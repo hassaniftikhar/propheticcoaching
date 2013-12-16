@@ -12,5 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require turbolinks
+//= require "documentViewer/libs/yepnope.1.5.3-min.js"
+//= require "documentViewer/libs/pdfjs/pdf.js"
+//= require "documentViewer/libs/pdfjs/compatibility.js"
+//= require "documentViewer/ttw-document-viewer.min.js"
+//= require jquery_highlight
 //= require_tree .
+
+

@@ -1,0 +1,10 @@
+<%= simple_form_for @ebook, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+  <%= f.input :name %>
+  <%= f.file_field :pdf %>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                ebooks_path, :class => 'btn' %>
+  </div>
+<% end %>
