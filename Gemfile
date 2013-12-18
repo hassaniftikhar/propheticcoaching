@@ -33,6 +33,8 @@ gem "paperclip", "~> 3.5.1"
 gem "pdf-reader"
 gem "tire"
 gem "gon"
+gem 'activeadmin', github: 'gregbell/active_admin'
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

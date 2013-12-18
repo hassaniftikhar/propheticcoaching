@@ -1,0 +1,7 @@
+setup bootstrap
+
+setup devise
+ rails generate devise:install
+ rails generate devise user
+
+setup active admin
