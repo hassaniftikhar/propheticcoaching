@@ -3,4 +3,15 @@ class Role < ActiveRecord::Base
   belongs_to :resource, :polymorphic => true
   
   scopify
+
+  validates_presence_of :name
+
+
+  def self.global_roles
+    where("resource_id is null").find_or_create_by :name => "admin"
+    where("resource_id is null").find_or_create_by :name => "coach"
+    where("resource_id is null").find_or_create_by :name => "mentee"
+    global
+  end
+
 end

@@ -2,7 +2,7 @@ ActiveAdmin.register User do
 
   permit_params :first_name, :last_name, :email, :address, :home_phone,
                 :availablity_time, :best_time_to_call, :date_of_birth,
-                :roles, :status, :role_ids
+                :status, :role_ids => []
 
   index do
     column :first_name
@@ -28,9 +28,8 @@ ActiveAdmin.register User do
       f.input :last_name
       f.input :email
       f.input :address
-      f.input :roles, :as => :select, :collection => {"Admin" => :admin, "Coach" => :coach, "Mentee" => :mentee} do |mentee|
-        mentee.roles
-      end
+      #f.input :roles, :as => :select, :collection => {"Admin" => :admin, "Coach" => :coach, "Mentee" => :mentee}
+      f.input :roles, :as => :check_boxes
       f.input :home_phone
       f.input :availablity_time
       f.input :status, :as => :select, :collection => {"Enable" => true, "Disable" => false}
