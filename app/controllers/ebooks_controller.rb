@@ -1,4 +1,5 @@
 class EbooksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_ebook, only: [:show, :edit, :update, :destroy, :pdf]
 
   # GET /ebooks

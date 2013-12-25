@@ -1,0 +1,27 @@
+<%- model_class = Ebook -%>
+<table class="table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <th><%= model_class.human_attribute_name(:name) %></th>
+    <th> Page No</th>
+    <th> Matched Text</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% pages ||= [] %>
+  <% pages.each do |page| %>
+    <tr>
+      <td><%= link_to page.ebook_id, admin_ebook_path(page.ebook_id) %></td>
+      <td><%= page.ebook_name %></td>
+      <td>
+        <div id="pdf-view">
+          <%= page.page_number %>
+        </div>
+      </td>
+      <td id="tags"> <%= page.tags %> </td>
+    </tr>
+
+  <% end %>
+  </tbody>
+</table>

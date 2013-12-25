@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Propheticcoaching</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -17,12 +17,13 @@
         <span class="icon-bar"></span>
       </a>
       <a class="brand" href="#">Prophetic Coaching</a>
+
       <div class="nav-collapse">
         <ul class="nav">
-          <li><%= link_to "Browse Books", ebooks_path %></li>
-          <li><%= link_to "Price List" %></li>
-          <li><%= link_to "Contact Us" %></li>
-          <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+          <% if current_user %>
+            <li><%= link_to "Browse Books", admin_ebooks_path %></li>
+            <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+          <% end %>
         </ul>
       </div>
     </div>

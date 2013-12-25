@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218052959) do
+ActiveRecord::Schema.define(version: 20131223183211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20131218052959) do
     t.string   "bc"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "coach_id"
   end
 
   create_table "pages", force: true do |t|

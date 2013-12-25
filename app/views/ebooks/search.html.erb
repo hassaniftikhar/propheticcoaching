@@ -7,7 +7,7 @@
   <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 
-<%= form_tag search_ebooks_path, method: :get do %>
+<%= form_tag search_admin_ebooks_path, :id => "search_ebook", :remote => true, method: :get do %>
   <p>
     <%= text_field_tag :query, params[:query] %>
     <%= submit_tag "Search", name: nil %>

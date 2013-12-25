@@ -1,4 +1,4 @@
-<%= simple_form_for @ebook, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+<%= simple_form_for @ebook ||= Ebook.new, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
   <%= f.input :name %>
   <%= f.file_field :pdf %>
 

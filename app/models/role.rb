@@ -4,7 +4,7 @@ class Role < ActiveRecord::Base
   
   scopify
 
-  validates_presence_of :name
+  #validates_presence_of :name
 
 
   def self.global_roles

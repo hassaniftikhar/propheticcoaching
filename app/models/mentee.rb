@@ -2,6 +2,8 @@ class Mentee < ActiveRecord::Base
 
   resourcify
 
+  belongs_to :coach, :class_name => "User", :foreign_key => "coach_id"
+
   def self.import_csv(file)
     require "csv"
 
@@ -34,6 +36,10 @@ class Mentee < ActiveRecord::Base
       mentee.save!
 
     end
+  end
+
+  def name
+    "#{first_name} #{last_name}".titleize
   end
 
 end
