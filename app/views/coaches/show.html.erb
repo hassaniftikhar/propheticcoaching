@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= link_to "Back", coaches_path %>
+</p>
+
+<p>
+  <strong>Coach Name:</strong>
+  <%= @coach.name %>
+</p>
+
+<h3> Listing Mentees </h3>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Availability</th>
+    <th>Prophecy</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @coach.mentees.each do |mentee| %>
+    <tr>
+      <td><%= mentee.name %></td>
+      <td><%= mentee.email %></td>
+      <td><%= mentee.availability %></td>
+      <td><%= mentee.prophecy %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

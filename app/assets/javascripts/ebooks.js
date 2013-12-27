@@ -12,14 +12,14 @@ $(document).ready(function(){
 //  var url = 'http://localhost:3000/guice.pdf';
   var documentViewer = $('#pdfContainer').documentViewer(
       {
-        path: "http://localhost:3000/assets/documentViewer/",
+        path: "/assets/documentViewer/",
         debug:true
       }
   );
 
   $("td #pdf-view").click(function() {
     var document_id = $(this).closest('td').prev('td').prev('td').text(),
-        url = "http://localhost:3000/ebooks/"+document_id+"/pdf.pdf",
+        url = "/ebooks/"+document_id+"/pdf.pdf",
         currentPage = parseInt($(this).text());
     console.log(document_id);
     console.log(currentPage);

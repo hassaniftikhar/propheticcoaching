@@ -1,0 +1,27 @@
+<div id = "desc_dialog" class="dialog" style ="display:none;">
+  <div id = "event_desc">
+  </div>
+  <br/>
+  <br/>
+  <div id = "event_actions">
+    <span id = "edit_event"></span>
+    <span id = "delete_event"></span>
+  </div>
+</div>
+<div id = "create_event_dialog" class="dialog" style ="display:none;">
+  <div id = "create_event">
+  </div>
+</div>
+
+<script type="text/javascript">
+  function editEvent(event_id){
+    jQuery.ajax({
+      url: "/events/" + event_id + "/edit",
+      success: function(data) {
+        $('#event_desc').html(data['form']);
+      }
+    });
+  }
+
+  authenticity_token = "<%= form_authenticity_token %>"
+</script>

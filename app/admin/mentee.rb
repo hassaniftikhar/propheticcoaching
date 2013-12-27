@@ -89,9 +89,23 @@ ActiveAdmin.register Mentee do
 
     active_admin_comments
 
-    div :id=>"ebook_search" do
+    div :id => "ebook_search" do
       render :partial => "admin/ebooks/search"
     end
+
+    div :class => "break" do
+    end
+
+    div do
+      div :id => "calendar", :style => "width:700px;height500px", :mentee_id => params[:id] do
+        render "admin/events/event_details"
+      end
+
+      div do
+        link_to 'Create Event', new_mentee_event_path(:mentee_id => params[:id]), :id => 'new_event'
+      end
+    end
+
 
     #render "search"
     #render "admin/products/index", products: winery.products, context: self

@@ -3,6 +3,7 @@ class Mentee < ActiveRecord::Base
   resourcify
 
   belongs_to :coach, :class_name => "User", :foreign_key => "coach_id"
+  has_many :events
 
   def self.import_csv(file)
     require "csv"

@@ -12,6 +12,9 @@
 @import "active_admin/base";
 
 @import "style.css";
+@import "jquery-ui-1.10.3.custom.min";
+@import "fullcalendar";
+
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
@@ -40,7 +43,7 @@ body {
 }
 
 .pdf-content {
-  border: 1px solid #000000;
+//  border: 1px solid #000000;
 }
 
 /* CSS classes used by TextLayerBuilder to style the text layer divs */
@@ -100,4 +103,8 @@ body {
 .span3 {
   float: right;
   width: 500px;
+}
+
+.break {
+  height: 150px;
 }
