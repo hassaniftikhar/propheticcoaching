@@ -52,7 +52,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'thin'
-  gem 'sqlite3'
 end
 group :production do
   #gem 'unicorn'
