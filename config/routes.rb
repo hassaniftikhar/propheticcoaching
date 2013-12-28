@@ -18,8 +18,7 @@ Propheticcoaching::Application.routes.draw do
 
   resources :coaches, :only => [:index, :show]
 
-  root :to => 'events#index'
-
+  root :to => 'coaches#index'
 
   resources :mentees, shallow: true do
     resources :events do
