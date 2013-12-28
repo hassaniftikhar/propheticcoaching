@@ -3,6 +3,8 @@ ActiveAdmin.register User do
   #permit_params :first_name, :last_name, :email, :address, :home_phone,
   #              :availablity_time, :best_time_to_call, :date_of_birth,
   #              :status, :role_ids => []
+  actions :all, :except => [:new]
+
 
   controller do
     def permitted_params
