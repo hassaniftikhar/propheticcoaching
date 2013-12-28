@@ -1,4 +1,6 @@
 class CoachesController < ApplicationController
+  before_action :authenticate_user!
+
   before_action :set_coach, only: [:show]
 
   # GET /coaches

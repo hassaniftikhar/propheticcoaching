@@ -25,11 +25,13 @@ ActiveAdmin.register User do
     end
     column :home_phone
     column :availablity_time
-    column :status
+    column :status do |user|
+      user.status? ? "Enabled" : "Disabled"
+    end
     column :best_time_to_call
     column :date_of_birth
-    column :current_sign_in_at
-    column :last_sign_in_at
+    #column :current_sign_in_at
+    #column :last_sign_in_at
     #column :current_sign_in_ip
     #column :last_sign_in_ip
     default_actions

@@ -2,9 +2,9 @@ ActiveAdmin.register Ebook do
 
   permit_params :name, :pdf
 
-  action_item :only => :index do
-    link_to('Seach All CSV', search_admin_ebooks_path)
-  end
+  #action_item :only => :index do
+  #  link_to('Seach All CSV', searches_admin_ebooks_path)
+  #end
 
   collection_action :search, :method => :get do
       @pages = Page.search params
@@ -13,6 +13,14 @@ ActiveAdmin.register Ebook do
       #  format.js { render :partial => 'search' }
       #end
       render :partial => "admin/ebooks/result_table", :locals => {:pages => @pages}
+  end
+
+  index do
+    column :name
+    column :created_at
+    column :pdf_file_name
+    column :pdf_content_type
+    default_actions
   end
 
   form do |f|
