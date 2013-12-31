@@ -7,6 +7,7 @@ class CoachesController < ApplicationController
   # GET /coaches.json
   def index
     @coaches = User.coaches.all
+    authorize! :read, @coaches
   end
 
   # GET /coaches/1
@@ -66,7 +67,11 @@ class CoachesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_coach
-      @coach = User.coaches.find(params[:id])
+      #if can? :read, @coach
+        @coach = User.coaches.find_by(:id => params[:id]) || current_user
+      #else
+      #  @coach = current_user
+      #end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

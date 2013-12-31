@@ -3,26 +3,15 @@ ActiveAdmin.register Mentee do
   permit_params :first_name, :last_name, :email, :donor_id, :home_phone,
                 :availability, :prophecy, :bc, :coach_id
 
-  #
-  #collection_action :import_csv, :method => :post do
-  #  # Do some CSV importing work here...
-  #  puts "import_csv post #{params.inspect}"
-  #
-  #end
-
-
   #action_item :all, :except => [:new]
 
   collection_action :import_csv, :method => [:get, :post] do
-    puts "import_csv get #{params.inspect}"
     if request.method == "GET"
       @mentee = Mentee.new
       render :partial => "import_csv"
     else
-      p "===== #{params[:mentee][:csv].tempfile.to_path.to_s}"
       file = params[:mentee][:csv].tempfile.to_path.to_s
       Mentee.import_csv file
-
       redirect_to admin_mentees_url, flash: {message: "successfully imported csv"}
     end
   end
@@ -55,7 +44,11 @@ ActiveAdmin.register Mentee do
     column :coach do |mentee|
       mentee.coach.name if mentee.coach
     end
+
     default_actions
+    actions :defaults => false do |mentee|
+      link_to "Change Coach", assign_coach_admin_mentee_path(mentee.id)
+    end
   end
 
   form do |f|
@@ -73,6 +66,9 @@ ActiveAdmin.register Mentee do
   end
 
   show do
+    span do
+      link_to "Back to Mentees List", admin_mentees_path
+    end
     attributes_table do
       row :first_name
       row :last_name
@@ -98,27 +94,13 @@ ActiveAdmin.register Mentee do
 
     div do
       div :id => "calendar", :style => "width:700px;height500px", :mentee_id => params[:id] do
-        render "admin/events/event_details"
+        render "/events/actions_dialog"
       end
 
       div do
         link_to 'Create Event', new_mentee_event_path(:mentee_id => params[:id]), :id => 'new_event'
       end
     end
-
-
-    #render "search"
-    #render "admin/products/index", products: winery.products, context: self
-    #render "/ebooks/form"
-
-
-    #form do |f|
-    #  f.input :assign_coach, :as => :select, :collection => {"a" => 1, "b" => 2}, :label => "Assign Coach"
-    #  f.button :submit
-    #end
-
-
-
 
   end
 

@@ -6,6 +6,7 @@
     <tr>
       <th>Index</th>
       <th>Show</th>
+      <th>Mentees Count</th>
       <th></th>
 
     </tr>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= coach.first_name %></td>
         <td><%= coach.last_name %></td>
+        <td><%= coach.mentees.count %></td>
         <td><%= link_to 'Show', coach_path(coach), :class => 'btn btn-mini'%></td>
 
       </tr>

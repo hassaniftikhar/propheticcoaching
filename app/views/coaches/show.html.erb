@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <% if can? :read, @coaches %>
   <%= link_to "Back", coaches_path %>
+    <% end %>
 </p>
 
 <p>
@@ -17,6 +19,7 @@
     <th>Email</th>
     <th>Availability</th>
     <th>Prophecy</th>
+    <th>Calendar Schedule</th>
   </tr>
   </thead>
 
@@ -27,6 +30,7 @@
       <td><%= mentee.email %></td>
       <td><%= mentee.availability %></td>
       <td><%= mentee.prophecy %></td>
+      <td><%= link_to "View", mentee_events_path(mentee) %></td>
     </tr>
   <% end %>
   </tbody>

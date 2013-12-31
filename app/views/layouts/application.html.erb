@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <%= include_gon %>
 </head>
 <body>
 
@@ -16,14 +17,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">Prophetic Coaching</a>
+      <a class="brand" href="/">Prophetic Coaching</a>
 
       <div class="nav-collapse">
         <ul class="nav">
           <% if current_user %>
             <li><%= link_to "Admin Panel", admin_users_path if current_user.has_role?(:admin)%></li>
+            <li><%= link_to "My Mentees List", coach_path(current_user) %></li>
+            <li><%= link_to "View Coaches Schedule", events_path(current_user) %></li>
             <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
-          <% end %>
+            <li> <%= "Welcome #{current_user.name}" %> </li>
+        <% end %>
         </ul>
       </div>
     </div>
@@ -31,6 +35,14 @@
 </div>
 
 <div class="container">
+  <% flash.each do |name, msg| %>
+    <% if msg.is_a?(String) %>
+      <div class="alert text-center alert-<%= name == :notice ? "success" : "error" %>">
+        <a class="close" data-dismiss="alert">&#215;</a>
+        <%= content_tag :div, msg.html_safe, :id => "flash_#{name}" %>
+      </div>
+    <% end %>
+  <% end %>
   <div class="row">
     <div class="span9"><%= yield %></div>
     <div class="span3">

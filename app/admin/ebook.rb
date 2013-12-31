@@ -24,7 +24,8 @@ ActiveAdmin.register Ebook do
   end
 
   form do |f|
-    f.inputs "details" do
+    f.semantic_errors *f.object.errors.keys
+    f.inputs "Details" do
       f.input :name
       f.input :pdf, :as => :file
     end

@@ -1,7 +1,14 @@
 class EventsController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :set_calendar_properties
+
   #before_action :authenticate_admin_user!, :except => [:get_events]
+
+  def set_calendar_properties
+    gon.editable = current_user.is_admin? ? true : false
+    @calendar_editable = gon.editable
+  end
 
   def new
     @event = Event.new(:endtime => 1.hour.from_now, :period => "Does not repeat")
@@ -24,10 +31,15 @@ class EventsController < ApplicationController
   end
 
   def index
+    #p "index --- #{params.inspect}"
+    @mentee = Mentee.find_by :id => params[:mentee_id]
   end
 
   def get_events
-    @events = Event.where "mentee_id = '#{params[:mentee_id]}' AND starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"
+    p params.inspect
+    conditions = "starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"
+    conditions += " AND mentee_id = '#{params[:mentee_id]}'" if params[:mentee_id].present?
+    @events = Event.where conditions
     events = []
     @events.each do |event|
       events << {:id => event.id, :title => event.title, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.event_series_id) ? true : false}
@@ -56,8 +68,9 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @mentee = Mentee.find_by :id => params[:mentee_id]
     @event = Event.find_by_id(params[:id])
-    render :json => {:form => render_to_string(:partial => 'edit_form')}
+    render :json => {:form => render_to_string(:partial => 'form')}
   end
 
   def update
@@ -92,7 +105,8 @@ class EventsController < ApplicationController
   def event_params
     #params.permit(:name, {:emails => []}, :friends => [ :name, { :family => [ :name ], :hobbies => [] }])
     #params.require(:event).permit('title', 'description', 'starttime(1i)', 'starttime(2i)', 'starttime(3i)', 'starttime(4i)', 'starttime(5i)', 'endtime(1i)', 'endtime(2i)', 'endtime(3i)', 'endtime(4i)', 'endtime(5i)', 'all_day', 'period', 'frequency', 'commit_button', 'mentee_id')
-    params.permit(:mentee_id ,:event => ['title', 'description', 'starttime(1i)', 'starttime(2i)', 'starttime(3i)', 'starttime(4i)', 'starttime(5i)', 'endtime(1i)', 'endtime(2i)', 'endtime(3i)', 'endtime(4i)', 'endtime(5i)', 'all_day', 'period', 'frequency', 'commit_button', 'mentee_id'])
+    #params.permit(:mentee_id ,:event => ['title', 'description', 'starttime(1i)', 'starttime(2i)', 'starttime(3i)', 'starttime(4i)', 'starttime(5i)', 'endtime(1i)', 'endtime(2i)', 'endtime(3i)', 'endtime(4i)', 'endtime(5i)', 'all_day', 'period', 'frequency', 'commit_button', 'mentee_id'])
+    params.require(:event).permit(:mentee_id , :id,  :title, :description, :starttime, :endtime,  :all_day, :period, :frequency, :mentee_id)
   end
 
 end
