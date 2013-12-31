@@ -22,6 +22,16 @@ ActiveAdmin.register Mentee do
     #redirect_to {:action => :show}, {:notice => "Locked!"}
   end
 
+  controller do
+    before_action :set_calendar_properties
+
+    def set_calendar_properties
+      p "=========>>>active admin before action called"
+      gon.editable = current_user.is_admin? ? true : false
+      @calendar_editable = gon.editable
+    end
+  end
+
   action_item :only => :index do
     link_to('Import Mentee CSV', import_csv_admin_mentees_path)
   end
