@@ -26,7 +26,6 @@ ActiveAdmin.register Mentee do
     before_action :set_calendar_properties
 
     def set_calendar_properties
-      p "=========>>>active admin before action called"
       gon.editable = current_user.is_admin? ? true : false
       @calendar_editable = gon.editable
     end
