@@ -6,39 +6,17 @@
 //= require jquery_highlight
 //= require fullcalendar.min.js
 //= require events
+//= require ebooks
 
 
 $(document).ready(function () {
   $("#search_ebook").on("ajax:success",function (e, data, status, xhr) {
+
     console.log("search ebook success");
-
     $("#result_table").html(xhr.responseText);
-    $("td#tags").highlight($("input#query").val());
-    $('#pdfContainer').empty();
-    var documentViewer = $('#pdfContainer').documentViewer(
-        {
-          path: "/assets/documentViewer/",
-          debug: true
-        }
-    );
-
-    $("td #pdf-view").click(function () {
-      var document_id = $(this).closest('td').prev('td').prev('td').text(),
-          url = "/ebooks/" + document_id + "/pdf.pdf",
-          currentPage = parseInt($(this).text());
-      console.log(document_id);
-      console.log(currentPage);
-      documentViewer.load(url, {currentPage: currentPage});
-    });
 
   }).bind("ajax:error", function (e, xhr, status, error) {
         console.log("search ebook error");
         return $("#search_ebook").append("<p>ERROR</p>");
-      });
-
-  // ----- calendar code goes here ----- //
-
-
-
-
+  });
 });
