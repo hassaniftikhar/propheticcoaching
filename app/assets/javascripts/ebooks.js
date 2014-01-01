@@ -1,6 +1,14 @@
 $(document).ready(function () {
 
   $(".container .row").on("click", "td #pdf-view", function () {
+
+    if ($("#pdfContainer").hasClass('ui-dialog-content')) {
+      $('#pdfContainer').empty().dialog('destroy');
+    }
+
+    var document_id = $(this).closest('td').prev('td').prev('td').text();
+    var url = "/ebooks/" + document_id + "/pdf.pdf";
+    var currentPage = parseInt($(this).text());
     var documentViewer = $('#pdfContainer').documentViewer(
         {
           path: "/assets/documentViewer/",
@@ -9,19 +17,13 @@ $(document).ready(function () {
         }
     );
 
-    var document_id = $(this).closest('td').prev('td').prev('td').text(),
-        url = "/ebooks/" + document_id + "/pdf.pdf",
-        currentPage = parseInt($(this).text());
-    console.log(document_id);
-    console.log(currentPage);
-
-
     documentViewer.load(url, {currentPage: currentPage});
+
     $("#pdfContainer").dialog({
-      close: function(event, ui) {
+      close: function (event, ui) {
         $(this).empty().dialog('destroy');
       },
-      width:900
+      width: 900
     });
 
   });
