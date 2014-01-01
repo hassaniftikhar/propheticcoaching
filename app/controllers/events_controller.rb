@@ -103,10 +103,7 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    #params.permit(:name, {:emails => []}, :friends => [ :name, { :family => [ :name ], :hobbies => [] }])
-    #params.require(:event).permit('title', 'description', 'starttime(1i)', 'starttime(2i)', 'starttime(3i)', 'starttime(4i)', 'starttime(5i)', 'endtime(1i)', 'endtime(2i)', 'endtime(3i)', 'endtime(4i)', 'endtime(5i)', 'all_day', 'period', 'frequency', 'commit_button', 'mentee_id')
-    #params.permit(:mentee_id ,:event => ['title', 'description', 'starttime(1i)', 'starttime(2i)', 'starttime(3i)', 'starttime(4i)', 'starttime(5i)', 'endtime(1i)', 'endtime(2i)', 'endtime(3i)', 'endtime(4i)', 'endtime(5i)', 'all_day', 'period', 'frequency', 'commit_button', 'mentee_id'])
-    params.require(:event).permit(:mentee_id , :id,  :title, :description, :starttime, :endtime,  :all_day, :period, :frequency, :mentee_id)
+    params.permit(:mentee_id, :event => [:mentee_id , :id,  :title, :description, :starttime, :endtime,  :all_day, :period, :frequency])
   end
 
 end

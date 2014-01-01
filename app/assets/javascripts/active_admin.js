@@ -20,4 +20,21 @@ $(document).ready(function () {
         console.log("search ebook error");
         return $("#search_ebook").append("<p>ERROR</p>");
   });
+
+  $("#main_content").on("click", "#show_calendar", function(){
+    $("#calendar").show();
+    $("#calendar").dialog({
+      width:700
+    });
+    $("#calendar .fc-button.fc-button-month.fc-state-default.fc-corner-left").trigger("click");
+  });
+
+  $("#main_content").on("click", "#btn_ebook_search", function(){
+    $("#ebook_search #result_table tbody").empty();
+    $("#ebook_search").show();
+    $("#ebook_search").dialog({
+      width:800
+    });
+  });
+
 });

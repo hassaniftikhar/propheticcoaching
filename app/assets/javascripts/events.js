@@ -1,28 +1,5 @@
 
-$('#new_event').click(function (event) {
-  event.preventDefault();
-  var url = $(this).attr('href');
-  $.ajax({
-    url: url,
-    beforeSend: function () {
-      $('#loading').show();
-    },
-    complete: function () {
-      $('#loading').hide();
-    },
-    success: function (data) {
-      $('#create_event').replaceWith(data['form']);
-      $('#create_event_dialog').dialog({
-        title: 'New Event',
-        modal: true,
-        width: 500,
-        close: function (event, ui) {
-          $('#create_event_dialog').dialog('destroy')
-        }
-      });
-    }
-  });
-});
+
 
 function moveEvent(event, dayDelta, minuteDelta, allDay){
   jQuery.ajax({
@@ -205,7 +182,33 @@ var ready = function() {
       alert(xhr.responseText);
     }
   })
-}
+
+  $("#new_event").on("click", function (event) {
+    event.preventDefault();
+    var url = $(this).attr('href');
+    $.ajax({
+      url: url,
+      beforeSend: function () {
+        $('#loading').show();
+      },
+      complete: function () {
+        $('#loading').hide();
+      },
+      success: function (data) {
+        $('#create_event').replaceWith(data['form']);
+        $('#create_event_dialog').dialog({
+          title: 'New Event',
+          modal: true,
+          width: 500,
+          close: function (event, ui) {
+            $('#create_event_dialog').dialog('destroy')
+          }
+        });
+      }
+    });
+  });
+
+}//ready end
 
 $(document).on("page:load", ready);
 

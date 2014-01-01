@@ -24,6 +24,11 @@ ActiveAdmin.register Mentee do
 
   controller do
     before_action :set_calendar_properties
+    before_action :set_mentee_id
+
+    def set_mentee_id
+      params[:mentee_id] = params[:id]
+    end
 
     def set_calendar_properties
       gon.editable = current_user.is_admin? ? true : false
@@ -75,9 +80,20 @@ ActiveAdmin.register Mentee do
   end
 
   show do
+
     span do
       link_to "Back to Mentees List", admin_mentees_path
     end
+    br
+    button "Search Ebooks", :id => "btn_ebook_search"
+    div :id => "ebook_search", :style => "display:none" do
+      render :partial => "admin/ebooks/search"
+    end
+    button "show calendar", :id => "show_calendar"
+    div :id => "calendar", :style => "width:700px;height500px;display:none", :mentee_id => params[:id] do
+      render "/events/actions_dialog"
+    end
+
     attributes_table do
       row :first_name
       row :last_name
@@ -94,22 +110,7 @@ ActiveAdmin.register Mentee do
 
     active_admin_comments
 
-    div :id => "ebook_search" do
-      render :partial => "admin/ebooks/search"
-    end
 
-    div :class => "break" do
-    end
-
-    div do
-      div :id => "calendar", :style => "width:700px;height500px", :mentee_id => params[:id] do
-        render "/events/actions_dialog"
-      end
-
-      div do
-        link_to 'Create Event', new_mentee_event_path(:mentee_id => params[:id]), :id => 'new_event'
-      end
-    end
 
   end
 
