@@ -14,6 +14,7 @@ $(document).ready(function () {
 
     console.log("search ebook success");
     $("#result_table").html(xhr.responseText);
+    $("td#tags").highlight($("input#query").val());
 
   }).bind("ajax:error", function (e, xhr, status, error) {
         console.log("search ebook error");

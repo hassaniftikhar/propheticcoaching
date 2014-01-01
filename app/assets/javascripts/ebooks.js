@@ -15,7 +15,6 @@ $(document).ready(function () {
     console.log(document_id);
     console.log(currentPage);
 
-    $("td#tags").highlight($("input#query").val());
 
     documentViewer.load(url, {currentPage: currentPage});
     $("#pdfContainer").dialog({
@@ -24,6 +23,9 @@ $(document).ready(function () {
       },
       width:900
     });
+
   });
+
+  $("td#tags").highlight($("input#query").val());
 
 });
