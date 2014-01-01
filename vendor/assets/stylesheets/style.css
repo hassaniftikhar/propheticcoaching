@@ -65,7 +65,7 @@
 .dv-loading {
   height: 32px;
   width: 100%;
-  background: transparent url(../images/loading.gif) no-repeat center center;
+  background: transparent url(/assets/loading.gif) no-repeat center center;
 }
 /** Drop Shadow **/
 .dv-sheet.sheet2:before, .dv-sheet.sheet2:after {
