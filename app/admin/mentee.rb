@@ -106,6 +106,11 @@ ActiveAdmin.register Mentee do
       row :coach do |mentee|
         link_to(mentee.coach.name, admin_user_path(mentee.coach)) if mentee.coach
       end
+      row "Recent Coaches" do |mentee|
+        mentee.versions.collect { |version|
+          link_to version.reify.coach.name, admin_user_path(version.reify.coach)
+        }.join(", ").html_safe
+      end
     end
 
     active_admin_comments

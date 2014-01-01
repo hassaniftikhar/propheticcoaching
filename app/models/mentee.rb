@@ -1,6 +1,7 @@
 class Mentee < ActiveRecord::Base
 
   resourcify
+  has_paper_trail
 
   belongs_to :coach, :class_name => "User", :foreign_key => "coach_id"
   has_many :events
