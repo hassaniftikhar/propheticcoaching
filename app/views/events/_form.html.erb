@@ -12,12 +12,12 @@
 <p>
   <%=f.label :starttime, 'Start Time' %>
   <br/>
-  <%=f.datetime_select :starttime %>
+  <%=f.datetime_select :starttime, ampm: true, :minute_step => 5%>
 </p>
 <p>
   <%=f.label :endtime, 'End Time' %>
   <br/>
-  <%=f.datetime_select :endtime %>
+  <%=f.datetime_select :endtime, ampm: true, :minute_step => 5 %>
 </p>
 <p>
   <%=f.label :all_day %>
