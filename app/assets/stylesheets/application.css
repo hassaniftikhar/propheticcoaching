@@ -15,6 +15,7 @@
  *= require fullcalendar
  *= require bootstrap_and_overrides
  *= require ebooks
+ *= require jquery.ui.chatbox
 
 
  // require scaffolds

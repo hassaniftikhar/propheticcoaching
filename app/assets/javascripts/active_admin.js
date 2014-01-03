@@ -6,6 +6,7 @@
 //= require jquery_highlight
 //= require fullcalendar.min.js
 //= require events
+//= require private_pub
 //= require ebooks
 
 

@@ -20,4 +20,23 @@
 //= require "documentViewer/libs/pdfjs/compatibility.js"
 //= require "documentViewer/ttw-document-viewer.min.js"
 //= require jquery_highlight
-//= require_tree .
+//= require private_pub
+//= require ebooks
+//= require events
+//= require active_admin
+//= require bootstrap
+//= require private_pub
+//= require jquery.ui.chatbox
+
+
+ready = function () {
+  $("#chat_div").chatbox({id: "chat_div", title: "Public Chat Room", offset: 10, width: 200,
+      messageSent: function (id, user, msg) {
+        this.boxManager.addMsg(user, msg);
+//        publish_to("/ebooks", msg);
+      }
+    });
+
+};
+$(document).ready(ready);
+$(document).on("page:load", ready);

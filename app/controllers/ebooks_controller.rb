@@ -61,6 +61,10 @@ class EbooksController < ApplicationController
         format.json { render json: @ebook.errors, status: :unprocessable_entity }
       end
     end
+
+    PrivatePub.publish_to "localhost:9292/ebooks", :message => message_hash.to_json
+
+
   end
 
   # DELETE /ebooks/1

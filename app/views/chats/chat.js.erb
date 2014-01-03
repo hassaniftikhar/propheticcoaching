@@ -1,0 +1,14 @@
+ready = function () {
+  alert(1);
+  <% if current_user %>
+    $("#chat_div").chatbox({id: "chat_div", title: "Public Chat Room", offset: 10, width: 200,
+      messageSent: function (id, user, msg) {
+        this.boxManager.addMsg(<%= current_user.name %>, msg);
+      }
+    });
+  <% end %>
+
+};
+$(document).ready(ready);
+$(document).on("page:load", ready);
+
