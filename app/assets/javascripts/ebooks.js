@@ -1,11 +1,5 @@
 $(document).ready(function () {
 
-
-  PrivatePub.subscribe("/ebooks", function (data, channel) {
-    var val = jQuery.parseJSON(data.message);
-    $("#chat_div").chatbox("option", "boxManager").addMsg("Mr. Foo", val['message']);
-  });
-
   $(".container .row").on("click", "td #pdf-view", function () {
 
     if ($("#pdfContainer").hasClass('ui-dialog-content')) {

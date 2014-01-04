@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :mentees, :foreign_key => "coach_id"
+  has_many :chats
 
   scope :coaches, -> { Role.where("name='coach'").first.users }
 

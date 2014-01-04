@@ -7,6 +7,16 @@ Propheticcoaching::Application.routes.draw do
 
   devise_for :users
 
+  #resources :users do
+  #  resources :chats, only: [:index, :new, :create]
+  #end
+  resources :chats do
+    collection do
+      get :talk
+    end
+  end
+
+
   resources :ebooks do
     collection do
       get 'search'

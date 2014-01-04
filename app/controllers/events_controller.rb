@@ -17,7 +17,6 @@ class EventsController < ApplicationController
 
   def create
     @mentee = Mentee.where("id = #{event_params[:mentee_id]}").first
-    p "found mentee with id #{event_params.inspect} as: #{@mentee.inspect}"
     if params[:event][:period] == "Does not repeat"
       event = @mentee.events.new event_params[:event]
     else
@@ -31,7 +30,6 @@ class EventsController < ApplicationController
   end
 
   def index
-    #p "index --- #{params.inspect}"
     @mentee = Mentee.find_by :id => params[:mentee_id]
   end
 

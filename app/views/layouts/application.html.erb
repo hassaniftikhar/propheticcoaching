@@ -22,13 +22,13 @@
       <div class="nav-collapse">
         <ul class="nav">
           <% if current_user %>
-            <li><%= link_to "Admin Panel", admin_users_path if current_user.has_role?(:admin)%></li>
+            <li><%= link_to "Admin Panel", admin_users_path if current_user.has_role?(:admin) %></li>
             <li><%= link_to "My Mentees List", coach_path(current_user) %></li>
             <li><%= link_to "View Coaches Schedule", events_path(current_user) %></li>
             <li><%= link_to "Search Ebooks", ebooks_path %></li>
             <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
             <li> <%= "Welcome #{current_user.name}" %> </li>
-        <% end %>
+          <% end %>
         </ul>
       </div>
     </div>
@@ -45,6 +45,7 @@
     <% end %>
   <% end %>
   <div class="row">
+    <%= subscribe_to "/chats/talk" %>
     <div class="span9"><%= yield %></div>
     <div class="span3">
     </div>
