@@ -9,7 +9,7 @@ ready = function () {
     $("#chat_div").chatbox("option", "boxManager").addMsg(val['user_name'], val['message']);
   });
 
-  if (user_name.length > 0) {
+//  if (user_name.length > 0) {
     $("#chat_div").chatbox({id: "chat_div", title: "Public Chat Room", offset: 10, width: 200,
       messageSent: function (id, user, msg) {
 
@@ -24,7 +24,7 @@ ready = function () {
 
       }
     });
-  }
+//  }
 
 };
 

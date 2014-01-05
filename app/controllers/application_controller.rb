@@ -15,4 +15,16 @@ class ApplicationController < ActionController::Base
     @current_permission ||= ::Permissions.permission_for(current_user)
   end
 
+  private
+
+  def after_sign_in_path_for(resource)
+    PrivatePub.publish_to("/chats/talk", :message => {message: "#{current_user.name} entered.", user_name: ""}.to_json)
+    current_user.is_admin? ? root_path : coach_path(current_user.id)
+  end
+
+  def after_sign_out_path_for(resource_or_scope)
+    PrivatePub.publish_to("/chats/talk", :message => {message: "#{current_user.name} left.", user_name: ""}.to_json)
+    new_user_session_path
+  end
+
 end
