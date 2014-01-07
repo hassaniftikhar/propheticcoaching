@@ -36,6 +36,7 @@ gem "gon"
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'paper_trail', '~> 3.0.0'
 gem 'private_pub'
+gem 'redis'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

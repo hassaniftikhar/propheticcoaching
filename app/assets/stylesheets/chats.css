@@ -1,0 +1,19 @@
+
+
+
+.online-clients {
+    width: 150px;
+    /*margin-right: 220px;*/
+    float: right;
+    border: 1px solid #aaa;
+    color: #222;
+    height: 400px;
+    margin-top:73px;
+    position: fixed;
+    bottom: 0%;
+    right: 5px;
+}
+
+.contact:hover {
+    background: gainsboro;
+}

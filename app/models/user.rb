@@ -21,4 +21,8 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}".titleize
   end
 
+  def escaped_name
+    name.gsub /\W/, "_"
+  end
+
 end

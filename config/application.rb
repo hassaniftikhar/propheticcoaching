@@ -21,3 +21,6 @@ module Propheticcoaching
     # config.i18n.default_locale = :de
   end
 end
+
+REDIS_ONLINE_CLIENTS = "online_clients"
+CHAT_PUBLIC_CHANNEL = "/chats/talk"

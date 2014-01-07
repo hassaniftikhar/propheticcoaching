@@ -247,6 +247,7 @@ GEM
       polyamorous (~> 0.6.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redis (3.0.6)
     ref (1.0.5)
     responders (1.0.0)
       railties (>= 3.2, < 5)
@@ -357,6 +358,7 @@ DEPENDENCIES
   private_pub
   quiet_assets
   rails (= 4.0.2)
+  redis
   rolify
   rspec-rails
   sass-rails (~> 4.0.0)
