@@ -15,7 +15,7 @@ class ChatsController < ApplicationController
 
     respond_to do |format|
       if @chat.save
-        message = {message: @chat.message, user_name: current_user.name, dest: chat_params[:dest]}
+        message = {message: @chat.message, user_name: current_user.name, dest: chat_params[:dest], src: chat_params[:src]}
         PrivatePub.publish_to("/chats/talk", :message => message.to_json)
         format.js {}
         #render :nothing => true
@@ -37,6 +37,6 @@ class ChatsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def chat_params
-    params.permit(:dest, :chat => [:message])
+    params.permit(:dest, :src, :chat => [:message])
   end
 end

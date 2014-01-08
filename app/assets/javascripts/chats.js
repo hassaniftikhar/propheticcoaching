@@ -6,8 +6,8 @@ ready = function () {
   PrivatePub.subscribe("/chats/talk", function (data, channel) {
     var val = jQuery.parseJSON(data.message);
 
-    debugger;
     if (val['id'] == "client_list") {
+      //update online client list
       console.log("online clients recvd: building divs");
       var clients = jQuery.parseJSON(val['message']);
       $("#online_contacts").empty();
@@ -28,14 +28,15 @@ ready = function () {
         }
       }
     } else if (val['dest']) {
+      //destination user message
       console.log("val['dest']: " + val['dest']);
-      var dest_id = "#boxcontact_" + val['dest'];
-      var self_id = "#boxcontact_" + my_id;
-      if ($(dest_id).length > 0) {
-        $(dest_id).chatbox("option", "boxManager").addMsg(val['user_name'], val['message']);
+      var dest_id = "contact_" + val['src']; //as we have to open src id windown at dest
+      if (val['src'] != my_id && val['dest'] == my_id) {
+        dest_id = createChatWindow(dest_id, val['user_name']);
+        $("#" + dest_id).chatbox("option", "boxManager").addMsg(val['user_name'], val['message']);
       }
-//      $(self_id).chatbox("option", "boxManager").addMsg(val['user_name'], val['message']);
     } else {
+      //public chat message
       console.log("--- else ---");
       $("#chat_div").chatbox("option", "boxManager").addMsg(val['user_name'], val['message']);
     }
@@ -55,6 +56,7 @@ ready = function () {
 
     }
   });
+  $("#chat_div").parent().hide();
 
   var counter = 0;
   var idList = new Array();
@@ -76,7 +78,7 @@ ready = function () {
 
     console.log("messageCallback " + dest + " " + dest_user_id);
     $.ajax({
-      data: 'chat[message]=' + msg + '&dest=' + my_id,
+      data: 'chat[message]=' + msg + '&dest=' + dest_user_id + '&src=' + my_id,
       type: "POST",
       url: "/chats",
       success: function (data) {
@@ -90,28 +92,33 @@ ready = function () {
 
   $("#chat-main").on("click", ".contact", function (event) {
 
-    counter = $(this).attr('id');
-    var id = "#box" + counter;
-    console.log(id);
+    createChatWindow($(this).attr('id'), $(this).text());
 
-    var user_name = $(this).text();
-    counter = $(this).attr('id');
-    var id = "box" + counter;
-//    console.log(id);
-    if ($(id).length == 0) {
-      idList.push(id);
-      chatboxManager.addBox(id,
+  });
+
+  var createChatWindow = function (id, text) {
+
+    console.log("=== createChatWin === div: " + id);
+
+    var div_id = "box" + id;
+    var user_name = text;
+
+    console.log(div_id);
+
+    if ($("#" + div_id).length == 0) {
+      idList.push(div_id);
+      chatboxManager.addBox(div_id,
           {
-            dest: "dest" + counter, // not used in demo
-            title: "box" + counter,
+            dest: "dest" + id, // not used in demo
+            title: "box" + id,
             first_name: user_name,
             last_name: ""
             //you can add your own options too
           });
       event.preventDefault();
     }
-
-  });
+    return div_id;
+  }
 
 };
 
