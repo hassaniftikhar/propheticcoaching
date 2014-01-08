@@ -58,16 +58,21 @@ ready = function () {
   });
   $("#chat_div").parent().hide();
 
-  var counter = 0;
-  var idList = new Array();
-
-  var broadcastMessageCallback = function (from, msg, id) {
-    console.log("broadcastMessageCallback, from:" + from + " msg:" + msg + " id: " + id);
-    for (var i = 0; i < idList.length; i++) {
-      chatboxManager.addBox(idList[i]);
-      $("#" + idList[i]).chatbox("option", "boxManager").addMsg(from, msg);
-    }
-  }
+//  var idList = new Array();
+//  var idHash;
+//  var cookieHash = $.cookie('idHash');
+//  if (cookieHash) {
+//    idHash = JSON.parse($.cookie('idHash'));
+//  } else {
+//    idHash = {};
+//  }
+//  var broadcastMessageCallback = function (from, msg, id) {
+//    console.log("broadcastMessageCallback, from:" + from + " msg:" + msg + " id: " + id);
+//    for (var i = 0; i < idList.length; i++) {
+//      chatboxManager.addBox(idList[i]);
+//      $("#" + idList[i]).chatbox("option", "boxManager").addMsg(from, msg);
+//    }
+//  }
 
   var messageCallback = function (dest, msg, id) {
 
@@ -91,35 +96,41 @@ ready = function () {
   chatboxManager.init({messageSent: messageCallback});
 
   $("#chat-main").on("click", ".contact", function (event) {
-
     createChatWindow($(this).attr('id'), $(this).text());
-
   });
 
-  var createChatWindow = function (id, text) {
-
+  var createChatWindow = function (id, text, hidden) {
     console.log("=== createChatWin === div: " + id);
 
+    hidden = typeof hidden !== 'undefined' ? hidden : false;
     var div_id = "box" + id;
     var user_name = text;
 
-    console.log(div_id);
-    if ($("#" + div_id).length == 0) {
-      idList.push(div_id);
-      chatboxManager.addBox(div_id,
-          {
-            dest: "dest" + id, // not used in demo
-            title: "box" + id,
-            first_name: user_name,
-            last_name: ""
-            //you can add your own options too
-          });
-      event.preventDefault();
-    } else {
-      $("#" + div_id).parent().parent().show();
+//    console.log(div_id);
+//    idList.push(div_id);
+//    idHash[id] = text;
+    chatboxManager.addBox(div_id,
+        {
+          dest: "dest" + id, // not used in demo
+          title: "box" + id,
+          first_name: user_name,
+          last_name: ""
+          //you can add your own options too
+        });
+    event.preventDefault();
+
+    if (hidden) {
+      $("#" + div_id).parent().hide();
     }
+//    var date = new Date();
+//    var minutes = 30;
+//    date.setTime(date.getTime() + (minutes * 60 * 1000));
+//    $.cookie('idHash', JSON.stringify(idHash), { expires: date });
     return div_id;
   }
+//  $.each(idHash, function (k, v) {
+//    createChatWindow(k, v, true);
+//  });
 
 };
 
@@ -175,6 +186,7 @@ var chatboxManager = function () {
 
   var boxClosedCallback = function (id) {
     // close button in the titlebar is clicked
+//    debugger;
     var idx = showList.indexOf(id);
     if (idx != -1) {
       showList.splice(idx, 1);
@@ -193,6 +205,7 @@ var chatboxManager = function () {
   var addBox = function (id, user, name) {
     var idx1 = showList.indexOf(id);
     var idx2 = boxList.indexOf(id);
+//    debugger;
     if (idx1 != -1) {
       // found one in show box, do nothing
     }

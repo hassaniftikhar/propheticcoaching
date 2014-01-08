@@ -27,3 +27,4 @@
 //= require bootstrap
 //= require private_pub
 //= require jquery.ui.chatbox
+//= require jquery.cookie
