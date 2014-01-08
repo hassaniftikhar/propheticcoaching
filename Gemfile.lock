@@ -310,8 +310,6 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     ttfunk (1.0.3)
-    turbolinks (2.0.0)
-      coffee-rails
     twitter-bootstrap-rails (2.2.8)
       actionpack (>= 3.1)
       execjs
@@ -367,6 +365,5 @@ DEPENDENCIES
   therubyracer
   thin
   tire
-  turbolinks
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)

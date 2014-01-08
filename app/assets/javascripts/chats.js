@@ -104,7 +104,6 @@ ready = function () {
     var user_name = text;
 
     console.log(div_id);
-
     if ($("#" + div_id).length == 0) {
       idList.push(div_id);
       chatboxManager.addBox(div_id,
@@ -116,6 +115,8 @@ ready = function () {
             //you can add your own options too
           });
       event.preventDefault();
+    } else {
+      $("#" + div_id).parent().parent().show();
     }
     return div_id;
   }
