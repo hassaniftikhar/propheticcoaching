@@ -22,7 +22,6 @@
 //= require private_pub
 //= require ebooks
 //= require events
-//= require chats
 //= require active_admin
 //= require bootstrap
 //= require private_pub
