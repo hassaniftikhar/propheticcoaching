@@ -35,6 +35,9 @@
           this.elem = elem;
         },
         addMsg: function(peer, msg) {
+//          var d = new Date();
+//          var time_stamp = " " + d.getHours() + ":" + ((d.getMinutes() < 10) ? ("0"+d.getMinutes()) : d.getMinutes());
+//          msg += time_stamp;
           var self = this;
           var box = self.elem.uiChatboxLog;
           var e = document.createElement('div');
@@ -57,7 +60,7 @@
           e.appendChild(msgElement);
           $(e).addClass("ui-chatbox-msg");
           $(e).css("maxWidth", $(box).width());
-          $(e).fadeIn();
+          $(e).show();
           self._scrollToBottom();
 
           if (!self.elem.uiChatboxTitlebar.hasClass("ui-state-focus")

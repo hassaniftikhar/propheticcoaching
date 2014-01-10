@@ -2,6 +2,26 @@ ready = function () {
 
   var user_name = $("#chat_div").attr("user_name");
   var my_id = $("#chat_div").attr("user_id");
+  var idHash;
+  var cookieHash = $.cookie('idHash');
+  if (cookieHash) {
+    idHash = JSON.parse(cookieHash);
+  } else {
+    idHash = {};
+  }
+  var messagesHash = {};
+  var messagesCookie = $.cookie("messages");
+  if (messagesCookie) {
+    messagesHash = JSON.parse(messagesCookie);
+  }
+
+  var addMessage = function(id, user_name, message) {
+
+    $("#" + id).chatbox("option", "boxManager").addMsg(user_name, message);
+    messagesHash[id] = $("#" + id).html();
+    setCookie("messages", messagesHash);
+
+  };
 
   PrivatePub.subscribe("/chats/talk", function (data, channel) {
     var val = jQuery.parseJSON(data.message);
@@ -33,18 +53,21 @@ ready = function () {
       var dest_id = "contact_" + val['src']; //as we have to open src id windown at dest
       if (val['src'] != my_id && val['dest'] == my_id) {
         dest_id = createChatWindow(dest_id, val['user_name']);
-        $("#" + dest_id).chatbox("option", "boxManager").addMsg(val['user_name'], val['message']);
+        addMessage(dest_id, val['user_name'], val['message']);
       }
     } else {
       //public chat message
       console.log("--- else ---");
-      $("#chat_div").chatbox("option", "boxManager").addMsg(val['user_name'], val['message']);
+      addMessage("chat_div", val['user_name'], val['message']);
     }
   });
+
+
 
   $("#chat_div").chatbox({id: "chat_div", title: "Public Chat Room", offset: 5, width: 200,
     messageSent: function (id, user, msg) {
 
+      var myDivId = $(this).attr('id');
       $.ajax({
         data: 'chat[message]=' + msg,
         type: "POST",
@@ -58,32 +81,16 @@ ready = function () {
   });
   $("#chat_div").parent().hide();
 
-//  var idList = new Array();
-//  var idHash;
-//  var cookieHash = $.cookie('idHash');
-//  if (cookieHash) {
-//    idHash = JSON.parse($.cookie('idHash'));
-//  } else {
-//    idHash = {};
-//  }
-//  var broadcastMessageCallback = function (from, msg, id) {
-//    console.log("broadcastMessageCallback, from:" + from + " msg:" + msg + " id: " + id);
-//    for (var i = 0; i < idList.length; i++) {
-//      chatboxManager.addBox(idList[i]);
-//      $("#" + idList[i]).chatbox("option", "boxManager").addMsg(from, msg);
-//    }
-//  }
-
   var messageCallback = function (dest, msg, id) {
 
     var div_info = id.split("_");
     var dest_user_id = div_info[div_info.length - 1];
-
-    $("#" + id).chatbox("option", "boxManager").addMsg("me", msg);
-
+//    $("#" + id).chatbox("option", "boxManager").addMsg("me", msg);
+    addMessage(id, "me", msg);
     console.log("messageCallback " + dest + " " + dest_user_id);
+
     $.ajax({
-      data: 'chat[message]=' + msg + '&dest=' + dest_user_id + '&src=' + my_id,
+      data: 'chat[message]=' + msg + '&chat[recipient_id]=' + dest_user_id + '&dest=' + dest_user_id + '&src=' + my_id,
       type: "POST",
       url: "/chats",
       success: function (data) {
@@ -92,12 +99,18 @@ ready = function () {
     });
   }
 
-//  chatboxManager.init({messageSent: broadcastMessageCallback});
   chatboxManager.init({messageSent: messageCallback});
 
   $("#chat-main").on("click", ".contact", function (event) {
     createChatWindow($(this).attr('id'), $(this).text());
   });
+
+  var setCookie = function (key, obj) {
+    var date = new Date();
+    var minutes = 30;
+    date.setTime(date.getTime() + (minutes * 60 * 1000));
+    $.cookie(key, JSON.stringify(obj), { expires: date });
+  }
 
   var createChatWindow = function (id, text, hidden) {
     console.log("=== createChatWin === div: " + id);
@@ -106,9 +119,6 @@ ready = function () {
     var div_id = "box" + id;
     var user_name = text;
 
-//    console.log(div_id);
-//    idList.push(div_id);
-//    idHash[id] = text;
     chatboxManager.addBox(div_id,
         {
           dest: "dest" + id, // not used in demo
@@ -122,15 +132,20 @@ ready = function () {
     if (hidden) {
       $("#" + div_id).parent().hide();
     }
-//    var date = new Date();
-//    var minutes = 30;
-//    date.setTime(date.getTime() + (minutes * 60 * 1000));
-//    $.cookie('idHash', JSON.stringify(idHash), { expires: date });
+
+    idHash[id] = text;
+    setCookie('idHash', idHash);
+
     return div_id;
   }
-//  $.each(idHash, function (k, v) {
-//    createChatWindow(k, v, true);
-//  });
+
+  $.each(idHash, function (k, v) {
+    var div_id = createChatWindow(k, v, true);
+    var html = messagesHash[div_id];
+    $("#" + div_id).append(html);
+  });
+  var div_id = "chat_div";
+  $("#"+div_id).append(messagesHash[div_id]);
 
 };
 
