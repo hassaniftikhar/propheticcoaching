@@ -1,5 +1,3 @@
-
-
 table_for mentee do
   column :name
   column :email
@@ -11,10 +9,7 @@ end
 "Assign Coach"
 
 form_for [:admin, mentee] do |f|
-
   f.select :coach_id, options_from_collection_for_select(User.coaches.all, 'id', 'name', mentee.coach_id)
-
   f.button "Select/Change Coach"
-
 end
 

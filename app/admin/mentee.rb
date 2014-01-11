@@ -1,9 +1,20 @@
 ActiveAdmin.register Mentee do
 
-  permit_params :first_name, :last_name, :email, :donor_id, :home_phone,
-                :availability, :prophecy, :bc, :coach_id
+  permit_params(:mentees_id_list, :mentee => [:first_name, :last_name, :email, :donor_id, :home_phone,
+                            :availability, :prophecy, :bc, :coach_id, :mentees_id_list])
 
-  #action_item :all, :except => [:new]
+  batch_action "Assign Coach" do |selection|
+    mentees = Mentee.find(selection)
+    render "assign_coachs", :locals => {mentees: mentees, selection: selection}
+  end
+
+  collection_action :assign_multiple_coaches, :method => :post do
+    mentees = Mentee.find(JSON.parse(params[:mentee][:mentees_id_list]))
+    mentees.each do |mentee|
+      mentee.update_attribute :coach_id, params[:mentee][:coach_id]
+    end
+    redirect_to admin_mentees_url, flash: {message: "Successfully Assigned Coach"}
+  end
 
   collection_action :import_csv, :method => [:get, :post] do
     if request.method == "GET"
@@ -12,14 +23,12 @@ ActiveAdmin.register Mentee do
     else
       file = params[:mentee][:csv].tempfile.to_path.to_s
       Mentee.import_csv file
-      redirect_to admin_mentees_url, flash: {message: "successfully imported csv"}
+      redirect_to admin_mentees_url, flash: {message: "Successfully Imported CSV"}
     end
   end
 
   member_action :assign_coach, :method => :get do
     @mentee = Mentee.find(params[:id])
-    #user.lock!
-    #redirect_to {:action => :show}, {:notice => "Locked!"}
   end
 
   controller do
@@ -45,6 +54,7 @@ ActiveAdmin.register Mentee do
   end
 
   index do
+    selectable_column
     column :first_name
     column :last_name
     column :email
