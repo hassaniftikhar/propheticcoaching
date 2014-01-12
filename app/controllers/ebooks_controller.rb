@@ -16,7 +16,11 @@ class EbooksController < ApplicationController
   # GET /ebooks/1/pdf
   # GET /ebooks/1.json/pdf
   def pdf
-    send_file(open(@ebook.pdf.path), :filename => @ebook.pdf.path, :disposition => 'inline', :type => "application/pdf")
+    if can? :edit, @ebook
+      send_file(open(@ebook.pdf.path), :filename => @ebook.pdf.path, :disposition => 'inline', :type => "application/pdf")
+    else
+      redirect_to ebooks_path, alert: "You dont have permission to view pdf."
+    end
   end
 
   # GET /ebooks/new

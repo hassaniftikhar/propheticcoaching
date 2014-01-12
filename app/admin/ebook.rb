@@ -7,12 +7,17 @@ ActiveAdmin.register Ebook do
   #end
 
   collection_action :search, :method => :get do
+    if params.has_key? "query"
       @pages = Page.search params
-      #respond_to do |format|
-        p "=== js call"
-      #  format.js { render :partial => 'search' }
-      #end
       render :partial => "admin/ebooks/result_table", :locals => {:pages => @pages}
+    else
+      render "admin/ebooks/search"
+    end
+
+  end
+
+  action_item :only => :index do
+    link_to 'Search Ebooks', search_admin_ebooks_path
   end
 
   index do
