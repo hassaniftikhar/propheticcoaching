@@ -8,6 +8,7 @@ class Ability
     elsif user.has_role? :coach
       can :read, Mentee
       cannot :read, User
+      cannot :edit, Ebook
     #else
     #  can :read, :all
     end

@@ -50,7 +50,7 @@ ActiveAdmin.register User do
       f.input :availablity_time, :as => :select, :collection => {"Morning" => "morning", "Afternoon" => "afternoon", "Evening" => "evening"}
       #f.input :status, :as => :select, :collection => {"Enable" => true, "Disable" => false}
       f.input :best_time_to_call
-      f.input :date_of_birth
+      f.input :date_of_birth, :start_year =>  Time.now.year - 70
     end
     f.actions
   end

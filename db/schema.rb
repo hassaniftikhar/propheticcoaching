@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140110051209) do
+ActiveRecord::Schema.define(version: 20140111104421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 20140110051209) do
     t.string   "home_phone"
     t.string   "availablity_time"
     t.string   "best_time_to_call"
-    t.datetime "date_of_birth"
+    t.date     "date_of_birth"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "encrypted_password",     default: "",    null: false
