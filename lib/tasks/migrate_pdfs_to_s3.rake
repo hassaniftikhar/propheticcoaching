@@ -1,6 +1,8 @@
 namespace :pdf do
   task :migrate_to_s3, [:dir_path] => [:environment] do |t, args|
 
+    Ebook.destroy_all
+
     args.with_defaults(:dir_path => "Thanks for logging on")
     puts "dir_path: #{args.dir_path}"
 
