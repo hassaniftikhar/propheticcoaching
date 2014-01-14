@@ -4,8 +4,6 @@ class Ebook < ActiveRecord::Base
 
   mount_uploader :pdf, PdfUploader
 
-  validates_attachment :pdf, content_type: {content_type: "application/pdf"}
-
   after_save :create_pages
   before_destroy :remove_es_index
 
