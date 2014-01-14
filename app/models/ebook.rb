@@ -2,9 +2,7 @@ class Ebook < ActiveRecord::Base
 
   has_many :pages, dependent: :destroy
 
-  has_attached_file :pdf,
-                    :path => ":rails_root/tmp/assets/pictures/:id/:style/:basename.:extension",
-                    :url => ":rails_root/tmp/attachments/:id/:style/:basename.:extension"
+  mount_uploader :pdf, PdfUploader
 
   validates_attachment :pdf, content_type: {content_type: "application/pdf"}
 
@@ -41,8 +39,10 @@ class Ebook < ActiveRecord::Base
 
   def create_pages
     str = []
-    if pdf.path
-      reader = PDF::Reader.new(pdf.path)
+    if pdf.url
+      require 'open-uri'
+      io = open(pdf.url)
+      reader = PDF::Reader.new(io)
       reader.pages.each_with_index do |page, index|
         puts "===rendering page: ... - index: #{index}"
         self.pages.create! page_number: (index+1), tags: page.text

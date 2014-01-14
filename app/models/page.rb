@@ -30,7 +30,7 @@ class Page < ActiveRecord::Base
   end
 
   def ebook_name
-    ebook.name
+    ebook.name if ebook
   end
 
 end

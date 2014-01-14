@@ -19,7 +19,7 @@ ActiveAdmin.register Mentee do
   collection_action :import_csv, :method => [:get, :post] do
     if request.method == "GET"
       @mentee = Mentee.new
-      render :partial => "import_csv"
+      render "import_csv"
     else
       file = params[:mentee][:csv].tempfile.to_path.to_s
       Mentee.import_csv file

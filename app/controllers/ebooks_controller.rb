@@ -16,11 +16,8 @@ class EbooksController < ApplicationController
   # GET /ebooks/1/pdf
   # GET /ebooks/1.json/pdf
   def pdf
-    if can? :edit, @ebook
-      send_file(open(@ebook.pdf.path), :filename => @ebook.pdf.path, :disposition => 'inline', :type => "application/pdf")
-    else
-      redirect_to ebooks_path, alert: "You dont have permission to view pdf."
-    end
+    #TODO: this is a security issue as anyone can access the pdf, need to fix so that only jquery can access
+    send_file(open(@ebook.pdf.url), :filename => @ebook.pdf.path, :disposition => 'inline', :type => "application/pdf")
   end
 
   # GET /ebooks/new
