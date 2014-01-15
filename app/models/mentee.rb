@@ -5,6 +5,7 @@ class Mentee < ActiveRecord::Base
 
   belongs_to :coach, :class_name => "User", :foreign_key => "coach_id"
   has_many :events
+  has_many :goals
 
   def self.import_csv(file)
     require "csv"

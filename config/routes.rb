@@ -26,7 +26,10 @@ Propheticcoaching::Application.routes.draw do
     end
   end
 
-  resources :coaches, :only => [:index, :show]
+  resources :coaches, :only => [:index, :show] do
+    resources :mentees
+  end
+
 
   resources :events, :only => [:index] do
     collection do
