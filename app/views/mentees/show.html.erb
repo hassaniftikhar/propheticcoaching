@@ -1,0 +1,63 @@
+<h3> Mentee Details </h3>
+<table class="table table-striped" border="1" >
+  <tbody>
+		  <tr>
+		    <td>FIRST NAME</td>
+		    <td><%= @mentee.first_name %></td>
+		  </tr>
+		  <tr>
+		    <td>LAST NAME</td>
+		    <td><%= @mentee.last_name %></td>
+		  </tr>
+		  <tr>
+		    <td>EMAIL</td>
+		    <td><%= @mentee.email %></td>
+		  </tr>
+		  <tr>
+		    <td>DONER</td>
+		    <td><%= @mentee.donor_id %></td>
+		  </tr>
+		  <tr>
+		    <td>HOME PHONE</td>
+		    <td><%= @mentee.home_phone %></td>
+		  </tr>
+		  <tr>
+		    <td>AVAILABILITY</td>
+		    <td><%= @mentee.availability %></td>
+		  </tr>
+		  <tr>
+		    <td>PROPHECY</td>
+		    <td><%= @mentee.prophecy %></td>
+		  </tr>
+		  <tr>
+		    <td>BC</td>
+		    <td><%= @mentee.bc %></td>
+		  </tr>
+		  <tr>
+		    <td>COACH</td>
+		    <td><%= link_to("#{@mentee.coach.first_name} #{@mentee.coach.last_name}", admin_user_path(@mentee.coach)) if @mentee.coach %></td>
+		  </tr>
+
+  </tbody>
+</table>
+
+<h3> Listing Goals </h3>
+<table class="table table-striped" border="1">
+  <thead>
+  <tr>
+    <th>Detail</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @mentee.goals.each do |goal| %>
+    <tr>
+      <td><%= goal.body %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= render :partial => "goals/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
+
+<%= link_to 'Back', mentees_path %>

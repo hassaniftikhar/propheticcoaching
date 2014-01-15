@@ -1,0 +1,29 @@
+<h1>Listing mentees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mentees.each do |mentee| %>
+      <tr>
+        <td><%= mentee.first_name %></td>
+        <td><%= mentee.last_name %></td>
+        <td><%= link_to 'Show', mentee %></td>
+        <td><%= link_to 'Edit', edit_mentee_path(mentee) %></td>
+        <td><%= link_to 'Destroy', mentee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mentee', new_mentee_path %>

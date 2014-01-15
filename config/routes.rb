@@ -26,7 +26,12 @@ Propheticcoaching::Application.routes.draw do
     end
   end
 
-  resources :coaches, :only => [:index, :show]
+  resources :coaches, :only => [:index, :show] do
+    resources :mentees do
+      resources :goals
+    end
+  end
+
 
   resources :events, :only => [:index] do
     collection do
@@ -44,7 +49,9 @@ Propheticcoaching::Application.routes.draw do
         post :resize
       end
     end
+    
   end
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,11 @@
+<%= form_for @goal||=Goal.new, :url => coach_mentee_goals_path(coach,mentee) do |f| %>
+
+  <div class="field">
+    <%= f.text_area :body %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

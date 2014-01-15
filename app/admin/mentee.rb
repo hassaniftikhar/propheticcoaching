@@ -2,7 +2,6 @@ ActiveAdmin.register Mentee do
 
   permit_params(:mentees_id_list, :mentee => [:first_name, :last_name, :email, :donor_id, :home_phone,
                             :availability, :prophecy, :bc, :coach_id, :mentees_id_list])
-
   batch_action "Assign Coach" do |selection|
     mentees = Mentee.find(selection)
     render "assign_coachs", :locals => {mentees: mentees, selection: selection}
