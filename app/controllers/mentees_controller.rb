@@ -10,6 +10,7 @@ class MenteesController < ApplicationController
   # GET /mentees/1
   # GET /mentees/1.json
   def show
+    
   end
 
   # GET /mentees/new

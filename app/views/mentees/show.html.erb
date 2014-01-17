@@ -41,23 +41,12 @@
   </tbody>
 </table>
 
-<h3> Listing Goals </h3>
-<table class="table table-striped" border="1">
-  <thead>
-  <tr>
-    <th>Detail</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @mentee.goals.each do |goal| %>
-    <tr>
-      <td><%= goal.body %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<%= render :partial => "goals/show" %>
 
 <%= render :partial => "goals/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
 
-<%= link_to 'Back', mentees_path %>
+<%= render :partial => "comments/show" %>
+
+<%= render :partial => "comments/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
+
+<%= link_to 'Back', coach_path(@mentee.coach.id) %>

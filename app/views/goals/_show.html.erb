@@ -1,0 +1,16 @@
+<h3> Listing Goals </h3>
+<table class="table table-striped" border="1">
+  <thead>
+  <tr>
+    <th>Detail</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @mentee.goals.order("id DESC").each do |goal| %>
+    <tr>
+      <td><%= goal.body %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

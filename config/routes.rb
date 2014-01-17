@@ -29,6 +29,7 @@ Propheticcoaching::Application.routes.draw do
   resources :coaches, :only => [:index, :show] do
     resources :mentees do
       resources :goals
+      resources :comments
     end
   end
 

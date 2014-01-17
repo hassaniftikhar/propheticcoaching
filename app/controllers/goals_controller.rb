@@ -10,6 +10,7 @@ class GoalsController < ApplicationController
   # GET /goals/1
   # GET /goals/1.json
   def show
+    
   end
 
   # GET /goals/new
@@ -29,7 +30,7 @@ class GoalsController < ApplicationController
 
     respond_to do |format|
       if @goal.save
-        format.html { redirect_to coach_mentee_path(goal_params[:coach_id], goal_params[:mentee_id]), notice: 'Goal was successfully created.' }
+        format.html { redirect_to coach_mentee_path(goal_params[:coach_id], @mentee), notice: 'Goal was successfully created.' }
         format.json { render action: 'show', status: :created, location: @goal }
       else
         format.html { render action: 'new' }
