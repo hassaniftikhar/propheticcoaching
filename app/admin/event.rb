@@ -1,13 +1,13 @@
 ActiveAdmin.register Event do
 
-  permit_params :title, :description, :starttime, :endtime, :mentee_id
+  permit_params :title, :description, :starttime, :endtime, :profile
 
   index do
     column :title
     column :description
     column :starttime
     column :endtime
-    column :mentee
+    column :profile
 
     default_actions
   end
@@ -36,7 +36,7 @@ ActiveAdmin.register Event do
       row :description
       row :starttime
       row :endtime
-      row :mentee
+      row :profile
     end
     active_admin_comments
   end

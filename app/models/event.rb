@@ -4,7 +4,8 @@ class Event < ActiveRecord::Base
   validates_presence_of :title, :description
   validate :validate_timings
   
-  belongs_to :mentee
+  belongs_to :profile, :polymorphic => true
+  # belongs_to :mentee
   belongs_to :event_series
 
   REPEATS = [
