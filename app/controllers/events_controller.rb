@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   end
 
   def new
+    @mentee = Mentee.find_by id: event_params[:mentee_id]
     @event = Event.new(:endtime => 1.hour.from_now, :period => "Does not repeat")
     render :json => {:form => render_to_string(:partial => 'form')}
   end
@@ -20,7 +21,7 @@ class EventsController < ApplicationController
     if params[:event][:period] == "Does not repeat"
       event = @mentee.events.new event_params[:event]
     else
-      event = EventSeries.new(event_params)
+      event = EventSeries.new(event_params[:event])
     end
     if event.save
       render :nothing => true
@@ -75,13 +76,12 @@ class EventsController < ApplicationController
     @event = Event.find_by_id(params[:event][:id])
     if params[:event][:commit_button] == "Update All Occurrence"
       @events = @event.event_series.events #.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
-      @event.update_events(@events, event_params)
+      @event.update_events(@events, event_params[:event])
     elsif params[:event][:commit_button] == "Update All Following Occurrence"
       @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
-      @event.update_events(@events, event_params)
+      @event.update_events(@events, event_params[:event])
     else
-      @event.attributes = event_params
-      @event.save
+      @event.update(event_params[:event])
     end
     render :nothing => true
   end

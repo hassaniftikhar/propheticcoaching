@@ -43,19 +43,27 @@ ActiveAdmin.register User do
       f.input :first_name
       f.input :last_name
       f.input :email
-      f.input :password
+      if f.object.new_record?
+        f.input :password
+        f.input :password_confirmation
+      end
       f.input :address
       f.input :roles, :as => :check_boxes
       f.input :home_phone
       f.input :availablity_time, :as => :select, :collection => {"Morning" => "morning", "Afternoon" => "afternoon", "Evening" => "evening"}
       #f.input :status, :as => :select, :collection => {"Enable" => true, "Disable" => false}
       f.input :best_time_to_call
-      f.input :date_of_birth, :start_year =>  Time.now.year - 70
+      f.input :date_of_birth, :start_year => Time.now.year - 70
     end
     f.actions
   end
 
   show do |user|
+    button "show calendar", :id => "show_calendar"
+    div :id => "calendar", :style => "width:700px;height500px;display:none", :mentee_id => params[:id] do
+      render "/events/actions_dialog"
+    end
+
     attributes_table do
       row :first_name
       row :last_name
@@ -69,7 +77,7 @@ ActiveAdmin.register User do
       row :best_time_to_call
       row :date_of_birth
       row :mentees do |user|
-        user.mentees.collect{ |r| link_to(r.name, admin_mentee_path(r.id)) }.join(", ").html_safe
+        user.mentees.collect { |r| link_to(r.name, admin_mentee_path(r.id)) }.join(", ").html_safe
       end
     end
     active_admin_comments

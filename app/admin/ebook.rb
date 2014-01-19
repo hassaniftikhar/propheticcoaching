@@ -23,8 +23,8 @@ ActiveAdmin.register Ebook do
   index do
     column :name
     column :created_at
-    column :pdf_file_name
-    column :pdf_content_type
+    #column :pdf_file_name
+    #column :pdf_content_type
     default_actions
   end
 

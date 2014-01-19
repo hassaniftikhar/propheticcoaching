@@ -41,6 +41,8 @@
   </tbody>
 </table>
 
+<% if can? :create, @ebook %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_ebook_path,
             :class => 'btn btn-primary' %>
+<% end %>

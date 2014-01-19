@@ -1,4 +1,4 @@
-<%= form_for [:mentee, @event], :html => { :id => 'event_form' } do |f| %>
+<%= form_for [@mentee, @event], :html => { :id => 'event_form' } do |f| %>
 <p>
   <%=f.label :title %>
   <br/>
@@ -12,12 +12,12 @@
 <p>
   <%=f.label :starttime, 'Start Time' %>
   <br/>
-  <%=f.datetime_select :starttime, ampm: true, :minute_step => 5%>
+  <%=f.datetime_select :starttime, ampm: true, :minute_step => 15, :start_hour => 9, :end_hour => 21 %>
 </p>
 <p>
   <%=f.label :endtime, 'End Time' %>
   <br/>
-  <%=f.datetime_select :endtime, ampm: true, :minute_step => 5 %>
+  <%=f.datetime_select :endtime, ampm: true, :minute_step => 15, :start_hour => 9, :end_hour => 21 %>
 </p>
 <p>
   <%=f.label :all_day %>
