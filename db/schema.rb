@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140113080735) do
+ActiveRecord::Schema.define(version: 20140117054826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,7 +81,15 @@ ActiveRecord::Schema.define(version: 20140113080735) do
     t.datetime "endtime"
     t.boolean  "all_day",         default: false
     t.integer  "event_series_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "profile_id",                      null: false
+    t.string   "profile_type",                    null: false
+  end
+
+  create_table "goals", force: true do |t|
     t.integer  "mentee_id"
+    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

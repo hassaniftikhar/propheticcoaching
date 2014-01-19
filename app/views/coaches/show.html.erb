@@ -26,7 +26,7 @@
   <tbody>
   <% @coach.mentees.each do |mentee| %>
     <tr>
-      <td><%= mentee.name %></td>
+      <td><%= link_to mentee.name, coach_mentee_path(@coach, mentee) %></td>
       <td><%= mentee.email %></td>
       <td><%= mentee.availability %></td>
       <td><%= mentee.prophecy %></td>

@@ -1,0 +1,16 @@
+<h3> Listing Comments </h3>
+<table class="table table-striped" border="1">
+  <thead>
+  <tr>
+    <th>Detail</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @mentee.comments.each do |comment| %>
+    <tr>
+      <td><%= comment.body %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

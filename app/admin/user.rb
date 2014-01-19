@@ -5,14 +5,28 @@ ActiveAdmin.register User do
   #              :status, :role_ids => []
   #actions :all, :except => [:new]
 
-
+  collection_action :import_csv, :method => [:get, :post] do
+    if request.method == "GET"
+      @user = User.new
+      render :partial => "import_csv"
+    else
+      file = params[:user][:csv].tempfile.to_path.to_s
+      User.import_csv file
+      redirect_to admin_users_url, flash: {message: "successfully imported csv"}
+    end
+  end
+  
   controller do
     def permitted_params
       params.permit!
       #params.permit(:user => [:first_name, :last_name, :email, :address, :home_phone,
-      #                        :availablity_time, :best_time_to_call, :date_of_birth,
-      #                        :status, :role_ids => []])
+      # :availablity_time, :best_time_to_call, :date_of_birth,
+      # :status, :role_ids => []])
     end
+  end
+
+  action_item :only => :index do
+    link_to('Import User CSV', import_csv_admin_users_path)
   end
 
   index do
