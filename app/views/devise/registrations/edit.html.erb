@@ -23,6 +23,9 @@
     <%= f.input :password_confirmation, :required => false %>
     <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
   </div>
+  <div id = "calendar" coach_id = <%= resource.id %> >
+      <%= render "/events/actions_dialog" %>
+  </div>
 
   <div class="form-actions">
     <%= f.button :submit, "Update" %>

@@ -73,9 +73,10 @@ ActiveAdmin.register User do
   end
 
   show do |user|
+    @coach = params[:id]
     button "show calendar", :id => "show_calendar"
-    div :id => "calendar", :style => "width:700px;height500px;display:none", :coach_id => params[:id] do
-      render "/events/actions_dialog"
+    div :id => "calendar", :style => "width:700px;height500px;display:none", :coach_id => @coach do
+      render :partial => "/events/actions_dialog", :locals => {:coach => @coach }
     end
 
     attributes_table do

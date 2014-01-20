@@ -79,6 +79,7 @@ class EventsController < ApplicationController
 
   def edit
     @mentee = Mentee.find_by :id => params[:mentee_id]
+    @coach = User.find_by :id => 1
     @event = Event.find_by_id(params[:id])
     render :json => {:form => render_to_string(:partial => 'form')}
   end

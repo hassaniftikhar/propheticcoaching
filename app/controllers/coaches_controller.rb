@@ -1,7 +1,8 @@
 class CoachesController < ApplicationController
   before_action :authenticate_user!
 
-  before_action :set_coach, only: [:show]
+  #before_action :set_coach, only: [:show, :edit]
+  before_action :set_coach
 
   # GET /coaches
   # GET /coaches.json
@@ -21,8 +22,8 @@ class CoachesController < ApplicationController
   #end
   #
   ## GET /coaches/1/edit
-  #def edit
-  #end
+  # def edit
+  # end
   #
   ## POST /coaches
   ## POST /coaches.json
