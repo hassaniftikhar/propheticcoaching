@@ -11,7 +11,11 @@ class EventsController < ApplicationController
   end
 
   def new
-    @mentee = Mentee.find_by id: event_params[:mentee_id]
+    if event_params[:mentee_id].present?
+      @profile = Mentee.find_by id: event_params[:mentee_id]
+    else
+      @profile = User.coaches.find_by id: event_params[:coach_id]
+    end
     @event = Event.new(:endtime => 1.hour.from_now, :period => "Does not repeat")
     render :json => {:form => render_to_string(:partial => 'form')}
   end
@@ -35,10 +39,17 @@ class EventsController < ApplicationController
   end
 
   def get_events
-    p params.inspect
-    conditions = "starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"
-    conditions += " AND mentee_id = '#{params[:mentee_id]}'" if params[:mentee_id].present?
-    @events = Event.where conditions
+    if params[:mentee_id].present?
+      profile = Mentee.find_by id: params[:mentee_id]
+    elsif params[:coach_id].present?
+      profile = User.coaches.find_by id: params[:coach_id]
+    end
+    if profile
+      @events = profile.events.where "starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"
+    else
+      @events = Event.where "starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}' AND profile_type = 'User'"
+    end
+
     events = []
     @events.each do |event|
       events << {:id => event.id, :title => event.title, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.event_series_id) ? true : false}
@@ -101,7 +112,7 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.permit(:mentee_id, :event => [:mentee_id , :id,  :title, :description, :starttime, :endtime,  :all_day, :period, :frequency])
+    params.permit(:mentee_id, :coach_id, :event => [:mentee_id , :id,  :title, :description, :starttime, :endtime,  :all_day, :period, :frequency])
   end
 
 end

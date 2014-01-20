@@ -15,9 +15,13 @@
   </div>
 </div>
 
-<% if params[:mentee_id]  %>
+<% if params[:mentee_id] %>
   <%= link_to 'Create Event', new_mentee_event_path(:mentee_id => params[:mentee_id]), :id => 'new_event' %>
+<% elsif params[:id] %>
+  <%= link_to 'Create Event', new_coach_event_path(:coach_id => params[:id]), :id => 'new_event' %>
 <% end %>
+
+
 
 
 <script type="text/javascript">

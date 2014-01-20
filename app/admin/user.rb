@@ -74,7 +74,7 @@ ActiveAdmin.register User do
 
   show do |user|
     button "show calendar", :id => "show_calendar"
-    div :id => "calendar", :style => "width:700px;height500px;display:none", :mentee_id => params[:id] do
+    div :id => "calendar", :style => "width:700px;height500px;display:none", :coach_id => params[:id] do
       render "/events/actions_dialog"
     end
 

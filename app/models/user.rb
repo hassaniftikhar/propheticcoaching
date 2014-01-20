@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   has_many :mentees, :foreign_key => "coach_id"
   has_many :chats
+  has_many :events, :as => :profile
 
   scope :coaches, -> { Role.where("name='coach'").first.users }
 

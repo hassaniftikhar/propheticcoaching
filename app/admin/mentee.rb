@@ -36,6 +36,8 @@ ActiveAdmin.register Mentee do
 
     def set_mentee_id
       params[:mentee_id] = params[:id]
+      params[:profile_id] = params[:id]
+      params[:profile_type] = "mentee"
     end
 
     def set_calendar_properties
@@ -100,7 +102,7 @@ ActiveAdmin.register Mentee do
     end
     button "show calendar", :id => "show_calendar"
     div :id => "calendar", :style => "width:700px;height500px;display:none", :mentee_id => params[:id] do
-      render "/events/actions_dialog"
+      render "/events/actions_dialog", :locals => { :profile_id => params[:id], :profile_type => self.class.to_s }
     end
 
     attributes_table do

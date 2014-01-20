@@ -31,12 +31,20 @@ Propheticcoaching::Application.routes.draw do
       resources :goals
       resources :comments
     end
+    resources :events do
+      collection do
+        get :get_events
+      end
+    end
   end
 
-
-  resources :events, :only => [:index] do
+  resources :events, :only => [:index, :edit, :update, :destroy] do
     collection do
       get :get_events
+    end
+    member do
+      post :move
+      post :resize
     end
   end
 
@@ -46,8 +54,6 @@ Propheticcoaching::Application.routes.draw do
     resources :events do
       collection do
         get :get_events
-        post :move
-        post :resize
       end
     end
     

@@ -1,25 +1,22 @@
-
-
-
-function moveEvent(event, dayDelta, minuteDelta, allDay){
+function moveEvent(event, dayDelta, minuteDelta, allDay) {
   jQuery.ajax({
     data: 'id=' + event.id + '&title=' + event.title + '&day_delta=' + dayDelta + '&minute_delta=' + minuteDelta + '&all_day=' + allDay + '&authenticity_token=' + authenticity_token,
     dataType: 'script',
     type: 'post',
-    url: "/mentees/"+event.id+"/events/move"
+    url: "/events/"+ event.id +"/move"
   });
 }
 
-function resizeEvent(event, dayDelta, minuteDelta){
+function resizeEvent(event, dayDelta, minuteDelta) {
   jQuery.ajax({
     data: 'id=' + event.id + '&title=' + event.title + '&day_delta=' + dayDelta + '&minute_delta=' + minuteDelta + '&authenticity_token=' + authenticity_token,
     dataType: 'script',
     type: 'post',
-    url: "/mentees/"+event.id+"/events/resize"
+    url: "/events/" + event.id + "/resize"
   });
 }
 
-function showEventDetails(event){
+function showEventDetails(event) {
   $('#event_desc').html(event.description);
   $('#edit_event').html("<a href = 'javascript:void(0);' onclick ='editEvent(" + event.id + ")'>Edit</a>");
   if (event.recurring) {
@@ -36,7 +33,7 @@ function showEventDetails(event){
     title: title,
     modal: true,
     width: 500,
-    close: function(event, ui){
+    close: function (event, ui) {
       $('#desc_dialog').dialog('destroy')
     }
   });
@@ -44,37 +41,38 @@ function showEventDetails(event){
 
 function get_mentee_id() {
   return $('#calendar').attr('mentee_id');
-//  return $('#calendar').data().mentee_id;
 }
 
-function editEvent(event_id){
-  var mentee_id = get_mentee_id();
-  console.log("event_id: "+mentee_id+" event_id: "+event_id );
+function get_coach_id() {
+  return $('#calendar').attr('coach_id');
+}
+
+function editEvent(event_id) {
+  console.log("event_id: " + event_id);
   jQuery.ajax({
-    url: "/mentees/"+mentee_id+"/events/" + event_id + "/edit",
-    success: function(data) {
+    url: "/events/" + event_id + "/edit",
+    success: function (data) {
       $('#event_desc').html(data['form']);
     }
   });
 }
 
-function deleteEvent(event_id, delete_all){
-  var mentee_id = get_mentee_id();
+function deleteEvent(event_id, delete_all) {
   jQuery.ajax({
     data: 'authenticity_token=' + authenticity_token + '&delete_all=' + delete_all,
     dataType: 'script',
     type: 'delete',
-    url: "/mentees/" + mentee_id + "/events/" + event_id,
+    url: "/events/" + event_id,
     success: refetch_events_and_close_dialog
   });
 }
 
 function refetch_events_and_close_dialog() {
-  $('#calendar').fullCalendar( 'refetchEvents' );
+  $('#calendar').fullCalendar('refetchEvents');
   $('.dialog:visible').dialog('destroy');
 }
 
-function showPeriodAndFrequency(value){
+function showPeriodAndFrequency(value) {
 
   switch (value) {
     case 'Daily':
@@ -106,58 +104,58 @@ function to_boolean(str) {
   return (str == "true") ? true : false
 }
 
-var ready = function() {
+var ready = function () {
   console.log("doc . ready function called");
   var mentee_id = get_mentee_id();
+  var coach_id = get_coach_id();
   var events_url;
-  if(mentee_id) {
+  if (mentee_id) {
     console.log(" mentee id available ");
-    events_url = "/mentees/"+mentee_id+"/events/get_events";
-  }
-  else {
-    console.log(" mentee id NOT available ");
+    events_url = "/mentees/" + mentee_id + "/events/get_events";
+  } else if (coach_id) {
+    console.log(" coach id available ");
+    events_url = "/coaches/" + coach_id + "/events/get_events";
+  } else {
+    console.log(" NO id available ");
     events_url = "/events/get_events";
   }
 
-  if($('#calendar').length > 0) {
-//    alert(calendar_editable);
-    var editable = to_boolean(calendar_editable);
-    $('#calendar').fullCalendar({
-      editable: editable,
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      },
-      defaultView: 'agendaWeek',
-      height: 500,
-      slotMinutes: 15,
-      loading: function (bool) {
-        if (bool)
-          $('#loading').show();
-        else
-          $('#loading').hide();
-      },
-      events: events_url,
-      timeFormat: 'h:mm t{ - h:mm t} ',
-      dragOpacity: "0.5",
-      eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
-        moveEvent(event, dayDelta, minuteDelta, allDay);
-      },
+  var editable = to_boolean(calendar_editable);
+  $('#calendar').fullCalendar({
+    editable: editable,
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
+    defaultView: 'agendaWeek',
+    height: 500,
+    slotMinutes: 15,
+    loading: function (bool) {
+      if (bool)
+        $('#loading').show();
+      else
+        $('#loading').hide();
+    },
+    events: events_url,
+    timeFormat: 'h:mm t{ - h:mm t} ',
+    dragOpacity: "0.5",
+    eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+      moveEvent(event, dayDelta, minuteDelta, allDay);
+    },
 
-      eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
-        resizeEvent(event, dayDelta, minuteDelta);
-      },
+    eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+      resizeEvent(event, dayDelta, minuteDelta);
+    },
 
-      eventClick: function (event, jsEvent, view) {
-        if(editable) {
-          showEventDetails(event);
-        }
+    eventClick: function (event, jsEvent, view) {
+      if (editable) {
+        showEventDetails(event);
       }
-    });
-  }
+    }
+  });
 
-  $('#create_event_dialog, #desc_dialog').on('submit', "#event_form", function(event) {
+  $('#create_event_dialog, #desc_dialog').on('submit', "#event_form", function (event) {
     var $spinner = $('.spinner');
     event.preventDefault();
     $.ajax({

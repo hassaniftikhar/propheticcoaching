@@ -4,7 +4,6 @@ class Mentee < ActiveRecord::Base
   has_paper_trail
 
   belongs_to :coach, :class_name => "User", :foreign_key => "coach_id"
-  has_many :events
   has_many :goals
   has_many :comments, :as => :resource
   has_many :events, :as => :profile
