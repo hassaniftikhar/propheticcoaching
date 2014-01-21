@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :chats
   has_many :events, :as => :profile
 
-  scope :coaches, -> { Role.where("name='coach'").first.users }
+  scope :coach, -> { Role.where("name='coach'").first.users }
 
   def is_admin?
     self.has_role?(:admin) ? true : false

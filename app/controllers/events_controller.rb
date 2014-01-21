@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     if event_params[:mentee_id].present?
       @profile = Mentee.find_by id: event_params[:mentee_id]
     else
-      @profile = User.coaches.find_by id: event_params[:coach_id]
+      @profile = User.coach.find_by id: event_params[:coach_id]
     end
     @event = Event.new(:endtime => 1.hour.from_now, :period => "Does not repeat")
     render :json => {:form => render_to_string(:partial => 'form')}
@@ -42,7 +42,7 @@ class EventsController < ApplicationController
     if params[:mentee_id].present?
       profile = Mentee.find_by id: params[:mentee_id]
     elsif params[:coach_id].present?
-      profile = User.coaches.find_by id: params[:coach_id]
+      profile = User.coach.find_by id: params[:coach_id]
     end
     if profile
       @events = profile.events.where "starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"

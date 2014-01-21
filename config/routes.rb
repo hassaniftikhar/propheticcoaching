@@ -26,7 +26,7 @@ Propheticcoaching::Application.routes.draw do
     end
   end
 
-  resources :coaches, :only => [:index, :show] do
+  resources :users, :only => [:index, :show] do
     resources :mentees do
       resources :goals
       resources :comments
@@ -48,7 +48,7 @@ Propheticcoaching::Application.routes.draw do
     end
   end
 
-  root :to => 'coaches#index'
+  root :to => 'users#index'
 
   resources :mentees do
     resources :events do

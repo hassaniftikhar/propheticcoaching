@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
     
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to coach_mentee_path(comment_params[:coach_id], @mentee), notice: 'Comment was successfully created.' }
+        format.html { redirect_to user_mentee_path(comment_params[:user_id], @mentee), notice: 'Comment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @comment }
       else
         format.html { render action: 'new' }
@@ -75,6 +75,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.permit(:coach_id, :mentee_id, :comment => [:body, :id])
+      params.permit(:user_id, :mentee_id, :comment => [:body, :id])
     end
 end

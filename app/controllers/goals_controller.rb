@@ -30,7 +30,7 @@ class GoalsController < ApplicationController
 
     respond_to do |format|
       if @goal.save
-        format.html { redirect_to coach_mentee_path(goal_params[:coach_id], @mentee), notice: 'Goal was successfully created.' }
+        format.html { redirect_to user_mentee_path(goal_params[:user_id], @mentee), notice: 'Goal was successfully created.' }
         format.json { render action: 'show', status: :created, location: @goal }
       else
         format.html { render action: 'new' }
@@ -73,7 +73,7 @@ class GoalsController < ApplicationController
     def goal_params
       # params.permit(:mentee_id, :event => [:mentee_id , :id,  :title, :description, :starttime, :endtime,  :all_day, :period, :frequency])
 
-      params.permit(:coach_id, :mentee_id, :goal => [:body, :id])
+      params.permit(:user_id, :mentee_id, :goal => [:body, :id])
       # params.require(:goal).permit(:body)
     end
 end

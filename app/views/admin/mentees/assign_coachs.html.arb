@@ -11,6 +11,6 @@ end
 
 form_for Mentee.new, url: assign_multiple_coaches_admin_mentees_path do |f|
     f.hidden_field 'mentees_id_list', :value=>selection
-  f.select :coach_id, options_from_collection_for_select(User.coaches.all, 'id', 'name')
+  f.select :coach_id, options_from_collection_for_select(User.coach.all, 'id', 'name')
   f.button "Select/Change Coach"
 end

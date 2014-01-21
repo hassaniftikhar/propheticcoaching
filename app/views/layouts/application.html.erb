@@ -23,7 +23,7 @@
         <ul class="nav">
           <% if current_user %>
             <li><%= link_to "Admin Panel", admin_users_path if current_user.has_role?(:admin) %></li>
-            <li><%= link_to "My Mentees List", coach_path(current_user) %></li>
+            <li><%= link_to "My Mentees List", user_path(current_user) %></li>
             <li><%= link_to "View Coaches Schedule", events_path %></li>
             <li><%= link_to "Search Ebooks", ebooks_path %></li>
             <li><%= link_to "Edit Profile", edit_user_registration_path %></li>

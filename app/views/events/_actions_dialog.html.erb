@@ -16,9 +16,10 @@
 </div>
 
 <% if @mentee %>
+  <% #TODO: make dynamic routes %>
   <%= link_to 'Create Event', new_mentee_event_path(@mentee), :id => 'new_event' %>
 <% elsif coach %>
-  <%= link_to 'Create Event', new_coach_event_path(coach), :id => 'new_event' %>
+  <%= link_to 'Create Event', new_user_event_path(@user), :id => 'new_event' %>
 <% end %>
 
 <script type="text/javascript">

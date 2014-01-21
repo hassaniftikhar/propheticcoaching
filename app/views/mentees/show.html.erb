@@ -49,4 +49,4 @@
 
 <%= render :partial => "comments/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
 
-<%= link_to 'Back', coach_path(@mentee.coach.id) %>
+<%= link_to 'Back', user_path(@mentee.coach.id) %>
