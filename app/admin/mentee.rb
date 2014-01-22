@@ -7,12 +7,26 @@ ActiveAdmin.register Mentee do
     render "assign_coachs", :locals => {mentees: mentees, selection: selection}
   end
 
+
   collection_action :assign_multiple_coaches, :method => :post do
     mentees = Mentee.find(JSON.parse(params[:mentee][:mentees_id_list]))
     mentees.each do |mentee|
       mentee.update_attribute :coach_id, params[:mentee][:coach_id]
     end
     redirect_to admin_mentees_url, flash: {message: "Successfully Assigned Coach"}
+  end
+
+  batch_action "Assign Prophecy" do |selection|
+    mentees = Mentee.find(selection)
+    render "assign_prophecies", :locals => {mentees: mentees, selection: selection}
+  end
+  
+  collection_action :assign_multiple_prophecies, :method => :post do
+    mentees = Mentee.find(JSON.parse(params[:mentee][:mentees_id_list]))
+    mentees.each do |mentee|
+      mentee.update_attribute :prophecy, params[:mentee][:prophecy]
+    end
+    redirect_to admin_mentees_url, flash: {message: "Successfully Assigned Prophecy"}
   end
 
   collection_action :import_csv, :method => [:get, :post] do
