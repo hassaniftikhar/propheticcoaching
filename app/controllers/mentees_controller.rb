@@ -3,9 +3,11 @@ class MenteesController < ApplicationController
 
   # GET /mentees
   # GET /mentees.json
-  # def index
-  #   @mentees = Mentee.all
-  # end
+  def index
+    @user    = User.find_by id: params[:user_id]
+    @mentees = @user.mentees.page params[:page]
+
+  end
 
   # GET /mentees/1
   # GET /mentees/1.json

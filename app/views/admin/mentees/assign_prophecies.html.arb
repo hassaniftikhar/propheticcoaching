@@ -9,6 +9,6 @@ end
 
 form_for Mentee.new, url: assign_multiple_prophecies_admin_mentees_path do |f|
   f.hidden_field 'mentees_id_list', :value=>selection
-  f.text_field :prophecy, :title => "Prophecy", :size => 100
+  f.label "Prophecy"
   f.button "Change Prophecy"
 end

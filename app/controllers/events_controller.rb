@@ -22,11 +22,20 @@ class EventsController < ApplicationController
 
   def create
     @mentee = Mentee.where("id = #{event_params[:mentee_id]}").first
-    if params[:event][:period] == "Does not repeat"
-      event = @mentee.events.new event_params[:event]
+    if @mentee
+      if params[:event][:period] == "Does not repeat"
+        event = @mentee.events.new event_params[:event]
+      else
+        event = EventSeries.new(event_params[:event])
+      end
     else
-      event = EventSeries.new(event_params[:event])
-    end
+      @user   = User.where("id = #{event_params[:user_id]}").first
+      if params[:event][:period] == "Does not repeat"
+        event = @user.events.new event_params[:event]
+      else
+        event = EventSeries.new(event_params[:event])
+      end
+    end  
     if event.save
       render :nothing => true
     else
@@ -113,7 +122,7 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.permit(:mentee_id, :coach_id, :event => [:mentee_id , :id,  :title, :description, :starttime, :endtime,  :all_day, :period, :frequency])
+    params.permit(:mentee_id, :user_id, :event => [:mentee_id , :id,  :title, :description, :starttime, :endtime,  :all_day, :period, :frequency])
   end
 
 end

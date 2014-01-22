@@ -6,32 +6,44 @@
     <% end %>
 </p>
 
-<p>
-  <strong>User Name:</strong>
-  <%= @user.name %>
-</p>
-
-<h3> Listing Mentees </h3>
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Availability</th>
-    <th>Prophecy</th>
-    <th>Calendar Schedule</th>
-  </tr>
-  </thead>
-
+<h3> Coach Details </h3>
+<table class="table table-striped" border="1" >
   <tbody>
-  <% @user.mentees.each do |mentee| %>
-    <tr>
-      <td><%= link_to mentee.name, user_mentee_path(@user, mentee) %></td>
-      <td><%= mentee.email %></td>
-      <td><%= mentee.availability %></td>
-      <td><%= mentee.prophecy %></td>
-      <td><%= link_to "View", mentee_events_path(mentee) %></td>
-    </tr>
-  <% end %>
+      <tr>
+        <td>FIRST NAME</td>
+        <td><%= @user.first_name %></td>
+      </tr>
+      <tr>
+        <td>LAST NAME</td>
+        <td><%= @user.last_name %></td>
+      </tr>
+      <tr>
+        <td>EMAIL</td>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <td>ADDRESS</td>
+        <td><%= @user.address %></td>
+      </tr>
+      <tr>
+        <td>HOME PHONE</td>
+        <td><%= @user.home_phone %></td>
+      </tr>
+      <tr>
+        <td>AVAILABILITY</td>
+        <td><%= @user.availablity_time %></td>
+      </tr>
+      <tr>
+        <td>BEST TIME TO CALL</td>
+        <td><%= @user.best_time_to_call %></td>
+      </tr>
+      <tr>
+        <td>DATE OF BIRTH</td>
+        <td><%= @user.date_of_birth %></td>
+      </tr>
+
   </tbody>
 </table>
+
+<%= link_to 'Show Mentees', user_mentees_path(@user) %>
+<%= link_to 'Back', users_path %>
