@@ -17,6 +17,12 @@ ActiveAdmin.register User do
   end
   
   controller do
+    before_action :set_calendar_properties
+
+    def set_calendar_properties
+      @calendar_editable = current_user.is_admin? ? true : false
+    end
+
     def permitted_params
       params.permit!
       #params.permit(:user => [:first_name, :last_name, :email, :address, :home_phone,
@@ -76,7 +82,7 @@ ActiveAdmin.register User do
     #@user = params[:id]
     @user = user
     button "show calendar", :id => "show_calendar"
-    div :id => "calendar", :style => "width:700px;height500px;display:none", :user_id => @user do
+    div :id => "calendar", :style => "width:700px;height500px;display:none", :user_id => @user.id do
       render :partial => "/events/actions_dialog", :locals => {:user => @user }
     end
 
