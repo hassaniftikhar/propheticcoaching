@@ -1,29 +1,34 @@
-<h1>Listing mentees</h1>
+<p>
+  <strong>User Name:</strong>
+  <%= @user.name %>
+</p>
 
-<table>
+<h3> Listing Mentees </h3>
+<table class="table table-striped">
   <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Availability</th>
+    <th>Prophecy</th>
+    <th>Calendar Schedule</th>
+  </tr>
   </thead>
 
   <tbody>
+    
     <% @mentees.each do |mentee| %>
       <tr>
-        <td><%= mentee.first_name %></td>
-        <td><%= mentee.last_name %></td>
-        <td><%= link_to 'Show', mentee %></td>
-        <td><%= link_to 'Edit', edit_mentee_path(mentee) %></td>
-        <td><%= link_to 'Destroy', mentee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to mentee.name, user_mentee_path(@user, mentee) %></td>
+        <td><%= mentee.email %></td>
+        <td><%= mentee.availability %></td>
+        <td><%= mentee.prophecy %></td>
+        <td><%= link_to "View", mentee_events_path(mentee) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<%= paginate @mentees %>
 <br>
 
 <%= link_to 'New Mentee', new_mentee_path %>

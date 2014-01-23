@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-
+  #paginates_per 4
   accepts_nested_attributes_for :roles
 
   devise :database_authenticatable, :registerable,

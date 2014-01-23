@@ -1,0 +1,14 @@
+table_for mentees do
+  column :name
+  column :email
+  column :prophecy
+end
+
+
+"Assign Prophecy"
+
+form_for Mentee.new, url: assign_multiple_prophecies_admin_mentees_path do |f|
+  f.hidden_field 'mentees_id_list', :value=>selection
+  f.text_field :prophecy
+  f.button "Change Prophecy"
+end
