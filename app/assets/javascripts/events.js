@@ -3,7 +3,7 @@ function moveEvent(event, dayDelta, minuteDelta, allDay) {
     data: 'id=' + event.id + '&title=' + event.title + '&day_delta=' + dayDelta + '&minute_delta=' + minuteDelta + '&all_day=' + allDay + '&authenticity_token=' + authenticity_token,
     dataType: 'script',
     type: 'post',
-    url: "/events/"+ event.id +"/move"
+    url: "/events/" + event.id + "/move"
   });
 }
 
@@ -119,42 +119,43 @@ var ready = function () {
     console.log(" NO id available ");
     events_url = "/events/get_events";
   }
+  if ($('#calendar').length > 0) {
+    var editable = to_boolean(calendar_editable);
+    console.log("==editable: " + editable);
+    $('#calendar').fullCalendar({
+      editable: editable,
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      defaultView: 'agendaWeek',
+      height: 500,
+      slotMinutes: 15,
+      loading: function (bool) {
+        if (bool)
+          $('#loading').show();
+        else
+          $('#loading').hide();
+      },
+      events: events_url,
+      timeFormat: 'h:mm t{ - h:mm t} ',
+      dragOpacity: "0.5",
+      eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+        moveEvent(event, dayDelta, minuteDelta, allDay);
+      },
 
-  var editable = to_boolean(calendar_editable);
-  console.log("==editable: "+ editable);
-  $('#calendar').fullCalendar({
-    editable: editable,
-    header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'month,agendaWeek,agendaDay'
-    },
-    defaultView: 'agendaWeek',
-    height: 500,
-    slotMinutes: 15,
-    loading: function (bool) {
-      if (bool)
-        $('#loading').show();
-      else
-        $('#loading').hide();
-    },
-    events: events_url,
-    timeFormat: 'h:mm t{ - h:mm t} ',
-    dragOpacity: "0.5",
-    eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
-      moveEvent(event, dayDelta, minuteDelta, allDay);
-    },
+      eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+        resizeEvent(event, dayDelta, minuteDelta);
+      },
 
-    eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
-      resizeEvent(event, dayDelta, minuteDelta);
-    },
-
-    eventClick: function (event, jsEvent, view) {
-      if (editable) {
-        showEventDetails(event);
+      eventClick: function (event, jsEvent, view) {
+        if (editable) {
+          showEventDetails(event);
+        }
       }
-    }
-  });
+    });
+  }
 
   $('#create_event_dialog, #desc_dialog').on('submit', "#event_form", function (event) {
     var $spinner = $('.spinner');
