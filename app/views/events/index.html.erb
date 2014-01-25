@@ -1,6 +1,6 @@
 <div>
-    <div id='calendar' mentee_id=<%= @mentee.id if @mentee %>>
+  <div id='calendar'>
   </div>
 </div>
 
-<%= render :partial => "actions_dialog" %>
+<%= render :partial => "actions_dialog", :locals => {:profile => @profile} %>

@@ -39,14 +39,6 @@ function showEventDetails(event) {
   });
 }
 
-function get_mentee_id() {
-  return $('#calendar').attr('mentee_id');
-}
-
-function get_user_id() {
-  return $('#calendar').attr('user_id');
-}
-
 function editEvent(event_id) {
   console.log("event_id: " + event_id);
   jQuery.ajax({
@@ -105,57 +97,6 @@ function to_boolean(str) {
 }
 
 var ready = function () {
-  console.log("doc . ready function called");
-  var mentee_id = get_mentee_id();
-  var user_id = get_user_id();
-  var events_url;
-  if (mentee_id) {
-    console.log(" mentee id available ");
-    events_url = "/mentees/" + mentee_id + "/events/get_events";
-  } else if (user_id) {
-    console.log(" coach id available ");
-    events_url = "/users/" + user_id + "/events/get_events";
-  } else {
-    console.log(" NO id available ");
-    events_url = "/events/get_events";
-  }
-  if ($('#calendar').length > 0) {
-    var editable = to_boolean(calendar_editable);
-    console.log("==editable: " + editable);
-    $('#calendar').fullCalendar({
-      editable: editable,
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      },
-      defaultView: 'agendaWeek',
-      height: 500,
-      slotMinutes: 15,
-      loading: function (bool) {
-        if (bool)
-          $('#loading').show();
-        else
-          $('#loading').hide();
-      },
-      events: events_url,
-      timeFormat: 'h:mm t{ - h:mm t} ',
-      dragOpacity: "0.5",
-      eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
-        moveEvent(event, dayDelta, minuteDelta, allDay);
-      },
-
-      eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
-        resizeEvent(event, dayDelta, minuteDelta);
-      },
-
-      eventClick: function (event, jsEvent, view) {
-        if (editable) {
-          showEventDetails(event);
-        }
-      }
-    });
-  }
 
   $('#create_event_dialog, #desc_dialog').on('submit', "#event_form", function (event) {
     var $spinner = $('.spinner');

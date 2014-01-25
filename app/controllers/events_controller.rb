@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_calendar_properties
-  before_action :set_profile, only: [:new, :create, :index]
+  before_action :set_profile, only: [:new, :create, :index, :get_events]
 
   def set_calendar_properties
     gon.editable = current_user.is_admin? ? true : false
@@ -41,15 +41,13 @@ class EventsController < ApplicationController
 
   #TODO fix get events
   def get_events
-    if params[:mentee_id].present?
-      profile = Mentee.find_by id: params[:mentee_id]
-    elsif params[:coach_id].present?
-      profile = User.coach.find_by id: params[:coach_id]
-    end
-    if profile
-      @events = profile.events.where "starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"
+    conditions = "starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"
+    if @profile
+      @events = @profile.events.where conditions
     else
-      @events = Event.where "starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}' AND profile_type = 'User'"
+      conditions += " AND profile_type = '#{event_params[:profile_type]}'"
+      p conditions
+      @events = Event.where conditions
     end
 
     events = []
@@ -113,7 +111,7 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.permit(:mentee_id, :user_id, :event => [:mentee_id, :id, :title, :description, :starttime, :endtime, :all_day, :period, :frequency])
+    params.permit(:mentee_id, :user_id, :profile_type, :start, :end, :_, :event => [:mentee_id, :id, :title, :description, :starttime, :endtime, :all_day, :period, :frequency])
   end
 
 

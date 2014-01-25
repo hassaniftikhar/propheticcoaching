@@ -115,8 +115,8 @@ ActiveAdmin.register Mentee do
       render :partial => "admin/ebooks/search"
     end
     button "show calendar", :id => "show_calendar"
-    div :id => "calendar", :style => "width:700px;height500px;display:none", :mentee_id => params[:id] do
-      render "/events/actions_dialog", :locals => {:profile_id => params[:id], :profile_type => self.class.to_s}
+    div :id => "calendar", :style => "width:700px;height500px;display:none" do
+      render :partial => "/events/actions_dialog", :locals => {:profile => mentee}
     end
 
     attributes_table do
