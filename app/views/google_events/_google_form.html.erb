@@ -1,11 +1,11 @@
 <%= form_for [@profile, @google_event], :html => { :id => 'google_form' } do |f| %>
 <p>
-  <%=f.label :url %>
+  <%=f.label :title %>
   <br/>
-  <%=f.text_field :title, {value: @google_event.url} %>
+  <%=f.text_field :title, {value: @event.title || current_user.name} %>
 </p>
 
-<%=f.hidden_field :id, :value => @google_event.id %>
+<%=f.hidden_field :id, :value => @event.id %>
 <p>
   <%=f.submit 'Create' %> <span id = "creating_events" class="spinner" style = "display:none;">Creating, Please wait...</span>
 </p>

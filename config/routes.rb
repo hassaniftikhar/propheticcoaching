@@ -1,6 +1,13 @@
 Propheticcoaching::Application.routes.draw do
 
 
+  get "google_events/new"
+  get "google_events/create"
+  get "google_events/update"
+  get "google_events/edit"
+  get "google_events/destroy"
+  get "google_events/index"
+  get "google_events/show"
   #devise_for :admin_users, ActiveAdmin::Devise.config
 
   ActiveAdmin.routes(self)
@@ -48,8 +55,10 @@ Propheticcoaching::Application.routes.draw do
       end
       member do
         post :add_google_calendar
+        get :add_google_calendar
       end
     end
+    resources :google_events
   end
 
   resources :events, :only => [:index, :edit, :update, :destroy] do
