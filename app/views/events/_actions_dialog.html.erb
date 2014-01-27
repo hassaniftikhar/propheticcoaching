@@ -17,6 +17,7 @@
 
 <% if profile %>
   <%= link_to 'Create Event', [:new, profile, :event], :id => "new_event" %>
+  <%= link_to 'Add Google Calendar', add_google_calendar_user_event_path([:create, profile], :id => "new_google_event") %>
   <% events_url = get_events_url_on(profile) %>
 <% else %>
   <% events_url = get_coaches_events_url %>

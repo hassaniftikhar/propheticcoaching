@@ -3,6 +3,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_calendar_properties
   before_action :set_profile, only: [:new, :create, :index, :get_events]
+  before_action :set_google_profile, only: [:new, :create, :index, :add_google_calendar]
 
   def set_calendar_properties
     gon.editable = current_user.is_admin? ? true : false
@@ -49,7 +50,10 @@ class EventsController < ApplicationController
     end
     render :text => events.to_json
   end
-
+  def add_google_calendar
+    @google_calendar = GoogleEvent.new()
+    render :json => {:form => render_to_string(:partial => 'google_form')}
+  end
   def move
     @event = Event.find_by_id params[:id]
     if @event
@@ -116,5 +120,12 @@ class EventsController < ApplicationController
     end
     nil
   end
-
+  def set_google_profile
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        @profile = $1.classify.constantize.find_by id: value
+      end
+    end
+    nil
+  end
 end
