@@ -31,6 +31,9 @@ Propheticcoaching::Application.routes.draw do
       collection do
         get :get_events
       end
+      member do
+        post :add_google_calendar
+      end
     end
   end
 
@@ -42,6 +45,9 @@ Propheticcoaching::Application.routes.draw do
     resources :events do
       collection do
         get :get_events
+      end
+      member do
+        post :add_google_calendar
       end
     end
   end

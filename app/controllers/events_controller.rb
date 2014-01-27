@@ -11,18 +11,11 @@ class EventsController < ApplicationController
   end
 
   def new
-    p "===== params: #{event_params.inspect}"
-    #if event_params[:mentee_id].present?
-    #  @profile = Mentee.find_by id: event_params[:mentee_id]
-    #else
-    #  @profile = User.find_by id: event_params[:user_id]
-    #end
     @event = Event.new(:endtime => 1.hour.from_now, :period => "Does not repeat")
     render :json => {:form => render_to_string(:partial => 'form')}
   end
 
   def create
-    #@mentee = Mentee.where("id = #{event_params[:mentee_id]}").first
     if params[:event][:period] == "Does not repeat"
       event = @profile.events.new event_params[:event]
     else

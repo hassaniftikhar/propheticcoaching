@@ -18,17 +18,13 @@
 <% if profile %>
   <%= link_to 'Create Event', [:new, profile, :event], :id => "new_event" %>
   <% events_url = get_events_url_on(profile) %>
+<% else %>
+  <% events_url = get_coaches_events_url %>
 <% end %>
 
 <script type="text/javascript">
   authenticity_token = "<%= form_authenticity_token %>";
   calendar_editable = "<%= @calendar_editable %>";
-debugger;
-
-  // <% events_url ||= ["/events/get_events?profile_type=User"] %>
-  var ary = ("<%= events_url.to_json %>");
-  ary = ("<%= events_url %>");
-  console.log(ary);
 
   if ($('#calendar').length > 0) {
     var editable = to_boolean(calendar_editable);
@@ -49,8 +45,8 @@ debugger;
         else
           $('#loading').hide();
       },
-     events: "https://www.google.com/calendar/feeds/imran.malik71%40gmail.com/public/basic",
-      // eventSources: ary,
+//      events: "https://www.google.com/calendar/feeds/imran.malik71%40gmail.com/public/basic",
+      eventSources: <%= events_url %>,
       timeFormat: 'h:mm t{ - h:mm t} ',
       dragOpacity: "0.5",
       eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {

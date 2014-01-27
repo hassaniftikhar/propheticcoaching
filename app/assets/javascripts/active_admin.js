@@ -5,6 +5,7 @@
 //= require "documentViewer/ttw-document-viewer.min.js"
 //= require jquery_highlight
 //= require fullcalendar.min.js
+//= require gcal.js
 //= require events
 //= require private_pub
 //= require ebooks
