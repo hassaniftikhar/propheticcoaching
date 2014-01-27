@@ -26,6 +26,14 @@ Propheticcoaching::Application.routes.draw do
     end
   end
 
+  resources :mentees do
+    resources :events do
+      collection do
+        get :get_events
+      end
+    end
+  end
+
   resources :users, :only => [:index, :show] do
     resources :mentees do
       resources :goals
@@ -49,16 +57,6 @@ Propheticcoaching::Application.routes.draw do
   end
 
   root :to => 'users#index'
-
-  resources :mentees do
-    resources :events do
-      collection do
-        get :get_events
-      end
-    end
-    
-  end
-
 
 
   # The priority is based upon order of creation: first created -> highest priority.

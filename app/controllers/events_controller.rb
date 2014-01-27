@@ -2,40 +2,32 @@ class EventsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_calendar_properties
-
-  #before_action :authenticate_admin_user!, :except => [:get_events]
+  before_action :set_profile, only: [:new, :create, :index, :get_events]
 
   def set_calendar_properties
     gon.editable = current_user.is_admin? ? true : false
     @calendar_editable = gon.editable
+    p "=== @calendar_editable: #{@calendar_editable}"
   end
 
   def new
-    if event_params[:mentee_id].present?
-      @profile = Mentee.find_by id: event_params[:mentee_id]
-    else
-      @profile = User.coach.find_by id: event_params[:coach_id]
-    end
+    p "===== params: #{event_params.inspect}"
+    #if event_params[:mentee_id].present?
+    #  @profile = Mentee.find_by id: event_params[:mentee_id]
+    #else
+    #  @profile = User.find_by id: event_params[:user_id]
+    #end
     @event = Event.new(:endtime => 1.hour.from_now, :period => "Does not repeat")
     render :json => {:form => render_to_string(:partial => 'form')}
   end
 
   def create
-    @mentee = Mentee.where("id = #{event_params[:mentee_id]}").first
-    if @mentee
-      if params[:event][:period] == "Does not repeat"
-        event = @mentee.events.new event_params[:event]
-      else
-        event = EventSeries.new(event_params[:event])
-      end
+    #@mentee = Mentee.where("id = #{event_params[:mentee_id]}").first
+    if params[:event][:period] == "Does not repeat"
+      event = @profile.events.new event_params[:event]
     else
-      @user   = User.where("id = #{event_params[:user_id]}").first
-      if params[:event][:period] == "Does not repeat"
-        event = @user.events.new event_params[:event]
-      else
-        event = EventSeries.new(event_params[:event])
-      end
-    end  
+      event = EventSeries.new(event_params[:event])
+    end
     if event.save
       render :nothing => true
     else
@@ -44,19 +36,18 @@ class EventsController < ApplicationController
   end
 
   def index
-    @mentee = Mentee.find_by :id => params[:mentee_id]
+    #@mentee = Mentee.find_by :id => params[:mentee_id]
   end
 
+  #TODO fix get events
   def get_events
-    if params[:mentee_id].present?
-      profile = Mentee.find_by id: params[:mentee_id]
-    elsif params[:coach_id].present?
-      profile = User.coach.find_by id: params[:coach_id]
-    end
-    if profile
-      @events = profile.events.where "starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"
+    conditions = "starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"
+    if @profile
+      @events = @profile.events.where conditions
     else
-      @events = Event.where "starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}' AND profile_type = 'User'"
+      conditions += " AND profile_type = '#{event_params[:profile_type]}'"
+      p conditions
+      @events = Event.where conditions
     end
 
     events = []
@@ -87,8 +78,6 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @mentee = Mentee.find_by :id => params[:mentee_id]
-    @coach = User.find_by :id => 1
     @event = Event.find_by_id(params[:id])
     render :json => {:form => render_to_string(:partial => 'form')}
   end
@@ -122,7 +111,17 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.permit(:mentee_id, :user_id, :event => [:mentee_id , :id,  :title, :description, :starttime, :endtime,  :all_day, :period, :frequency])
+    params.permit(:mentee_id, :user_id, :profile_type, :start, :end, :_, :event => [:mentee_id, :id, :title, :description, :starttime, :endtime, :all_day, :period, :frequency])
+  end
+
+
+  def set_profile
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        @profile = $1.classify.constantize.find_by id: value
+      end
+    end
+    nil
   end
 
 end

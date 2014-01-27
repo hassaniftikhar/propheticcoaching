@@ -15,14 +15,59 @@
   </div>
 </div>
 
-<% if @mentee %>
-  <% #TODO: make dynamic routes %>
-  <%= link_to 'Create Event', new_mentee_event_path(@mentee), :id => 'new_event' %>
-<% elsif @user %>
-  <%= link_to 'Create Event', new_user_event_path(@user), :id => 'new_event' %>
+<% if profile %>
+  <%= link_to 'Create Event', [:new, profile, :event], :id => "new_event" %>
+  <% profile_type = profile.class.name.camelize(:lower)+"s" %>
 <% end %>
 
 <script type="text/javascript">
   authenticity_token = "<%= form_authenticity_token %>";
   calendar_editable = "<%= @calendar_editable %>";
+
+  console.log("doc . ready function called");
+  <% if profile %>
+    events_url = "<%= "/#{profile_type}/#{profile.id}/events/get_events" %>";
+  <% else %>
+    events_url = "/events/get_events?profile_type=User";
+  <% end %>
+  console.log(events_url);
+
+  if ($('#calendar').length > 0) {
+    var editable = to_boolean(calendar_editable);
+    console.log("==editable: " + editable);
+    $('#calendar').fullCalendar({
+      editable: editable,
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      defaultView: 'agendaWeek',
+      height: 500,
+      slotMinutes: 15,
+      loading: function (bool) {
+        if (bool)
+          $('#loading').show();
+        else
+          $('#loading').hide();
+      },
+      events: events_url,
+      timeFormat: 'h:mm t{ - h:mm t} ',
+      dragOpacity: "0.5",
+      eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+        moveEvent(event, dayDelta, minuteDelta, allDay);
+      },
+
+      eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+        resizeEvent(event, dayDelta, minuteDelta);
+      },
+
+      eventClick: function (event, jsEvent, view) {
+        if (editable) {
+          showEventDetails(event);
+        }
+      }
+    });
+  }
+
 </script>

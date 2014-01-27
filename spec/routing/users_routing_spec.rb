@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe CoachesController do
+describe UsersController do
   describe "routing" do
 
     it "routes to #index" do

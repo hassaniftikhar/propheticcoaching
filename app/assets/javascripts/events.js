@@ -3,7 +3,7 @@ function moveEvent(event, dayDelta, minuteDelta, allDay) {
     data: 'id=' + event.id + '&title=' + event.title + '&day_delta=' + dayDelta + '&minute_delta=' + minuteDelta + '&all_day=' + allDay + '&authenticity_token=' + authenticity_token,
     dataType: 'script',
     type: 'post',
-    url: "/events/"+ event.id +"/move"
+    url: "/events/" + event.id + "/move"
   });
 }
 
@@ -37,14 +37,6 @@ function showEventDetails(event) {
       $('#desc_dialog').dialog('destroy')
     }
   });
-}
-
-function get_mentee_id() {
-  return $('#calendar').attr('mentee_id');
-}
-
-function get_coach_id() {
-  return $('#calendar').attr('coach_id');
 }
 
 function editEvent(event_id) {
@@ -105,55 +97,6 @@ function to_boolean(str) {
 }
 
 var ready = function () {
-  console.log("doc . ready function called");
-  var mentee_id = get_mentee_id();
-  var coach_id = get_coach_id();
-  var events_url;
-  if (mentee_id) {
-    console.log(" mentee id available ");
-    events_url = "/mentees/" + mentee_id + "/events/get_events";
-  } else if (coach_id) {
-    console.log(" coach id available ");
-    events_url = "/coaches/" + coach_id + "/events/get_events";
-  } else {
-    console.log(" NO id available ");
-    events_url = "/events/get_events";
-  }
-
-  var editable = to_boolean(calendar_editable);
-  $('#calendar').fullCalendar({
-    editable: editable,
-    header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'month,agendaWeek,agendaDay'
-    },
-    defaultView: 'agendaWeek',
-    height: 500,
-    slotMinutes: 15,
-    loading: function (bool) {
-      if (bool)
-        $('#loading').show();
-      else
-        $('#loading').hide();
-    },
-    events: events_url,
-    timeFormat: 'h:mm t{ - h:mm t} ',
-    dragOpacity: "0.5",
-    eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
-      moveEvent(event, dayDelta, minuteDelta, allDay);
-    },
-
-    eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
-      resizeEvent(event, dayDelta, minuteDelta);
-    },
-
-    eventClick: function (event, jsEvent, view) {
-      if (editable) {
-        showEventDetails(event);
-      }
-    }
-  });
 
   $('#create_event_dialog, #desc_dialog').on('submit', "#event_form", function (event) {
     var $spinner = $('.spinner');

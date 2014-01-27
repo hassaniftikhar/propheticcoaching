@@ -40,6 +40,7 @@
   <% end %>
   </tbody>
 </table>
+<%= paginate @ebooks %>
 
 <% if can? :create, @ebook %>
 <%= link_to t('.new', :default => t("helpers.links.new")),

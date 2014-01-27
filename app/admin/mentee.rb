@@ -1,12 +1,28 @@
 ActiveAdmin.register Mentee do
 
-  permit_params(:mentees_id_list, :mentee => [:first_name, :last_name, :email, :donor_id, :home_phone,
-                            :availability, :prophecy, :bc, :coach_id, :mentees_id_list])
+  controller do
+    before_action :set_calendar_properties
+    before_action :set_mentee_id
+
+    def permitted_params
+      params.permit(:mentees_id_list, :mentee => [:first_name, :last_name, :email, :donor_id, :home_phone,
+                                                  :availability, :prophecy, :bc, :coach_id, :mentees_id_list])
+    end
+
+    def set_mentee_id
+      params[:mentee_id] = params[:id]
+    end
+
+    def set_calendar_properties
+      gon.editable = current_user.is_admin? ? true : false
+      @calendar_editable = gon.editable
+    end
+  end
+
   batch_action "Assign Coach" do |selection|
     mentees = Mentee.find(selection)
     render "assign_coachs", :locals => {mentees: mentees, selection: selection}
   end
-
 
   collection_action :assign_multiple_coaches, :method => :post do
     mentees = Mentee.find(JSON.parse(params[:mentee][:mentees_id_list]))
@@ -20,7 +36,7 @@ ActiveAdmin.register Mentee do
     mentees = Mentee.find(selection)
     render "assign_prophecies", :locals => {mentees: mentees, selection: selection}
   end
-  
+
   collection_action :assign_multiple_prophecies, :method => :post do
     mentees = Mentee.find(JSON.parse(params[:mentee][:mentees_id_list]))
     mentees.each do |mentee|
@@ -42,22 +58,6 @@ ActiveAdmin.register Mentee do
 
   member_action :assign_coach, :method => :get do
     @mentee = Mentee.find(params[:id])
-  end
-
-  controller do
-    before_action :set_calendar_properties
-    before_action :set_mentee_id
-
-    def set_mentee_id
-      params[:mentee_id] = params[:id]
-      params[:profile_id] = params[:id]
-      params[:profile_type] = "mentee"
-    end
-
-    def set_calendar_properties
-      gon.editable = current_user.is_admin? ? true : false
-      @calendar_editable = gon.editable
-    end
   end
 
   action_item :only => :index do
@@ -115,8 +115,8 @@ ActiveAdmin.register Mentee do
       render :partial => "admin/ebooks/search"
     end
     button "show calendar", :id => "show_calendar"
-    div :id => "calendar", :style => "width:700px;height500px;display:none", :mentee_id => params[:id] do
-      render "/events/actions_dialog", :locals => { :profile_id => params[:id], :profile_type => self.class.to_s }
+    div :id => "calendar", :style => "width:700px;height500px;display:none" do
+      render :partial => "/events/actions_dialog", :locals => {:profile => mentee}
     end
 
     attributes_table do
