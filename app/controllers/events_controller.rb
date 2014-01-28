@@ -3,7 +3,6 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_calendar_properties
   before_action :set_profile, only: [:new, :create, :index, :get_events]
-  before_action :set_google_profile, only: [:new, :create, :index, :add_google_calendar]
 
   def set_calendar_properties
     gon.editable = current_user.is_admin? ? true : false
@@ -49,12 +48,6 @@ class EventsController < ApplicationController
       events << {:id => event.id, :title => event.title, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.event_series_id) ? true : false}
     end
     render :text => events.to_json
-  end
-
-  def add_google_calendar
-    @google_event = GoogleEvent.new
-    render :partial => 'google_form', :locals => { :profile => @profile, :google_event => @google_event} 
-    #render :json => {:form => render_to_string(:partial => 'google_form', :locals => { :profile => @profile, :google_event => @google_event})}
   end
 
   def move
@@ -114,16 +107,7 @@ class EventsController < ApplicationController
     params.permit(:mentee_id, :user_id, :profile_type, :start, :end, :_, :event => [:mentee_id, :id, :title, :description, :starttime, :endtime, :all_day, :period, :frequency])
   end
 
-
   def set_profile
-    params.each do |name, value|
-      if name =~ /(.+)_id$/
-        @profile = $1.classify.constantize.find_by id: value
-      end
-    end
-    nil
-  end
-  def set_google_profile
     params.each do |name, value|
       if name =~ /(.+)_id$/
         @profile = $1.classify.constantize.find_by id: value

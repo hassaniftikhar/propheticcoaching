@@ -98,7 +98,7 @@ function to_boolean(str) {
 
 var ready = function () {
 
-    
+
   $('#create_event_dialog, #desc_dialog').on('submit', "#event_form", function (event) {
     var $spinner = $('.spinner');
     event.preventDefault();
@@ -123,57 +123,46 @@ var ready = function () {
     function handle_error(xhr) {
       alert(xhr.responseText);
     }
-  })
+  });
+
+  var renderDialog = function (element, event, event_div_id, dialog_div_id) {
+    event.preventDefault();
+    var url = element.attr('href');
+    $.ajax({
+      url: url,
+      beforeSend: function () {
+        $('#loading').show();
+      },
+      complete: function () {
+        $('#loading').hide();
+      },
+      success: function (data) {
+        $(event_div_id).replaceWith(data['form']);
+        $(dialog_div_id).dialog({
+          title: 'New Event',
+          modal: true,
+          width: 500,
+          close: function (event, ui) {
+            $(dialog_div_id).dialog('destroy')
+          }
+        });
+      }
+    });
+  }
+
+//  $("input#google_event_btn").on("click", function (event) {
+//    console.log("=== btn");
+////    $("#create_google_event_dialog").dialog('destroy');
+//  });
 
   $("#new_event").on("click", function (event) {
-    event.preventDefault();
-    var url = $(this).attr('href');
-    $.ajax({
-      url: url,
-      beforeSend: function () {
-        $('#loading').show();
-      },
-      complete: function () {
-        $('#loading').hide();
-      },
-      success: function (data) {
-        $('#create_event').replaceWith(data['form']);
-        $('#create_event_dialog').dialog({
-          title: 'New Event',
-          modal: true,
-          width: 500,
-          close: function (event, ui) {
-            $('#create_event_dialog').dialog('destroy')
-          }
-        });
-      }
-    });
+    renderDialog($(this), event, '#create_event', '#create_event_dialog');
   });
 
-    $("#google_event").on("click", function (event) {
-    event.preventDefault();
-    var url = $(this).attr('href');
-    $.ajax({
-      url: url,
-      beforeSend: function () {
-        $('#loading').show();
-      },
-      complete: function () {
-        $('#loading').hide();
-      },
-      success: function (data) {
-        $('#create_event').replaceWith(data['form']);
-        $('#create_event_dialog').dialog({
-          title: 'New Event',
-          modal: true,
-          width: 500,
-          close: function (event, ui) {
-            $('#create_event_dialog').dialog('destroy')
-          }
-        });
-      }
-    });
+  $("#google_event").on("click", function (event) {
+    renderDialog($(this), event, '#create_google_event', '#create_google_event_dialog')
   });
+
 
 }//ready end
 

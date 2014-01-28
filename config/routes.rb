@@ -1,28 +1,14 @@
 Propheticcoaching::Application.routes.draw do
 
 
-  get "google_events/new"
-  get "google_events/create"
-  get "google_events/update"
-  get "google_events/edit"
-  get "google_events/destroy"
-  get "google_events/index"
-  get "google_events/show"
-  #devise_for :admin_users, ActiveAdmin::Devise.config
-
   ActiveAdmin.routes(self)
-
   devise_for :users
 
-  #resources :users do
-  #  resources :chats, only: [:index, :new, :create]
+  #resources :chats do
+  #  collection do
+  #    get :talk
+  #  end
   #end
-  resources :chats do
-    collection do
-      get :talk
-    end
-  end
-
 
   resources :ebooks do
     collection do
@@ -38,10 +24,8 @@ Propheticcoaching::Application.routes.draw do
       collection do
         get :get_events
       end
-      member do
-        post :add_google_calendar
-      end
     end
+    resources :google_events, :only => [:new, :create]
   end
 
   resources :users, :only => [:index, :show] do
@@ -53,12 +37,8 @@ Propheticcoaching::Application.routes.draw do
       collection do
         get :get_events
       end
-      member do
-        post :add_google_calendar
-        get :add_google_calendar
-      end
     end
-    resources :google_events
+    resources :google_events, :only => [:new, :create]
   end
 
   resources :events, :only => [:index, :edit, :update, :destroy] do

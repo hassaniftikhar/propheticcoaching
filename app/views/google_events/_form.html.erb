@@ -1,0 +1,13 @@
+<%= form_for [@profile, @google_event], :html => {:id => 'google_event'} do |f| %>
+  <p>
+    <%= f.label :url %>
+    <br/>
+    <%= f.text_field :url %>
+  </p>
+
+  <p>
+    <%= f.submit 'Add', :html => {:id => "google_event_btn"} %>
+    <span id="creating_events" class="spinner" style="display:none;">Creating, Please wait...</span>
+  </p>
+<% end %>
+

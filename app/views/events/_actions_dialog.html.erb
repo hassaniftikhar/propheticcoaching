@@ -15,10 +15,15 @@
   </div>
 </div>
 
+<div id="create_google_event_dialog" class="dialog" style="display:none;">
+  <div id="create_google_event">
+  </div>
+</div>
+
 <% if profile %>
-  <%= link_to 'Create Event', [:new, profile, :event], :id => "new_event" %>
-  <%= link_to 'Add Google Calendar', add_google_calendar_user_event_path(profile, :id => 1) %>
-  
+  <%= link_to 'Create Event', [:new, profile, :event], :id => "new_event" %> <br/>
+  <%= link_to 'Add Google Calendar', [:new, profile, :google_event], :id => "google_event" %>
+
   <% events_url = get_events_url_on(profile) %>
 <% else %>
   <% events_url = get_coaches_events_url %>
