@@ -54,6 +54,7 @@ class EventsController < ApplicationController
   def add_google_calendar
     @google_event = GoogleEvent.new
     render :partial => 'google_form', :locals => { :profile => @profile, :google_event => @google_event} 
+    #render :json => {:form => render_to_string(:partial => 'google_form', :locals => { :profile => @profile, :google_event => @google_event})}
   end
 
   def move

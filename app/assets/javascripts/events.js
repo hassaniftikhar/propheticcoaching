@@ -98,6 +98,7 @@ function to_boolean(str) {
 
 var ready = function () {
 
+    
   $('#create_event_dialog, #desc_dialog').on('submit', "#event_form", function (event) {
     var $spinner = $('.spinner');
     event.preventDefault();
@@ -125,6 +126,31 @@ var ready = function () {
   })
 
   $("#new_event").on("click", function (event) {
+    event.preventDefault();
+    var url = $(this).attr('href');
+    $.ajax({
+      url: url,
+      beforeSend: function () {
+        $('#loading').show();
+      },
+      complete: function () {
+        $('#loading').hide();
+      },
+      success: function (data) {
+        $('#create_event').replaceWith(data['form']);
+        $('#create_event_dialog').dialog({
+          title: 'New Event',
+          modal: true,
+          width: 500,
+          close: function (event, ui) {
+            $('#create_event_dialog').dialog('destroy')
+          }
+        });
+      }
+    });
+  });
+
+    $("#google_event").on("click", function (event) {
     event.preventDefault();
     var url = $(this).attr('href');
     $.ajax({
