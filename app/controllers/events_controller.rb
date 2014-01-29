@@ -105,6 +105,7 @@ class EventsController < ApplicationController
   private
   def event_params
     params.permit(:mentee_id, :user_id, :profile_type, :start, :end, :_, :event => [:mentee_id, :id, :title, :description, :starttime, :endtime, :all_day, :period, :frequency])
+    #params.permit(:mentee_id, :user_id, :profile_type, :start, :end, :_, :event => [:mentee_id, :id, :title, :description, :starttime, :endtime, :all_day, :period, :frequency], :user => [:first_name, :last_name, :address, :home_phone, :availablity_time, :best_time_to_call, :date_of_birth])
   end
 
   def set_profile
