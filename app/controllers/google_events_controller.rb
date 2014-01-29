@@ -14,7 +14,8 @@ class GoogleEventsController < ApplicationController
         format.html { redirect_to request.referer, notice: 'Event was successfully created.' }
         format.json { render action: 'show', status: :created, location: @google_event }
       else
-        format.html { render action: 'new' }
+      
+        format.html { render :text => @google_event.errors.full_messages.to_sentence, :status => 422 }
         format.json { render json: @google_event.errors, status: :unprocessable_entity }
       end
     end

@@ -162,8 +162,6 @@ var ready = function () {
   $("#google_event").on("click", function (event) {
     renderDialog($(this), event, '#create_google_event', '#create_google_event_dialog')
   });
-
-
 }//ready end
 
 $(document).on("page:load", ready);
