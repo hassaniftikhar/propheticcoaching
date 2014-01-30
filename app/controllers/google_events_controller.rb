@@ -23,7 +23,8 @@ class GoogleEventsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @google_event.update(google_event_params)
+      if params[:google_event].update(google_event_params)
+        #if @google_event.update(google_event_params)
         format.html { redirect_to request.referer, notice: 'Event was successfully updated.' }
         format.json { render action: 'show', status: :created, location: @google_event }
       else
@@ -37,6 +38,10 @@ class GoogleEventsController < ApplicationController
     @google_event = GoogleEvent.find_by_id(params[:id])
     #render :json => {:form => render_to_string(:partial => 'form', locals => )}
     render :json => {:form => render_to_string(:partial => 'form')}
+    
+
+
+    #render :json => { :form => render_to_string('_form', :layout => false, :locals => { :google_event => @google_event }) }
 
   end
   

@@ -9,7 +9,7 @@
       <td>
         <% if can? :edit, @google_events %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_user_google_event_path(google_event.profile, google_event), :class => 'btn btn-mini' %>
+                      edit_user_google_event_path(google_event.profile, google_event), :class => 'btn btn-mini google_event' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       user_google_event_path(google_event.profile, google_event),
                       :method => :delete,
@@ -28,3 +28,14 @@
             new_user_google_event_path,
             :class => 'btn btn-primary' %>
 <% end %>
+
+
+<div id="create_event_dialog" class="dialog" style="display:none;">
+  <div id="create_event">
+  </div>
+</div>
+
+<div id="create_google_event_dialog" class="dialog" style="display:none;">
+  <div id="create_google_event">
+  </div>
+</div>
