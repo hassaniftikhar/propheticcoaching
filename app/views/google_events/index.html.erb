@@ -23,12 +23,6 @@
 </table>
 <%= paginate @google_events %>
 
-<% if can? :create, @google_event %>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_user_google_event_path,
-            :class => 'btn btn-primary' %>
-<% end %>
-
 
 <div id="create_event_dialog" class="dialog" style="display:none;">
   <div id="create_event">
