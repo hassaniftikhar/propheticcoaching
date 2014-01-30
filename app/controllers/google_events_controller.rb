@@ -9,7 +9,7 @@ class GoogleEventsController < ApplicationController
   end
 
   def create
-    @google_event = @profile.google_events.new google_event_params[:google_event]
+    @google_event = @profile.google_events.new google_event_params
     respond_to do |format|
       if @google_event.save
         format.html { redirect_to request.referer, notice: 'Event was successfully created.' }
@@ -24,10 +24,7 @@ class GoogleEventsController < ApplicationController
 
   def update
     respond_to do |format|
-      p @google_event
-      p google_event_params
       if @google_event.update(google_event_params)
-        #if @google_event.update(google_event_params)
         format.html { redirect_to request.referer, notice: 'Event was successfully updated.' }
         format.json { render action: 'show', status: :created, location: @google_event }
       else
