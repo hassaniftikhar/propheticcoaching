@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   scope :coach, -> { Role.where("name='coach'").first.users }
 
+
   def is_admin?
     self.has_role?(:admin) ? true : false
   end

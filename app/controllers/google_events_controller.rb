@@ -1,6 +1,7 @@
 class GoogleEventsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile, only: [:new, :create, :edit, :index]
+  before_action :set_google_event, only: [:show, :edit, :update, :destroy]
 
   def new
     @google_event = @profile.google_events.new
@@ -23,7 +24,9 @@ class GoogleEventsController < ApplicationController
 
   def update
     respond_to do |format|
-      if params[:google_event].update(google_event_params)
+      p @google_event
+      p google_event_params
+      if @google_event.update(google_event_params)
         #if @google_event.update(google_event_params)
         format.html { redirect_to request.referer, notice: 'Event was successfully updated.' }
         format.json { render action: 'show', status: :created, location: @google_event }
@@ -35,7 +38,7 @@ class GoogleEventsController < ApplicationController
   end
   
   def edit
-    @google_event = GoogleEvent.find_by_id(params[:id])
+    #@google_event = GoogleEvent.find_by_id(params[:id])
     #render :json => {:form => render_to_string(:partial => 'form', locals => )}
     render :json => {:form => render_to_string(:partial => 'form')}
     
@@ -65,7 +68,13 @@ class GoogleEventsController < ApplicationController
   private
 
   def google_event_params
-    params.permit(:google_event => [:url])
+    params.require(:google_event).permit(:url)
+    # => params.permit(:url, :event => [:mentee_id , :id,  :title, :description, :starttime, :endtime,  :all_day, :period, :frequency])
+  end
+
+  def set_google_event
+    @google_event = GoogleEvent.find_by id: params[:id]
+    #@goal = Goal.find(params[:id])
   end
 
   def set_profile

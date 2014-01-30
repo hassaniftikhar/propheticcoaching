@@ -2,7 +2,9 @@ Propheticcoaching::Application.routes.draw do
 
 
   ActiveAdmin.routes(self)
-  devise_for :users
+  #devise_for :users
+  #devise_for :users, controllers: {registrations: "users/registrations"}
+  devise_for :users, :controllers => { :registrations => "users/registrations" }
 
   #resources :chats do
   #  collection do
