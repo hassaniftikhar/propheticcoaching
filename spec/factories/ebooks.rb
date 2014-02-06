@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :ebook do
-    name "MyString"
+    name "Computer Basic Learning"
   end
 end

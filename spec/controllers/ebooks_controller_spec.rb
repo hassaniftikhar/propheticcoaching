@@ -23,17 +23,23 @@ describe EbooksController do
   # This should return the minimal set of attributes required to create a valid
   # Ebook. As you add validations to Ebook, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "name" => "MyString" } }
+  #let(:valid_attributes) { { "name" => "Computer Basic Learning" } }
+  let(:valid_attributes) { { name: 'Computer Basic Learning' } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # EbooksController. Be sure to keep this updated too.
   let(:valid_session) { {} }
+  include Devise::TestHelpers
+  before (:each) do
+    @user = FactoryGirl.create :user
+    sign_in @user
+  end
 
   describe "GET index" do
     it "assigns all ebooks as @ebooks" do
       ebook = Ebook.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {} , valid_session
       assigns(:ebooks).should eq([ebook])
     end
   end

@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :goal do
     mentee_id 1
-    body "MyText"
+    body "Testting Goal"
   end
 end

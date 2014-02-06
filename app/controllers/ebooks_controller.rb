@@ -64,7 +64,6 @@ class EbooksController < ApplicationController
       end
     end
 
-    PrivatePub.publish_to "localhost:9292/ebooks", :message => message_hash.to_json
 
 
   end
