@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :ebook do
-    name "MyString"
+    name "test book"
+    pdf Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/test.pdf')))
   end
 end

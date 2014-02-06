@@ -30,6 +30,20 @@ describe EbooksController do
   # EbooksController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  include Devise::TestHelpers
+  before (:each) do
+    @user = FactoryGirl.create :user
+    sign_in @user
+  end
+
+  describe "search" do
+    it "searches ebooks" do
+      ebook = FactoryGirl.create :ebook
+      get :search, {:query => "Certification"}, valid_session
+      assigns(:pages).first.ebook_name.should eq(ebook.name)
+    end
+  end
+
   describe "GET index" do
     it "assigns all ebooks as @ebooks" do
       ebook = Ebook.create! valid_attributes
@@ -85,14 +99,14 @@ describe EbooksController do
       it "assigns a newly created but unsaved ebook as @ebook" do
         # Trigger the behavior that occurs when invalid params are submitted
         Ebook.any_instance.stub(:save).and_return(false)
-        post :create, {:ebook => { "name" => "invalid value" }}, valid_session
+        post :create, {:ebook => {"name" => "invalid value"}}, valid_session
         assigns(:ebook).should be_a_new(Ebook)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Ebook.any_instance.stub(:save).and_return(false)
-        post :create, {:ebook => { "name" => "invalid value" }}, valid_session
+        post :create, {:ebook => {"name" => "invalid value"}}, valid_session
         response.should render_template("new")
       end
     end
@@ -106,8 +120,8 @@ describe EbooksController do
         # specifies that the Ebook created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Ebook.any_instance.should_receive(:update).with({ "name" => "MyString" })
-        put :update, {:id => ebook.to_param, :ebook => { "name" => "MyString" }}, valid_session
+        Ebook.any_instance.should_receive(:update).with({"name" => "MyString"})
+        put :update, {:id => ebook.to_param, :ebook => {"name" => "MyString"}}, valid_session
       end
 
       it "assigns the requested ebook as @ebook" do
@@ -128,7 +142,7 @@ describe EbooksController do
         ebook = Ebook.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Ebook.any_instance.stub(:save).and_return(false)
-        put :update, {:id => ebook.to_param, :ebook => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => ebook.to_param, :ebook => {"name" => "invalid value"}}, valid_session
         assigns(:ebook).should eq(ebook)
       end
 
@@ -136,7 +150,7 @@ describe EbooksController do
         ebook = Ebook.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Ebook.any_instance.stub(:save).and_return(false)
-        put :update, {:id => ebook.to_param, :ebook => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => ebook.to_param, :ebook => {"name" => "invalid value"}}, valid_session
         response.should render_template("edit")
       end
     end

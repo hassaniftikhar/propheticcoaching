@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :mentee do
-    donot_id "MyString"
+    donor_id "MyString"
     first_name "MyString"
     last_name "MyString"
     email "MyString"

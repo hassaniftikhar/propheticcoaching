@@ -23,17 +23,18 @@ describe MenteesController do
   # This should return the minimal set of attributes required to create a valid
   # Mentee. As you add validations to Mentee, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "index" => "MyString" } }
+  let(:valid_attributes) { { email: 'test@test.com', first_name: 'test', last_name: 'user' } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # MenteesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { { } }
 
   describe "GET index" do
     it "assigns all mentees as @mentees" do
-      mentee = Mentee.create! valid_attributes
-      get :index, {}, valid_session
+      user = FactoryGirl.create :user
+      mentee = user.mentees.create! valid_attributes
+      get :index, { user_id: user.id }, valid_session
       assigns(:mentees).should eq([mentee])
     end
   end
@@ -85,19 +86,19 @@ describe MenteesController do
       it "assigns a newly created but unsaved mentee as @mentee" do
         # Trigger the behavior that occurs when invalid params are submitted
         Mentee.any_instance.stub(:save).and_return(false)
-        post :create, {:mentee => { "index" => "invalid value" }}, valid_session
+        post :create, {:mentee => { "name" => "invalid value" }}, valid_session
         assigns(:mentee).should be_a_new(Mentee)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Mentee.any_instance.stub(:save).and_return(false)
-        post :create, {:mentee => { "index" => "invalid value" }}, valid_session
+        post :create, {:mentee => { "name" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end
   end
-
+  #
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested mentee" do
@@ -128,7 +129,7 @@ describe MenteesController do
         mentee = Mentee.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Mentee.any_instance.stub(:save).and_return(false)
-        put :update, {:id => mentee.to_param, :mentee => { "index" => "invalid value" }}, valid_session
+        put :update, {:id => mentee.to_param, :mentee => { "name" => "invalid value" }}, valid_session
         assigns(:mentee).should eq(mentee)
       end
 
@@ -136,7 +137,7 @@ describe MenteesController do
         mentee = Mentee.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Mentee.any_instance.stub(:save).and_return(false)
-        put :update, {:id => mentee.to_param, :mentee => { "index" => "invalid value" }}, valid_session
+        put :update, {:id => mentee.to_param, :mentee => { "name" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end
