@@ -21,7 +21,6 @@ class Page < ActiveRecord::Base
   end
 
   def remove_es_index
-    puts "=== Page: removing es index"
     self.index.remove self
   end
 

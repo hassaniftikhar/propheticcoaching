@@ -31,7 +31,6 @@ class Ebook < ActiveRecord::Base
   end
 
   def remove_es_index
-    puts "=== Ebook: removing es index"
     self.index.remove self
   end
 
@@ -42,7 +41,6 @@ class Ebook < ActiveRecord::Base
       io = open(pdf.url)
       reader = PDF::Reader.new(io)
       reader.pages.each_with_index do |page, index|
-        puts "===rendering page: ... - index: #{index}"
         self.pages.create! page_number: (index+1), tags: page.text
       end
     end
