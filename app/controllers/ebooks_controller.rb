@@ -1,5 +1,6 @@
 class EbooksController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_ebook_name
   before_action :set_ebook, only: [:show, :edit, :update, :destroy, :pdf]
 
   # GET /ebooks
@@ -42,7 +43,7 @@ class EbooksController < ApplicationController
 
     respond_to do |format|
       if @ebook.save
-        format.html { redirect_to @ebook, notice: 'Ebook was successfully created.' }
+        format.html { redirect_to @ebook, notice: @ebook_name+' was successfully created.' }
         format.json { render action: 'show', status: :created, location: @ebook }
       else
         format.html { render action: 'new' }
@@ -56,7 +57,7 @@ class EbooksController < ApplicationController
   def update
     respond_to do |format|
       if @ebook.update(ebook_params)
-        format.html { redirect_to @ebook, notice: 'Ebook was successfully updated.' }
+        format.html { redirect_to @ebook, notice: @ebook_name+' was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -84,5 +85,9 @@ class EbooksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ebook_params
       params.require(:ebook).permit(:name, :pdf)
+    end
+
+    def set_ebook_name
+      @ebook_name = "Resource"
     end
 end

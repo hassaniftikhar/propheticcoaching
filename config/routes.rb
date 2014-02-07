@@ -27,7 +27,7 @@ Propheticcoaching::Application.routes.draw do
         get :get_events
       end
     end
-    resources :google_events , :only => [:new, :create]
+    resources :google_events #, :only => [:new, :create, :edit, :update]
   end
 
   resources :users, :only => [:index, :show] do

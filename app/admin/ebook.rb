@@ -1,10 +1,15 @@
 ActiveAdmin.register Ebook do
 
-  permit_params :name, :pdf
+  menu :label => "Resources"
+  # This Clear the default "New ebook" link
+  config.clear_action_items!
 
-  #action_item :only => :index do
-  #  link_to('Seach All CSV', searches_admin_ebooks_path)
-  #end
+
+   action_item only:[:index] do
+     link_to "New Resource", new_admin_ebook_path()
+   end
+
+  permit_params :name, :pdf
 
   collection_action :search, :method => :get do
     if params.has_key? "query"
@@ -17,10 +22,16 @@ ActiveAdmin.register Ebook do
   end
 
   action_item :only => :index do
-    link_to 'Search Ebooks', search_admin_ebooks_path
+    link_to 'Search Resources', search_admin_ebooks_path
   end
+  
+  controller do
+    def edit
+      @page_title = "Edit Resource"
+    end
+  end  
 
-  index do
+  index :title => 'Resources' do
     column :name
     column :created_at
     #column :pdf_file_name
@@ -34,19 +45,36 @@ ActiveAdmin.register Ebook do
       f.input :name
       f.input :pdf, :as => :file
     end
-    f.actions
+    f.actions do
+      f.action :submit, label: 'Update Resource'
+      #f.action :cancel, label: 'Cancel'
+      f.action :cancel, label: 'Cancel'
+    end
   end
-
+  
   show do
-    attributes_table do
-      row :name
-      row :pdf do |file|
-        link_to "View PDF", pdf_ebook_path(file)
+    panel "Resource Details" do
+      attributes_table_for ebook  do
+        row :name
+        row :pdf do |file|
+          link_to "View PDF", pdf_ebook_path(file)
+        end
       end
     end
     active_admin_comments
-
   end
+
+  # show do
+  #   attributes_table do
+  #     row :name
+  #     row :pdf do |file|
+  #       link_to "View PDF", pdf_ebook_path(file)
+  #     end
+  #   end
+  #   active_admin_comments
+  # end
+
+
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

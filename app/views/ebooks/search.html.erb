@@ -4,7 +4,7 @@
 
 <%- model_class = Ebook -%>
 <div class="page-header">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%= t '.title', :default => @ebook_name.pluralize.titleize %></h1>
 </div>
 
 <%= form_tag search_ebooks_path, :id => "search_ebook", method: :get do %>

@@ -110,7 +110,7 @@ ActiveAdmin.register Mentee do
       link_to "Back to Mentees List", admin_mentees_path
     end
     br
-    button "Search Ebooks", :id => "btn_ebook_search"
+    button "Search Resources", :id => "btn_ebook_search"
     div :id => "ebook_search", :style => "display:none" do
       render :partial => "admin/ebooks/search"
     end

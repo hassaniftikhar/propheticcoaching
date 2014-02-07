@@ -1,6 +1,6 @@
 <%- model_class = Ebook -%>
 <div class="page-header">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%= t '.title', :default => @ebook_name.pluralize.titleize %></h1>
 </div>
 
 <%= form_tag search_ebooks_path, method: :get do %>
@@ -22,7 +22,7 @@
   <tbody>
   <% @ebooks.each do |ebook| %>
     <tr>
-      <td><%= link_to ebook.id, ebook_path(ebook) %></td>
+      <td><%= link_to ebook.id, pdf_ebook_path(ebook) %></td>
       <td><%= ebook.name %></td>
       <td><%= l ebook.created_at.to_time %></td>
       <td>
