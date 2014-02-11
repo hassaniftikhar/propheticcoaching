@@ -45,13 +45,19 @@ ActiveAdmin.register Ebook do
       f.input :name
       f.input :pdf, :as => :file
     end
-    f.actions do
-      f.action :submit, label: 'Update Resource'
-      #f.action :cancel, label: 'Cancel'
-      f.action :cancel, label: 'Cancel'
-    end
+    f.actions
+    #f.actions
+    # f.actions do
+    #   f.action :submit, label: 'Update Resource'
+    #   f.action :cancel , label: 'Cancel'
+    # end
+  #   f.actions do
+  #     f.action :submit, :as => :button
+  #     f.action :cancel
+  #   end
   end
   
+
   show do
     panel "Resource Details" do
       attributes_table_for ebook  do
