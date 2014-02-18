@@ -1,17 +1,23 @@
 Propheticcoaching::Application.routes.draw do
 
 
-  ActiveAdmin.routes(self)
+  get "dashboard/index"
+   #get "dashboad/index"
+   #get "dashboard" => "dashboard#index"
+   #get '/dashboard', to: 'dashboard#index'
+   #match '/dashboard', to: 'dashboard#index', via: :get
+   #root :to => 'dashboard#index'
+   #resource :dashboard , :only => [:index]
   #devise_for :users
   #devise_for :users, controllers: {registrations: "users/registrations"}
   devise_for :users, :controllers => { :registrations => "users/registrations" }
+  ActiveAdmin.routes(self)
 
   #resources :chats do
   #  collection do
   #    get :talk
   #  end
   #end
-
   resources :ebooks do
     collection do
       get 'search'

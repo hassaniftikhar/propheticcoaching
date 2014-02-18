@@ -29,7 +29,11 @@ ActiveAdmin.register User do
       # :availablity_time, :best_time_to_call, :date_of_birth,
       # :status, :role_ids => []])
     end
-  end
+
+    def update_resource(object, attributes)
+      update_method = attributes.first[:password].present? ? :update_attributes : :update_without_password
+      object.send(update_method, *attributes)
+    end  end
 
   action_item :only => :index do
     link_to('Import User CSV', import_csv_admin_users_path)
@@ -56,12 +60,7 @@ ActiveAdmin.register User do
     #column :last_sign_in_ip
     default_actions
   end
-  controller do
-    def update_resource(object, attributes)
-      update_method = attributes.first[:password].present? ? :update_attributes : :update_without_password
-      object.send(update_method, *attributes)
-    end
-  end
+
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs "Details" do

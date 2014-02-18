@@ -1,0 +1,41 @@
+<h2>Latest Resources</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Created at</th>
+      <th></th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @latest_resources.each do |latest_resource| %>
+      <tr>
+        <td><%= link_to latest_resource.name, ebook_path(latest_resource) %></td>
+        <td><%= latest_resource.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class = 'coachCalendar2'>
+		<h2>Coach Calendar2</h2>
+		<p>
+		  <strong>Coach Name:</strong>
+		  <%= @current_user.name %>
+		</p>
+  <div id='calendar'>
+  	 <%= render :partial => "/events/actions_dialog", :locals => {:profile => @current_user} %>
+  </div>
+</div>
+
+<div class = 'coachesCalendar1'>
+  <h2>Coaches Calendar1</h2>
+  <div id='calendar'>
+    <%= render :partial => "/events/actions_dialog", :locals => {:profile => nil } %>
+  </div>
+</div>
+
+
