@@ -25,5 +25,5 @@
 en:
   formtastic:
     actions:
-      update: "Update Resource"
+      update: "Update"
       cancel: "Cancel"
