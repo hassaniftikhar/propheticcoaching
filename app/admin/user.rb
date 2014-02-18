@@ -34,7 +34,7 @@ ActiveAdmin.register User do
   action_item :only => :index do
     link_to('Import User CSV', import_csv_admin_users_path)
   end
-
+  # in app/admin/admin_users.rb
   index do
     column :first_name
     column :last_name
@@ -56,7 +56,12 @@ ActiveAdmin.register User do
     #column :last_sign_in_ip
     default_actions
   end
-
+  controller do
+    def update_resource(object, attributes)
+      update_method = attributes.first[:password].present? ? :update_attributes : :update_without_password
+      object.send(update_method, *attributes)
+    end
+  end
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs "Details" do
@@ -66,6 +71,8 @@ ActiveAdmin.register User do
       if f.object.new_record?
         f.input :password
         f.input :password_confirmation
+      else
+        f.input :password
       end
       f.input :address
       f.input :roles, :as => :check_boxes
