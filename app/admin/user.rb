@@ -29,6 +29,11 @@ ActiveAdmin.register User do
       # :availablity_time, :best_time_to_call, :date_of_birth,
       # :status, :role_ids => []])
     end
+
+    def update_resource(object, attributes)
+      update_method = attributes.first[:password].present? ? :update_attributes : :update_without_password
+      object.send(update_method, *attributes)
+    end
   end
 
   action_item :only => :index do
@@ -66,6 +71,8 @@ ActiveAdmin.register User do
       if f.object.new_record?
         f.input :password
         f.input :password_confirmation
+      else
+        f.input :password
       end
       f.input :address
       f.input :roles, :as => :check_boxes
