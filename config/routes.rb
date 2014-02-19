@@ -1,6 +1,8 @@
 Propheticcoaching::Application.routes.draw do
 
 
+  resources :tasks
+
   get "dashboard/index"
    #get "dashboad/index"
    #get "dashboard" => "dashboard#index"

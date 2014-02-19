@@ -3,14 +3,9 @@ class DashboardController < ApplicationController
   # before_action :set_mentee_id  
   def index
   		@latest_resources = Ebook.order("created_at desc").limit(5)
+  		@coach_events = @current_user.events.where("endtime >= ?", Time.now ).order("starttime asc")
+  		@user    = @current_user
+    @mentees = @user.mentees.page params[:page]
   end
 
-    def set_mentee_id
-      params[:mentee_id] = params[:id]
-    end
-
-    def set_calendar_properties
-      gon.editable = current_user.is_admin? ? true : false
-      @calendar_editable = gon.editable
-    end
 end
