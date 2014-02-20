@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219111658) do
+ActiveRecord::Schema.define(version: 20140220070546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accomplishments", force: true do |t|
+    t.text     "body"
+    t.integer  "mentee_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -62,6 +69,13 @@ ActiveRecord::Schema.define(version: 20140219111658) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "pdf"
+  end
+
+  create_table "email_histories", force: true do |t|
+    t.text     "body"
+    t.integer  "mentee_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "event_series", force: true do |t|
@@ -143,6 +157,7 @@ ActiveRecord::Schema.define(version: 20140219111658) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "mentee_id"
   end
 
   create_table "users", force: true do |t|

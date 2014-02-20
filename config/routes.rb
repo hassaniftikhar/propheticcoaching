@@ -1,7 +1,11 @@
 Propheticcoaching::Application.routes.draw do
 
 
-  resources :tasks
+  # resources :email_histories
+
+  # resources :accomplishments
+
+  # resources :tasks
 
   get "dashboard/index"
    #get "dashboad/index"
@@ -42,6 +46,10 @@ Propheticcoaching::Application.routes.draw do
     resources :mentees do
       resources :goals
       resources :comments
+      resources :tasks
+      resources :accomplishments
+      resources :email_histories
+
     end
     resources :events do
       collection do

@@ -46,11 +46,19 @@
 </table>
 
 <%= render :partial => "goals/show" %>
-
 <%= render :partial => "goals/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
 
-<%= render :partial => "comments/show" %>
+<%= render :partial => "accomplishments/show" %>
+<%= render :partial => "accomplishments/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
 
+<%= render :partial => "comments/show" %>
 <%= render :partial => "comments/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
+
+<%= render :partial => "email_histories/show" %>
+<%= render :partial => "email_histories/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
+
+
+<%= render :partial => "tasks/show" %>
+<%= render :partial => "tasks/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
 
 <%= link_to 'Back', user_path(@mentee.coach.id) %>

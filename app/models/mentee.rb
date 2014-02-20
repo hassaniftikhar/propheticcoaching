@@ -8,6 +8,9 @@ class Mentee < ActiveRecord::Base
   has_many :comments, :as => :resource
   has_many :events, :as => :profile
   has_many :google_events, :as => :profile
+  has_many :tasks
+  has_many :accomplishments
+  has_many :email_histories
 
   def self.import_csv(file)
     require "csv"
