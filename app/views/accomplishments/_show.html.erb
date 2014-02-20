@@ -1,0 +1,16 @@
+<h3> Listing Accomplishments </h3>
+<table class="table table-striped" >
+  <thead>
+  <tr>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @mentee.accomplishments.order("id DESC").each do |accomplishment| %>
+    <tr>
+      <td><%= accomplishment.body %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

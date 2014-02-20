@@ -1,0 +1,29 @@
+<h1>Listing email_histories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Body</th>
+      <th>Mentee</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @email_histories.each do |email_history| %>
+      <tr>
+        <td><%= email_history.body %></td>
+        <td><%= email_history.mentee_id %></td>
+        <td><%= link_to 'Show', email_history %></td>
+        <td><%= link_to 'Edit', edit_email_history_path(email_history) %></td>
+        <td><%= link_to 'Destroy', email_history, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Email history', new_email_history_path %>

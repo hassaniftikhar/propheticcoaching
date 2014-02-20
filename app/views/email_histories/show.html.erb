@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @email_history.body %>
+</p>
+
+<p>
+  <strong>Mentee:</strong>
+  <%= @email_history.mentee_id %>
+</p>
+
+<%= link_to 'Edit', edit_email_history_path(@email_history) %> |
+<%= link_to 'Back', email_histories_path %>
