@@ -144,6 +144,13 @@ ActiveAdmin.register Mentee do
       end
     end
 
+    div do
+      panel "Goals" do
+        render :partial => "/goals/show", :locals => {:profile => mentee}
+        render :partial => "/admin/goals/form"
+      end      
+    end
+
     active_admin_comments
 
 

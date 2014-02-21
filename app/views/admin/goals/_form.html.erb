@@ -1,0 +1,11 @@
+<%= form_for @mentee.goals.new, :url => admin_mentee_goals_path(@mentee) do |f| %>
+
+  <div class="field">
+    <%= f.text_area :body %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

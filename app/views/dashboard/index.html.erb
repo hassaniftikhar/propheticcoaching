@@ -53,24 +53,29 @@
   <%= render :partial => "/mentees/list" %>
 </div>
 --------------------------------------------------------------------------------------------------
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Coach Calendar</a></li>
+        <li><a href="#tabs-2">All Coaches Calendar</a></li>
+    </ul>
 
-<div class = 'coachCalendar2'>
+  <div id="tabs-1">
 		<h2>Coach Calendar2</h2>
 		<p>
 		  <strong>Coach Name:</strong>
 		  <%= @current_user.name %>
 		</p>
-  <div id='calendar'>
-  	 <%= render :partial => "/events/actions_dialog", :locals => {:profile => @current_user} %>
+    <div id='calendar'>
+    	 <%= render :partial => "/events/actions_dialog", :locals => {:profile => @current_user} %>
+    </div>
   </div>
-</div>
---------------------------------------------------------------------------------------------------
 
-<div class = 'coachesCalendar1'>
-  <h2>Coaches Calendar1</h2>
-  <div id='calendar'>
-    <%= render :partial => "/events/actions_dialog", :locals => {:profile => nil } %>
+  <div id="tabs-2">
+    <h2>Coaches Calendar1</h2>
+    <div id='dcalendar'>
+      <%= render :partial => "/events/dactions_dialog", :locals => {:profile => nil } %>
+    </div>
   </div>
-</div>
 
+<div/>
 

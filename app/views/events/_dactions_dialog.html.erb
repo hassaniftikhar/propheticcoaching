@@ -1,0 +1,76 @@
+<div id="desc_dialog" class="dialog" style="display:none;">
+  <div id="event_desc">
+  </div>
+  <br/>
+  <br/>
+
+  <div id="event_actions">
+    <span id="edit_event"></span>
+    <span id="delete_event"></span>
+  </div>
+</div>
+
+<div id="create_event_dialog" class="dialog" style="display:none;">
+  <div id="create_event">
+  </div>
+</div>
+
+<div id="create_google_event_dialog" class="dialog" style="display:none;">
+  <div id="create_google_event">
+  </div>
+</div>
+
+<% if profile %>
+  <%= link_to 'Create Event', [:new, profile, :event], :id => "new_event" %> <br/>
+  <%= link_to 'Add Google Calendar', [:new, profile, :google_event], :id => "google_event" %> <br/>
+  <%= link_to 'Edit Google Calendar', [profile, :google_events], :id => "google_event" %> <br/>
+
+  <% events_url = get_events_url_on(profile) %>
+<% else %>
+  <% events_url = get_coaches_events_url %>
+<% end %>
+
+<script type="text/javascript">
+  authenticity_token = "<%= form_authenticity_token %>";
+  calendar_editable = "<%= @calendar_editable %>";
+
+  if ($('#dcalendar').length > 0) {
+    var editable = to_boolean(calendar_editable);
+    console.log("==editable: " + editable);
+    $('#dcalendar').fullCalendar({
+      editable: editable,
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      defaultView: 'agendaWeek',
+      height: 500,
+      slotMinutes: 15,
+      loading: function (bool) {
+        if (bool)
+          $('#loading').show();
+        else
+          $('#loading').hide();
+      },
+//      events: "https://www.google.com/calendar/feeds/imran.malik71%40gmail.com/public/basic",
+      eventSources: <%= events_url %>,
+      timeFormat: 'h:mm t{ - h:mm t} ',
+      dragOpacity: "0.5",
+      eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+        moveEvent(event, dayDelta, minuteDelta, allDay);
+      },
+
+      eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+        resizeEvent(event, dayDelta, minuteDelta);
+      },
+
+      eventClick: function (event, jsEvent, view) {
+        if (editable) {
+          showEventDetails(event);
+        }
+      }
+    });
+  }
+
+</script>
