@@ -6,12 +6,17 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     elsif user.has_role? :coach
-      can :read, Mentee
-      cannot :read, User
-      cannot :edit, Ebook
-    #else
-    #  can :read, :all
+        can :read, Mentee do |*mentees_list|
+        mentees_list.all? {|mentee| mentee.coaches.pluck("id").include? user.id}
+        # mentees_list.all? {|mentee| user.id == mentee.coaches}
+      end    # elsif user.has_role? :coach
     end
+    #   can :read, Mentee
+    #   cannot :read, User
+    #   cannot :edit, Ebook
+    # #else
+    # #  can :read, :all
+    # end
 
     # Define abilities for the passed in user here. For example:
     #

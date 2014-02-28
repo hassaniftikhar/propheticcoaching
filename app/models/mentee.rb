@@ -1,5 +1,6 @@
 class Mentee < ActiveRecord::Base
 
+  rolify
   resourcify
   has_paper_trail
 

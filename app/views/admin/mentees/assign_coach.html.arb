@@ -1,15 +1,15 @@
 table_for mentee do
   column :name
   column :email
-  column :coach_name do |m|
-    link_to m.coach.name, admin_user_path(m.coach_id) if m.coach
+  column :coach_name do |mentee|
+  		mentee.coaches.collect {|coach| (link_to coach.name, admin_user_path(coach))}.join(", ").html_safe
   end
 end
+
 
 "Assign Coach"
 
 form_for [:admin, mentee] do |f|
-  f.select :coach_id, options_from_collection_for_select(User.coach.all, 'id', 'name', mentee.coach_id)
+		f.select :coach_ids, User.coach.all.collect {|c| [c.name, c.id]}, {}, :multiple => true
   f.button "Select/Change Coach"
 end
-

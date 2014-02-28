@@ -5,8 +5,8 @@ ActiveAdmin.register Mentee do
     before_action :set_mentee_id
 
     def permitted_params
-      params.permit(:mentees_id_list, :mentee => [:first_name, :last_name, :email, :date_of_birth, :donor_id, :home_phone,
-                                                  :availability, :prophecy, :bc, :coach_id, :mentees_id_list])
+      params.permit(:mentees_id_list, :coach_ids, :mentee => [:id, :first_name, :last_name, :email, :date_of_birth, :donor_id, :home_phone,
+                                                  :availability, :prophecy, :bc, :mentees_id_list])
     end
 
     def set_mentee_id
@@ -27,7 +27,8 @@ ActiveAdmin.register Mentee do
   collection_action :assign_multiple_coaches, :method => :post do
     mentees = Mentee.find(JSON.parse(params[:mentee][:mentees_id_list]))
     mentees.each do |mentee|
-      mentee.update_attribute :coach_id, params[:mentee][:coach_id]
+      #mentee.update_attribute :coach_id, params[:mentee][:coach_id]
+      mentee.coaches << (Coach.find_by id: 5)
     end
     redirect_to admin_mentees_url, flash: {message: "Successfully Assigned Coach"}
   end
@@ -82,9 +83,8 @@ ActiveAdmin.register Mentee do
     end
     column :bc
     column :coach do |mentee|
-      mentee.coach.name if mentee.coach
+          mentee.coaches.collect {|coach| (coach.name)}.join(", ").html_safe
     end
-
     default_actions
     actions :defaults => false do |mentee|
       link_to "Change Coach", assign_coach_admin_mentee_path(mentee.id)
@@ -132,13 +132,12 @@ ActiveAdmin.register Mentee do
       row :prophecy
       row :bc
       row :coach do |mentee|
-        link_to(mentee.coach.name, admin_user_path(mentee.coach)) if mentee.coach
+          mentee.coaches.collect {|coach| (link_to coach.name, admin_user_path(coach))}.join(", ").html_safe
       end
-
-      if mentee.coach
+      if mentee.coaches
         row "Recent Coaches" do |mentee|
           mentee.versions.collect { |version|
-            (link_to version.reify.coach.name, admin_user_path(version.reify.coach)) if version.reify && version.reify.coach
+            version.reify.coaches.collect { |coach| (link_to coach.name, admin_user_path(coach))} if version.reify && version.reify.coaches
           }.join(", ").html_safe
         end
       end
