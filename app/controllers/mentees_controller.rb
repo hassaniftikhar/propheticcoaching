@@ -32,7 +32,17 @@ class MenteesController < ApplicationController
   # GET /mentees/1
   # GET /mentees/1.json
   def show
-    
+    @user    = User.find_by id: params[:user_id]
+    @mentee  = Mentee.find_by id: params[:id]
+    if(!current_user.has_role?(:admin) and current_user.id != @user.id)
+      redirect_to user_mentee_path(current_user, @mentee)
+    else
+      # p @user.inspect
+      authorize! :read, *(@mentee ? @mentee : @user.mentees.new)
+      respond_to do |format|
+        format.html
+      end
+    end
   end
 
   # GET /mentees/new

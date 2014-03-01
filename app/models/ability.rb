@@ -8,8 +8,7 @@ class Ability
     elsif user.has_role? :coach
         can :read, Mentee do |*mentees_list|
         mentees_list.all? {|mentee| mentee.coaches.pluck("id").include? user.id}
-        # mentees_list.all? {|mentee| user.id == mentee.coaches}
-      end    # elsif user.has_role? :coach
+      end
     end
     #   can :read, Mentee
     #   cannot :read, User
