@@ -7,8 +7,7 @@ class UsersController < ApplicationController
   # GET /useres
   # GET /useres.json
   def index
-    #@users = User.coach.all
-    @users = User.coach.page params[:page]
+    @users = User.coach.search(params)
     authorize! :read, @users
   end
 
