@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+  before_action :authenticate_user!
   # before_action :set_calendar_properties
   # before_action :set_mentee_id  
   def index
