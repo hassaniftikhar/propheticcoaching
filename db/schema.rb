@@ -97,8 +97,8 @@ ActiveRecord::Schema.define(version: 20140220070546) do
     t.integer  "event_series_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "profile_id",                      null: false
-    t.string   "profile_type",                    null: false
+    t.string   "profile_id"
+    t.string   "profile_type"
   end
 
   create_table "goals", force: true do |t|
