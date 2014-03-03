@@ -5,7 +5,7 @@ ActiveAdmin.register Mentee do
     before_action :set_mentee_id
 
     def permitted_params
-      params.permit(:mentees_id_list, :mentee => [:first_name, :last_name, :email, :donor_id, :home_phone,
+      params.permit(:mentees_id_list, :mentee => [:first_name, :last_name, :email, :date_of_birth, :donor_id, :home_phone,
                                                   :availability, :prophecy, :bc, :coach_id, :mentees_id_list])
     end
 
@@ -73,6 +73,7 @@ ActiveAdmin.register Mentee do
     column :first_name
     column :last_name
     column :email
+    column :date_of_birth
     column :donor_id
     column :home_phone
     column :availability
@@ -95,6 +96,7 @@ ActiveAdmin.register Mentee do
       f.input :first_name
       f.input :last_name
       f.input :email
+      f.input :date_of_birth
       f.input :donor_id
       f.input :home_phone
       f.input :availability
@@ -110,7 +112,7 @@ ActiveAdmin.register Mentee do
       link_to "Back to Mentees List", admin_mentees_path
     end
     br
-    button "Search Ebooks", :id => "btn_ebook_search"
+    button "Search Resources", :id => "btn_ebook_search"
     div :id => "ebook_search", :style => "display:none" do
       render :partial => "admin/ebooks/search"
     end
@@ -123,6 +125,7 @@ ActiveAdmin.register Mentee do
       row :first_name
       row :last_name
       row :email
+      row :date_of_birth
       row :donor_id
       row :home_phone
       row :availability
@@ -139,6 +142,13 @@ ActiveAdmin.register Mentee do
           }.join(", ").html_safe
         end
       end
+    end
+
+    div do
+      panel "Goals" do
+        render :partial => "/goals/show", :locals => {:profile => mentee}
+        render :partial => "/admin/goals/form"
+      end      
     end
 
     active_admin_comments

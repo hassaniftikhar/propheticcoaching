@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @accomplishment.body %>
+</p>
+
+<p>
+  <strong>Mentee:</strong>
+  <%= @accomplishment.mentee_id %>
+</p>
+
+<%= link_to 'Edit', edit_accomplishment_path(@accomplishment) %> |
+<%= link_to 'Back', accomplishments_path %>

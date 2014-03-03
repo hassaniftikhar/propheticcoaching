@@ -1,6 +1,6 @@
 class GoogleEventsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_profile, only: [:new, :create, :edit, :index]
+  before_action :set_profile, only: [:new, :create, :edit, :update, :index]
   before_action :set_google_event, only: [:show, :edit, :update, :destroy]
 
   def new
@@ -41,7 +41,11 @@ class GoogleEventsController < ApplicationController
     google_event = GoogleEvent.find_by_id(params[:id])
     google_event.destroy
     respond_to do |format|
-      format.html { redirect_to user_google_events_url }
+      if @google_event.profile_type == "User"
+        format.html { redirect_to user_google_events_url }
+      else
+        format.html { redirect_to mentee_google_events_url }
+      end
       format.json { head :no_content }
     end
   end

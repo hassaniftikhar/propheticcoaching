@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140124110004) do
+ActiveRecord::Schema.define(version: 20140220070546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accomplishments", force: true do |t|
+    t.text     "body"
+    t.integer  "mentee_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -64,6 +71,13 @@ ActiveRecord::Schema.define(version: 20140124110004) do
     t.string   "pdf"
   end
 
+  create_table "email_histories", force: true do |t|
+    t.text     "body"
+    t.integer  "mentee_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "event_series", force: true do |t|
     t.integer  "frequency",  default: 1
     t.string   "period",     default: "monthly"
@@ -83,8 +97,8 @@ ActiveRecord::Schema.define(version: 20140124110004) do
     t.integer  "event_series_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "profile_id"
-    t.string   "profile_type"
+    t.string   "profile_id",                      null: false
+    t.string   "profile_type",                    null: false
   end
 
   create_table "goals", force: true do |t|
@@ -114,6 +128,7 @@ ActiveRecord::Schema.define(version: 20140124110004) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "coach_id"
+    t.date     "date_of_birth"
   end
 
   create_table "pages", force: true do |t|
@@ -134,6 +149,16 @@ ActiveRecord::Schema.define(version: 20140124110004) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "tasks", force: true do |t|
+    t.text     "description"
+    t.datetime "starttime"
+    t.datetime "endtime"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "mentee_id"
+  end
 
   create_table "users", force: true do |t|
     t.string   "first_name"

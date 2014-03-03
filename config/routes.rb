@@ -1,17 +1,29 @@
 Propheticcoaching::Application.routes.draw do
 
 
-  ActiveAdmin.routes(self)
+  # resources :email_histories
+
+  # resources :accomplishments
+
+  # resources :tasks
+
+  get "dashboard/index"
+   #get "dashboad/index"
+   #get "dashboard" => "dashboard#index"
+   #get '/dashboard', to: 'dashboard#index'
+   #match '/dashboard', to: 'dashboard#index', via: :get
+   #root :to => 'dashboard#index'
+   #resource :dashboard , :only => [:index]
   #devise_for :users
   #devise_for :users, controllers: {registrations: "users/registrations"}
   devise_for :users, :controllers => { :registrations => "users/registrations" }
+  ActiveAdmin.routes(self)
 
   #resources :chats do
   #  collection do
   #    get :talk
   #  end
   #end
-
   resources :ebooks do
     collection do
       get 'search'
@@ -27,13 +39,17 @@ Propheticcoaching::Application.routes.draw do
         get :get_events
       end
     end
-    resources :google_events , :only => [:new, :create]
+    resources :google_events #, :only => [:new, :create, :edit, :update]
   end
 
   resources :users, :only => [:index, :show] do
     resources :mentees do
       resources :goals
       resources :comments
+      resources :tasks
+      resources :accomplishments
+      resources :email_histories
+
     end
     resources :events do
       collection do
@@ -53,7 +69,8 @@ Propheticcoaching::Application.routes.draw do
     end
   end
 
-  root :to => 'users#index'
+  #root :to => 'users#index'
+  root :to => 'dashboard#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

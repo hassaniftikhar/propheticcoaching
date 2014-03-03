@@ -1,0 +1,16 @@
+<h3> Email History </h3>
+<table class="table table-striped" >
+  <thead>
+  <tr>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @mentee.email_histories.order("id DESC").each do |email_history| %>
+    <tr>
+      <td><%= email_history.body %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

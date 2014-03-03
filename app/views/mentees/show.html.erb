@@ -14,6 +14,10 @@
 		    <td><%= @mentee.email %></td>
 		  </tr>
 		  <tr>
+		    <td>Date of Birth</td>
+		    <td><%= @mentee.date_of_birth %></td>
+		  </tr>
+		  <tr>
 		    <td>DONER</td>
 		    <td><%= @mentee.donor_id %></td>
 		  </tr>
@@ -41,12 +45,38 @@
   </tbody>
 </table>
 
-<%= render :partial => "goals/show" %>
+<div id="tabs">
+		<ul>
+				<li><a href="#tabs-1">Goals</a></li>
+				<li><a href="#tabs-2">Accomplishments</a></li>
+				<li><a href="#tabs-3">Comments</a></li>
+				<li><a href="#tabs-4">Email History</a></li>
+				<li><a href="#tabs-5">Tasks</a></li>
+		</ul>
+		<div id="tabs-1">
+				<%= render :partial => "goals/show" %>
+				<%= render :partial => "goals/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
+		</div>
 
-<%= render :partial => "goals/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
+		<div id="tabs-2">
+		<%= render :partial => "accomplishments/show" %>
+		<%= render :partial => "accomplishments/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
+		</div>
 
-<%= render :partial => "comments/show" %>
+		<div id="tabs-3">
+				<%= render :partial => "comments/show" %>
+				<%= render :partial => "comments/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
+		</div>
 
-<%= render :partial => "comments/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
+		<div id="tabs-4">
+				<%= render :partial => "email_histories/show" %>
+				<%= render :partial => "email_histories/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
+		</div>
 
+
+		<div id="tabs-5">
+				<%= render :partial => "tasks/show" %>
+				<%= render :partial => "tasks/form", :locals => {:coach => @mentee.coach, :mentee => @mentee} %>
+		</div>
+</div>
 <%= link_to 'Back', user_path(@mentee.coach.id) %>

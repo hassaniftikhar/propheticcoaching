@@ -20,8 +20,12 @@
 //= require "documentViewer/ttw-document-viewer.min.js"
 //= require jquery_highlight
 //= require private_pub
+//= require jquery-1.9.1
+//= require jquery-ui
+//= require mentees
 //= require ebooks
 //= require events
+//= require dashboard
 //= require active_admin
 //= require bootstrap
 //= require jquery.ui.chatbox

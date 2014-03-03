@@ -22,14 +22,14 @@ ActiveAdmin.register_page "Dashboard" do
            strong { link_to "View All User", admin_users_path }
          end
 
-         panel "Recent Ebook" do
+         panel "Recent Resource" do
            ul do
              Ebook.order("created_at desc").limit(5).map do |ebook|
                #User.recent(5).map do |user|
                li link_to(ebook.name, admin_ebook_path(ebook))
              end
            end
-           strong { link_to "View All Ebooks", admin_ebooks_path }
+           strong { link_to "View All Resources", admin_ebooks_path }
          end
 
          panel "Recent Mentee" do

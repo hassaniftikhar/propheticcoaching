@@ -39,7 +39,7 @@ ActiveAdmin.register User do
   action_item :only => :index do
     link_to('Import User CSV', import_csv_admin_users_path)
   end
-
+  # in app/admin/admin_users.rb
   index do
     column :first_name
     column :last_name

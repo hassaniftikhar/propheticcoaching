@@ -1,0 +1,22 @@
+<h3> Task Reminder </h3>
+<table class="table table-striped" >
+  <thead>
+  <tr>
+     <td>DESCRIPTION</td>
+     <td>START TIME</td>
+     <td>END TIME</td>
+     <td>STATUS</td>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @mentee.tasks.order("id DESC").each do |task| %>
+    <tr>
+      <td><%= task.description %></td>
+      <td><%= task.starttime %></td>
+      <td><%= task.endtime %></td>
+      <td><%= task.status %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

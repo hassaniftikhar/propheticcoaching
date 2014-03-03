@@ -6,7 +6,7 @@
   </p>
 
   <p>
-    <%= f.submit 'Add', :id => "google_event_btn" %>
+    <%= f.submit (@google_event.new_record? ? 'Add' : 'Edit'), :id => "google_event_btn" %>
     <span id="creating_events" class="spinner" style="display:none;">Creating, Please wait...</span>
   </p>
 <% end %>
