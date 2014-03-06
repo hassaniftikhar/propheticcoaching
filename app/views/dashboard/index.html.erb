@@ -14,7 +14,7 @@
     <% @latest_resources.each do |latest_resource| %>
       <tr>
         <td><%= link_to latest_resource.name, ebook_path(latest_resource) %></td>
-        <td><%= latest_resource.created_at %></td>
+        <td><%= latest_resource.created_at.strftime("%d %b, %Y %I:%M %p") %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,7 +30,6 @@
       <th>Description</th>
       <th>Start Time</th>
       <th>End Time</th>
-      <th>Created at</th>
       <th></th>
 
     </tr>
@@ -41,9 +40,9 @@
       <tr>
         <td><%= coach_event.title %></td>
         <td><%= coach_event.description %></td>
-        <td><%= coach_event.starttime %></td>
-        <td><%= coach_event.endtime %></td>
-        <td><%= coach_event.created_at %></td>
+        <td><%= coach_event.starttime.strftime("%d %b, %Y %I:%M %p") %></td>
+        <td><%= coach_event.endtime.strftime("%d %b, %Y %I:%M %p") %></td>
+        <td><%= coach_event.created_at.strftime("%d %b, %Y %I:%M %p") %></td>
       </tr>
     <% end %>
   </tbody>
@@ -68,14 +67,14 @@
 		  <%= @current_user.name %>
 		</p>
     <div id='calendar'>
-    	 <%= render :partial => "/events/actions_dialog", :locals => {:profile => @current_user} %>
+    	 <%= render :partial => "/events/actions_dialog", :locals => {:profile => @current_user, :dashboard => true} %>
     </div>
   </div>
 
   <div id="tabs-2">
     <h2>Coaches Calendar1</h2>
     <div id='coaches_calendar'>
-      <%= render :partial => "/events/actions_dialog", :locals => {:profile => nil } %>
+      <%= render :partial => "/events/actions_dialog", :locals => {:profile => nil, :dashboard => true } %>
     </div>
   </div>
 
