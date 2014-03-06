@@ -9,7 +9,7 @@
 //= require events
 //= require private_pub
 //= require ebooks
-//= require jquery.multiselect.min
+//= require jquery.multiselect
 
 
 $(document).ready(function () {
@@ -48,23 +48,23 @@ $(document).ready(function () {
         // $callback.text(ui.value + ' ' + (ui.checked ? 'checked' : 'unchecked') );
         var url = window.location.href;
         var parts = url.split("/");
-        var mentee_id = parts[parts.length - 2]; //keep in mind that since array starts with 0, last part is [length - 1]
-        // alert(mentee_id);
-    
-        // alert(ui.value + ' ' + (ui.checked ? 'checked' : 'unchecked'));
-        // $editEvent(" + event.id + ")
+        var mentee_id = parts[parts.length - 2];
+
         console.log("event: " + event);
-        // alert();
+
+        var url = '/admin/mentees'+( ( mentee_id > 0 ) ? ('/'+mentee_id+'/assign_multiple_coaches'):'/batch_assign_multiple_coaches');
+
         $.ajax({
-          data: 'coach_id=' + ui.value + '&checked=' + (ui.checked ? 'checked' : 'unchecked'),
+          data: 'coach_id=' + ui.value + '&mentee_selection=' + mentee_selection + '&checked=' + (ui.checked ? 'checked' : 'unchecked'),
           dataType: 'script',
           type: 'post',
-          url: '/admin/mentees/'+mentee_id+'/assign_multiple_coaches',
-          success: function(data){
-            alert(data);
-          },
+          url: url,
+          success: function(){
+            location.reload();
+          }
+          ,
           error: function(){
-            alert("Something is wrong");
+            location.reload();
           }
         });
         // return false;

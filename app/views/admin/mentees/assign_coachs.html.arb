@@ -1,21 +1,14 @@
-table_for mentee do
-  column :name
-  column :email
-  column :coach_name do |m|
-  		if m.coaches.length > 0
-		  		m.coaches do |c|
-		    		link_to c.name, admin_user_path(c)
-		  		end
-  		end
-  end
-end
+if mentees
+    table_for mentees do
+      column :name
+      column :email
+      column :coach_name do |mentee|
+          mentee.coaches.collect {|coach| (link_to coach.name, admin_user_path(coach))}.join(", ").html_safe
+      end
+    end
 
-render "assign_multi_coachs"
 
-"Assign Coach"
+    "Assign Coach"
+    render "assign_multi_coachs"
 
-form_for Mentee.new, url: assign_multiple_coaches_admin_mentees_path do |f|
-  f.hidden_field 'mentees_id_list', :value=>selection
-  f.select :coach_ids, options_from_collection_for_select(User.coach.all, 'id', 'name')
-  f.button "Select/Change Coach"
 end

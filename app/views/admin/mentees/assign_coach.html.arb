@@ -1,12 +1,14 @@
-table_for mentee do
-  column :name
-  column :email
-  column :coach_name do |mentee|
-  		mentee.coaches.collect {|coach| (link_to coach.name, admin_user_path(coach))}.join(", ").html_safe
-  end
+div :id => "mentee_coach_list" do
+		table_for mentee do
+		  column :name
+		  column :email
+		  column :coach_name do |mentee|
+		  		mentee.coaches.collect {|coach| (link_to coach.name, admin_user_path(coach))}.join(", ").html_safe
+		  end
+		end
+
+
+		"Assign Coach"
+
+		render "assign_multi_coachs"
 end
-
-
-"Assign Coach"
-
-render "assign_multi_coachs"

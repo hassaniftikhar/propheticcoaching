@@ -21,38 +21,47 @@ ActiveAdmin.register Mentee do
 
   batch_action "Assign Coach" do |selection|
     mentees = Mentee.find(selection)
-    hhh
+    @selection = selection
+    @existing_coaches=nil
     render "assign_coachs", :locals => {mentees: mentees, selection: selection}
-    
-    # @existing_coaches = (Mentee.find_by id: params[:mentee_id]).coaches
-    # render "assign_coachs", :locals => {mentees: mentees, selection: selection}
-
   end
 
-  # collection_action :ttttassign_multiple_coaches, :method => :post do
-  #   mentees = Mentee.find(JSON.parse(params[:mentee][:mentees_id_list]))
-  #   mentees.each do |mentee|
-  #     #mentee.update_attribute :coach_id, params[:mentee][:coach_id]
-  #     mentee.coaches << (Coach.find_by id: 5)
-  #   end
-  #   redirect_to admin_mentees_url, flash: {message: "Successfully Assigned Coach"}
-  # end
+  collection_action :batch_assign_multiple_coaches, :method => :post do
 
+
+    p "==========================================="
+    p params
+    p "==========================================="
+    params[:mentee_selection].split(",").map(&:to_i).each do |mentee_id|
+      mentee = (Mentee.find_by id: mentee_id)
+      if(params[:checked] == "checked" )
+        if(!(mentee.coaches.pluck("id").include? params[:coach_id].to_i))
+          mentee.coaches << (Coach.find_by id: params[:coach_id])
+        end
+      else
+        if(mentee.coaches.pluck("id").include? params[:coach_id].to_i)
+          mentee.coaches.delete(params[:coach_id])
+        end
+      end
+    end
+    redirect_to assign_coach_admin_mentee_path(params[:mentee_id])
+    # redirect_to root_path
+  end
 
   member_action :assign_coach, :method => :get do
     @mentee = Mentee.find(params[:id])
+    @existing_coaches = (Mentee.find_by id: params[:mentee_id]).coaches
   end
-  
+
   member_action :assign_multiple_coaches, :method => :post do
 
+    p "==========================================="
+    p params
+    p "==========================================="
 
     existing_coaches = (Mentee.find_by id: params[:mentee_id]).coaches
     is_already_coach = existing_coaches.pluck("id").include? params[:coach_id].to_i
 
-    p "==========================================="
-    p is_already_coach
-    p params
-    p "==========================================="
     if(params[:checked] == "checked" )
       if(!is_already_coach)
         existing_coaches << (Coach.find_by id: params[:coach_id])
@@ -65,8 +74,8 @@ ActiveAdmin.register Mentee do
       end
     end
     # redirect_to admin_mentees_url, flash: {message: "Successfully Assigned Coach"}
-    # redirect_to assign_coach_admin_mentee_path(params[:mentee_id])
-    render :json => { :success => true }
+    redirect_to assign_coach_admin_mentee_path(params[:mentee_id])
+    
   end
 
 

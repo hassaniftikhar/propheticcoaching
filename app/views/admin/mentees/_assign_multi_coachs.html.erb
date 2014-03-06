@@ -1,12 +1,6 @@
-<p>
-<%= params %>
-st
-<% @existing_coaches = (Mentee.find_by id: params[:mentee_id]).coaches %>
-en
-</p>
 <select id="coaches_list" name="coaches_list" multiple="multiple">
   <% User.coach.order("first_name ASC").each do |coach| %>
-    <% if @existing_coaches.pluck("id").include? coach.id %>
+    <% if @existing_coaches and (@existing_coaches.pluck("id").include? coach.id) %>
 						<option value= <%="#{coach.id}" %> selected="selected" > <%= coach.first_name %> </option>
 				<% else %>
 						<option value= <%="#{coach.id}" %>  > <%= coach.first_name %> </option>
@@ -14,3 +8,12 @@ en
 
   <% end %>
 </select>
+<script type="text/javascript">
+
+// 		var mentee_selection;
+// 		<% if @selection %>
+// 		  mentee_selection  ="<%= @selection.join(',').html_safe %>";
+// 		<% else %>
+// 				mentee_selection  = nil;
+// 		<% end %>
+ </script>
