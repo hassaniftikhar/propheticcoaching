@@ -5,8 +5,8 @@ ActiveAdmin.register Mentee do
     before_action :set_mentee_id
 
     def permitted_params
-      params.permit(:mentees_id_list, :mentee => [:first_name, :last_name, :email, :date_of_birth, :donor_id, :home_phone,
-                                                  :availability, :prophecy, :bc, :coach_id, :mentees_id_list])
+      params.permit(:mentees_id_list,  :mentee => [:id, :first_name, :last_name, :email, :date_of_birth, :donor_id, :home_phone,
+                                                  :availability, :prophecy, :bc])
     end
 
     def set_mentee_id
@@ -21,16 +21,63 @@ ActiveAdmin.register Mentee do
 
   batch_action "Assign Coach" do |selection|
     mentees = Mentee.find(selection)
+    @selection = selection
+    @existing_coaches=nil
     render "assign_coachs", :locals => {mentees: mentees, selection: selection}
   end
 
-  collection_action :assign_multiple_coaches, :method => :post do
-    mentees = Mentee.find(JSON.parse(params[:mentee][:mentees_id_list]))
-    mentees.each do |mentee|
-      mentee.update_attribute :coach_id, params[:mentee][:coach_id]
+  collection_action :batch_assign_multiple_coaches, :method => :post do
+
+
+    p "==========================================="
+    p params
+    p "==========================================="
+    params[:mentee_selection].split(",").map(&:to_i).each do |mentee_id|
+      mentee = (Mentee.find_by id: mentee_id)
+      if(params[:checked] == "checked" )
+        if(!(mentee.coaches.pluck("id").include? params[:coach_id].to_i))
+          mentee.coaches << (Coach.find_by id: params[:coach_id])
+        end
+      else
+        if(mentee.coaches.pluck("id").include? params[:coach_id].to_i)
+          mentee.coaches.delete(params[:coach_id])
+        end
+      end
     end
-    redirect_to admin_mentees_url, flash: {message: "Successfully Assigned Coach"}
+    redirect_to assign_coach_admin_mentee_path(params[:mentee_id])
+    # redirect_to root_path
   end
+
+  member_action :assign_coach, :method => :get do
+    @mentee = Mentee.find(params[:id])
+    @existing_coaches = (Mentee.find_by id: params[:mentee_id]).coaches
+  end
+
+  member_action :assign_multiple_coaches, :method => :post do
+
+    p "==========================================="
+    p params
+    p "==========================================="
+
+    existing_coaches = (Mentee.find_by id: params[:mentee_id]).coaches
+    is_already_coach = existing_coaches.pluck("id").include? params[:coach_id].to_i
+
+    if(params[:checked] == "checked" )
+      if(!is_already_coach)
+        existing_coaches << (Coach.find_by id: params[:coach_id])
+        # flash: {message: "Successfully Assigned Coach"}
+      end
+    else
+      if(is_already_coach)
+        existing_coaches.delete(params[:coach_id])
+        # flash: {message: "Successfully Unassigned Coach"}
+      end
+    end
+    # redirect_to admin_mentees_url, flash: {message: "Successfully Assigned Coach"}
+    redirect_to assign_coach_admin_mentee_path(params[:mentee_id])
+    
+  end
+
 
   batch_action "Assign Prophecy" do |selection|
     mentees = Mentee.find(selection)
@@ -56,9 +103,6 @@ ActiveAdmin.register Mentee do
     end
   end
 
-  member_action :assign_coach, :method => :get do
-    @mentee = Mentee.find(params[:id])
-  end
 
   action_item :only => :index do
     link_to('Import Mentee CSV', import_csv_admin_mentees_path)
@@ -82,9 +126,8 @@ ActiveAdmin.register Mentee do
     end
     column :bc
     column :coach do |mentee|
-      mentee.coach.name if mentee.coach
+          mentee.coaches.collect {|coach| (coach.name)}.join(", ").html_safe
     end
-
     default_actions
     actions :defaults => false do |mentee|
       link_to "Change Coach", assign_coach_admin_mentee_path(mentee.id)
@@ -132,18 +175,22 @@ ActiveAdmin.register Mentee do
       row :prophecy
       row :bc
       row :coach do |mentee|
-        link_to(mentee.coach.name, admin_user_path(mentee.coach)) if mentee.coach
+          mentee.coaches.collect {|coach| (link_to coach.name, admin_user_path(coach))}.join(", ").html_safe
       end
-
-      if mentee.coach
+      if mentee.coaches
         row "Recent Coaches" do |mentee|
           mentee.versions.collect { |version|
-            (link_to version.reify.coach.name, admin_user_path(version.reify.coach)) if version.reify && version.reify.coach
+            version.reify.coaches.collect { |coach| (link_to coach.name, admin_user_path(coach))} if version.reify && version.reify.coaches
           }.join(", ").html_safe
         end
       end
     end
 
+    div do
+      panel "Coaches" do
+        render :partial => "assign_multi_coachs", :locals => {:profile => mentee}
+      end      
+    end
     div do
       panel "Goals" do
         render :partial => "/goals/show", :locals => {:profile => mentee}

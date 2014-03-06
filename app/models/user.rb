@@ -8,14 +8,66 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :mentees, :foreign_key => "coach_id"
+  #has_many :mentees, :foreign_key => "coach_id"
+  #has_and_belongs_to_many :mentees 
+  has_and_belongs_to_many :mentees,
+        :foreign_key => 'coach_id',
+        :association_foreign_key => 'mentee_id',
+        :class_name => 'Mentee',
+        :join_table => 'coaches_mentees_joins'  
+
+# has_and_belongs_to_many :clients,
+#         :foreign_key => 'client_id',
+#         :association_foreign_key => 'coach_id',
+#         :class_name => 'User',
+#         :join_table => 'coaches_clients
   has_many :chats
   has_many :events, :as => :profile
   has_many :google_events, :as => :profile
 
   scope :coach, -> { Role.where("name='coach'").first.users }
 
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
 
+  def self.search(params)
+    tire.search(load: true, page: params[:page], per_page: 10) do
+      query { string params[:query], default_operator: "AND" } if params[:query].present?
+      # filter :range, created_at: {lte: Time.zone.now-30.days}
+      # filter :range, first_name: {lte: "a"}
+      # filter :query, coach_role: {lte: "a"}
+      filter :term, :coach_role => true
+      sort { by :first_name, "asc" }
+    end
+  end
+
+  mapping do
+    indexes :id, type: 'integer'
+    indexes :first_name
+    indexes :last_name
+    indexes :email
+    indexes :address
+    indexes :home_phone
+    indexes :availablity_time
+    indexes :best_time_to_call
+    indexes :date_of_birth
+    indexes :mentee_count
+    indexes :coach_role
+    # indexes :mentee_name
+  end
+
+  def to_indexed_json
+    to_json(methods: [:mentee_count, :coach_role])
+  end
+    
+  def mentee_count
+    mentees.size
+  end
+
+  def coach_role
+    roles_name.include? "coach"
+  end
+   #------------------------------------------------------------------------
   def is_admin?
     self.has_role?(:admin) ? true : false
   end

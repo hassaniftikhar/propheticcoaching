@@ -1,18 +1,48 @@
 class MenteesController < ApplicationController
+  #load_and_authorize_resource
+  # load_and_authorize_resource :user
+  # load_and_authorize_resource :mentee, :through => :user
   before_action :set_mentee, only: [:show, :edit, :update, :destroy]
+
 
   # GET /mentees
   # GET /mentees.json
   def index
     @user    = User.find_by id: params[:user_id]
-    @mentees = @user.mentees.page params[:page]
+    #@mentees = @user.mentees.page params[:page]
+
+    if @user.has_any_role?(:admin, :manager)
+      @mentees = Mentee.all.page params[:page]
+    else
+      @mentees = @user.mentees.page params[:page]
+    end
+
+    authorize! :read, *(@mentees.any? ? @mentees : @user.mentees.new)
+    respond_to do |format|
+      format.html
+    end
+    
+    # @mentees = Mentee.accessible_by(current_ability).page params[:page]
+    # p current_ability.inspect
+    # @ads = Ad.where("ads.published_at >= ?", 30.days.ago).accessible_by(current_ability)
+
 
   end
 
   # GET /mentees/1
   # GET /mentees/1.json
   def show
-    
+    @user    = User.find_by id: params[:user_id]
+    @mentee  = Mentee.find_by id: params[:id]
+    if(!current_user.has_role?(:admin) and current_user.id != @user.id)
+      redirect_to user_mentee_path(current_user, @mentee)
+    else
+      # p @user.inspect
+      authorize! :read, *(@mentee ? @mentee : @user.mentees.new)
+      respond_to do |format|
+        format.html
+      end
+    end
   end
 
   # GET /mentees/new
