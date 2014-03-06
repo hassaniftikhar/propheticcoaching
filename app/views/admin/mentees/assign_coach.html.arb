@@ -9,7 +9,4 @@ end
 
 "Assign Coach"
 
-form_for [:admin, mentee] do |f|
-		f.select :coach_ids, User.coach.all.collect {|c| [c.name, c.id]}, {}, :multiple => true
-  f.button "Select/Change Coach"
-end
+render "assign_multi_coachs"

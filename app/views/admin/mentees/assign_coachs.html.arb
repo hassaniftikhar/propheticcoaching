@@ -10,6 +10,7 @@ table_for mentee do
   end
 end
 
+render "assign_multi_coachs"
 
 "Assign Coach"
 

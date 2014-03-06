@@ -5,8 +5,8 @@ ActiveAdmin.register Mentee do
     before_action :set_mentee_id
 
     def permitted_params
-      params.permit(:mentees_id_list, :coach_ids, :mentee => [:id, :first_name, :last_name, :email, :date_of_birth, :donor_id, :home_phone,
-                                                  :availability, :prophecy, :bc, :mentees_id_list])
+      params.permit(:mentees_id_list,  :mentee => [:id, :first_name, :last_name, :email, :date_of_birth, :donor_id, :home_phone,
+                                                  :availability, :prophecy, :bc])
     end
 
     def set_mentee_id
@@ -21,17 +21,54 @@ ActiveAdmin.register Mentee do
 
   batch_action "Assign Coach" do |selection|
     mentees = Mentee.find(selection)
+    hhh
     render "assign_coachs", :locals => {mentees: mentees, selection: selection}
+    
+    # @existing_coaches = (Mentee.find_by id: params[:mentee_id]).coaches
+    # render "assign_coachs", :locals => {mentees: mentees, selection: selection}
+
   end
 
-  collection_action :assign_multiple_coaches, :method => :post do
-    mentees = Mentee.find(JSON.parse(params[:mentee][:mentees_id_list]))
-    mentees.each do |mentee|
-      #mentee.update_attribute :coach_id, params[:mentee][:coach_id]
-      mentee.coaches << (Coach.find_by id: 5)
-    end
-    redirect_to admin_mentees_url, flash: {message: "Successfully Assigned Coach"}
+  # collection_action :ttttassign_multiple_coaches, :method => :post do
+  #   mentees = Mentee.find(JSON.parse(params[:mentee][:mentees_id_list]))
+  #   mentees.each do |mentee|
+  #     #mentee.update_attribute :coach_id, params[:mentee][:coach_id]
+  #     mentee.coaches << (Coach.find_by id: 5)
+  #   end
+  #   redirect_to admin_mentees_url, flash: {message: "Successfully Assigned Coach"}
+  # end
+
+
+  member_action :assign_coach, :method => :get do
+    @mentee = Mentee.find(params[:id])
   end
+  
+  member_action :assign_multiple_coaches, :method => :post do
+
+
+    existing_coaches = (Mentee.find_by id: params[:mentee_id]).coaches
+    is_already_coach = existing_coaches.pluck("id").include? params[:coach_id].to_i
+
+    p "==========================================="
+    p is_already_coach
+    p params
+    p "==========================================="
+    if(params[:checked] == "checked" )
+      if(!is_already_coach)
+        existing_coaches << (Coach.find_by id: params[:coach_id])
+        # flash: {message: "Successfully Assigned Coach"}
+      end
+    else
+      if(is_already_coach)
+        existing_coaches.delete(params[:coach_id])
+        # flash: {message: "Successfully Unassigned Coach"}
+      end
+    end
+    # redirect_to admin_mentees_url, flash: {message: "Successfully Assigned Coach"}
+    # redirect_to assign_coach_admin_mentee_path(params[:mentee_id])
+    render :json => { :success => true }
+  end
+
 
   batch_action "Assign Prophecy" do |selection|
     mentees = Mentee.find(selection)
@@ -57,9 +94,6 @@ ActiveAdmin.register Mentee do
     end
   end
 
-  member_action :assign_coach, :method => :get do
-    @mentee = Mentee.find(params[:id])
-  end
 
   action_item :only => :index do
     link_to('Import Mentee CSV', import_csv_admin_mentees_path)
@@ -143,6 +177,11 @@ ActiveAdmin.register Mentee do
       end
     end
 
+    div do
+      panel "Coaches" do
+        render :partial => "assign_multi_coachs", :locals => {:profile => mentee}
+      end      
+    end
     div do
       panel "Goals" do
         render :partial => "/goals/show", :locals => {:profile => mentee}

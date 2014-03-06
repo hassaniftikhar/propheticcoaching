@@ -18,10 +18,10 @@
 //= require "documentViewer/libs/pdfjs/pdf.js"
 //= require "documentViewer/libs/pdfjs/compatibility.js"
 //= require "documentViewer/ttw-document-viewer.min.js"
-// require jquery_highlight
+//= require jquery_highlight
 //= require private_pub
-//= require jquery-1.9.1
-//= require jquery-ui
+// require jquery-1.9.1
+// require jquery-ui
 //= require mentees
 //= require ebooks
 //= require events
@@ -30,4 +30,3 @@
 //= require bootstrap
 //= require jquery.ui.chatbox
 //= require jquery.cookie
-//= require jquery_highlight

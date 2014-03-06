@@ -1,0 +1,16 @@
+<p>
+<%= params %>
+st
+<% @existing_coaches = (Mentee.find_by id: params[:mentee_id]).coaches %>
+en
+</p>
+<select id="coaches_list" name="coaches_list" multiple="multiple">
+  <% User.coach.order("first_name ASC").each do |coach| %>
+    <% if @existing_coaches.pluck("id").include? coach.id %>
+						<option value= <%="#{coach.id}" %> selected="selected" > <%= coach.first_name %> </option>
+				<% else %>
+						<option value= <%="#{coach.id}" %>  > <%= coach.first_name %> </option>
+    <% end %>
+
+  <% end %>
+</select>
