@@ -38,7 +38,7 @@ gem 'paper_trail', '~> 3.0.0'
 gem 'private_pub'
 gem 'redis'
 gem 'carrierwave'
-
+gem 'rails_12factor'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

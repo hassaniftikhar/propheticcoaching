@@ -33,11 +33,12 @@
 <script type="text/javascript">
   authenticity_token = "<%= form_authenticity_token %>";
   calendar_editable = "<%= @calendar_editable %>";
+  calendar_scope_type = "<%= profile ? "#calendar" : "#coaches_calendar" %>";
 
-  if ($('#calendar').length > 0) {
+  if ($(calendar_scope_type).length > 0) {
     var editable = to_boolean(calendar_editable);
     console.log("==editable: " + editable);
-    $('#calendar').fullCalendar({
+    $(calendar_scope_type).fullCalendar({
       editable: editable,
       header: {
         left: 'prev,next today',
