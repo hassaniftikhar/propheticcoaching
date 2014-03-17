@@ -1,0 +1,45 @@
+<div id="pdfContainer" class = "pdf-content">
+</div>
+
+
+<%- model_class = Ebook -%>
+<div class="page-header">
+  <h1><%= t '.title', :default => @ebook_name.pluralize.titleize %></h1>
+</div>
+
+<%= form_tag search_ebooks_path, :id => "search_ebook", method: :get do %>
+  <p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", name: nil %>
+  </p>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <th><%= model_class.human_attribute_name(:name) %></th>
+    <th> Page No</th>
+    <th> Matched Text</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @pages ||= [] %>
+  <% @pages.each do |page| %>
+    <tr>
+      <td><%= link_to page.ebook_id, ebook_path(page.ebook_id) %></td>
+      <td><%= page.ebook_name %></td>
+      <td>
+        <div id="pdf-view">
+        <%= page.page_number %></td>
+      </div>
+      <td id="tags"> <%= page.tags %> </td>
+    </tr>
+
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_ebook_path,
+            :class => 'btn btn-primary' %>
