@@ -32,7 +32,7 @@ ActiveAdmin.register Mentee do
     params[:mentee_selection].split(",").map(&:to_i).each do |mentee_id|
       mentee = (Mentee.find_by id: mentee_id)
       if(params[:checked] == "checked" )
-        if(!(mentee.coaches.pluck("id").include? params[:coach_id].to_i))
+        unless(mentee.coaches.pluck("id").include? params[:coach_id].to_i)
           mentee.coaches << (Coach.find_by id: params[:coach_id])
         end
       else

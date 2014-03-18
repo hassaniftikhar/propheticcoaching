@@ -3,7 +3,7 @@ if mentees
       column :name
       column :email
       column :coach_name do |mentee|
-          mentee.coaches.collect {|coach| (link_to coach.name, admin_user_path(coach))}.join(", ").html_safe
+          mentee.coaches.order("first_name asc").collect {|coach| (link_to coach.name, admin_user_path(coach))}.join(", ").html_safe
       end
     end
 
