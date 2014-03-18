@@ -1,0 +1,38 @@
+
+<%- model_class = Question -%>
+<div class="page-header">
+  <h1><%= t '.title', :default => Question.name.pluralize.titleize %></h1>
+</div>
+
+<%= form_tag questions_path, method: :get do %>
+  <p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", body: nil %>
+  </p>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Question List</th>
+      <th></th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.body %></td>
+        <td><%= link_to 'Show', question_path(question), :class => 'btn btn-mini'%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @questions %>
+
+<% if can? :create, @question %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_question_path,
+            :class => 'btn btn-primary' %>
+<% end %>
