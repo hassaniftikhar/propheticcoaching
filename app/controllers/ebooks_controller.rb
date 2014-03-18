@@ -8,6 +8,7 @@ class EbooksController < ApplicationController
   def index
     #@ebooks = Ebook.all
     @ebooks = Ebook.all.page params[:page]
+    @questions = Question.search(params)
   end
 
   # GET /ebooks/1

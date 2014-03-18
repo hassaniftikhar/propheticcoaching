@@ -1,6 +1,8 @@
 class Ebook < ActiveRecord::Base
 
   has_many :pages, dependent: :destroy
+  validates_presence_of :name
+  validates_uniqueness_of :name, :case_sensitive => false
 
   mount_uploader :pdf, PdfUploader
 

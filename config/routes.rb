@@ -1,6 +1,8 @@
 Propheticcoaching::Application.routes.draw do
 
 
+  resources :questions
+
   # resources :email_histories
 
   # resources :accomplishments
@@ -24,6 +26,7 @@ Propheticcoaching::Application.routes.draw do
   #    get :talk
   #  end
   #end
+
   resources :ebooks do
     collection do
       get 'search'

@@ -29,9 +29,6 @@ ActiveAdmin.register Mentee do
   collection_action :batch_assign_multiple_coaches, :method => :post do
 
 
-    p "==========================================="
-    p params
-    p "==========================================="
     params[:mentee_selection].split(",").map(&:to_i).each do |mentee_id|
       mentee = (Mentee.find_by id: mentee_id)
       if(params[:checked] == "checked" )
@@ -54,10 +51,6 @@ ActiveAdmin.register Mentee do
   end
 
   member_action :assign_multiple_coaches, :method => :post do
-
-    p "==========================================="
-    p params
-    p "==========================================="
 
     existing_coaches = (Mentee.find_by id: params[:mentee_id]).coaches
     is_already_coach = existing_coaches.pluck("id").include? params[:coach_id].to_i
