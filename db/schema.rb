@@ -103,8 +103,8 @@ ActiveRecord::Schema.define(version: 20140318094532) do
     t.integer  "event_series_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "profile_id",                      null: false
-    t.string   "profile_type",                    null: false
+    t.string   "profile_id"
+    t.string   "profile_type"
   end
 
   create_table "goals", force: true do |t|
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20140318094532) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "date_of_birth"
+    t.string   "coach_id",      limit: nil
   end
 
   create_table "pages", force: true do |t|
