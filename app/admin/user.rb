@@ -34,6 +34,17 @@ ActiveAdmin.register User do
       update_method = attributes.first[:password].present? ? :update_attributes : :update_without_password
       object.send(update_method, *attributes)
     end
+
+    # def create
+    #   @user = User.new(params[:user])
+
+    #   respond_to do |format|
+    #     if @user.save
+    #       AdminMailer.registration_confirmation(@user.id).deliver
+    #       redirect_to @user
+    #     end
+    #   end
+    # end    
   end
 
   action_item :only => :index do

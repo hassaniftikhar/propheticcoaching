@@ -28,4 +28,20 @@ Propheticcoaching::Application.configure do
   config.assets.debug = true
 
   Paperclip.options[:command_path] = '/usr/local/bin/convert'
+
+config.action_mailer.default_url_options = { :host => 'localhost' }
+  # ActionMailer settings
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'mail.propheticcoaching.com',
+    port: 25,
+    domain: 'propheticcoaching.com',
+    user_name: 'alerts@propheticcoaching.com',
+    password: 'asdfasdf1234!@#$',
+    authentication: 'plain',
+    enable_starttls_auto: true,
+    openssl_verify_mode: 'none'}
+
 end

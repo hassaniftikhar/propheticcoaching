@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    # UserMailer.registration_confirmation(@user).deliver
   end
 
   # GET /coaches/new
