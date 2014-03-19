@@ -3,7 +3,7 @@ class AddShaColumnToEbooks < ActiveRecord::Migration
     add_column :ebooks, :sha, :string
     Ebook.all.each do |ebook|
       if ebook.pdf.url
-        ebook.update_column(:sha, create_pages(ebook.pdf))
+        ebook.update_column(:sha, AddShaColumnToEbooks.create_pages(ebook.pdf))
       end
     end
   end
