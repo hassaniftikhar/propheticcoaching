@@ -3,11 +3,11 @@ class Ebook < ActiveRecord::Base
   has_many :pages, dependent: :destroy
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
-  validates_uniqueness_of :sha
+  # validates_uniqueness_of :sha
 
   mount_uploader :pdf, PdfUploader
 
-  after_save :update_sha
+  # after_save :update_sha
   after_save :create_pages
   before_destroy :remove_es_index
 
@@ -51,16 +51,17 @@ class Ebook < ActiveRecord::Base
   end
 
 
-  def update_sha
-    # str = []
-    if pdf.url
-      require 'open-uri'
-      io = open(pdf.url)
-      reader = PDF::Reader.new(io)
+  # def update_sha
+  #   # str = []
+  #   if pdf.url
+  #     require 'open-uri'
+  #     io = open(pdf.url)
+  #     reader = PDF::Reader.new(io)
       
-      self.update_column(:sha, (Digest::SHA1.hexdigest reader.pages.first.text)) 
-    end
-  end
+  #     self.update_column(:sha, (Digest::SHA1.hexdigest reader.pages.first.text)) 
+  #   end
+  # end
+  
   #def import_pages
   #  puts "===running import pages"
   #  str = []
