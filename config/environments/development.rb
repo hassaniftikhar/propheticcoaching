@@ -29,7 +29,7 @@ Propheticcoaching::Application.configure do
 
   Paperclip.options[:command_path] = '/usr/local/bin/convert'
 
-config.action_mailer.default_url_options = { :host => 'localhost' }
+config.action_mailer.default_url_options = { :host => ENV['DOMAIN'] }
   # ActionMailer settings
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
