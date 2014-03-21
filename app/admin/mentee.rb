@@ -179,11 +179,11 @@ ActiveAdmin.register Mentee do
       end
     end
 
-    div do
-      panel "Coaches" do
-        render :partial => "assign_multi_coachs", :locals => {:profile => mentee}
-      end      
-    end
+    # div do
+    #   panel "Coaches" do
+    #     render :partial => "assign_multi_coachs", :locals => {:profile => mentee}
+    #   end      
+    # end
     div do
       panel "Goals" do
         render :partial => "/goals/show", :locals => {:profile => mentee}
