@@ -3,9 +3,14 @@
   <div class="field">
     <%= f.text_area :body %>
   </div>
-
+<!--   #   f.actions do
+  #     f.action :submit, :as => :button
+  #     f.action :cancel
+  #   end -->
   <div class="actions">
-    <%= f.submit %>
+    		<%= f.submit "Create" %>
+    		<%= f.submit "Send Email" %>
+
   </div>
 
 <% end %>

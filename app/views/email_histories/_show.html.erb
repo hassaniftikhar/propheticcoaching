@@ -7,9 +7,10 @@
   </thead>
 
   <tbody>
-  <% @mentee.email_histories.order("id DESC").each do |email_history| %>
+  <% @mentee.email_histories.order("created_at DESC").each do |email_history| %>
     <tr>
       <td><%= email_history.body %></td>
+      <td><%= email_history.created_at.strftime("%d %b, %Y %I:%M %p") %></td>
     </tr>
   <% end %>
   </tbody>

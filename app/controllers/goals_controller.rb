@@ -24,13 +24,33 @@ class GoalsController < ApplicationController
 
   # POST /goals
   # POST /goals.json
+  def send_email
+    email = @mentee.email_histories.new
+    email.body = @goal.body
+
+    if email.save
+      # flash[:notice] = "Email Sent to #{@mentee.first_name} #{@mentee.last_name}"
+      # UserMailer.registration_confirmation(@mentee, "New Goal Created", current_user).deliver
+      # Resque.enqueue(EmailSend, email.id, @mentee, current_user)
+      Resque.enqueue(EmailSend, email.id)
+      @msg = "Goal was successfully created and Email Sent to #{@mentee.first_name} #{@mentee.last_name}."
+    end
+  end
   def create
-    @mentee = Mentee.find_by :id => goal_params[:mentee_id]
-    @goal = @mentee.goals.new(goal_params[:goal])
+    @mentee = Mentee.find_by :id => params[:mentee_id]
+    @goal = @mentee.goals.new(:body => params[:goal][:body])
 
     respond_to do |format|
+      case params[:commit]
+        when 'Send Email' then 
+          send_email
+        else
+          @msg = 'Goal was successfully created.'
+      end
       if @goal.save
-        format.html { redirect_to user_mentee_path(goal_params[:user_id], @mentee), notice: 'Goal was successfully created.' }
+        # AdminMailer.registration_confirmation(@mentee).deliver
+
+        format.html { redirect_to user_mentee_path(params[:user_id], @mentee), notice: @msg }
         format.json { render action: 'show', status: :created, location: @goal }
       else
         format.html { render action: 'new' }
@@ -73,7 +93,7 @@ class GoalsController < ApplicationController
     def goal_params
       # params.permit(:mentee_id, :event => [:mentee_id , :id,  :title, :description, :starttime, :endtime,  :all_day, :period, :frequency])
 
-      params.permit(:user_id, :mentee_id, :goal => [:body, :id])
+      params.permit(:goal, :commit, :user_id, :mentee_id, :goal => [:body, :id])
       # params.require(:goal).permit(:body)
     end
 end

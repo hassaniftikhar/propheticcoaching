@@ -74,8 +74,23 @@ Propheticcoaching::Application.routes.draw do
 
   #root :to => 'users#index'
   root :to => 'dashboard#index'
+  resque_constraint = lambda do |request|
+    # request.env['warden'].authenticate? and request.env['warden'].user.admin?
+    request.env['warden'].authenticate? and request.env['warden'].user.has_role?(:admin)
+  end
 
+  constraints resque_constraint do
+    mount Resque::Server, :at => "/admin/resque"
+  end
 
+  # mount Resque::Server, :at => "/resque"
+  # authenticate do
+  #   mount Resque::Server.new, at: '/resque'
+  # end  
+
+  # authenticate :admin do
+  #   mount Resque::Server, :at => "/resque"
+  # end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -39,6 +39,8 @@ gem 'private_pub'
 gem 'redis'
 gem 'carrierwave'
 gem 'rails_12factor'
+# gem 'resque'
+gem 'resque', :require => 'resque/server'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
