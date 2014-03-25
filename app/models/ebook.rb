@@ -3,16 +3,31 @@ class Ebook < ActiveRecord::Base
   has_many :pages, dependent: :destroy
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
+  validate is_book_unique
   # validates_uniqueness_of :sha
 
   mount_uploader :pdf, PdfUploader
 
   # after_save :update_sha
+  before_save :calculate_sha
   after_save :create_pages
   before_destroy :remove_es_index
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
+
+  def calculate_sha
+    require 'open-uri'
+    if self.pdf.path
+      io = open(self.pdf.path)
+      reader = PDF::Reader.new(io)
+      self.sha = Digest::SHA1.hexdigest(reader.pages.first.text)
+    end
+  end
+
+  def is_book_unique
+    errors.add :pdf, "book already exist" if Ebook.find_by sha: self.sha
+  end
 
   def self.search(params)
     tire.search do
@@ -20,18 +35,9 @@ class Ebook < ActiveRecord::Base
     end
   end
 
-  #mapping _source: {excludes: ['attachment']} do
   mapping do
     indexes :id, type: 'integer'
     indexes :name
-    #indexes :attachment, :type => 'attachment',
-    #        :fields => {
-    #            :name => {:store => 'yes'},
-    #            :content => {:store => 'yes'},
-    #            :title => {:store => 'yes'},
-    #            :attachment => {:term_vector => 'with_positions_offsets', :store => 'yes'},
-    #            :date => {:store => 'yes'}
-    #        }
   end
 
   def remove_es_index
@@ -49,47 +55,5 @@ class Ebook < ActiveRecord::Base
       end
     end
   end
-
-
-  # def update_sha
-  #   # str = []
-  #   if pdf.url
-  #     require 'open-uri'
-  #     io = open(pdf.url)
-  #     reader = PDF::Reader.new(io)
-      
-  #     self.update_column(:sha, (Digest::SHA1.hexdigest reader.pages.first.text)) 
-  #   end
-  # end
-  
-  #def import_pages
-  #  puts "===running import pages"
-  #  str = []
-  #  if pdf.path
-  #    reader = PDF::Reader.new(pdf.path)
-  #    reader.pages.each_with_index do |page, index|
-  #      puts "===rendering page: #{page} - index: #{index}"
-  #      str << { :id => index, :parent_id => self.id, :name => self.name, :created_at => self.created_at,
-  #              :type => "ebook", :page => (index+1), :tags => page.text, :pdf_path => self.pdf.path,
-  #              :pdf_url => self.pdf.url }
-  #    end
-  #  end
-  #
-  #  Tire.index "ebooks" do
-  #    import str
-  #  end
-  #end
-
-  #def attachment
-  #  if pdf.path
-  #    Base64.encode64(open(pdf.path) { |file| file.read })
-  #  else
-  #    Base64.encode64("missing")
-  #  end
-  #end
-
-  #def to_indexed_json
-  #  to_json(methods: [:attachment])
-  #end
 
 end

@@ -41,27 +41,13 @@ class EbooksController < ApplicationController
   # POST /ebooks.json
   def create
     @ebook = Ebook.new(ebook_params)
-    if @ebook.pdf.path
-      require 'open-uri'
-
-      io     = open(@ebook.pdf.path)
-      reader = PDF::Reader.new(io)
-      book_alreay_exist = (Ebook.find_by sha: (Digest::SHA1.hexdigest reader.pages.first.text))
-
-      unless book_alreay_exist
-        @ebook.sha = (Digest::SHA1.hexdigest reader.pages.first.text)
-      end
-    else
-      book_alreay_exist = true
-    end
     respond_to do |format|
-      if !book_alreay_exist and @ebook.save
-        format.html { redirect_to @ebook, notice: @ebook_name+' was successfully created.' }
+      if @ebook.save
+        format.html { redirect_to @ebook, notice: "#{@ebook_name} was successfully created." }
         format.json { render action: 'show', status: :created, location: @ebook }
       else
         format.html { render action: 'new' }
         format.json { render json: @ebook.errors, status: :unprocessable_entity }
-        flash[:notice] = "Book already exist"
       end
     end
   end
@@ -71,7 +57,7 @@ class EbooksController < ApplicationController
   def update
     respond_to do |format|
       if @ebook.update(ebook_params)
-        format.html { redirect_to @ebook, notice: @ebook_name+' was successfully updated.' }
+        format.html { redirect_to @ebook, notice: "#{@ebook_name} was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
