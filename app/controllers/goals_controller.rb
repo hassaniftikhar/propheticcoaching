@@ -30,7 +30,7 @@ class GoalsController < ApplicationController
 
     respond_to do |format|
       if @goal.save
-        @goal.deliver_email if params[:send_mail]
+        @goal.deliver_email if params[:is_send_email]
         format.html { redirect_to user_mentee_path(params[:user_id], @mentee), notice: 'Goal was successfully created.' }
         format.json { render action: 'show', status: :created, location: @goal }
       else
