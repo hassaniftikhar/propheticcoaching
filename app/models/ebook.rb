@@ -2,8 +2,10 @@ class Ebook < ActiveRecord::Base
 
   has_many :pages, dependent: :destroy
   validates_presence_of :name
+  validates_presence_of :pdf
   validates_uniqueness_of :name, :case_sensitive => false
-  validate is_book_unique
+  validates_uniqueness_of :sha
+  validate :is_book_unique
   # validates_uniqueness_of :sha
 
   mount_uploader :pdf, PdfUploader
@@ -16,17 +18,26 @@ class Ebook < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  def calculate_sha
+  def get_sha
     require 'open-uri'
+    sha = ''
     if self.pdf.path
       io = open(self.pdf.path)
       reader = PDF::Reader.new(io)
-      self.sha = Digest::SHA1.hexdigest(reader.pages.first.text)
+      sha = Digest::SHA1.hexdigest(reader.pages.first.text)
     end
+    sha
+  end
+
+  def calculate_sha
+    self.sha = get_sha
   end
 
   def is_book_unique
-    errors.add :pdf, "book already exist" if Ebook.find_by sha: self.sha
+    sha = self.sha || get_sha
+    if Ebook.find_by sha: sha
+      errors.add :name, "book already exist"
+    end
   end
 
   def self.search(params)
