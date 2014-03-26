@@ -8,19 +8,17 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  #has_many :mentees, :foreign_key => "coach_id"
-  #has_and_belongs_to_many :mentees 
-  has_and_belongs_to_many :mentees,
-        :foreign_key => 'coach_id',
-        :association_foreign_key => 'mentee_id',
-        :class_name => 'Mentee',
-        :join_table => 'coaches_mentees_joins'  
+  has_many :coach_mentee_relations, :class_name => "CoachMenteeRelation",
+        :foreign_key => 'coach_id'
+  # has_many :mentees, through: :coach_mentee_relations
+  has_many :mentees, through: :coach_mentee_relations, :class_name => "Mentee",
+        :foreign_key => 'coach_id'
+  # has_and_belongs_to_many :mentees,
+  #       :foreign_key => 'coach_id',
+  #       :association_foreign_key => 'mentee_id',
+  #       :class_name => 'Mentee',
+  #       :join_table => 'coaches_mentees'  
 
-# has_and_belongs_to_many :clients,
-#         :foreign_key => 'client_id',
-#         :association_foreign_key => 'coach_id',
-#         :class_name => 'User',
-#         :join_table => 'coaches_clients
   has_many :chats
   has_many :events, :as => :profile
   has_many :google_events, :as => :profile

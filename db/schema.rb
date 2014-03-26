@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318094532) do
+ActiveRecord::Schema.define(version: 20140326070131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20140318094532) do
     t.integer  "recipient_id"
   end
 
-  create_table "coaches_mentees_joins", id: false, force: true do |t|
+  create_table "coach_mentee_relations", force: true do |t|
     t.integer "coach_id"
     t.integer "mentee_id"
   end
@@ -103,8 +103,8 @@ ActiveRecord::Schema.define(version: 20140318094532) do
     t.integer  "event_series_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "profile_id"
-    t.string   "profile_type"
+    t.string   "profile_id",                      null: false
+    t.string   "profile_type",                    null: false
   end
 
   create_table "goals", force: true do |t|
@@ -134,7 +134,6 @@ ActiveRecord::Schema.define(version: 20140318094532) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "date_of_birth"
-    t.string   "coach_id",      limit: nil
   end
 
   create_table "pages", force: true do |t|
@@ -170,6 +169,13 @@ ActiveRecord::Schema.define(version: 20140318094532) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "mentee_id"
+  end
+
+  create_table "time_slots", force: true do |t|
+    t.integer  "time_seconds"
+    t.integer  "coach_mentee_relation_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

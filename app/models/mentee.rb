@@ -4,19 +4,17 @@ class Mentee < ActiveRecord::Base
   resourcify
   has_paper_trail
 
+  has_many :coach_mentee_relations
+  has_many :coaches, through: :coach_mentee_relations, :class_name => "User",
+        :foreign_key => 'mentee_id'
+        # :association_foreign_key => 'coach_id',
   #belongs_to :coach, :class_name => "User", :foreign_key => "coach_id"
   #has_and_belongs_to_many :coaches, :class_name => "User" 
-  has_and_belongs_to_many :coaches,
-        :foreign_key => 'mentee_id',
-        :association_foreign_key => 'coach_id',
-        :class_name => 'User',
-        :join_table => 'coaches_mentees_joins'
-
-# has_and_belongs_to_many :coaches,
-#         :foreign_key => 'coach_id',
-#         :association_foreign_key => 'client_id',
-#         :class_name => 'User',
-#         :join_table => 'coaches_clients'
+  # has_and_belongs_to_many :coaches,
+  #       :foreign_key => 'mentee_id',
+  #       :association_foreign_key => 'coach_id',
+  #       :class_name => 'User',
+  #       :join_table => 'coaches_mentees'
 
   has_many :goals
   has_many :comments, :as => :resource
