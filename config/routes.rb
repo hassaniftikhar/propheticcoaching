@@ -1,6 +1,8 @@
 Propheticcoaching::Application.routes.draw do
 
 
+  # get "time_slots/new"
+  # get "time_slots/create"
   resources :questions
 
   # resources :email_histories
@@ -52,6 +54,11 @@ Propheticcoaching::Application.routes.draw do
       resources :tasks
       resources :accomplishments
       resources :email_histories
+      resources :time_slots
+
+      member do
+        post :save
+      end
 
     end
     resources :events do
