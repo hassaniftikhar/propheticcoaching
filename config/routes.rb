@@ -54,7 +54,6 @@ Propheticcoaching::Application.routes.draw do
       resources :tasks
       resources :accomplishments
       resources :email_histories
-      resources :time_slots
 
       member do
         post :save
@@ -77,6 +76,7 @@ Propheticcoaching::Application.routes.draw do
       post :move
       post :resize
     end
+    resources :time_slots
   end
 
   #root :to => 'users#index'

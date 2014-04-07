@@ -32,11 +32,13 @@ ActiveAdmin.register Mentee do
     params[:mentee_selection].split(",").map(&:to_i).each do |mentee_id|
       mentee = (Mentee.find_by id: mentee_id)
       if(params[:checked] == "checked" )
-        unless(mentee.coaches.pluck("id").include? params[:coach_id].to_i)
+        # unless(mentee.coaches.pluck("id").include? params[:coach_id].to_i)
+        unless(mentee.coach_mentee_relations.pluck(:coach_id).include? params[:coach_id].to_i)
           mentee.coaches << (Coach.find_by id: params[:coach_id])
         end
       else
-        if(mentee.coaches.pluck("id").include? params[:coach_id].to_i)
+        # if(mentee.coaches.pluck("id").include? params[:coach_id].to_i)
+        if(mentee.coach_mentee_relations.pluck(:coach_id).include? params[:coach_id].to_i)
           mentee.coaches.delete(params[:coach_id])
         end
       end
@@ -53,7 +55,8 @@ ActiveAdmin.register Mentee do
   member_action :assign_multiple_coaches, :method => :post do
 
     existing_coaches = (Mentee.find_by id: params[:mentee_id]).coaches
-    is_already_coach = existing_coaches.pluck("id").include? params[:coach_id].to_i
+    # is_already_coach = existing_coaches.pluck("id").include? params[:coach_id].to_i
+    is_already_coach = (Mentee.find_by id: params[:mentee_id]).coach_mentee_relations.pluck(:coach_id).include? params[:coach_id].to_i
 
     if(params[:checked] == "checked" )
       if(!is_already_coach)
@@ -184,12 +187,12 @@ ActiveAdmin.register Mentee do
     #     render :partial => "assign_multi_coachs", :locals => {:profile => mentee}
     #   end      
     # end
-    div do
-      panel "Goals" do
-        render :partial => "/goals/show", :locals => {:profile => mentee}
-        render :partial => "/admin/goals/form"
-      end      
-    end
+    # div do
+    #   panel "Goals" do
+    #     render :partial => "/goals/show", :locals => {:profile => mentee}
+    #     render :partial => "/admin/goals/form"
+    #   end      
+    # end
 
     active_admin_comments
 

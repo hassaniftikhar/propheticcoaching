@@ -231,5 +231,12 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
-
+  # config.namespace :admin do |admin|
+  #   admin.build_menu do |menu|
+  #     menu.add :label => 'Event' do |submenu|
+  #       submenu.add :label => 'Event', :url => '/admin/events'
+  #       submenu.add :label => 'Meeting', :url => '/admin/events'
+  #     end
+  #   end
+  # end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326070131) do
+ActiveRecord::Schema.define(version: 20140328155654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,12 +99,13 @@ ActiveRecord::Schema.define(version: 20140326070131) do
     t.text     "description"
     t.datetime "starttime"
     t.datetime "endtime"
-    t.boolean  "all_day",         default: false
+    t.boolean  "all_day",                  default: false
     t.integer  "event_series_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "profile_id",                      null: false
-    t.string   "profile_type",                    null: false
+    t.string   "profile_id",                               null: false
+    t.string   "profile_type",                             null: false
+    t.integer  "coach_mentee_relation_id"
   end
 
   create_table "goals", force: true do |t|
@@ -173,9 +174,9 @@ ActiveRecord::Schema.define(version: 20140326070131) do
 
   create_table "time_slots", force: true do |t|
     t.integer  "time_seconds"
-    t.integer  "coach_mentee_relation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "event_id"
   end
 
   create_table "users", force: true do |t|

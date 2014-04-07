@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
 
   has_many :coach_mentee_relations, :class_name => "CoachMenteeRelation",
         :foreign_key => 'coach_id'
-  # has_many :mentees, through: :coach_mentee_relations
   has_many :mentees, through: :coach_mentee_relations, :class_name => "Mentee",
         :foreign_key => 'coach_id'
   # has_and_belongs_to_many :mentees,

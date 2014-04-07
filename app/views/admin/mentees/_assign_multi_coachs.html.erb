@@ -1,6 +1,6 @@
 <select id="coaches_list" name="coaches_list" multiple="multiple">
   <% User.coach.order("first_name ASC").each do |coach| %>
-    <% if @existing_coaches and (@existing_coaches.pluck("id").include? coach.id) %>
+    <% if @existing_coaches and (@mentee.coach_mentee_relations.pluck(:coach_id).include? coach.id) %>
 						<option value= <%="#{coach.id}" %> selected="selected" > <%= coach.first_name %> </option>
 				<% else %>
 						<option value= <%="#{coach.id}" %>  > <%= coach.first_name %> </option>

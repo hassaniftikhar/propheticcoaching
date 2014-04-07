@@ -48,7 +48,40 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @coach_events %>
+<br>
 
+<h2>Meetings</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Created at</th>
+      <th>Meeting With</th>
+      <th></th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coach_meetings.each do |coach_meeting| %>
+      <tr>
+        <td><%= coach_meeting.title %></td>
+        <td><%= coach_meeting.description %></td>
+        <td><%= coach_meeting.starttime.strftime("%d %b, %Y %I:%M %p") %></td>
+        <td><%= coach_meeting.endtime.strftime("%d %b, %Y %I:%M %p") %></td>
+        <td><%= coach_meeting.created_at.strftime("%d %b, %Y %I:%M %p") %></td>
+        <td><%= link_to coach_meeting.coach_mentee_relation.mentee.name, user_mentee_path(@user, coach_meeting.coach_mentee_relation.mentee) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @coach_meetings %>
+<br>
 
 <div>
   <%= render :partial => "/mentees/list" %>

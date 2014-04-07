@@ -1,0 +1,54 @@
+ <%= semantic_form_for [:admin, @event], :html => { :id => 'event_form' } do |f| %>
+<p>
+  <%=f.label :title %>
+  <br/>
+  <%=f.text_field :title, {value: @event.title || current_user.name} %>
+</p>
+<p>
+  <%=f.label :description %>
+  <br/>
+  <%=f.text_area :description, {:rows => 4, :cols => 30, value: @event.description || current_user.name} %>
+</p>
+<p>
+  <%=f.label :starttime, 'Start Time' %>
+  <br/>
+  <%=f.datetime_select :starttime, ampm: true, order: [:month, :day, :year], :minute_step => 15, :start_hour => 9, :end_hour => 21 %>
+</p>
+<p>
+  <%=f.label :endtime, 'End Time' %>
+  <br/>
+  <%=f.datetime_select :endtime, ampm: true, order: [:month, :day, :year], :minute_step => 15, :start_hour => 9, :end_hour => 21 %>
+</p>
+<p>
+  <%=f.label :all_day %>
+  <%=f.check_box :all_day %>
+</p>
+<p>
+  <%=f.label :period, "Repeats" %>
+  <%=f.select :period, Event::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);" %>
+</p>
+<p id = "frequency" style = "display:none;">
+  <%=f.label :frequency, "Repeat every" %>
+  <%=f.select :frequency, (1..30).to_a %> <span id = "period"></span>
+</p>
+<%=f.hidden_field :id, :value => @event.id %>
+<p>
+
+<% if params[:meeting] or (params[:action] = "edit" and (Event.find_by id: params[:id]).coach_mentee_relation_id )%>
+  <div class="field">
+    <%= f.label :coach_id %>
+    <%= f.collection_select :coach_id, User.coach.includes(:coach_mentee_relations).where('coach_mentee_relations.mentee_id IS NOT NULL').references(:coach_mentee_relations).order(:first_name), :id, :first_name, include_blank: false %>
+    <%= f.label :mentee_id %>
+    <%= f.grouped_collection_select :mentee_id, User.coach.includes(:coach_mentee_relations).where('coach_mentee_relations.mentee_id IS NOT NULL').references(:coach_mentee_relations).order(:first_name), :mentees, :first_name, :id, :first_name, include_blank: false %>
+    <%=f.hidden_field :coach_mentee_relation_id %>
+  </div>
+<% end %>
+
+
+
+<p>
+  <%=f.submit @event.new_record? ? 'Create' : 'Edit' %> <span id = "creating_events" class="spinner" style = "display:none;">Creating, Please wait...</span>
+</p>
+<%end %>
+
+</select>

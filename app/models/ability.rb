@@ -7,7 +7,7 @@ class Ability
       can :manage, :all
     elsif user.has_role? :coach
         can :read, Mentee do |*mentees_list|
-        mentees_list.all? {|mentee| mentee.coaches.pluck("id").include? user.id}
+        mentees_list.all? {|mentee| mentee.coach_mentee_relations.pluck(:coach_id).include? user.id}
       end
     end
     #   can :read, Mentee

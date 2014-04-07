@@ -46,16 +46,6 @@
   </tbody>
 </table>
 
-<div> <h3> Meeting Timer </h3> </div>
-<div id="clock">0</div>
-<div id="buttons" class="clear">
-    <button id="start" onClick="startInterval()">start</button>
-    <button id="stop" onClick="stopInterval()">stop</button>
-    <button id="reset" onClick="reset()">reset</button>
-    <button id="save" onClick="save()">Save Time</button>
-</div>
-<div> <p> </p> </br></div>
-
 <div id="tabs">
 		<ul>
 				<li><a href="#tabs-1">Goals</a></li>
@@ -63,6 +53,7 @@
 				<li><a href="#tabs-3">Comments</a></li>
 				<li><a href="#tabs-4">Email History</a></li>
 				<li><a href="#tabs-5">Tasks</a></li>
+				<li><a href="#tabs-6">Meetings</a></li>
 		</ul>
 		<div id="tabs-1">
 				<%= render :partial => "goals/show" %>
@@ -89,5 +80,7 @@
 				<%= render :partial => "tasks/show" %>
 				<%= render :partial => "tasks/form", :locals => {:coach => @mentee.coaches.first, :mentee => @mentee} %>
 		</div>
-</div>
+		<div id="tabs-6">
+				<%= render :partial => "mentees/meeting_index" %>
+		</div></div>
 <%= link_to 'Back', user_path(@mentee.coaches.first.id) %>

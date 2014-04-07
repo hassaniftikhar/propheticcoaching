@@ -1,12 +1,22 @@
 class Event < ActiveRecord::Base
   attr_accessor :period, :frequency, :commit_button
-  
+
+  validate :update_profile
   validates_presence_of :title, :description
   validate :validate_timings
   
   belongs_to :profile, :polymorphic => true
-  # belongs_to :mentee
   belongs_to :event_series
+  belongs_to :coach_mentee_relation
+  has_many :time_slots
+
+  scope :GenericEvents, -> { where('coach_mentee_relation_id IS NULL') }
+  # scope :GenericEvents, where('coach_mentee_relation_id IS NULL')
+  # scope :Meetings, where('coach_mentee_relation_id IS NOT NULL') 
+  scope :Meetings, -> { where('coach_mentee_relation_id IS NOT NULL') }
+
+  delegate :coach_id, to: :coach_mentee_relation, :allow_nil => true
+  delegate :mentee_id, to: :coach_mentee_relation, :allow_nil => true
 
   REPEATS = [
               "Does not repeat",
@@ -15,6 +25,19 @@ class Event < ActiveRecord::Base
               "Monthly"        ,
               "Yearly"         
   ]
+  def update_profile
+    unless self.profile
+      if self.coach_mentee_relation_id
+        self.profile_id = CoachMenteeRelation.find_by(:id => self.coach_mentee_relation_id).coach_id
+        self.profile_type = "User"
+      end
+    end
+  end
+
+  def remaining_time
+    (self.endtime - self.starttime) - self.time_slots.sum(:time_seconds)
+  end
+  
   
   def validate_timings
     if (starttime >= endtime) and !all_day

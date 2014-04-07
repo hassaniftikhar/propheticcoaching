@@ -77,6 +77,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find_by_id(params[:event][:id])
+
     if params[:event][:commit_button] == "Update All Occurrence"
       @events = @event.event_series.events #.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
       @event.update_events(@events, event_params[:event])

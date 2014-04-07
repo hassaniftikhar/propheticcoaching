@@ -32,8 +32,21 @@ class MenteesController < ApplicationController
   # GET /mentees/1
   # GET /mentees/1.json
   def show
+    # events_meeting_time_remaining = []
+    @coach_meetings = []
+
     @user    = User.find_by id: params[:user_id]
     @mentee  = Mentee.find_by id: params[:id]
+    @goals = @mentee.goals.page params[:page]
+    @coach_mentee_relation_id = (CoachMenteeRelation.find_by mentee_id: @mentee.id).id
+    # @coach_meetings     = @current_user.events.where("endtime >= ? and coach_mentee_relation_id = ?", Time.now, @coach_mentee_relation_id).order("starttime asc")
+
+    @user.events.where("endtime >= ? and coach_mentee_relation_id = ?", Time.now, @coach_mentee_relation_id).order("starttime asc").each do |event|
+      @coach_meetings << event if event.remaining_time > 0
+    end
+    # events_meeting_time_remaining[0][:id]
+
+
     if(!current_user.has_role?(:admin) and current_user.id != @user.id)
       redirect_to user_mentee_path(current_user, @mentee)
     else
@@ -93,7 +106,20 @@ class MenteesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def time_diff(seconds_diff)
+    seconds_diff = seconds_diff.to_i.abs
 
+    hours = seconds_diff / 3600
+    seconds_diff -= hours * 3600
+
+    minutes = seconds_diff / 60
+    seconds_diff -= minutes * 60
+
+    seconds = seconds_diff
+
+    "#{hours.to_s.rjust(2, '0')}:#{minutes.to_s.rjust(2, '0')}:#{seconds.to_s.rjust(2, '0')}"
+  end
+  helper_method :time_diff
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_mentee
