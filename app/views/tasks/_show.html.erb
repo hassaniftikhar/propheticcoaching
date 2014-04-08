@@ -10,7 +10,7 @@
   </thead>
 
   <tbody>
-  <% @mentee.tasks.order("id DESC").each do |task| %>
+  <% @tasks.each do |task| %>
     <tr>
       <td><%= task.description %></td>
       <td><%= task.starttime %></td>
@@ -20,3 +20,4 @@
   <% end %>
   </tbody>
 </table>
+<%= paginate @tasks %>

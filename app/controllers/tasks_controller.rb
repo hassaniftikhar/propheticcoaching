@@ -12,6 +12,7 @@ class TasksController < InheritedResources::Base
 
     respond_to do |format|
       if @task.save
+        @task.deliver_email(current_user, "New Task Created") if params[:is_send_email]
         format.html { redirect_to user_mentee_path(task_params[:user_id], @mentee), notice: 'Task was successfully created.' }
         format.json { render action: 'show', status: :created, location: @task }
       else

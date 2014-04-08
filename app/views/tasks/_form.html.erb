@@ -28,6 +28,9 @@
     <%= f.text_field :status %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+        <%= label_tag "Send Email" %>
+        <%= check_box_tag("is_send_email","1", true,  {}) %>
+        <br/><br/><br/>
+        <%= f.submit "Create" %>
   </div>
 <% end %>

@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
     mail(:from => current_user.email, :to => user.email, :subject => subject)
   end
 
-  def goals_created(subject, current_user_id, email_id)
+  def email_created(subject, current_user_id, email_id)
   		@email = EmailHistory.find(email_id)
   		@user = @email.mentee
       @current_user = User.find(current_user_id)

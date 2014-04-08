@@ -7,10 +7,11 @@
   </thead>
 
   <tbody>
-  <% @mentee.accomplishments.order("id DESC").each do |accomplishment| %>
+  <% @accomplishments.each do |accomplishment| %>
     <tr>
       <td><%= accomplishment.body %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
+<%= paginate @accomplishments %>

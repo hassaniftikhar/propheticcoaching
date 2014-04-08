@@ -7,7 +7,7 @@
   </thead>
 
   <tbody>
-  <% @mentee.email_histories.order("created_at DESC").each do |email_history| %>
+  <% @email_histories.each do |email_history| %>
     <tr>
       <td><%= email_history.body %></td>
       <td><%= email_history.created_at.strftime("%d %b, %Y %I:%M %p") %></td>
@@ -15,3 +15,4 @@
   <% end %>
   </tbody>
 </table>
+<%= paginate @email_histories %>

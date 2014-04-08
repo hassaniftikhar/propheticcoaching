@@ -38,6 +38,12 @@ class MenteesController < ApplicationController
     @user    = User.find_by id: params[:user_id]
     @mentee  = Mentee.find_by id: params[:id]
     @goals = @mentee.goals.page params[:page]
+    @accomplishments = @mentee.accomplishments.order("id DESC").page  params[:page]
+    @comments = @mentee.comments.order("id DESC").page  params[:page]
+    @tasks = @mentee.tasks.order("id DESC").page  params[:page]
+    @email_histories = @mentee.email_histories.order("id DESC").page  params[:page]
+
+
     @coach_mentee_relation_id = (CoachMenteeRelation.find_by mentee_id: @mentee.id).id
     # @coach_meetings     = @current_user.events.where("endtime >= ? and coach_mentee_relation_id = ?", Time.now, @coach_mentee_relation_id).order("starttime asc")
 

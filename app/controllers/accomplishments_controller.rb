@@ -30,6 +30,7 @@ class AccomplishmentsController < ApplicationController
 
     respond_to do |format|
       if @accomplishment.save
+        @accomplishment.deliver_email(current_user, "New Accomplishment Created") if params[:is_send_email]
         format.html { redirect_to user_mentee_path(accomplishment_params[:user_id], @mentee), notice: 'Accomplishment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @accomplishment }
       else

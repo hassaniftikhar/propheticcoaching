@@ -34,6 +34,7 @@ class CommentsController < ApplicationController
     
     respond_to do |format|
       if @comment.save
+        @comment.deliver_email(current_user, "New Comment Created") if params[:is_send_email]
         format.html { redirect_to user_mentee_path(comment_params[:user_id], @mentee), notice: 'Comment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @comment }
       else
