@@ -14,7 +14,7 @@
     <% @latest_resources.each do |latest_resource| %>
       <tr>
         <td><%= link_to latest_resource.name, ebook_path(latest_resource) %></td>
-        <td><%= latest_resource.created_at.strftime("%d %b, %Y %I:%M %p") %></td>
+        <td><%= latest_resource.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
       </tr>
     <% end %>
   </tbody>
@@ -41,9 +41,9 @@
       <tr>
         <td><%= coach_event.title %></td>
         <td><%= coach_event.description %></td>
-        <td><%= coach_event.starttime.strftime("%d %b, %Y %I:%M %p") %></td>
-        <td><%= coach_event.endtime.strftime("%d %b, %Y %I:%M %p") %></td>
-        <td><%= coach_event.created_at.strftime("%d %b, %Y %I:%M %p") %></td>
+        <td><%= coach_event.starttime.strftime("%b %d, %Y %I:%M %p") %></td>
+        <td><%= coach_event.endtime.strftime("%b %d, %Y %I:%M %p") %></td>
+        <td><%= coach_event.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
       </tr>
     <% end %>
   </tbody>
@@ -72,9 +72,9 @@
       <tr>
         <td><%= coach_meeting.title %></td>
         <td><%= coach_meeting.description %></td>
-        <td><%= coach_meeting.starttime.strftime("%d %b, %Y %I:%M %p") %></td>
-        <td><%= coach_meeting.endtime.strftime("%d %b, %Y %I:%M %p") %></td>
-        <td><%= coach_meeting.created_at.strftime("%d %b, %Y %I:%M %p") %></td>
+        <td><%= coach_meeting.starttime.strftime("%b %d, %Y %I:%M %p") %></td>
+        <td><%= coach_meeting.endtime.strftime("%b %d, %Y %I:%M %p") %></td>
+        <td><%= coach_meeting.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
         <td><%= link_to coach_meeting.coach_mentee_relation.mentee.name, user_mentee_path(@user, coach_meeting.coach_mentee_relation.mentee) %></td>
       </tr>
     <% end %>

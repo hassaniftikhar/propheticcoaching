@@ -32,4 +32,27 @@ class Question < ActiveRecord::Base
   # def question_count
   #   questions.size
   # end
+  def self.import_csv(file)
+      require "csv"
+
+      rows = CSV.open(file)
+      #strict format skipping first two rows for header and space
+      #rows.shift
+      rows.shift
+      rows.each do |row|
+
+        index_map = { :body => 0 }
+
+        question = Question.new
+
+        question.body   = row[index_map[:body]]
+
+        # p "++++ question import method"
+        # p question.inspect
+        # user.add_role "coach"
+        question.save!
+
+      end
+    end
+
 end
