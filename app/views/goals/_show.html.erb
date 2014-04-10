@@ -11,6 +11,6 @@
 
 </table>
  <div id="paginator">
-    <%= paginate @goals, :remote => true %>
+    <%= paginate @goals, :remote => true, :param_name => "goal_page" %>
  </div>
 

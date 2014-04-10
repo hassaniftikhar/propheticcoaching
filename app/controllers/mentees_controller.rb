@@ -39,7 +39,7 @@ class MenteesController < ApplicationController
 
     @user    = User.find_by id: params[:user_id]
     @mentee  = Mentee.find_by id: params[:id]
-    @goals = @mentee.goals.page(params[:page]).per(15)
+    @goals = @mentee.goals.page(params[:goal_page]).per(15)
 
     @accomplishments = @mentee.accomplishments.order("id DESC").page  params[:page]
     @comments = @mentee.comments.order("id DESC").page  params[:page]
