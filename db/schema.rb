@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20140328155654) do
     t.integer  "recipient_id"
   end
 
-  create_table "coach_mentee_relations", force: true do |t|
+  create_table "coaches_mentees_joins", force: true do |t|
     t.integer "coach_id"
     t.integer "mentee_id"
   end
@@ -103,8 +103,8 @@ ActiveRecord::Schema.define(version: 20140328155654) do
     t.integer  "event_series_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "profile_id",                               null: false
-    t.string   "profile_type",                             null: false
+    t.string   "profile_id"
+    t.string   "profile_type"
     t.integer  "coach_mentee_relation_id"
   end
 
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 20140328155654) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "date_of_birth"
+    t.string   "coach_id",      limit: nil
   end
 
   create_table "pages", force: true do |t|
