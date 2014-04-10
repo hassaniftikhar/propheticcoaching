@@ -3,5 +3,36 @@
 		  <strong>User Name:</strong>
 		  		<%= @user.name %>
 				</p>
-    <%= render :partial => "/mentees/list" %>
+				<h3> Listing Mentees </h3>
+				<table class="table table-striped">
+				  <thead>
+				  <tr>
+				    <th>Name</th>
+				    <th>Email</th>
+				    <th>Date of Birth</th>
+				    <th>Availability</th>
+				    <th>Prophecy</th>
+				    <th>Calendar Schedule</th>
+				  </tr>
+				  </thead>
+
+				  <tbody id="mentee_detail_list">
+				    <%= render :partial => "/mentees/mentee_detail_list", :locals => {:mentees => @mentees} %>
+				  </tbody>
+				</table>
+
+				 <div id="paginator">
+				    <%= paginate @mentees, :remote => true %>
+				 </div>
+				<br>
+
+
+
   </div>
+
+  <script type="text/javascript">
+    @mentees = "<%= @mentees %>";
+   // $('tbody#mentee_detail_list').html(mentee_list);
+   // $('tbody#mentee_detail_list').html(<%= render  'mentee_detail_list' %>);
+   // $('#paginator').html('<%= escape_javascript(paginate(@mentees, :remote => true).to_s) %>');
+		</script>

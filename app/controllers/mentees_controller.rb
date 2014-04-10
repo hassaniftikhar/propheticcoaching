@@ -11,11 +11,12 @@ class MenteesController < ApplicationController
     @user    = User.find_by id: params[:user_id]
     #@mentees = @user.mentees.page params[:page]
 
-    if @user.has_any_role?(:admin, :manager)
-      @mentees = Mentee.all.page params[:page]
-    else
-      @mentees = @user.mentees.page params[:page]
-    end
+    # if @user.has_any_role?(:admin, :manager)
+    #   @mentees = Mentee.all.page params[:page]
+    # else
+    #   @mentees = @user.mentees.page params[:page]
+    # end
+    @mentees = @user.mentees.page(params[:page]).per(2)
 
     authorize! :read, *(@mentees.any? ? @mentees : @user.mentees.new)
     respond_to do |format|
@@ -37,7 +38,8 @@ class MenteesController < ApplicationController
 
     @user    = User.find_by id: params[:user_id]
     @mentee  = Mentee.find_by id: params[:id]
-    @goals = @mentee.goals.page params[:page]
+    @goals = @mentee.goals.page(params[:page]).per(15)
+
     @accomplishments = @mentee.accomplishments.order("id DESC").page  params[:page]
     @comments = @mentee.comments.order("id DESC").page  params[:page]
     @tasks = @mentee.tasks.order("id DESC").page  params[:page]

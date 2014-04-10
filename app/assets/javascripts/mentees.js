@@ -1,7 +1,19 @@
 $(document).ready(function () {
 		$( "#tabs" ).tabs();
+    // $('tbody#mentee_detail_list').html_safe('<%= escape_javascript render :partial => "/mentees/mentee_detail_list", :locals => {:mentees => @mentees} %>');
+    // $('#paginator').html_safe('<%= escape_javascript(paginate(@mentees, :remote => true).to_s) %>');
+    // $('tbody#mentee_detail_list').html('<%= escape_javascript  render :partial => "/mentees/mentee_detail_list", :locals => {:mentees => @mentees} %>');
+    // $('tbody#mentee_detail_list').html("<%= escape_javascript  render :partial => '/mentees/mentee_detail_list', :locals => {:mentees => @mentees} %>");
+    // var test_c = 100;
+    // var menteeName = <%= @mentees.first.to_json %>;
+    // $('tbody#mentee_detail_list').html(menteeName);
+    // $('tbody#mentee_detail_list').val(<%= @mentees.to_json %>);
+    // alert("#{@mentees.first}");
+
+    // $('#paginator').html('<%= escape_javascript(paginate(@mentees, :remote => true).to_s) %>');
 
 });				
+
 
 var counter = 0;
 var timer = null;

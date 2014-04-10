@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   # GET /useres.json
   def index
     @users = User.coach.search(params)
+    # @users = User.coach.search(params).page(params[:page]).per(5)
+    # @goals = @mentee.goals.page(params[:page]).per(5)
     authorize! :read, @users
   end
 

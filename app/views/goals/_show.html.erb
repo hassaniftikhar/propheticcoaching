@@ -5,13 +5,12 @@
     <th></th>
   </tr>
   </thead>
-
-  <tbody>
-  <% @goals.order("id DESC").each do |goal| %>
-    <tr>
-      <td><%= goal.body %></td>
-    </tr>
-  <% end %>
+  <tbody id="goals">
+    <%= render :partial => "/goals/goal", :locals => {:goal => @goals} %>
   </tbody>
+
 </table>
-<%= paginate @goals %>
+ <div id="paginator">
+    <%= paginate @goals, :remote => true %>
+ </div>
+
