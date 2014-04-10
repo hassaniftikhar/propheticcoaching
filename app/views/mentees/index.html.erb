@@ -16,8 +16,7 @@
 				  </tr>
 				  </thead>
 
-				  <tbody id="mentee_detail_list">
-				    <%= render :partial => "/mentees/mentee_detail_list", :locals => {:mentees => @mentees} %>
+				  <tbody id="mentees">
 				  </tbody>
 				</table>
 
@@ -30,9 +29,11 @@
 
   </div>
 
-  <script type="text/javascript">
-    @mentees = "<%= @mentees %>";
-   // $('tbody#mentee_detail_list').html(mentee_list);
-   // $('tbody#mentee_detail_list').html(<%= render  'mentee_detail_list' %>);
-   // $('#paginator').html('<%= escape_javascript(paginate(@mentees, :remote => true).to_s) %>');
-		</script>
+<script type="text/javascript">
+
+  var mentees = "<%= @mentees %>";
+  // alert(mentees);
+		$('tbody#mentees').html('<%= escape_javascript render(@mentees) %>');
+		 
+		$('#paginator').html('<%= escape_javascript(paginate(@mentees, :remote => true).to_s) %>');
+</script>
