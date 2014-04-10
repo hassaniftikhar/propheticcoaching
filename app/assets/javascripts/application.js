@@ -19,7 +19,6 @@
 //= require "documentViewer/libs/pdfjs/compatibility.js"
 //= require "documentViewer/ttw-document-viewer.min.js"
 //= require jquery_highlight
-//= require private_pub
 //= require mentees
 //= require ebooks
 //= require events

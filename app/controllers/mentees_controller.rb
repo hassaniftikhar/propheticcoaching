@@ -21,6 +21,7 @@ class MenteesController < ApplicationController
     authorize! :read, *(@mentees.any? ? @mentees : @user.mentees.new)
     respond_to do |format|
       format.html
+      format.js
     end
     
     # @mentees = Mentee.accessible_by(current_ability).page params[:page]

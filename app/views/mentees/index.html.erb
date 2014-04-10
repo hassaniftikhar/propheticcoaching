@@ -1,39 +1,30 @@
-  <div>
-  	<p>
-		  <strong>User Name:</strong>
-		  		<%= @user.name %>
-				</p>
-				<h3> Listing Mentees </h3>
-				<table class="table table-striped">
-				  <thead>
-				  <tr>
-				    <th>Name</th>
-				    <th>Email</th>
-				    <th>Date of Birth</th>
-				    <th>Availability</th>
-				    <th>Prophecy</th>
-				    <th>Calendar Schedule</th>
-				  </tr>
-				  </thead>
+<div>
+  <p>
+    <strong>User Name:</strong>
+    <%= @user.name %>
+  </p>
 
-				  <tbody id="mentees">
-				  </tbody>
-				</table>
+  <h3> Listing Mentees </h3>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Date of Birth</th>
+      <th>Availability</th>
+      <th>Prophecy</th>
+      <th>Calendar Schedule</th>
+    </tr>
+    </thead>
 
-				 <div id="paginator">
-				    <%= paginate @mentees, :remote => true %>
-				 </div>
-				<br>
+    <tbody id="mentees">
+      <%= render @mentees %>
+    </tbody>
+  </table>
 
-
-
+  <div id="paginator">
+    <%= paginate @mentees, :remote => true %>
   </div>
+  <br>
 
-<script type="text/javascript">
-
-  var mentees = "<%= @mentees %>";
-  // alert(mentees);
-		$('tbody#mentees').html('<%= escape_javascript render(@mentees) %>');
-		 
-		$('#paginator').html('<%= escape_javascript(paginate(@mentees, :remote => true).to_s) %>');
-</script>
+</div>

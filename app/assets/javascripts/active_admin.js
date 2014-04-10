@@ -7,7 +7,6 @@
 //= require fullcalendar.min.js
 //= require gcal.js
 //= require events
-//= require private_pub
 //= require ebooks
 //= require meetings.js.coffee
 //= require jquery.multiselect
