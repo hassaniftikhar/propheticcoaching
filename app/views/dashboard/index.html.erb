@@ -83,10 +83,28 @@
 <%= paginate @coach_meetings %>
 <br>
 
-<div>
-  <%= render :partial => "/mentees/list" %>
-</div>
 
+<h2>Mentees</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>E-mail</th>
+      <th>Date of Birth</th>
+      <th>Availability</th>
+      <th>Prophecy</th>
+      <th></th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render :partial => "/mentees/mentee", :locals => {:mentees => @mentees} %>
+  </tbody>
+</table>
+<br>
+<br>
 
 <div id="tabs">
     <ul>
