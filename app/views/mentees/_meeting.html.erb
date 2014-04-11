@@ -1,0 +1,19 @@
+<% @coach_meetings.each do |coach_meeting| %>
+  <tr>
+    <td><%= coach_meeting.title %></td>
+    <td><%= coach_meeting.description %></td>
+    <td><%= coach_meeting.starttime.strftime("%d %b, %Y %I:%M %p") %></td>
+    <td><%= coach_meeting.endtime.strftime("%d %b, %Y %I:%M %p") %></td>
+    <td>
+      <p id="clock-<%=coach_meeting.id %>"><%= time_diff(coach_meeting.remaining_time) %></p>
+    </td>
+    <p id="buttons" class="clear">
+      <td>
+        <button id="start-<%=coach_meeting.id %>" class="button" onClick="startInterval(<%=coach_meeting.id %>,<%=coach_meeting.remaining_time %>)">start</button>
+      </td>
+      <td>
+        <button id="stop-<%=coach_meeting.id %>" class="button" onClick="stopInterval(<%=coach_meeting.id %>)">stop</button>
+      </td>
+    </p>
+  </tr>
+<% end %>

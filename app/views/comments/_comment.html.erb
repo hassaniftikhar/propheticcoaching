@@ -1,0 +1,5 @@
+<% @comments.order("id DESC").each do |comment| %>
+  <tr>
+    <td><%= comment.body %></td>
+  </tr>
+<% end %>

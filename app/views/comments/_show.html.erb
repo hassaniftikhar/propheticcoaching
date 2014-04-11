@@ -1,17 +1,15 @@
-<h3> Listing Comments </h3>
+<h3> Listing comments </h3>
 <table class="table table-striped" >
   <thead>
   <tr>
     <th></th>
   </tr>
   </thead>
-
-  <tbody>
-  <% @comments.each do |comment| %>
-    <tr>
-      <td><%= comment.body %></td>
-    </tr>
-  <% end %>
+  <tbody id="comments">
+    <%= render :partial => "/comments/comment", :locals => {:comments => @comments} %>
   </tbody>
+
 </table>
-<%= paginate @comments %>
+ <div id="comment_paginator">
+    <%= paginate @comments, :remote => true, :param_name => "comment_page" %>
+ </div>

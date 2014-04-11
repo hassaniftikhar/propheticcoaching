@@ -1,0 +1,5 @@
+<% @accomplishments.order("id DESC").each do |accomplishment| %>
+  <tr>
+    <td><%= accomplishment.body %></td>
+  </tr>
+<% end %>

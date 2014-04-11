@@ -9,15 +9,11 @@
   </tr>
   </thead>
 
-  <tbody>
-  <% @tasks.each do |task| %>
-    <tr>
-      <td><%= task.description %></td>
-      <td><%= task.starttime %></td>
-      <td><%= task.endtime %></td>
-      <td><%= task.status %></td>
-    </tr>
-  <% end %>
+  <tbody id="tasks">
+    <%= render :partial => "/tasks/task_list", :locals => {:tasks => @tasks} %>
   </tbody>
+
 </table>
-<%= paginate @tasks %>
+<div id="task_paginator">
+  <%= paginate @tasks, :remote => true, :param_name => "task_page" %>
+</div>

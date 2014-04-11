@@ -6,11 +6,11 @@
   </tr>
   </thead>
   <tbody id="goals">
-    <%= render :partial => "/goals/goal", :locals => {:goal => @goals} %>
+    <%= render :partial => "/goals/goal", :locals => {:goals => @goals} %>
   </tbody>
 
 </table>
- <div id="paginator">
-    <%= paginate @goals, :remote => true, :param_name => "goal_page" %>
- </div>
+<div id="goal_paginator">
+   <%= paginate @goals, :remote => true, :param_name => "goal_page" %>
+</div>
 

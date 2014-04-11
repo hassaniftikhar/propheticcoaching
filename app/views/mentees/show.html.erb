@@ -1,86 +1,86 @@
 <h3> Mentee Details </h3>
 <table class="table table-striped" >
   <tbody>
-		  <tr>
-		    <td>FIRST NAME</td>
-		    <td><%= @mentee.first_name %></td>
-		  </tr>
-		  <tr>
-		    <td>LAST NAME</td>
-		    <td><%= @mentee.last_name %></td>
-		  </tr>
-		  <tr>
-		    <td>EMAIL</td>
-		    <td><%= @mentee.email %></td>
-		  </tr>
-		  <tr>
-		    <td>Date of Birth</td>
-		    <td><%= @mentee.date_of_birth %></td>
-		  </tr>
-		  <tr>
-		    <td>DONER</td>
-		    <td><%= @mentee.donor_id %></td>
-		  </tr>
-		  <tr>
-		    <td>HOME PHONE</td>
-		    <td><%= @mentee.home_phone %></td>
-		  </tr>
-		  <tr>
-		    <td>AVAILABILITY</td>
-		    <td><%= @mentee.availability %></td>
-		  </tr>
-		  <tr>
-		    <td>PROPHECY</td>
-		    <td><%= @mentee.prophecy %></td>
-		  </tr>
-		  <tr>
-		    <td>BC</td>
-		    <td><%= @mentee.bc %></td>
-		  </tr>
-		  <tr>
-		    <td>COACH</td>
-		    <td><% @mentee.coaches.collect {|coach| %></td>
-		    <td><%= link_to("#{coach.first_name} #{coach.last_name}", admin_user_path(coach)) if coach %></td>
-		    <td><% } %> </td>
-		  </tr>
+      <tr>
+        <td>FIRST NAME</td>
+        <td><%= @mentee.first_name %></td>
+      </tr>
+      <tr>
+        <td>LAST NAME</td>
+        <td><%= @mentee.last_name %></td>
+      </tr>
+      <tr>
+        <td>EMAIL</td>
+        <td><%= @mentee.email %></td>
+      </tr>
+      <tr>
+        <td>Date of Birth</td>
+        <td><%= @mentee.date_of_birth %></td>
+      </tr>
+      <tr>
+        <td>DONER</td>
+        <td><%= @mentee.donor_id %></td>
+      </tr>
+      <tr>
+        <td>HOME PHONE</td>
+        <td><%= @mentee.home_phone %></td>
+      </tr>
+      <tr>
+        <td>AVAILABILITY</td>
+        <td><%= @mentee.availability %></td>
+      </tr>
+      <tr>
+        <td>PROPHECY</td>
+        <td><%= @mentee.prophecy %></td>
+      </tr>
+      <tr>
+        <td>BC</td>
+        <td><%= @mentee.bc %></td>
+      </tr>
+      <tr>
+        <td>COACH</td>
+        <td><% @mentee.coaches.collect {|coach| %></td>
+        <td><%= link_to("#{coach.first_name} #{coach.last_name}", admin_user_path(coach)) if coach %></td>
+        <td><% } %> </td>
+      </tr>
   </tbody>
 </table>
 
 <div id="tabs">
-		<ul>
-				<li><a href="#tabs-1">Goals</a></li>
-				<li><a href="#tabs-2">Accomplishments</a></li>
-				<li><a href="#tabs-3">Comments</a></li>
-				<li><a href="#tabs-4">Email History</a></li>
-				<li><a href="#tabs-5">Tasks</a></li>
-				<li><a href="#tabs-6">Meetings</a></li>
-		</ul>
-		<div id="tabs-1">
-				<%= render :partial => "goals/show" %>
-				<%= render :partial => "goals/form", :locals => {:coach => @mentee.coaches.first, :mentee => @mentee} %>
-		</div>
+    <ul>
+        <li><a href="#tabs-1">Goals</a></li>
+        <li><a href="#tabs-2">Accomplishments</a></li>
+        <li><a href="#tabs-3">Comments</a></li>
+        <li><a href="#tabs-4">Email History</a></li>
+        <li><a href="#tabs-5">Tasks</a></li>
+        <li><a href="#tabs-6">Meetings</a></li>
+    </ul>
+    <div id="tabs-1">
+        <%= render :partial => "goals/show" %>
+        <%= render :partial => "goals/form", :locals => {:coach => @mentee.coaches.first, :mentee => @mentee} %>
+    </div>
 
-		<div id="tabs-2">
-		<%= render :partial => "accomplishments/show" %>
-		<%= render :partial => "accomplishments/form", :locals => {:coach => @mentee.coaches.first, :mentee => @mentee} %>
-		</div>
+    <div id="tabs-2">
+    <%= render :partial => "accomplishments/show" %>
+    <%= render :partial => "accomplishments/form", :locals => {:coach => @mentee.coaches.first, :mentee => @mentee} %>
+    </div>
 
-		<div id="tabs-3">
-				<%= render :partial => "comments/show" %>
-				<%= render :partial => "comments/form", :locals => {:coach => @mentee.coaches.first, :mentee => @mentee} %>
-		</div>
+    <div id="tabs-3">
+        <%= render :partial => "comments/show" %>
+        <%= render :partial => "comments/form", :locals => {:coach => @mentee.coaches.first, :mentee => @mentee} %>
+    </div>
 
-		<div id="tabs-4">
-				<%= render :partial => "email_histories/show" %>
-				<%= render :partial => "email_histories/form", :locals => {:coach => @mentee.coaches.first, :mentee => @mentee} %>
-		</div>
+    <div id="tabs-4">
+        <%= render :partial => "email_histories/show" %>
+        <%= render :partial => "email_histories/form", :locals => {:coach => @mentee.coaches.first, :mentee => @mentee} %>
+    </div>
 
 
-		<div id="tabs-5">
-				<%= render :partial => "tasks/show" %>
-				<%= render :partial => "tasks/form", :locals => {:coach => @mentee.coaches.first, :mentee => @mentee} %>
-		</div>
-		<div id="tabs-6">
-				<%= render :partial => "mentees/meeting_index" %>
-		</div></div>
+    <div id="tabs-5">
+        <%= render :partial => "tasks/show" %>
+        <%= render :partial => "tasks/form", :locals => {:coach => @mentee.coaches.first, :mentee => @mentee} %>
+    </div>
+    <div id="tabs-6">
+        <%= render :partial => "mentees/meeting_index" %>
+    </div></div>
 <%= link_to 'Back', user_path(@mentee.coaches.first.id) %>

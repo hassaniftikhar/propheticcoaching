@@ -1,0 +1,17 @@
+$('tbody#goals').html('<%= escape_javascript render :partial => "/goals/goal", :locals => {:goals => @goals} %>');
+$('#goal_paginator').html('<%= escape_javascript(paginate(@goals, :remote => true, :param_name => 'goal_page').to_s) %>');
+
+$('tbody#accomplishments').html('<%= escape_javascript render :partial => "/accomplishments/accomplishment", :locals => {:accomplishments => @accomplishments} %>');
+$('#accomplishment_paginator').html('<%= escape_javascript(paginate(@accomplishments, :remote => true, :param_name => 'accomplishment_page').to_s) %>');
+
+$('tbody#comments').html('<%= escape_javascript render :partial => "/comments/comment", :locals => {:comments => @comments} %>');
+$('#comment_paginator').html('<%= escape_javascript(paginate(@comments, :remote => true, :param_name => 'comment_page').to_s) %>');
+
+$('tbody#email_histories').html('<%= escape_javascript render :partial => "/email_histories/email", :locals => {:email_histories => @email_histories} %>');
+$('#email_paginator').html('<%= escape_javascript(paginate(@email_histories, :remote => true, :param_name => 'email_page').to_s) %>');
+
+$('tbody#tasks').html('<%= escape_javascript render :partial => "/tasks/task_list", :locals => {:tasks => @tasks} %>');
+$('#task_paginator').html('<%= escape_javascript(paginate(@tasks, :remote => true, :param_name => 'task_page').to_s) %>');
+
+$('tbody#meetings').html('<%= escape_javascript render :partial => "/mentees/meeting", :locals => {:coach_meetings => @coach_meetings} %>');
+$('#meeting_paginator').html('<%= escape_javascript(paginate(@coach_meetings, :remote => true, :param_name => 'meeting_page').to_s) %>');

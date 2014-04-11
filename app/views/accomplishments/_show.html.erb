@@ -7,11 +7,11 @@
   </thead>
 
   <tbody>
-  <% @accomplishments.each do |accomplishment| %>
-    <tr>
-      <td><%= accomplishment.body %></td>
-    </tr>
-  <% end %>
+  <tbody id="accomplishments">
+    <%= render :partial => "/accomplishments/accomplishment", :locals => {:accomplishments => @accomplishments} %>
   </tbody>
+
 </table>
-<%= paginate @accomplishments %>
+ <div id="accomplishment_paginator">
+    <%= paginate @accomplishments, :remote => true, :param_name => "accomplishment_page" %>
+ </div>

@@ -6,13 +6,11 @@
   </tr>
   </thead>
 
-  <tbody>
-  <% @email_histories.each do |email_history| %>
-    <tr>
-      <td><%= email_history.body %></td>
-      <td><%= email_history.created_at.strftime("%d %b, %Y %I:%M %p") %></td>
-    </tr>
-  <% end %>
+  <tbody id="email_histories">
+    <%= render :partial => "/email_histories/email", :locals => {:email_histories => @email_histories} %>
   </tbody>
+
 </table>
-<%= paginate @email_histories %>
+<div id="email_paginator">
+  <%= paginate @email_histories, :remote => true, :param_name => "email_page" %>
+</div>

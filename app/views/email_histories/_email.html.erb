@@ -1,0 +1,6 @@
+<% @email_histories.each do |email_history| %>
+  <tr>
+    <td><%= email_history.body %></td>
+    <td><%= email_history.created_at.strftime("%d %b, %Y %I:%M %p") %></td>
+  </tr>
+<% end %>

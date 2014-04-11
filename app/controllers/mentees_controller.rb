@@ -36,15 +36,20 @@ class MenteesController < ApplicationController
   def show
     # events_meeting_time_remaining = []
     @coach_meetings = []
+    @per_page_records = 5
 
     @user    = User.find_by id: params[:user_id]
     @mentee  = Mentee.find_by id: params[:id]
-    @goals = @mentee.goals.page(params[:goal_page]).per(15)
+    @goals = @mentee.goals.page(params[:goal_page]).per(@per_page_records)
+    @accomplishments = @mentee.accomplishments.order("id DESC").page(params[:accomplishment_page]).per(@per_page_records)
+    @comments = @mentee.comments.order("id DESC").page(params[:comment_page]).per(@per_page_records)
+    @tasks = @mentee.tasks.order("id DESC").page(params[:task_page]).per(@per_page_records)
+    @email_histories = @mentee.email_histories.order("id DESC").page(params[:email_page]).per(@per_page_records)
 
-    @accomplishments = @mentee.accomplishments.order("id DESC").page  params[:page]
-    @comments = @mentee.comments.order("id DESC").page  params[:page]
-    @tasks = @mentee.tasks.order("id DESC").page  params[:page]
-    @email_histories = @mentee.email_histories.order("id DESC").page  params[:page]
+
+    # @comments = @mentee.comments.order("id DESC")
+    # @tasks = @mentee.tasks.order("id DESC")
+    # @email_histories = @mentee.email_histories.order("id DESC")
 
 
     @coach_mentee_relation_id = (CoachMenteeRelation.find_by mentee_id: @mentee.id).id
@@ -53,6 +58,12 @@ class MenteesController < ApplicationController
     @user.events.where("endtime >= ? and coach_mentee_relation_id = ?", Time.now, @coach_mentee_relation_id).order("starttime asc").each do |event|
       @coach_meetings << event if event.remaining_time > 0
     end
+    unless @coach_meetings.kind_of?(Array)
+      @coach_meetings = @coach_meetings.page(params[:meeting_page]).per(@per_page_records)
+    else
+      @coach_meetings = Kaminari.paginate_array(@coach_meetings).page(params[:meeting_page]).per(@per_page_records)
+    end
+    # @coach_meetings.page(params[:meeting_page]).per(@per_page_records)
     # events_meeting_time_remaining[0][:id]
 
 
@@ -63,6 +74,7 @@ class MenteesController < ApplicationController
       authorize! :read, *(@mentee ? @mentee : @user.mentees.new)
       respond_to do |format|
         format.html
+        format.js
       end
     end
   end

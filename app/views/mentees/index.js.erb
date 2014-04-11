@@ -1,3 +1,2 @@
-var mentees = "<%= @mentees %>";
 $('tbody#mentees').html('<%= escape_javascript render(@mentees) %>');
 $('#paginator').html('<%= escape_javascript(paginate(@mentees, :remote => true).to_s) %>');
