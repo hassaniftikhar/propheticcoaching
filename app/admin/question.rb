@@ -1,19 +1,9 @@
 ActiveAdmin.register Question do
 
-  
-  # See permitted parameters documentation:
-  # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # permit_params :list, :of, :attributes, :on, :model
-  #
-  # or
-  #
-  # permit_params do
-  #  permitted = [:permitted, :attributes]
-  #  permitted << :other if resource.something?
-  #  permitted
-  # end
-  permit_params :id, :body
+  permit_params :id, :body, :last_import
+
+  scope :All
+  scope :LastImported
 
   collection_action :import_csv, :method => [:get, :post] do
     if request.method == "GET"
@@ -22,7 +12,8 @@ ActiveAdmin.register Question do
     else
       file = params[:question][:csv].tempfile.to_path.to_s
       Question.import_csv file
-      redirect_to admin_questions_url, flash: {message: "successfully imported csv"}
+      @questions = Question.all.where(:last_import => true)
+      redirect_to admin_questions_url(:scope => "last_imported")
     end
   end
 
