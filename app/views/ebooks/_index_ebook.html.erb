@@ -20,28 +20,14 @@
     <th><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
-  <tbody>
-  <% @ebooks.each do |ebook| %>
-    <tr>
-      <td><%= link_to ebook.id, pdf_ebook_path(ebook) %></td>
-      <td><%= ebook.name %></td>
-      <td><%= l ebook.created_at.to_time %></td>
-      <td>
-        <% if can? :edit, @ebook %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_ebook_path(ebook), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      ebook_path(ebook),
-                      :method => :delete,
-                      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                      :class => 'btn btn-mini btn-danger' %>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
+  <tbody id="ebooks">
+    <%= render :partial => "/ebooks/ebook", :locals => {:ebooks => @ebooks} %>
   </tbody>
+
 </table>
-<%= paginate @ebooks %>
+<div id="ebook_paginator">
+   <%= paginate @ebooks, :remote => true, :param_name => "ebook_page" %>
+</div>
 
 <% if can? :create, @ebook %>
 <%= link_to t('.new', :default => t("helpers.links.new")),

@@ -1,0 +1,4 @@
+$('tbody#ebooks').html('<%= escape_javascript render :partial => "/ebooks/ebook", :locals => {:ebooks => @ebooks} %>');
+$('#ebook_paginator').html('<%= escape_javascript(paginate(@ebooks, :remote => true, :param_name => 'ebook_page').to_s) %>');
+$('tbody#questions').html('<%= escape_javascript render :partial => "/questions/question", :locals => {:questions => @questions} %>');
+$('#question_paginator').html('<%= escape_javascript(paginate(@questions, :remote => true, :param_name => 'question_page').to_s) %>');

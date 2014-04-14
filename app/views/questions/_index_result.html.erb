@@ -20,16 +20,14 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @questions.each do |question| %>
-      <tr>
-        <td><%= question.body %></td>
-        <td><%= link_to 'Show', question_path(question), :class => 'btn btn-mini'%></td>
-      </tr>
-    <% end %>
+  <tbody id="questions">
+    <%= render :partial => "/questions/question", :locals => {:questions => @questions} %>
   </tbody>
+
 </table>
-<%= paginate @questions %>
+<div id="question_paginator">
+   <%= paginate @questions, :remote => true, :param_name => "question_page" %>
+</div>
 
 <% if can? :create, @question %>
 <%= link_to t('.new', :default => t("helpers.links.new")),

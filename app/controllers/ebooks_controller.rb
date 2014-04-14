@@ -7,8 +7,20 @@ class EbooksController < ApplicationController
   # GET /ebooks.json
   def index
     #@ebooks = Ebook.all
-    @ebooks = Ebook.all.page params[:page]
+    @ebooks = Ebook.all.page(params[:ebook_page]).per(PER_PAGE_RECORDS)
+    # @questions = Question.search(params).page(params[:question_page]).per(PER_PAGE_RECORDS)
     @questions = Question.search(params)
+    # @questions2 = @questions.page(params[:question_page]).per(PER_PAGE_RECORDS)
+
+    # unless @questions.kind_of?(Array)
+    #   @questions = @questions.page(params[:question_page]).per(PER_PAGE_RECORDS)
+    #   p "array =================================="
+    # else
+    @questions = Kaminari.paginate_array(@questions).page(params[:question_page]).per(PER_PAGE_RECORDS)
+    #   p "not array =================================="
+    # end
+
+
   end
 
   # GET /ebooks/1

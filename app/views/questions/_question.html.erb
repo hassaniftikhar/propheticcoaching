@@ -1,0 +1,6 @@
+<% @questions.each do |question| %>
+  <tr>
+    <td><%= question.body %></td>
+    <td><%= link_to 'Show', question_path(question), :class => 'btn btn-mini'%></td>
+  </tr>
+<% end %>

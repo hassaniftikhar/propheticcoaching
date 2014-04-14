@@ -1,0 +1,2 @@
+$('tbody#questions').html('<%= escape_javascript render :partial => "/questions/question", :locals => {:questions => @questions} %>');
+$('#question_paginator').html('<%= escape_javascript(paginate(@questions, :remote => true, :param_name => 'question_page').to_s) %>');

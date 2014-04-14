@@ -16,7 +16,7 @@ class MenteesController < ApplicationController
     # else
     #   @mentees = @user.mentees.page params[:page]
     # end
-    @mentees = @user.mentees.page(params[:page]).per(2)
+    @mentees = @user.mentees.page(params[:page])
 
     authorize! :read, *(@mentees.any? ? @mentees : @user.mentees.new)
     respond_to do |format|
@@ -36,15 +36,14 @@ class MenteesController < ApplicationController
   def show
     # events_meeting_time_remaining = []
     @coach_meetings = []
-    @per_page_records = 5
 
     @user    = User.find_by id: params[:user_id]
     @mentee  = Mentee.find_by id: params[:id]
-    @goals = @mentee.goals.page(params[:goal_page]).per(@per_page_records)
-    @accomplishments = @mentee.accomplishments.order("id DESC").page(params[:accomplishment_page]).per(@per_page_records)
-    @comments = @mentee.comments.order("id DESC").page(params[:comment_page]).per(@per_page_records)
-    @tasks = @mentee.tasks.order("id DESC").page(params[:task_page]).per(@per_page_records)
-    @email_histories = @mentee.email_histories.order("id DESC").page(params[:email_page]).per(@per_page_records)
+    @goals = @mentee.goals.page(params[:goal_page]).per(PER_PAGE_RECORDS)
+    @accomplishments = @mentee.accomplishments.order("id DESC").page(params[:accomplishment_page]).per(PER_PAGE_RECORDS)
+    @comments = @mentee.comments.order("id DESC").page(params[:comment_page]).per(PER_PAGE_RECORDS)
+    @tasks = @mentee.tasks.order("id DESC").page(params[:task_page]).per(PER_PAGE_RECORDS)
+    @email_histories = @mentee.email_histories.order("id DESC").page(params[:email_page]).per(PER_PAGE_RECORDS)
 
 
     # @comments = @mentee.comments.order("id DESC")
@@ -59,11 +58,15 @@ class MenteesController < ApplicationController
       @coach_meetings << event if event.remaining_time > 0
     end
     unless @coach_meetings.kind_of?(Array)
-      @coach_meetings = @coach_meetings.page(params[:meeting_page]).per(@per_page_records)
+      @coach_meetings = @coach_meetings.page(params[:meeting_page]).per(PER_PAGE_RECORDS)
     else
-      @coach_meetings = Kaminari.paginate_array(@coach_meetings).page(params[:meeting_page]).per(@per_page_records)
+      @coach_meetings = Kaminari.paginate_array(@coach_meetings).page(params[:meeting_page]).per(PER_PAGE_RECORDS)
     end
-    # @coach_meetings.page(params[:meeting_page]).per(@per_page_records)
+    p "================================="
+    p @coach_meetings
+    p "================================="
+
+    # @coach_meetings.page(params[:meeting_page]).per(PER_PAGE_RECORDS)
     # events_meeting_time_remaining[0][:id]
 
 
