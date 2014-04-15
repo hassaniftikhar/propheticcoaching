@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   #paginates_per 4
   accepts_nested_attributes_for :roles
 
-  index_name BONSAI_INDEX_NAME
+  # index_name BONSAI_INDEX_NAME
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

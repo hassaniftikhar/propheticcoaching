@@ -3,7 +3,7 @@ class Question < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  index_name BONSAI_INDEX_NAME
+  # index_name BONSAI_INDEX_NAME
 
   validates_presence_of :body
   validates_uniqueness_of :body, :case_sensitive => false
