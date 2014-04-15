@@ -10,7 +10,7 @@ class Question < ActiveRecord::Base
   scope :LastImported, -> { where('last_import IS true') }
 
   def self.search(params)
-    tire.search(load: true, page: params[:page], per_page: 10) do
+    tire.search(load: true, page: params[:page], per_page: 100) do
       query { string params[:query], default_operator: "AND" } if params[:query].present?
       # filter :term, :coach_role => true
       # sort { by :updated_at, "desc" }
