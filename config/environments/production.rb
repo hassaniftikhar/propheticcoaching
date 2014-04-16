@@ -77,4 +77,9 @@ Propheticcoaching::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+   Tire.configure do
+  url "http://zgf3zzgf:b2vq8zicct99g5dk@juniper-2074803.us-east-1.bonsai.io
+"
+ end
 end
