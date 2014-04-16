@@ -79,7 +79,6 @@ Propheticcoaching::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
    Tire.configure do
-  url "http://zgf3zzgf:b2vq8zicct99g5dk@juniper-2074803.us-east-1.bonsai.io
-"
+  url "http://o7vh1zzg:yh20on4y7mc1ol09@cherry-7098079.us-east-1.bonsai.io"
  end
 end
