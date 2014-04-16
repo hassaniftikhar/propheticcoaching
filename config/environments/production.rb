@@ -20,7 +20,7 @@ Propheticcoaching::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -78,7 +78,7 @@ Propheticcoaching::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-   Tire.configure do
-  url "http://o7vh1zzg:yh20on4y7mc1ol09@cherry-7098079.us-east-1.bonsai.io"
- end
+  Tire.configure do
+    url "http://o7vh1zzg:yh20on4y7mc1ol09@cherry-7098079.us-east-1.bonsai.io"
+  end
 end
