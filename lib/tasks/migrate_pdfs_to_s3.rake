@@ -11,6 +11,8 @@ namespace :pdf do
       mimetype = (`file --mime -b "#{file_path}"`).split(";")[0]
       count = 1
 
+    begin
+
       record_exist = Ebook.exists? name: file
       unless record_exist
         if mimetype =~ /pdf/
@@ -37,6 +39,9 @@ namespace :pdf do
       else
         p "ebook #{file} already exists skipping ... "
       end
+    rescue Exception => e
+      p "=== Exception caught #{e.inspect}" 
+    end
 
     end
 
