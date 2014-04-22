@@ -24,7 +24,12 @@ class Ebook < ActiveRecord::Base
     if self.pdf.path
       io = open(self.pdf.path)
       reader = PDF::Reader.new(io)
-      sha = Digest::SHA1.hexdigest(reader.pages.first.text)
+      book_text = ""
+      reader.pages.each do |page|
+        book_text = book_text + (page.text)
+      end
+      # sha = Digest::SHA1.hexdigest(reader.pages[reader.pages.length/2].text)
+      sha = Digest::SHA1.hexdigest(book_text)
     end
     sha
   end
