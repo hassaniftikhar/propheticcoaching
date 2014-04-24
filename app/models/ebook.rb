@@ -4,46 +4,50 @@ class Ebook < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :pdf
   validates_uniqueness_of :name, :case_sensitive => false
-  validates_uniqueness_of :sha
-  validate :is_book_unique
+  # validates_uniqueness_of :sha
+  # validate :is_book_unique
   # validates_uniqueness_of :sha
 
   mount_uploader :pdf, PdfUploader
+  process_in_background :pdf
+
 
   # after_save :update_sha
-  before_save :calculate_sha
+  # after_save :calculate_sha
   after_save :create_pages
   before_destroy :remove_es_index
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  def get_sha
-    require 'open-uri'
-    sha = ''
-    if self.pdf.path
-      io = open(self.pdf.path)
-      reader = PDF::Reader.new(io)
-      book_text = ""
-      reader.pages.each do |page|
-        book_text = book_text + (page.text)
-      end
-      # sha = Digest::SHA1.hexdigest(reader.pages[reader.pages.length/2].text)
-      sha = Digest::SHA1.hexdigest(book_text)
-    end
-    sha
-  end
+  # def get_sha
+  #   require 'open-uri'
+  #   sha = ''
+  #   if self.pdf.path
+  #     io = open(self.pdf.path)
+  #     reader = PDF::Reader.new(io)
+  #     book_text = ""
+  #     reader.pages.each do |page|
+  #       book_text = book_text + (page.text)
+  #     end
+  #     # sha = Digest::SHA1.hexdigest(reader.pages[reader.pages.length/2].text)
+  #     sha = Digest::SHA1.hexdigest(book_text)
+  #   end
+  #   sha
+  # end
 
-  def calculate_sha
-    self.sha = get_sha
-  end
+  # def calculate_sha
+  #   # self.sha = get_sha
+  #   Resque.enqueue(CreatePages, self.pdf.path, self)
+  # end
 
-  def is_book_unique
-    sha = self.sha || get_sha
-    if Ebook.find_by sha: sha
-      errors.add :name, "book already exist"
-    end
-  end
+  # def is_book_unique
+  #   sha = self.sha || calculate_sha
+  #   # sha = self.sha
+  #   if Ebook.find_by sha: sha
+  #     errors.add :name, "book already exist"
+  #   end
+  # end
 
   def self.search(params)
     tire.search do
@@ -61,15 +65,7 @@ class Ebook < ActiveRecord::Base
   end
 
   def create_pages
-    str = []
-    if pdf.url
-      require 'open-uri'
-      io = open(pdf.url)
-      reader = PDF::Reader.new(io)
-      reader.pages.each_with_index do |page, index|
-        self.pages.create! page_number: (index+1), tags: page.text
-      end
-    end
+    Resque.enqueue(CreatePagesWorker, self.id)
   end
 
 end

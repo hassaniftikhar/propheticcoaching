@@ -73,6 +73,8 @@ GEM
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
+    carrierwave_backgrounder (0.3.0)
+      carrierwave (~> 0.5)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.3)
@@ -338,6 +340,7 @@ DEPENDENCIES
   cancan
   capybara
   carrierwave
+  carrierwave_backgrounder
   coffee-rails (~> 4.0.0)
   cucumber-rails
   database_cleaner
