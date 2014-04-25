@@ -7,7 +7,7 @@ class EbooksController < ApplicationController
   # GET /ebooks.json
   def index
     #@ebooks = Ebook.all
-    @ebooks = Ebook.all.page(params[:ebook_page]).per(PER_PAGE_RECORDS)
+    @ebooks = Ebook.all.order("created_at desc").page(params[:ebook_page]).per(PER_PAGE_RECORDS)
     # @questions = Question.search(params).page(params[:question_page]).per(PER_PAGE_RECORDS)
     @questions = Question.search(params)
     # @questions2 = @questions.page(params[:question_page]).per(PER_PAGE_RECORDS)
