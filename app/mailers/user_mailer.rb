@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
-  default :from => "alerts@propheticcoaching.com"
-		default :subject => "Registered" 
+  # default :from => "alerts@propheticcoaching.com"
+	# default :subject => "Registered" 
 
 
   def registration_confirmation(user, subject, current_user)
