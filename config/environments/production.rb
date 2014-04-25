@@ -81,4 +81,19 @@ Propheticcoaching::Application.configure do
   Tire.configure do
     url "http://o7vh1zzg:yh20on4y7mc1ol09@cherry-7098079.us-east-1.bonsai.io"
   end
+
+  config.action_mailer.default_url_options = { :host => ENV['DOMAIN'] }
+    # ActionMailer settings
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: 'mail.propheticcoaching.com',
+      port: 25,
+      domain: 'propheticcoaching.com',
+      user_name: 'alerts@propheticcoaching.com',
+      password: 'asdfasdf1234!@#$',
+      authentication: 'plain',
+      enable_starttls_auto: true,
+      openssl_verify_mode: 'none'}
 end

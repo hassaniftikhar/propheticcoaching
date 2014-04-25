@@ -12,9 +12,6 @@ class UserMailer < ActionMailer::Base
   		@user = @email.mentee
       @current_user = User.find(current_user_id)
 
-      p "email =========================="
-      p @current_user.email
-      p "email =========================="
     mail(:from => @current_user.email, :to => @user.email, :subject => subject)
   end
 end
