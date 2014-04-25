@@ -40,6 +40,7 @@ gem 'carrierwave'
 gem 'carrierwave_backgrounder'
 gem 'rails_12factor'
 # gem 'resque'
+gem 'unf' 
 gem 'resque', :require => 'resque/server'
 
 group :doc do
