@@ -12,7 +12,7 @@ ActiveAdmin.register User do
     else
       file = params[:user][:csv].tempfile.to_path.to_s
       User.import_csv file
-      redirect_to admin_users_url, flash: {message: "successfully imported csv"}
+      redirect_to admin_users_url, flash: {message: "Only new users successfully imported through csv"}
     end
   end
   

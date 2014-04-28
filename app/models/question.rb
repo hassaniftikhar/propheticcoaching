@@ -8,7 +8,8 @@ class Question < ActiveRecord::Base
   validates_presence_of :body
   validates_uniqueness_of :body, :case_sensitive => false
 
-  scope :All, -> { where('last_import IS false') }
+  # scope :All, -> { where('last_import IS false') }
+  scope :All
   scope :LastImported, -> { where('last_import IS true') }
 
   def self.search(params)
@@ -58,7 +59,21 @@ class Question < ActiveRecord::Base
         # p "++++ question import method"
         # p question.inspect
         # user.add_role "coach"
-        question.save!
+        # question.save!
+
+        begin
+          question.save!
+        rescue ActiveRecord::RecordInvalid => e
+          p "============ "+e.message
+          # if e.message == 'Validation failed: Body has already been taken'
+          #   p  " ===============" + e.message
+          # # else
+          # #   p "else Validation failed: Already been taken ==============="
+          # #   p e.message
+          # #   p "================================="
+          # end
+        end
+        # format.html { redirect_to(root_url, :notice => 'Subscription was successfully created.') }
 
       end
     end

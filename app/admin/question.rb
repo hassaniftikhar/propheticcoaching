@@ -12,8 +12,8 @@ ActiveAdmin.register Question do
     else
       file = params[:question][:csv].tempfile.to_path.to_s
       Question.import_csv file
-      @questions = Question.all.where(:last_import => true)
-      redirect_to admin_questions_url(:scope => "last_imported"), flash: {message: "Questions Imported Successfully"}
+      @questions = Question.all.order("updated_at desc").where(:last_import => true)
+      redirect_to admin_questions_url(:scope => "last_imported"), flash: {message: "Only New Questions Imported Successfully"}
     end
   end
 

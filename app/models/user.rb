@@ -103,7 +103,21 @@ def self.import_csv(file)
       p "++++ user import method"
       p user.inspect
       user.add_role "coach"
-      user.save!
+      # user.save!
+
+      begin
+        user.save!
+      rescue ActiveRecord::RecordInvalid => e
+        # if e.message == 'Validation failed: User already been taken'
+          # p  " ===============" + e.message
+        # else
+        #   p "else Validation failed: Already been taken ==============="
+        #   p e.message
+        #   p "================================="
+        # end
+        p  " ===============" + e.message
+      end
+
 
     end
   end
