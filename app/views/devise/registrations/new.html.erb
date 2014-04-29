@@ -20,18 +20,10 @@
   <%= f.error_notification %>
   <div class="admin-login-form">
     <h2><span style="color:#06F">Admin</span> Login</h2>
-    <p class="form-control" >  
-    	<%= f.input :email, :required => true, :autofocus => true %>  
-    </p>
-    <p class="form-control" >  
-	    <%= f.input :password, :required => true %>
-    </p>
-    <p class="form-control" >  
-	    <%= f.input :password_confirmation, :required => true %>
-    </p>
-    <button class="btn btn-block btn-primary">
-    <h3>LOGIN</h3>
-    </button>
+				<%= f.input :email, placeholder: 'email', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control' }  %>  
+				<%= f.input :password, placeholder: 'password', :required => true, label: false, input_html: { class: 'form-control' } %>
+				<%= f.input :password_confirmation, placeholder: 'password confirmation', :required => true, label: false, input_html: { class: 'form-control' } %>
+    <%= f.submit "LOGIN",class: "btn btn-block btn-primary" %>
 <% end %>    
     <div class="row margin-top-20">
       <div class="col-xs-6 text-right ">
