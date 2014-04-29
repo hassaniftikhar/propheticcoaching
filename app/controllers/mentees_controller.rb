@@ -57,10 +57,16 @@ class MenteesController < ApplicationController
     @user.events.where("endtime >= ? and coach_mentee_relation_id = ?", Time.now, @coach_mentee_relation_id).order("starttime asc").each do |event|
       @coach_meetings << event if event.remaining_time > 0
     end
+    p "bf================================="
+    p @coach_meetings
     unless @coach_meetings.kind_of?(Array)
       @coach_meetings = @coach_meetings.page(params[:meeting_page]).per(PER_PAGE_RECORDS)
+    p "unless================================="
+    p @coach_meetings
     else
       @coach_meetings = Kaminari.paginate_array(@coach_meetings).page(params[:meeting_page]).per(PER_PAGE_RECORDS)
+    p "else ================================="
+    p @coach_meetings
     end
     p "================================="
     p @coach_meetings
