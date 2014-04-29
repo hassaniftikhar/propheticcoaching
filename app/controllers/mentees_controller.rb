@@ -58,7 +58,11 @@ class MenteesController < ApplicationController
       @coach_meetings << event if event.remaining_time > 0
     end
     p "bf================================="
+    p @mentee.id
+    p @coach_mentee_relation_id
     p @coach_meetings
+    p Time.now
+    
     unless @coach_meetings.kind_of?(Array)
       @coach_meetings = @coach_meetings.page(params[:meeting_page]).per(PER_PAGE_RECORDS)
     p "unless================================="
