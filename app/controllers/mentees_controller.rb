@@ -51,28 +51,20 @@ class MenteesController < ApplicationController
     # @email_histories = @mentee.email_histories.order("id DESC")
 
 
-    @coach_mentee_relation_id = (CoachMenteeRelation.find_by mentee_id: @mentee.id).id
+    # @coach_mentee_relation_id = (CoachMenteeRelation.find_by mentee_id: @mentee.id).id
+    @coach_mentee_relation_id = (@user.coach_mentee_relations.find_by mentee_id: @mentee.id).id
     # @coach_meetings     = @current_user.events.where("endtime >= ? and coach_mentee_relation_id = ?", Time.now, @coach_mentee_relation_id).order("starttime asc")
 
     @user.events.where("endtime >= ? and coach_mentee_relation_id = ?", Time.now, @coach_mentee_relation_id).order("starttime asc").each do |event|
       @coach_meetings << event if event.remaining_time > 0
     end
-    p "bf================================="
-    p @mentee.id
-    p @coach_mentee_relation_id
-    p @coach_meetings
-    p Time.now
-    
+
     unless @coach_meetings.kind_of?(Array)
       @coach_meetings = @coach_meetings.page(params[:meeting_page]).per(PER_PAGE_RECORDS)
-    p "unless================================="
-    p @coach_meetings
     else
       @coach_meetings = Kaminari.paginate_array(@coach_meetings).page(params[:meeting_page]).per(PER_PAGE_RECORDS)
-    p "else ================================="
-    p @coach_meetings
     end
-    p "================================="
+    p "Meetings================================="
     p @coach_meetings
     p "================================="
 
