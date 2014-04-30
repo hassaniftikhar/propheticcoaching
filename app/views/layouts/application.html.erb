@@ -9,7 +9,7 @@
 
 </head>
 <body>
-
+<% if current_user %>
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
@@ -29,14 +29,14 @@
             <li><%= link_to "Search Resource", ebooks_path %></li>
             <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
             <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
-            <li> <%= "Welcome #{current_user.name}" %> </li>
+            <li> <%= "Welcome #{current_user.first_name} #{current_user.last_name}" %> </li>
           <% end %>
         </ul>
       </div>
     </div>
   </div>
 </div>
-
+<% end %>
 <div class="container">
   <% flash.each do |name, msg| %>
     <% if msg.is_a?(String) %>
