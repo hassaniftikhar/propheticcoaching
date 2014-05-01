@@ -24,21 +24,21 @@
 				<%= f.input :email, placeholder: 'Email', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control' }  %>  
 				<%= f.input :password, placeholder: 'Password', :required => true, label: false, input_html: { class: 'form-control' } %>
     <%= f.submit "Sign Up",class: "btn btn-block btn-primary" %>
-<% end %>    
+    
     <div class="row margin-top-20">
       <div class="col-xs-6 text-right ">
         <p>New member?</p>
         <a href="#">Rigister new account</a> </div>
       <div class="col-xs-6 border-left text-left">
         <div class="admin-login-bottom">
-          <label>
-            <input type="checkbox">
-            Keep me signed in </label>
+            <%= f.input :remember_me,  :as => :boolean, label: 'Keep me signed in' if devise_mapping.rememberable? %>
           <div class="clearfix"></div>
-          <a href="#">Forgot my password</a> </div>
+          <a href="/users/password/new">Forgot my password</a> 
+        </div>
       </div>
     </div>
   </div>
+<% end %>    
   <div class="footer-login">
   <ul class="footer-login-nav">
   <li><a href="index.html">Home</a></li>
