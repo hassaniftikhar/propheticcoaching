@@ -355,6 +355,7 @@ hr.about {
 	width: 100%;
 	position: absolute;
 	bottom: 0px;
+	left: 0px;
 }
 .login-bg-signup {
 	background-color: #036;
@@ -370,6 +371,7 @@ hr.about {
 	margin: 0 auto;
 	display: block;
 	margin-top: 60px;
+	/*margin-left: 0px;*/
 }
 .admin-login-form {
 	border-radius: 20px;
@@ -378,7 +380,7 @@ hr.about {
 	min-height: 50px;
 	border: 1px solid #CCC;
 	box-shadow: 0px 0px 40px rgba(0,0,0,.4);
-	margin: 0 auto;
+	margin:  auto;
 	margin-top: 40px;
 	padding: 30px;
 	background-color: #fff;
@@ -433,7 +435,7 @@ color:#999;
 }
 
 .footer-login{
-	margin-top: 30px;
+	margin-top: 100px;
 }
 .footer-login-nav li{
 	list-style: none;
@@ -691,4 +693,7 @@ p.call-out-text {
 	margin-left: -15px;
 	margin-top: 20px;
 }
+}
+#sign_in_button_hidden {
+	visibility: hidden;
 }

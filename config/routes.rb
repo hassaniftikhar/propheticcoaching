@@ -82,9 +82,8 @@ Propheticcoaching::Application.routes.draw do
     end
     resources :time_slots
   end
-
-  #root :to => 'users#index'
-  root :to => 'dashboard#index'
+  
+  # root :to => 'dashboard#index'
   resque_constraint = lambda do |request|
     # request.env['warden'].authenticate? and request.env['warden'].user.admin?
     request.env['warden'].authenticate? and request.env['warden'].user.has_role?(:admin)
