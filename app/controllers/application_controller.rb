@@ -22,9 +22,9 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:account_update) << [:first_name, :last_name, :address, :home_phone, :availablity_time, :best_time_to_call, :date_of_birth]
-    devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name, :address, :home_phone, :availablity_time, :best_time_to_call, :date_of_birth, :remember_me]
+    # devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name, :address, :home_phone, :availablity_time, :best_time_to_call, :date_of_birth, :remember_me]
     # devise_parameter_sanitizer.for(:sign_up) << :username
-    p "====devise================"
+    # p "====devise================"
     # devise_parameter_sanitizer.for(:sign_up) { |u| u.permit({ roles: [] }, :first_name, :last_name, :address, :home_phone, :availablity_time, :best_time_to_call, :date_of_birth) }
     # devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:first_name, :last_name, :address, :home_phone, :availablity_time, :best_time_to_call, :date_of_birth) }
     # devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:first_name, :last_name, :address, :home_phone, :availablity_time, :best_time_to_call, :date_of_birth) }

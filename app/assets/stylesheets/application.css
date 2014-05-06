@@ -18,6 +18,14 @@
  *= require jquery-ui
  *= require jquery.ui.chatbox
 
+ *= require bootstrap.css
+ *= require bootstrap-theme.css
+ *= require font-awesome.css
+ *= require custom.css
+ *= require owl.carousel.css
+ *= require owl.theme.css
+ *= require owl.transitions.css
+
  // require scaffolds
 
  */

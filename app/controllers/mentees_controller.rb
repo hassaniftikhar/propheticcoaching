@@ -66,13 +66,6 @@ class MenteesController < ApplicationController
     else
       @coach_meetings = Kaminari.paginate_array(@coach_meetings).page(params[:meeting_page]).per(PER_PAGE_RECORDS)
     end
-    p "Meetings================================="
-    p @coach_meetings
-    p "================================="
-
-    # @coach_meetings.page(params[:meeting_page]).per(PER_PAGE_RECORDS)
-    # events_meeting_time_remaining[0][:id]
-
 
     if(!current_user.has_role?(:admin) and current_user.id != @user.id)
       redirect_to user_mentee_path(current_user, @mentee)
