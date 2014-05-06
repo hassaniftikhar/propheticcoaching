@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  # before_filter :configure_permitted_parameters
+  # before_filter :configure_permitted_parameters, if: :registration_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to user_path(current_user)#, :alert => exception.message
@@ -20,7 +22,13 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:account_update) << [:first_name, :last_name, :address, :home_phone, :availablity_time, :best_time_to_call, :date_of_birth]
-  end
+    devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name, :address, :home_phone, :availablity_time, :best_time_to_call, :date_of_birth, :remember_me]
+    # devise_parameter_sanitizer.for(:sign_up) << :username
+    p "====devise================"
+    # devise_parameter_sanitizer.for(:sign_up) { |u| u.permit({ roles: [] }, :first_name, :last_name, :address, :home_phone, :availablity_time, :best_time_to_call, :date_of_birth) }
+    # devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:first_name, :last_name, :address, :home_phone, :availablity_time, :best_time_to_call, :date_of_birth) }
+    # devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:first_name, :last_name, :address, :home_phone, :availablity_time, :best_time_to_call, :date_of_birth) }
+   end
 
   private
 
