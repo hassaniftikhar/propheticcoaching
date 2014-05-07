@@ -12,11 +12,6 @@ class InfoController < ApplicationController
   	
   end
   def send_message
-  	p "in send_message ================================="
-  	p params[:info][:subject]
-  	p "2222================"
-  	# params[subject:]
-  	# @goal.deliver_email(current_user, "New Goal Created") if params[:is_send_email]
   	to_email = "ijmalik@gmail.com"
   	Resque.enqueue(MessageSendWorker, params[:info][:name], params[:info][:email],params[:info][:subject], params[:info][:message], to_email)
 
