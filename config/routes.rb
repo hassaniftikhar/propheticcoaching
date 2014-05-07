@@ -29,7 +29,7 @@ Propheticcoaching::Application.routes.draw do
    #get '/dashboard', to: 'dashboard#index'
    #match '/dashboard', to: 'dashboard#index', via: :get
    #root :to => 'dashboard#index'
-   # root :to => 'info#index'
+   root :to => 'info#index'
    #resource :dashboard , :only => [:index]
   #devise_for :users
   #devise_for :users, controllers: {registrations: "users/registrations"}
