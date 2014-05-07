@@ -1,4 +1,4 @@
-class Question < ActiveRecord::Base
+class Exercise < ActiveRecord::Base
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
@@ -9,9 +9,7 @@ class Question < ActiveRecord::Base
   validates_uniqueness_of :body, :case_sensitive => false
 
   # scope :All, -> { where('last_import IS false') }
-  # scope :All
   scope :All, -> { order('updated_at') }
-  # default_scope { order('updated_at') }
   scope :LastImported, -> { where('last_import IS true') }
 
   def self.search(params)
@@ -33,50 +31,27 @@ class Question < ActiveRecord::Base
     indexes :body
   end
 
-  # def to_indexed_json
-  #   to_json(methods: [:question_count])
-  # end
-    
-  # def question_count
-  #   questions.size
-  # end
   def self.import_csv(file)
       require "csv"
 
-      Question.all.where(:last_import => true).each{|question| question.last_import=false; question.save! }
+      Exercise.all.where(:last_import => true).each{|exercise| exercise.last_import=false; exercise.save! }
 
       rows = CSV.open(file)
-      #strict format skipping first two rows for header and space
-      #rows.shift
       rows.shift
       rows.each do |row|
 
         index_map = { :body => 0 }
 
-        question = Question.new
+        exercise = Exercise.new
 
-        question.body         = row[index_map[:body]]
-        question.last_import  = true
-
-        # p "++++ question import method"
-        # p question.inspect
-        # user.add_role "coach"
-        # question.save!
+        exercise.body         = row[index_map[:body]]
+        exercise.last_import  = true
 
         begin
-          question.save!
+          exercise.save!
         rescue ActiveRecord::RecordInvalid => e
           p "============ "+e.message
-          # if e.message == 'Validation failed: Body has already been taken'
-          #   p  " ===============" + e.message
-          # # else
-          # #   p "else Validation failed: Already been taken ==============="
-          # #   p e.message
-          # #   p "================================="
-          # end
         end
-        # format.html { redirect_to(root_url, :notice => 'Subscription was successfully created.') }
-
       end
     end
 

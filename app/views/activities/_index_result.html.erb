@@ -1,0 +1,36 @@
+
+<%- model_class = Activity -%>
+<div class="page-header">
+  <h1><%= t '.title', :default => Activity.name.pluralize.titleize %></h1>
+</div>
+
+<%= form_tag activities_path, method: :get do %>
+  <p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", body: nil %>
+  </p>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Activity List</th>
+      <th></th>
+
+    </tr>
+  </thead>
+
+  <tbody id="activities">
+    <%= render :partial => "/activities/activity", :locals => {:activities => @activities} %>
+  </tbody>
+
+</table>
+<div id="activity_paginator">
+   <%= paginate @activities, :remote => true, :param_name => "activity_page" %>
+</div>
+
+<% if can? :create, @activity %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_activity_path,
+            :class => 'btn btn-primary' %>
+<% end %>

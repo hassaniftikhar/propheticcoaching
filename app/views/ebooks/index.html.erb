@@ -2,6 +2,8 @@
     <ul>
         <li><a href="#tabs-1">Ebook</a></li>
         <li><a href="#tabs-2">Question</a></li>
+        <li><a href="#tabs-3">Activity</a></li>
+        <li><a href="#tabs-4">Exercise</a></li>
     </ul>
 
   <div id="tabs-1">
@@ -10,6 +12,14 @@
 
   <div id="tabs-2">
     <%= render :partial => "/questions/index_result" %>
+  </div>
+
+  <div id="tabs-3">
+    <%= render :partial => "/activities/index_result" %>
+  </div>
+
+  <div id="tabs-4">
+    <%= render :partial => "/exercises/index_result" %>
   </div>
 
 <div/>

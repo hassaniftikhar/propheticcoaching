@@ -1,0 +1,6 @@
+<% @exercises.each do |exercise| %>
+  <tr>
+    <td><%= exercise.body %></td>
+    <td><%= link_to 'Show', exercise_path(exercise), :class => 'btn btn-mini'%></td>
+  </tr>
+<% end %>

@@ -1,0 +1,12 @@
+<%= semantic_form_for [:admin, @activity], :url => import_csv_admin_activities_path, :html => { :multipart => true } do |f| %>
+
+  <%= f.inputs :name => "upload file" do %>
+    <%= f.input "csv", :as => :file %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :label => "Upload CSV", :as => :button  %>
+  <% end %>
+
+
+<% end %>

@@ -2,3 +2,7 @@ $('tbody#ebooks').html('<%= escape_javascript render :partial => "/ebooks/ebook"
 $('#ebook_paginator').html('<%= escape_javascript(paginate(@ebooks, :remote => true, :param_name => 'ebook_page').to_s) %>');
 $('tbody#questions').html('<%= escape_javascript render :partial => "/questions/question", :locals => {:questions => @questions} %>');
 $('#question_paginator').html('<%= escape_javascript(paginate(@questions, :remote => true, :param_name => 'question_page').to_s) %>');
+$('tbody#activities').html('<%= escape_javascript render :partial => "/activities/activity", :locals => {:activities => @activities} %>');
+$('#activity_paginator').html('<%= escape_javascript(paginate(@activities, :remote => true, :param_name => 'activity_page').to_s) %>');
+$('tbody#exercises').html('<%= escape_javascript render :partial => "/exercises/exercise", :locals => {:exercises => @exercises} %>');
+$('#exercise_paginator').html('<%= escape_javascript(paginate(@exercises, :remote => true, :param_name => 'exercise_page').to_s) %>');

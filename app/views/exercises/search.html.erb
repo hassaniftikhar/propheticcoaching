@@ -1,0 +1,36 @@
+<%- model_class = Exercise -%>
+<div class="page-header">
+  <h1><%= t '.title', :default => Exercise.name.pluralize.titleize %></h1>
+</div>
+
+<%= form_tag search_exercises_path, :id => "search_exercise", method: :get do %>
+  <p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", name: nil %>
+  </p>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:body) %></th>
+    <th> Page No</th>
+    <th> Matched Text</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @pages ||= [] %>
+  <% @pages.each do |page| %>
+    <tr>
+      <td><%= page.body %></td>
+      <td>
+      <td id="tags"> <%= page.tags %> </td>
+    </tr>
+
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_exercise_path,
+            :class => 'btn btn-primary' %>

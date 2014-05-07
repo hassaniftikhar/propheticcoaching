@@ -6,20 +6,16 @@ class EbooksController < ApplicationController
   # GET /ebooks
   # GET /ebooks.json
   def index
-    #@ebooks = Ebook.all
     @ebooks = Ebook.all.order("created_at desc").page(params[:ebook_page]).per(PER_PAGE_RECORDS)
-    # @questions = Question.search(params).page(params[:question_page]).per(PER_PAGE_RECORDS)
+
     @questions = Question.search(params)
-    # @questions2 = @questions.page(params[:question_page]).per(PER_PAGE_RECORDS)
-
-    # unless @questions.kind_of?(Array)
-    #   @questions = @questions.page(params[:question_page]).per(PER_PAGE_RECORDS)
-    #   p "array =================================="
-    # else
     @questions = Kaminari.paginate_array(@questions).page(params[:question_page]).per(PER_PAGE_RECORDS)
-    #   p "not array =================================="
-    # end
 
+    @activities = Activity.search(params)
+    @activities = Kaminari.paginate_array(@activities).page(params[:activity_page]).per(PER_PAGE_RECORDS)
+
+    @exercises = Exercise.search(params)
+    @exercises = Kaminari.paginate_array(@exercises).page(params[:exercise_page]).per(PER_PAGE_RECORDS)
 
   end
 

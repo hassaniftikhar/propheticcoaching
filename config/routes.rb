@@ -1,6 +1,10 @@
 Propheticcoaching::Application.routes.draw do
 
 
+  resources :exercises
+
+  resources :activities
+
   # get "time_slots/new"
   # get "time_slots/create"
   resources :questions
