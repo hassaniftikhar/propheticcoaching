@@ -1,12 +1,20 @@
 Propheticcoaching::Application.routes.draw do
 
-
   resources :exercises
-
   resources :activities
+  # get "index", to: "info/index"
+  # get "about", to: 'info#about'
+  # get "features", to: "info/features"
+  # get "contact", to: "info/contact"
 
+  get "info/index"
+  get "info/about"
+  get "info/features"
+  get "info/contact"
+  post 'info/contact', to: 'info#send_message'
   # get "time_slots/new"
   # get "time_slots/create"
+
   resources :questions
 
   # resources :email_histories
@@ -21,6 +29,7 @@ Propheticcoaching::Application.routes.draw do
    #get '/dashboard', to: 'dashboard#index'
    #match '/dashboard', to: 'dashboard#index', via: :get
    #root :to => 'dashboard#index'
+   # root :to => 'info#index'
    #resource :dashboard , :only => [:index]
   #devise_for :users
   #devise_for :users, controllers: {registrations: "users/registrations"}
