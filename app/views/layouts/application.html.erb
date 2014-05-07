@@ -25,6 +25,7 @@
           <% if current_user %>
             <li><%= link_to "Admin Panel", admin_users_path if current_user.has_role?(:admin) %></li>
             <li><%= link_to "View Coaches Schedule", events_path %></li>
+            <li><%= link_to "My Mentees", mentees_path %></li>
             <li><%= link_to "Search Resource", ebooks_path %></li>
             <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
             <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>

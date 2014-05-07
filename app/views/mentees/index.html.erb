@@ -3,7 +3,6 @@
     <strong>User Name:</strong>
     <%= @user.name %>
   </p>
-
   <h3> Listing Mentees </h3>
   <table class="table table-striped">
     <thead>
@@ -17,10 +16,10 @@
     </tr>
     </thead>
 
-    <tbody id="mentees">
-      <%= render @mentees %>
+    <tbody>
+      <%= render :partial => "/mentees/mentee", :locals => {:mentees => @mentees} %>
     </tbody>
-    
+      
   </table>
 
   <div id="paginator">

@@ -8,7 +8,8 @@ class MenteesController < ApplicationController
   # GET /mentees
   # GET /mentees.json
   def index
-    @user    = User.find_by id: params[:user_id]
+    # @user    = User.find_by id: params[:user_id]
+    @user = @current_user
     #@mentees = @user.mentees.page params[:page]
 
     # if @user.has_any_role?(:admin, :manager)
@@ -16,6 +17,7 @@ class MenteesController < ApplicationController
     # else
     #   @mentees = @user.mentees.page params[:page]
     # end
+    # @mentees = @user.mentees.page(params[:page])
     @mentees = @user.mentees.page(params[:page])
 
     authorize! :read, *(@mentees.any? ? @mentees : @user.mentees.new)
