@@ -108,9 +108,11 @@ body {
 	min-height: 50px;
 	width: 100%;
 	background-color: rgba(0,0,0,.05);
+	/*background: radial-gradient(ellipse at center center , rgb(0, 101, 191) 0%, rgb(40, 32, 160) 100%) repeat scroll 0% 0% transparent;*/
 	position: absolute;
 	z-index: 1;
 	top: 71px;
+	/*margin-left: -306px;*/
 }
 .carousel-holder {
 	height: 550px;
