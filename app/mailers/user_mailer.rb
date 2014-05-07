@@ -14,5 +14,14 @@ class UserMailer < ActionMailer::Base
 
     mail(:from => @current_user.email, :to => @user.email, :subject => subject)
   end
+
+  def message_created(name, email, subject, message, to_eamil)
+    @email     = email
+    @to_email = to_eamil
+    @subject  = subject
+    @message  = message
+    mail(:from => email, :to => to_eamil, :subject => subject, :message => message)
+  end
+
 end
 
