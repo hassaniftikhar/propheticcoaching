@@ -141,22 +141,17 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <h1 class="divider">BENIFITS</h1>
+      <h1 class="divider">BENEFITS</h1>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-6">
       <ul class="benefits">
-        <li><i class="glyphicon glyphicon-chevron-right"></i> Strengthen your Communication</li>
-        <li><i class="glyphicon glyphicon-chevron-right"></i> Organize Your Schedule</li>
-        <li><i class="glyphicon glyphicon-chevron-right"></i> Access over 20,000 Questions and 50 Topics</li>
-        <li><i class="glyphicon glyphicon-chevron-right"></i> Customized Coaching Sessions</li>
-        <li><i class="glyphicon glyphicon-chevron-right"></i> Track Client Goals, Tasks and Notes Progress</li>
-        <li><i class="glyphicon glyphicon-chevron-right"></i> Keep Clients Engaged</li>
-        <li><i class="glyphicon glyphicon-chevron-right"></i> Deliver Content</li>
-        <li><i class="glyphicon glyphicon-chevron-right"></i> Web Based Interactive Software</li>
-        <li><i class="glyphicon glyphicon-chevron-right"></i> Manage Multiple Coaches and Clients</li>
-        <li><i class="glyphicon glyphicon-chevron-right"></i> Google Calendar Synch with Reminders</li>
+        <% @benefits.each do |benefit| %>
+          <li><i class="glyphicon glyphicon-chevron-right"></i> 
+            <%= truncate(h(benefit.title), :length => 60,  :separator => ' ', :omission => " ...")%>
+          </li>
+        <% end %>
       </ul>
     </div>
     <div class="col-md-6 hidden-xs hidden-sm"> <img class="img-responsive" src="/assets/laptop.png"/> </div>
