@@ -1,5 +1,6 @@
 class InfoController < ApplicationController
   def index
+    @benefits = Benefit.order("created_at desc").limit(10)
   end
 
   def about

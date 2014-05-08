@@ -1,5 +1,7 @@
 Propheticcoaching::Application.routes.draw do
 
+  resources :benefits , :only => [:index, :show]
+
   resources :exercises
   resources :activities
   # get "index", to: "info/index"

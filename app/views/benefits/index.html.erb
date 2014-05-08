@@ -1,0 +1,24 @@
+<h1>Listing benefits</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @benefits.each do |benefit| %>
+      <tr>
+        <td><%= benefit.title %></td>
+        <td><%= link_to 'Show', benefit %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
