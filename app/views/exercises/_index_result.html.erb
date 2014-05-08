@@ -1,7 +1,7 @@
 
-<%- model_class = Question -%>
+<%- model_class = Exercise -%>
 <div class="page-header">
-  <h1><%= t '.title', :default => Question.name.pluralize.titleize %></h1>
+  <h1><%= t '.title', :default => Exercise.name.pluralize.titleize %></h1>
 </div>
 
 <%= form_tag exercises_path, method: :get do %>
