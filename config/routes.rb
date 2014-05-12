@@ -1,5 +1,14 @@
 Propheticcoaching::Application.routes.draw do
 
+  # resources :featured_products
+  resources :featured_products , :only => [:index, :show] do
+    member do
+      get 'image'
+    end
+  end
+
+  resources :best_features
+
   resources :benefits , :only => [:index, :show]
 
   resources :exercises

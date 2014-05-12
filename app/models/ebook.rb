@@ -11,6 +11,8 @@ class Ebook < ActiveRecord::Base
   mount_uploader :pdf, PdfUploader
   process_in_background :pdf
 
+  has_one :featured_product, :as => :profile
+
 
   # after_save :update_sha
   # after_save :calculate_sha

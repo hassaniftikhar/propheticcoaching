@@ -1,0 +1,31 @@
+<h1>Listing featured_products</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th>Price</th>
+      <th>Profile</th>
+      <th>Profile type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @featured_products.each do |featured_product| %>
+      <tr>
+        <td><%= featured_product.title %></td>
+        <td><%= featured_product.description %></td>
+        <td><%= featured_product.image %></td>
+        <td><%= featured_product.price %></td>
+        <td><%= featured_product.profile_id %></td>
+        <td><%= featured_product.profile_type %></td>
+        <td><%= link_to 'Show', featured_product %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

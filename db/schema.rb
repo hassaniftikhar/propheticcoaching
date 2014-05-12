@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508045030) do
+ActiveRecord::Schema.define(version: 20140508091029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(version: 20140508045030) do
 
   create_table "benefits", force: true do |t|
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "best_features", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -106,6 +114,17 @@ ActiveRecord::Schema.define(version: 20140508045030) do
   create_table "exercises", force: true do |t|
     t.text     "body"
     t.boolean  "last_import"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "featured_products", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "image"
+    t.decimal  "price"
+    t.string   "profile_id"
+    t.string   "profile_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

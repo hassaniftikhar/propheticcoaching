@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @best_feature.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @best_feature.description %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @best_feature.image %>
+</p>
+
+<%= link_to 'Edit', edit_best_feature_path(@best_feature) %> |
+<%= link_to 'Back', best_features_path %>
