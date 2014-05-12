@@ -1,0 +1,29 @@
+<%= form_for(@best_feature) do |f| %>
+  <% if @best_feature.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@best_feature.errors.count, "error") %> prohibited this best_feature from being saved:</h2>
+
+      <ul>
+      <% @best_feature.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br>
+    <%= f.text_field :image %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<h1>Listing best_features</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @best_features.each do |best_feature| %>
+      <tr>
+        <td><%= best_feature.title %></td>
+        <td><%= best_feature.description %></td>
+        <td><%= best_feature.image %></td>
+        <td><%= link_to 'Show', best_feature %></td>
+        <td><%= link_to 'Edit', edit_best_feature_path(best_feature) %></td>
+        <td><%= link_to 'Destroy', best_feature, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Best feature', new_best_feature_path %>
