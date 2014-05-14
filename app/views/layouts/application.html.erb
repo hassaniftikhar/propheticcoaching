@@ -7,70 +7,152 @@
   <%= csrf_meta_tags %>
   <%= include_gon %>
 
-  <% if params[:controller] == "info" %>
-    <title>info Propheticcc Coaching</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,300,700' rel='stylesheet' type='text/css'>
-  <%end%>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prophetic Coaching</title>
+  <link href="/assets/bootstrap.css" rel="stylesheet"/>
+  <link href="/assets/bootstrap-theme.css" rel="stylesheet"/>
+  <link href="/assets/font-awesome.css" rel="stylesheet"/>
+  <link href="/assets/custom.css" rel="stylesheet"/>
+  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,300,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<% if params[:controller] != "info" %>
-<% if current_user %>
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="/">Prophetic Coaching</a>
-
-      <div class="nav-collapse">
-        <ul class="nav">
-          <% if current_user %>
-            <li><%= link_to "Admin Panel", admin_users_path if current_user.has_role?(:admin) %></li>
-            <li><%= link_to "View Coaches Schedule", events_path %></li>
-            <li><%= link_to "My Mentees", mentees_path %></li>
-            <li><%= link_to "Search Resource", ebooks_path %></li>
-            <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-            <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
-            <li> <%= "Welcome #{current_user.first_name} #{current_user.last_name}" %> </li>
-          <% end %>
-        </ul>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container"> 
+    <% flash.each do |name, msg| %>
+      <% if msg.is_a?(String) %>
+        <div class="alert text-center alert-<%= name == :notice ? "success" : "error" %>">
+          <a class="close" data-dismiss="alert">&#215;</a>
+          <%= content_tag :div, msg.html_safe, :id => "flash_#{name}" %>
+        </div>
+      <% end %>
+    <% end %>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      <a class="navbar-brand" href="#"><img class="logo" src="/assets/Prophetic-Coaching-logo.png"/></a> </div>
+    
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/info/index.html">HOME</a></li>
+        <li><a href="/info/about.html">ABOUT</a></li>
+        <li><a href="/info/features.html">FEATURES</a></li>
+        <% if current_user %>
+          <li class="dropdown">
+            <a href="/dashboard/index.html" class="dropdown-toggle" data-toggle="dropdown">COACHING SYSTEM</b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Admin Panel", admin_users_path if current_user.has_role?(:admin) %></li>
+              <li class="divider"></li>
+              <li><%= link_to "View Coaches Schedule", events_path %></li>
+              <li><%= link_to "My Mentees", mentees_path %></li>
+              <li><%= link_to "Search Resource", ebooks_path %></li>
+              <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+              <li class="divider"></li>
+              <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+            </ul>
+          </li>
+        <% end %>
+        <li><a href="contact.html">CONTACT</a></li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse --> 
+  </div>
+  <!-- /.container-fluid --> 
+</nav>
+<section class="social">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="s-icons">
+          <ul class="s-ul">
+            <li><a href="#"><i class="fa fa-facebook fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-skype fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-dribbble fa-2x"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin fa-2x"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="s-links">
+          <ul class="sl-ul">
+            <li><a href="/users/sign_up">REGISTER</a></li>
+            <li><a href="/users/sign_in">LOG-IN</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel"> 
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <div class="carousel-holder-short">
+        <div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2 class="page-title">Title</h2>
+      </div>
+  </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<% end %>
-<div class="container">
-  <% flash.each do |name, msg| %>
-    <% if msg.is_a?(String) %>
-      <div class="alert text-center alert-<%= name == :notice ? "success" : "error" %>">
-        <a class="close" data-dismiss="alert">&#215;</a>
-        <%= content_tag :div, msg.html_safe, :id => "flash_#{name}" %>
+<%= yield %>
+<div class="call-out">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+        <p class="call-out-text">Experience the Coaching Console for 30-Days - Prophetic coaching system</p>
       </div>
-    <% end %>
-  <% end %>
-  <div class="row">
-    <div class="span1"></div>
-    <!-- <div class="span9"><%= yield %></div> -->
+      <div class="col-sm-4">
+        <form class="form-inline call-out-form">
+          <input class="form-control" type="email" placeholder="Email"/>
+          <button class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <p class="copyrights">Copyright (C) 2014 Prophetic Coaching</p>
+      </div>
+    </div>
   </div>
 </div>
 
 <% if current_user %>
   <%= evnolve_html_code(current_user) %>
 <% end %>
-<% else %>
-<div ><%= yield %></div>
-<% end %>
 
 <script type="text/javascript">
   authenticity_token = "<%= form_authenticity_token %>"
 </script>
 
-
+<!--<script src="/assets/jquery.js" type="text/javascript"></script> --> 
+<script src="/assets/bootstrap.js" type="text/javascript"></script> 
+<script src="/assets/js.js" type="text/javascript"></script> 
+<script src="/assets/owl.carousel.js" type="text/javascript"></script> 
+<script src="/assets/jquery.nicescroll.min.js" type="text/javascript"></script> 
+<script>
+$(document).ready(
+  function() {  
+    $("html").niceScroll({
+       cursorcolor:"#000" 
+      ,mousescrollstep:"40" 
+      ,scrollspeed:"400"
+      ,cursoropacitymin:"0.4"
+      ,cursoropacitymax:"0.4"
+      ,cursorborderradius:"10px"});
+    }
+  );
+</script>
 </body>
 </html>
