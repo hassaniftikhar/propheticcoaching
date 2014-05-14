@@ -16,7 +16,7 @@
  *= require ebooks
  *= require jquery-ui
  *= require jquery.ui.chatbox
-
+	* require bootstrap_and_overrides
  *= require bootstrap.css
  *= require bootstrap-theme.css
  *= require font-awesome.css
