@@ -11,9 +11,7 @@
 </p>
 
 <p>
-  <strong>Image:</strong>
-  <%= @best_feature.image %>
+  <img src="<%= @best_feature.image %>" style="width:200px; height:200px;" alt="" />
 </p>
 
-<%= link_to 'Edit', edit_best_feature_path(@best_feature) %> |
 <%= link_to 'Back', best_features_path %>

@@ -69,38 +69,16 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3 col-sm-6">
-      <div class="feature-box">
-        <h3 class="feature-box-title text-center">Become a Prophetic Coach</h3>
-        <img class=" img-responsive" src="/assets/businesspeople1.jpg"/>
-        <p class="feature-box-text text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae aliquet tortor, et volutpat justo. Vivamus convallis consequat lectus, sit amet interdum sem congue sit amet. </p>
-        <p class="feature-box-more text-center"><a href="#">More info</a></p>
+    <% @best_features.each do |best_feature| %>
+      <div class="col-md-3 col-sm-6">
+        <div class="feature-box">
+          <h3 class="feature-box-title text-center"><%= best_feature.title %></h3>
+          <img class=" img-responsive" src="<%= best_feature.image %>"/>
+          <p class="feature-box-text text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae aliquet tortor, et volutpat justo. Vivamus convallis consequat lectus, sit amet interdum sem congue sit amet. </p>
+          <p class="feature-box-more text-center"><a href= "<%= best_feature_path(best_feature) %>" >More info</a></p>
+        </div>
       </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-      <div class="feature-box">
-        <h3 class="feature-box-title text-center">Recieve Complimentary Coaching</h3>
-        <img class=" img-responsive" src="/assets/businesspeople1.jpg"/>
-        <p class="feature-box-text text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae aliquet tortor, et volutpat justo. Vivamus convallis consequat lectus, sit amet interdum sem congue sit amet. </p>
-        <p class="feature-box-more text-center"><a href="#">More info</a></p>
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-      <div class="feature-box">
-        <h3 class="feature-box-title text-center">Start a Prosperity Action Plan</h3>
-        <img class=" img-responsive" src="/assets/businesspeople1.jpg"/>
-        <p class="feature-box-text text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae aliquet tortor, et volutpat justo. Vivamus convallis consequat lectus, sit amet interdum sem congue sit amet. </p>
-        <p class="feature-box-more text-center"><a href="#">More info</a></p>
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-      <div class="feature-box">
-        <h3 class="feature-box-title text-center">Join The Inner Circle Coaching</h3>
-        <img class=" img-responsive" src="/assets/businesspeople1.jpg"/>
-        <p class="feature-box-text text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae aliquet tortor, et volutpat justo. Vivamus convallis consequat lectus, sit amet interdum sem congue sit amet. </p>
-        <p class="feature-box-more text-center"><a href="#">More info</a></p>
-      </div>
-    </div>
+    <% end %>
   </div>
   <div class="row">
     <div class="col-xs-12">
