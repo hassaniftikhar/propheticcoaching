@@ -1,7 +1,8 @@
 class InfoController < ApplicationController
   def index
-    @benefits = Benefit.order("created_at desc").limit(10)
-    @featured_products = FeaturedProduct.order("created_at desc").limit(20)
+    @benefits = Benefit.order("updated_at desc").limit(10)
+    @featured_products = FeaturedProduct.order("updated_at desc").limit(20)
+    @best_features = BestFeature.order("updated_at desc").limit(4)
   end
 
   def about
