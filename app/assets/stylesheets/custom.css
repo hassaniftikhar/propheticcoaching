@@ -484,6 +484,9 @@ p.mini {
 .table-striped thead tr th, .table-striped tbody tr td{
 	 border: 1px solid #ddd !important;
 }
+#activities tr td:last-child{
+	max-width: 300px;
+}
 
 }
  @media screen and (max-width: 767px) {
