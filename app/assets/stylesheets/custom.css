@@ -485,7 +485,8 @@ p.mini {
 	 border: 1px solid #ddd !important;
 }
 #activities tr td:last-child{
-	max-width: 300px;
+	width: 20%;
+	text-align: right;
 }
 
 }

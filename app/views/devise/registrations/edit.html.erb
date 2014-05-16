@@ -1,4 +1,3 @@
-<body>
 <div class="container">
   <div class="row margin-bottom-50">
     <div class="col-xs-12 col-sm-6 col-md-6">
@@ -81,7 +80,9 @@
   </div>
   <div class="row margin-bottom-50 margin-top-50">
   <div class="col-xs-12">
-  Add Content Here........
+   <div id="calendar">
+    <%= render :partial => "/events/actions_dialog", :locals => {:profile => resource} %>
+  </div>
   </div>
   </div>
   <div class="row margin-top-20">
@@ -98,6 +99,7 @@
      <div class="clearfix"></div>
      </div>
   </div>
+
   <div class="row margin-top-20">
     <div class="col-xs-12">
       <button class="btn btn-default">Back</button>
@@ -125,7 +127,5 @@ $(document).ready(
   );
 </script> 
 <script type="text/javascript">
-            $('#timepicker1').timepicker();
-        </script>
-</body>
-</html>
+  $('#timepicker1').timepicker();
+</script>
