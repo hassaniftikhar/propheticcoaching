@@ -518,23 +518,25 @@ p.top-bar-text{
 	text-decoration: none;
 }
 .flash-box{
-	background-color: rgba(21, 98, 112, 0.7);
+	/*background-color: rgba(21, 98, 112, 0.7);*/
+	/*background-color: white;*/
 	padding: 20px;
-	position: absolute;
+	position: fixed;
 	top:20px;
 	right:20px;
 	z-index:9999;
 	border-radius: 5px;
-	color:#fff;
+	/*color:#fff;*/
 }
 .flash-box p{
 	margin:0px;
+	
 }
 .close-fl{
-	position: absolute;
+	position: fixed;
 padding: 2px 7px;
-right: -9px;
-top: -3px;
+right: 7px;
+top: 10px;
 width: 31px;
 height: 31px;
 background-color: red;

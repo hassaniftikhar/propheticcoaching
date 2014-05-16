@@ -21,16 +21,36 @@
 
 
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <% flash.each do |name, msg| %>
+
+<% if !(params[:controller] == 'devise/sessions' or params[:controller] == 'users/registrations') %>
+
+<% flash.each do |name, msg| %>
+<div class="flash-box">
       <% if msg.is_a?(String) %>
         <div class="alert text-center alert-<%= name == :notice ? "success" : "error" %>">
           <a class="close" data-dismiss="alert">&#215;</a>
           <%= content_tag :div, msg.html_safe, :id => "flash_#{name}" %>
         </div>
       <% end %>
-    <% end %>
+</div>
+<% end %>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<% if current_user %>
+<div class="top-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6">
+        <p class="text-left top-bar-text">Welcome to prophetic Coaching</p>
+      </div>
+      <div class="col-xs-6">
+        <p class="text-right top-bar-text">Logged in as : <a href="#"><%= current_user.first_name %> </a></p>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+  <div class="container">
+
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
@@ -127,7 +147,12 @@
   <%= yield %>
 <% end %>
 
+
+
 <%= render partial: 'layouts/footer' %>
+<% else %>
+  <%= yield %>
+<% end %>
 
 <% if current_user %>
   <%= evnolve_html_code(current_user) %>
