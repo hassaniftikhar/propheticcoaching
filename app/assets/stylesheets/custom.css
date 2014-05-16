@@ -110,7 +110,7 @@ body {
 	background-color: rgba(0,0,0,.05);
 	position: absolute;
 	z-index: 1;
-	top: 71px;
+	top: 103px;
 }
 .carousel-holder {
 	height: 550px;
@@ -126,7 +126,7 @@ body {
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0065bf', endColorstr='#2820a0', GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 .carousel-holder-short {
-	height: 140px;
+	height: 113px;
 	margin: 0px;
 	margin-bottom: 50px;
 	padding: 0px;
@@ -140,7 +140,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0065bf', end
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0065bf', endColorstr='#2820a0', GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 .carousel {
-	margin-top: 71px;
+	margin-top: 101px;
 }
 .navbar-default .navbar-nav > li > a:hover {
 	color: #09F;
@@ -243,7 +243,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0065bf', end
 	min-height: 50px;
 }
 .page-title {
-	margin-top: 77px;
+	margin-top: 66px;
 	color: #fff;
 }
 .about-img {
@@ -481,6 +481,9 @@ p.mini {
 	width: 100%;
 	display: block;
 }
+.table thead tr th{
+	background-color: lavender;
+}
 .table-striped thead tr th, .table-striped tbody tr td{
 	 border: 1px solid #ddd !important;
 }
@@ -488,7 +491,56 @@ p.mini {
 	width: 20%;
 	text-align: right;
 }
+#exercises tr td:last-child{
+	width: 20%;
+	text-align: right;
+}
+h2.tablehead{
+background-color: cornflowerblue;
+color: #fff;
+padding: 11px;
+border-radius: 5px;
 
+}
+.top-bar{
+	background-color:#0065bf;
+	height:30px;
+}
+p.top-bar-text{
+	margin-top: 4px;
+	color:#fff;
+}
+.top-bar a{
+	color:#fff;
+}
+.top-bar a:hover{
+	color:#0CF;
+	text-decoration: none;
+}
+.flash-box{
+	background-color: rgba(21, 98, 112, 0.7);
+	padding: 20px;
+	position: absolute;
+	top:20px;
+	right:20px;
+	z-index:9999;
+	border-radius: 5px;
+	color:#fff;
+}
+.flash-box p{
+	margin:0px;
+}
+.close-fl{
+	position: absolute;
+padding: 2px 7px;
+right: -9px;
+top: -3px;
+width: 31px;
+height: 31px;
+background-color: red;
+border-radius: 50px;
+border: 3px solid #fff;
+}
 }
  @media screen and (max-width: 767px) {
 .page-title {

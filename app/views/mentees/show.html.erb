@@ -1,5 +1,5 @@
 
-<h3> Mentee Details </h3>
+<h2 class="tablehead"> Mentee Details </h2>
 <table class="table table-striped" >
   <tbody>
       <tr>
@@ -40,9 +40,10 @@
       </tr>
       <tr>
         <td>COACH</td>
-        <td><% @mentee.coaches.collect {|coach| %></td>
-        <td><%= link_to("#{coach.first_name} #{coach.last_name}", admin_user_path(coach)) if coach %></td>
-        <td><% } %> </td>
+        <td><% @mentee.coaches.collect {|coach| %>
+          <%= link_to("#{coach.first_name} #{coach.last_name}", admin_user_path(coach)) if coach %>
+          <% } %> 
+        </td>
       </tr>
   </tbody>
 </table>

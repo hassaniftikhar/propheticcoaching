@@ -1,4 +1,4 @@
-<h2>Latest Resources</h2>
+<h2 class="tablehead">Latest Resources</h2>
 
 <table class="table table-striped">
   <thead>
@@ -19,7 +19,7 @@
 </table>
 
 
-<h2>Appointments</h2>
+<h2 class="tablehead">Appointments</h2>
 
 <table class="table table-striped">
   <thead>
@@ -48,7 +48,7 @@
 <%= paginate @coach_events %>
 <br>
 
-<h2>Meetings</h2>
+<h2 class="tablehead">Meetings</h2>
 
 <table class="table table-striped">
   <thead>
@@ -80,7 +80,7 @@
 <br>
 
 
-<h2>Mentees</h2>
+<h2 class="tablehead">Mentees</h2>
 
 <table class="table table-striped">
   <thead>
@@ -108,7 +108,7 @@
     </ul>
 
   <div id="tabs-1">
-		<h2>Coach Calendar</h2>
+		<h2 class="tablehead">Coach Calendar</h2>
 		<p>
 		  <strong>Coach Name:</strong>
 		  <%= @current_user.name %>
@@ -119,7 +119,7 @@
   </div>
 
   <div id="tabs-2">
-    <h2>Coaches Calendar</h2>
+    <h2 class="tablehead">Coaches Calendar</h2>
     <div id='coaches_calendar'>
       <%= render :partial => "/events/actions_dialog", :locals => {:profile => nil, :dashboard => true } %>
     </div>

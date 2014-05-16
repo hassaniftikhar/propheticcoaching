@@ -7,40 +7,37 @@
             <label class="col-sm-4 control-label">First Name</label>
 
             <div class="col-sm-8">
-              <input type="text" class="form-control" placeholder="First Name"/>
+              <%= f.input :first_name, placeholder: 'First Name', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control' }  %>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-4 control-label">Last Name</label>
 
             <div class="col-sm-8">
-              <input type="text" class="form-control" placeholder="Last Name"/>
+              <%= f.input :last_name, placeholder: 'Last Name', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control' }  %>  
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-4 control-label">Address</label>
 
             <div class="col-sm-8">
-              <input type="text" class="form-control" placeholder="Address"/>
+              <%= f.input :address, placeholder: 'Address', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control' }  %>  
+
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-4 control-label">Home Phone</label>
 
             <div class="col-sm-8">
-              <input type="text" class="form-control" placeholder="Home Phone"/>
+              <%= f.input :home_phone, placeholder: 'Phone', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control' }  %> 
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-4 control-label">Availability</label>
 
             <div class="col-sm-8">
-              <select class="form-control">
-                <option></option>
-                <option>Morning</option>
-                <option>Afternoon</option>
-                <option>Evening</option>
-              </select>
+
+              <%= f.input :availablity_time, :as => :select, :collection => {"Morning" => "morning", "Afternoon" => "afternoon", "Evening" => "evening"},label: false, input_html: { class: 'form-control' } %>
             </div>
           </div>
           <div class="form-group">
@@ -48,7 +45,7 @@
 
             <div class="col-sm-8">
               <div class="input-group bootstrap-timepicker">
-                <input type="text" class="form-control" id="timepicker1">
+                <%= f.input :best_time_to_call, label: false, input_html: { class: 'form-control' } %>
                 <span class="input-group-addon"><i class="fa fa-times"></i></span></div>
             </div>
           </div>
@@ -56,37 +53,41 @@
             <label class="col-sm-4 control-label">Date of Birth</label>
 
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="dp1"/>
+              <%= f.input :date_of_birth, :start_year => Time.now.year - 70, label: false, input_html: { class: 'form-control',  id: 'dp1'} %>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-4 control-label">Email</label>
 
             <div class="col-sm-8">
-              <input type="text" class="form-control" placeholder="Email"/>
+              <%= f.input :email, placeholder: 'Email', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control' }  %>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-4 control-label">Password</label>
 
             <div class="col-sm-8">
-              <input type="text" class="form-control" placeholder="Leave blank if not required"/>
+              <%= f.input :password, :autocomplete => "off", placeholder: "Leave blank if not required", :required => false, input_html: { class: 'form-control' }, label: false %>
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-4 control-label">Password</label>
+            <label class="col-sm-4 control-label">Password Confirmation</label>
 
             <div class="col-sm-8">
-              <input type="text" class="form-control" placeholder="Leave blank if not required"/>
+              <%= f.input :password, :autocomplete => "off", placeholder: "Leave blank if not required", :required => false, input_html: { class: 'form-control' }, label: false %>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-4 control-label">Current Password</label>
 
             <div class="col-sm-8">
-              <input type="text" class="form-control" placeholder="Enter current password to confirm changes"/>
+              <%= f.input :current_password, :autocomplete => "off", placeholder: "Enter current password to confirm changes", :required => true, input_html: { class: 'form-control' }, label: false %>
+
             </div>
           </div>
+            <div class="form-actions">
+              <%= f.button :submit, "Update" %>
+            </div>
         <% end %>
       </form>
     </div>
@@ -98,6 +99,7 @@
   </div>
   </div>
   </div>
+      <!--
   <div class="row margin-top-20">
     <div class="col-xs-12">
       <div class="btn-group pull-left">
@@ -105,6 +107,7 @@
         <button class="btn btn-primary">Add Google Calendar</button>
         <button class="btn btn-primary">Edit Google Calendar</button>
       </div>
+
       <div class="pull-right">
         <button class="btn btn-success">Update Account Info</button>
         <button class="btn btn-danger">Cancel my Account</button>
@@ -123,6 +126,11 @@
 
     </div>
   </div>
+-->
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => {:confirm => "Are you sure?"}, :method => :delete %>
+</p>
+
+<%= link_to "Back", :back %>
 </div>
 
 <script>
