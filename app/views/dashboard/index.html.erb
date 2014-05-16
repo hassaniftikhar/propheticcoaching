@@ -101,6 +101,7 @@
 <br>
 <br>
 
+<h2 class="tablehead">Calendars</h2>
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1">Coach Calendar</a></li>
@@ -108,7 +109,7 @@
     </ul>
 
   <div id="tabs-1">
-		<h2 class="tablehead">Coach Calendar</h2>
+		<h2>Coach Calendar</h2>
 		<p>
 		  <strong>Coach Name:</strong>
 		  <%= @current_user.name %>
@@ -119,7 +120,7 @@
   </div>
 
   <div id="tabs-2">
-    <h2 class="tablehead">Coaches Calendar</h2>
+    <h2>Coaches Calendar</h2>
     <div id='coaches_calendar'>
       <%= render :partial => "/events/actions_dialog", :locals => {:profile => nil, :dashboard => true } %>
     </div>
