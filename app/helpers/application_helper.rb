@@ -17,4 +17,11 @@ module ApplicationHelper
     @envolve_html_code.html_safe
   end
 
+  # def title(page_title)
+  #   # content_for(:title) { page_title }
+  #   content_for(:title) { params[:controller].to_s.humanize }
+    
+  #   # <h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+  # end
 end

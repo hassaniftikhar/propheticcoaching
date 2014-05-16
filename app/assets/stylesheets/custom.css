@@ -55,8 +55,8 @@ p.call-out-text {
 .margin-top-50 {
 	margin-top: 50px;
 }
-.margin-top-20{
-	margin-top:20px;
+.margin-top-20 {
+	margin-top: 20px;
 }
 .margin-bottom-50 {
 	margin-bottom: 50px;
@@ -145,11 +145,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0065bf', end
 .navbar-default .navbar-nav > li > a:hover {
 	color: #09F;
 }
-.navbar-default .navbar-nav > li > a:focus{
+.navbar-default .navbar-nav > li > a:focus {
 	background-color: #FFF !important;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-background-color: #FFF  !important;
+	background-color: #FFF !important;
 }
 .s-ul {
 	margin: 0;
@@ -350,7 +350,6 @@ hr.about {
 .round i {
 	vertical-align: -75px;
 }
-
 .login-bg {
 	background-color: #036;
 	height: 300px;
@@ -391,10 +390,10 @@ hr.about {
 	background-color: #DAF0FF;
 }
 .admin-login-form input::-webkit-input-placeholder {
-	color: #10A9DC;
-	font-weight: bold;
-	font-size:16px;
-	text-transform:uppercase;
+ color: #10A9DC;
+ font-weight: bold;
+ font-size:16px;
+ text-transform:uppercase;
 }
  .admin-login-form::-moz-placeholder {
 color:#00f;
@@ -410,77 +409,83 @@ text-decoration:overline;
 letter-spacing:3px;
 color:#999;
 }
-.admin-login-form .btn{
-	padding:0px;
+.admin-login-form .btn {
+	padding: 0px;
 	border-radius: 10px;
 }
-.admin-login-bottom{
-	line-height:15px;
+.admin-login-bottom {
+	line-height: 15px;
 }
-.admin-login-bottom input{
-	margin:0px;
+.admin-login-bottom input {
+	margin: 0px;
 	margin-right: 5px;
 	height: 18px;
 	float: left;
 }
-.admin-login-bottom label{
+.admin-login-bottom label {
 	font-weight: normal;
 	margin-bottom: 15px;
-		
 }
-.border-left{
+.border-left {
 	border-left: 1px solid #CCC;
 }
-
-.footer-login{
+.footer-login {
 	margin-top: 30px;
 }
-.footer-login-nav li{
+.footer-login-nav li {
 	list-style: none;
 	display: inline;
 }
-.footer-login-nav li a{
+.footer-login-nav li a {
 	color: #fff;
 	margin: 20px;
 }
-.footer-login-nav li a:hover{
+.footer-login-nav li a:hover {
 	color: #0CF;
 	text-decoration: none;
 }
-.req{
-	color:#F00;
+.req {
+	color: #F00;
 }
-p.mini{
+p.mini {
 	font-size: 10px;
 }
-.well-heading{
+.well-heading {
 	box-shadow: none;
-	background-color:#2083C5;
+	background-color: #2083C5;
 	background-image: none;
 	color: #fff;
-	font-size:24px;
+	font-size: 24px;
 }
-.well-body{
+.well-body {
 	box-shadow: none;
-	background-color:#FFF;
+	background-color: #FFF;
 	background-image: none;
 }
-.icon-head .icon{
+.icon-head .icon {
 	float: left;
-margin-right: 10px;
-margin-bottom: 10px;
-background-color: #7BC54A;
-border-radius: 5px;
-color: #fff;
-width: 74px;
-height: 74px;
-text-align: center;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	background-color: #7BC54A;
+	border-radius: 5px;
+	color: #fff;
+	width: 74px;
+	height: 74px;
+	text-align: center;
 }
-.icon-head i{
+.icon-head i {
 	margin-top: 22%;
 }
+.wrapper {
+	min-height: 295px;
+	width: 100%;
+	display: block;
+}
+.table-striped thead tr th, .table-striped tbody tr td{
+	 border: 1px solid #ddd !important;
+}
 
-
+}
  @media screen and (max-width: 767px) {
 .page-title {
 	margin-top: 106px;
@@ -495,10 +500,10 @@ text-align: center;
 	position: absolute;
 	bottom: -250px;
 }
-.admin-login-form{
-	width:100%;
-	border-radius:0px;
-}	 
+.admin-login-form {
+	width: 100%;
+	border-radius: 0px;
+}
 .form-control {
 	margin-bottom: 10px;
 }
@@ -610,19 +615,16 @@ p.call-out-text {
 }
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
-	.icon-head h1{
-	font-size:20px
+.icon-head h1 {
+	font-size: 20px
 }
-.icon i{
-	font-size:23px;
+.icon i {
+	font-size: 23px;
 }
-.icon-head .icon{
-	
-width: 48px;
-height: 46px;
-
+.icon-head .icon {
+	width: 48px;
+	height: 46px;
 }
-
 .call-out-form input {
 	width: 66% !important;
 }
@@ -681,17 +683,15 @@ p.call-out-text {
 @media screen and (min-width:992px) {
 }
 @media screen and (min-width: 992px) and (max-width: 1199px) {
-.icon-head h1{
-	font-size:24px
+.icon-head h1 {
+	font-size: 24px
 }
-.icon i{
-	font-size:33px;
+.icon i {
+	font-size: 33px;
 }
-.icon-head .icon{
-	
-width: 58px;
-height: 56px;
-
+.icon-head .icon {
+	width: 58px;
+	height: 56px;
 }
 .call-out-form input {
 	width: 75% !important;
