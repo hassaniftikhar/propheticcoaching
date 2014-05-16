@@ -89,8 +89,8 @@
               <li><%= link_to "LOG-OUT", destroy_user_session_path, :method => :delete %></li>
               <li></li>
             <% else %>
-              <li><a href="/users/sign_up">REGISTER</a></li>
-              <li><a href="/users/sign_in">LOG-IN</a></li>
+              <li><a href=<%= new_user_registration_path %>> REGISTER</a></li>
+              <li><a href=<%= new_user_session_path %>>LOG-IN</a></li>
             <% end %>
           </ul>
         </div>
