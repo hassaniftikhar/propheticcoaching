@@ -10,12 +10,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Prophetic Coaching</title>
   <link href="/assets/bootstrap.css" rel="stylesheet"/>
   <link href="/assets/bootstrap-theme.css" rel="stylesheet"/>
   <link href="/assets/font-awesome.css" rel="stylesheet"/>
   <link href="/assets/custom.css" rel="stylesheet"/>
   <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,300,700' rel='stylesheet' type='text/css'>
+  <link href="/assets/datepicker.css" rel="stylesheet" type="text/css"/>
+  <link href="/assets/bootstrap-timepicker.js" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -43,14 +44,16 @@
           <li class="dropdown">
             <a href="/dashboard/index.html" class="dropdown-toggle" data-toggle="dropdown">COACHING SYSTEM</b></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Admin Panel", admin_users_path if current_user.has_role?(:admin) %></li>
+              <% if current_user.has_role?(:admin) %>
+                <li><%= link_to "Admin Panel", admin_users_path %></li>
+                <li class="divider"></li>
+              <% end %>
+              <li><%= link_to "Dashboard", dashboard_index_path %></li>
               <li class="divider"></li>
               <li><%= link_to "View Coaches Schedule", events_path %></li>
               <li><%= link_to "My Mentees", mentees_path %></li>
               <li><%= link_to "Search Resource", ebooks_path %></li>
               <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-              <li class="divider"></li>
-              <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
             </ul>
           </li>
         <% end %>
@@ -79,31 +82,48 @@
         <div class="s-links">
           <ul class="sl-ul">
             <li><a href="/users/sign_up">REGISTER</a></li>
-            <li><a href="/users/sign_in">LOG-IN</a></li>
+            <% if current_user %>
+              <li><%= link_to "LOG-OUT", destroy_user_session_path, :method => :delete %></li>
+            <% else %>
+              <li><a href="/users/sign_in">LOG-IN</a></li>
+            <% end %>
           </ul>
         </div>
       </div>
     </div>
   </div>
 </section>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel"> 
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-    <div class="item active">
-      <div class="carousel-holder-short">
-        <div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <h2 class="page-title">Title</h2>
-      </div>
-  </div>
+<% if params[:controller] != 'info' %>
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel"> 
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <div class="carousel-holder-short">
+          <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="page-title">Title</h2>
+        </div>
+    </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<%= yield %>
-<div class="call-out">
+  <div class="wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= yield %>
+<% end %>
+
+<div class="call-out margin-top-100">
   <div class="container">
     <div class="row">
       <div class="col-sm-8">
@@ -141,6 +161,10 @@
 <script src="/assets/js.js" type="text/javascript"></script> 
 <script src="/assets/owl.carousel.js" type="text/javascript"></script> 
 <script src="/assets/jquery.nicescroll.min.js" type="text/javascript"></script> 
+<script src="/assets/bootstrap-datepicker.js" type="text/javascript"></script> 
+<script src="/assets/bootstrap-timepicker.js" type="text/javascript"></script> 
+
+
 <script>
 $(document).ready(
   function() {  

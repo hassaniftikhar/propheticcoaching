@@ -1,8 +1,14 @@
-<div>
-  <div id='calendar'>
-  </div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<div>
+	  	<div id='calendar'>
+	  	</div>
+			</div>
+			<%= render :partial => "actions_dialog", :locals => {:profile => @profile} %>
+		</div>
+	</div>
 </div>
 
 
 
-<%= render :partial => "actions_dialog", :locals => {:profile => @profile} %>
