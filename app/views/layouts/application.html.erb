@@ -18,9 +18,11 @@
   <link href="/assets/datepicker.css" rel="stylesheet" type="text/css"/>
   <link href="/assets/bootstrap-timepicker.js" rel="stylesheet" type="text/css"/>
 </head>
+
+
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container"> 
+  <div class="container">
     <% flash.each do |name, msg| %>
       <% if msg.is_a?(String) %>
         <div class="alert text-center alert-<%= name == :notice ? "success" : "error" %>">
@@ -31,9 +33,11 @@
     <% end %>
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-      <a class="navbar-brand" href="#"><img class="logo" src="/assets/Prophetic-Coaching-logo.png"/></a> </div>
-    
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <span class="icon-bar"></span></button>
+      <a class="navbar-brand" href="#"><img class="logo" src="/assets/Prophetic-Coaching-logo.png"/></a></div>
+
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navigation">
       <ul class="nav navbar-nav navbar-right">
@@ -42,7 +46,7 @@
         <li><a href="/info/features.html">FEATURES</a></li>
         <% if current_user %>
           <li class="dropdown">
-            <a href="/dashboard/index.html" class="dropdown-toggle" data-toggle="dropdown">COACHING SYSTEM</b></a>
+            <a href="/dashboard/index.html" class="dropdown-toggle" data-toggle="dropdown">COACHING SYSTEM</a>
             <ul class="dropdown-menu">
               <% if current_user.has_role?(:admin) %>
                 <li><%= link_to "Admin Panel", admin_users_path %></li>
@@ -60,9 +64,9 @@
         <li><a href="contact.html">CONTACT</a></li>
       </ul>
     </div>
-    <!-- /.navbar-collapse --> 
+    <!-- /.navbar-collapse -->
   </div>
-  <!-- /.container-fluid --> 
+  <!-- /.container-fluid -->
 </nav>
 <section class="social">
   <div class="container">
@@ -94,17 +98,17 @@
   </div>
 </section>
 <% if params[:controller] != 'info' %>
-  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel"> 
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
         <div class="carousel-holder-short">
           <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <h2 class="page-title">Title</h2>
-        </div>
-    </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <h2 class="page-title"><%= @title %></h2>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -123,30 +127,7 @@
   <%= yield %>
 <% end %>
 
-<div class="call-out margin-top-100">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-8">
-        <p class="call-out-text">Experience the Coaching Console for 30-Days - Prophetic coaching system</p>
-      </div>
-      <div class="col-sm-4">
-        <form class="form-inline call-out-form">
-          <input class="form-control" type="email" placeholder="Email"/>
-          <button class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <p class="copyrights">Copyright (C) 2014 Prophetic Coaching</p>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render partial: 'layouts/footer' %>
 
 <% if current_user %>
   <%= evnolve_html_code(current_user) %>
@@ -156,26 +137,21 @@
   authenticity_token = "<%= form_authenticity_token %>"
 </script>
 
-<!--<script src="/assets/jquery.js" type="text/javascript"></script> --> 
-<script src="/assets/bootstrap.js" type="text/javascript"></script> 
-<script src="/assets/js.js" type="text/javascript"></script> 
-<script src="/assets/owl.carousel.js" type="text/javascript"></script> 
-<script src="/assets/jquery.nicescroll.min.js" type="text/javascript"></script> 
-<script src="/assets/bootstrap-datepicker.js" type="text/javascript"></script> 
-<script src="/assets/bootstrap-timepicker.js" type="text/javascript"></script> 
+<!--<script src="/assets/jquery.js" type="text/javascript"></script> -->
+<script src="/assets/bootstrap.js" type="text/javascript"></script>
+<script src="/assets/js.js" type="text/javascript"></script>
+<script src="/assets/owl.carousel.js" type="text/javascript"></script>
+<script src="/assets/jquery.nicescroll.min.js" type="text/javascript"></script>
+<script src="/assets/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="/assets/bootstrap-timepicker.js" type="text/javascript"></script>
 
 
 <script>
-$(document).ready(
-  function() {  
-    $("html").niceScroll({
-       cursorcolor:"#000" 
-      ,mousescrollstep:"40" 
-      ,scrollspeed:"400"
-      ,cursoropacitymin:"0.4"
-      ,cursoropacitymax:"0.4"
-      ,cursorborderradius:"10px"});
-    }
+  $(document).ready(
+      function () {
+        $("html").niceScroll({
+          cursorcolor: "#000", mousescrollstep: "40", scrollspeed: "400", cursoropacitymin: "0.4", cursoropacitymax: "0.4", cursorborderradius: "10px"});
+      }
   );
 </script>
 </body>
