@@ -1,6 +1,7 @@
 ActiveAdmin.register Ebook do
 
-  menu :label => "Resources"
+  menu :label => "Ebooks"
+  menu false
   # This Clear the default "New ebook" link
   config.clear_action_items!
 

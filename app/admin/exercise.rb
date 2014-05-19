@@ -1,6 +1,6 @@
 ActiveAdmin.register Exercise do
 
-  
+  menu false
   permit_params :id, :body, :last_import
 
   scope :All
