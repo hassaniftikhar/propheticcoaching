@@ -35,20 +35,27 @@
 </div>
 <% end %>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-<% if current_user %>
+
 <div class="top-bar">
   <div class="container">
     <div class="row">
       <div class="col-xs-6">
-        <p class="text-left top-bar-text">Welcome to prophetic Coaching</p>
+        <% if current_user %>
+          <p class="text-left top-bar-text">Welcome to prophetic Coaching</p>
+        <% else %>
+          <p class="text-left top-bar-text"></p>
+        <% end %>
       </div>
       <div class="col-xs-6">
-        <p class="text-right top-bar-text">Logged in as : <a href="#"><%= current_user.first_name %> </a></p>
+        <% if current_user %>
+          <p class="text-right top-bar-text">Logged in as : <a href="#"><%= current_user.first_name %> </a></p>
+        <% else %>
+          <p class="text-right top-bar-text"><a href="#"></a></p>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
-<% end %>
   <div class="container">
 
     <!-- Brand and toggle get grouped for better mobile display -->
