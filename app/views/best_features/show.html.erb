@@ -11,7 +11,7 @@
 </p>
 
 <p>
-  <img src="<%= @best_feature.image %>" style="width:200px; height:200px;" alt="" />
+  <img src="<%= @best_feature.image_url(:thumb) %>" alt="" />
 </p>
 
 <%= link_to 'Back', best_features_path %>

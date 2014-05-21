@@ -1,13 +1,11 @@
-<h1>Listing best_features</h1>
+<h1>Best Features</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Title</th>
       <th>Description</th>
       <th>Image</th>
-      <th></th>
-      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -17,7 +15,7 @@
       <tr>
         <td><%= best_feature.title %></td>
         <td><%= best_feature.description %></td>
-        <td><img src="<%= best_feature.image %>" style="width:50px; height:50px;" alt="" /></td>
+        <td><img src="<%= best_feature.image_url(:thumb) %>" alt="" /></td>
         <td><%= link_to 'Show', best_feature %></td>
 
       </tr>
