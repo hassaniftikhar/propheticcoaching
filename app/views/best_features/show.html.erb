@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
+<p>
+  <img src="<%= @best_feature.image_url(:thumb) %>" alt="" />
+</p>
 
 <p>
   <strong>Title:</strong>
@@ -8,10 +11,6 @@
 <p>
   <strong>Description:</strong>
   <%= @best_feature.description %>
-</p>
-
-<p>
-  <img src="<%= @best_feature.image_url(:thumb) %>" alt="" />
 </p>
 
 <%= link_to 'Back', best_features_path %>

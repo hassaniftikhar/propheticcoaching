@@ -5,7 +5,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MimeTypes
   include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-  p "in uploader ==============================="
   process :set_content_type
   
   # process :resize_to_fit => [100, 100]
@@ -24,7 +23,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    p "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 

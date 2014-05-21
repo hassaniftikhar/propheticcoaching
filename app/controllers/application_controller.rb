@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   # before_filter :configure_permitted_parameters
   # before_filter :configure_permitted_parameters, if: :registration_controller?
 
+  def after_sign_in_path_for(resource)
+    dashboard_index_path
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to user_path(current_user)#, :alert => exception.message
   end
