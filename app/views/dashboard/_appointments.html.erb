@@ -1,0 +1,27 @@
+<h2 class="tablehead">Appointments</h2>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Created at</th>
+
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @coach_events.each do |coach_event| %>
+    <tr>
+      <td><%= coach_event.title %></td>
+      <td><%= coach_event.description %></td>
+      <td><%= coach_event.starttime.strftime("%b %d, %Y %I:%M %p") %></td>
+      <td><%= coach_event.endtime.strftime("%b %d, %Y %I:%M %p") %></td>
+      <td><%= coach_event.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= paginate @coach_events %>
