@@ -6,6 +6,8 @@ ActiveAdmin.setup do |config|
   # for each of the active admin pages.
   #
   config.site_title = "Propheticcoaching"
+  # config.site_title_link = :root
+  config.site_title_link = "/dashboard/index"
 
     config.namespace :admin do |admin|
       admin.build_menu do |menu|
