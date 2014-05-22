@@ -1,79 +1,32 @@
-<h2 class="tablehead">Latest Resources</h2>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Created at</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @latest_resources.each do |latest_resource| %>
-      <tr>
-        <td><%= link_to latest_resource.name, ebook_path(latest_resource) %></td>
-        <td><%= latest_resource.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
-<h2 class="tablehead">Appointments</h2>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Start Time</th>
-      <th>End Time</th>
-      <th>Created at</th>
-
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @coach_events.each do |coach_event| %>
-      <tr>
-        <td><%= coach_event.title %></td>
-        <td><%= coach_event.description %></td>
-        <td><%= coach_event.starttime.strftime("%b %d, %Y %I:%M %p") %></td>
-        <td><%= coach_event.endtime.strftime("%b %d, %Y %I:%M %p") %></td>
-        <td><%= coach_event.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @coach_events %>
+<%= render partial: 'appointments' %>
 <br>
 
 <h2 class="tablehead">Meetings</h2>
 
 <table class="table table-striped">
   <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Start Time</th>
-      <th>End Time</th>
-      <th>Created at</th>
-      <th>Meeting With</th>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Created at</th>
+    <th>Meeting With</th>
 
-    </tr>
+  </tr>
   </thead>
 
   <tbody>
-    <% @coach_meetings.each do |coach_meeting| %>
-      <tr>
-        <td><%= coach_meeting.title %></td>
-        <td><%= coach_meeting.description %></td>
-        <td><%= coach_meeting.starttime.strftime("%b %d, %Y %I:%M %p") %></td>
-        <td><%= coach_meeting.endtime.strftime("%b %d, %Y %I:%M %p") %></td>
-        <td><%= coach_meeting.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
-        <td><%= link_to coach_meeting.coach_mentee_relation.mentee.name, user_mentee_path(@user, coach_meeting.coach_mentee_relation.mentee) %></td>
-      </tr>
-    <% end %>
+  <% @coach_meetings.each do |coach_meeting| %>
+    <tr>
+      <td><%= coach_meeting.title %></td>
+      <td><%= coach_meeting.description %></td>
+      <td><%= coach_meeting.starttime.strftime("%b %d, %Y %I:%M %p") %></td>
+      <td><%= coach_meeting.endtime.strftime("%b %d, %Y %I:%M %p") %></td>
+      <td><%= coach_meeting.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
+      <td><%= link_to coach_meeting.coach_mentee_relation.mentee.name, user_mentee_path(@user, coach_meeting.coach_mentee_relation.mentee) %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 <%= paginate @coach_meetings %>
@@ -84,18 +37,18 @@
 
 <table class="table table-striped">
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>E-mail</th>
-      <th>Date of Birth</th>
-      <th>Availability</th>
-      <th>Prophecy</th>
+  <tr>
+    <th>Name</th>
+    <th>E-mail</th>
+    <th>Date of Birth</th>
+    <th>Availability</th>
+    <th>Prophecy</th>
 
-    </tr>
+  </tr>
   </thead>
 
   <tbody>
-    <%= render :partial => "/mentees/mentee", :locals => {:mentees => @mentees} %>
+  <%= render :partial => "/mentees/mentee", :locals => {:mentees => @mentees} %>
   </tbody>
 </table>
 <br>
@@ -103,25 +56,29 @@
 
 <h2 class="tablehead">Calendars</h2>
 <div id="tabs">
-    <ul>
-        <li><a href="#tabs-1">Coach Calendar</a></li>
-        <li><a href="#tabs-2">All Coaches Calendar</a></li>
-    </ul>
+  <ul>
+    <li><a href="#tabs-1">Coach Calendar</a></li>
+    <li><a href="#tabs-2">All Coaches Calendar</a></li>
+  </ul>
 
   <div id="tabs-1">
-		<h2>Coach Calendar</h2>
-		<p>
-		  <strong>Coach Name:</strong>
-		  <%= @current_user.name %>
-		</p>
+    <h2>Coach Calendar</h2>
+
+    <p>
+      <strong>Coach Name:</strong>
+      <%= @current_user.name %>
+    </p>
+
     <div id='calendar'>
-    	 <%= render :partial => "/events/actions_dialog", :locals => {:profile => @current_user, :dashboard => true} %>
+      <%= render :partial => "/events/actions_dialog", :locals => {:profile => @current_user, :dashboard => true} %>
     </div>
   </div>
 
   <div id="tabs-2">
     <h2>Coaches Calendar</h2>
+
     <div id='coaches_calendar'>
-      <%= render :partial => "/events/actions_dialog", :locals => {:profile => nil, :dashboard => true } %>
+      <%= render :partial => "/events/actions_dialog", :locals => {:profile => nil, :dashboard => true} %>
     </div>
   </div>
+</div>
