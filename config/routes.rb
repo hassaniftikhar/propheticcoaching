@@ -1,5 +1,7 @@
 Propheticcoaching::Application.routes.draw do
 
+  resources :contact_requests
+
   # resources :featured_products
 
   resources :featured_products , :only => [:index, :show] do
