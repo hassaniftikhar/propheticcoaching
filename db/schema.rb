@@ -174,7 +174,6 @@ ActiveRecord::Schema.define(version: 20140508091029) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "date_of_birth"
-    t.string   "coach_id",      limit: nil
   end
 
   create_table "pages", force: true do |t|
