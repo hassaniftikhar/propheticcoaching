@@ -1,65 +1,133 @@
-<%= form_for(@contact_request) do |f| %>
-  <% if @contact_request.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@contact_request.errors.count, "error") %> prohibited this contact_request from being saved:</h2>
-
-      <ul>
-      <% @contact_request.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Contact</h1>
+      <hr/>
     </div>
-  <% end %>
+    <div class="col-sm-6">
+    <!--<form> -->
+      <%= simple_form_for(@contact_request) do |f| %>
+        <% if @contact_request.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@contact_request.errors.count, "error") %> prohibited this contact_request from being saved:</h2>
 
-  <div class="field">
-    <%= f.label :subject %><br>
-    <%= f.text_field :subject %>
+            <ul>
+            <% @contact_request.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+      <h4>Phone Number</h4>
+      <p>+1 234 567 8900</p>
+      <br/>
+      <h4>Mailing address</h4>
+      <p>Christian Coach Institute<br/>
+        Ballantyne One<br/>
+        15720 John J. Delaney Drive, Suite 300<br/>
+        Charlotte, NC  28277</p>
+      <hr/>
+      <p><span class="req">*</span>Required</p>
+      <br>
+      <h4>Purpose of Contact</h4>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+          Text for option goes here. </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+          Text for option two goes here. </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+          Text for option three goes here. </label>
+      </div>
+      <p class="mini">Please indicate what the nature of your contact is</p>
+      <br>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="control-label">Subject<span class="req">*</span></label>
+          <%= f.input :subject, placeholder: 'Enter Subject', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control input-sm' }  %>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="control-label">First Name<span class="req">*</span></label>
+              <%= f.input :first_name, placeholder: 'Enter First Name', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control input-sm' }  %>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="control-label">Last Name<span class="req">*</span></label>
+              <%= f.input :last_name, placeholder: 'Enter Last Name', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control input-sm' }  
+              %>            
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="control-label">Email<span class="req">*</span></label>
+              <%= f.input :email, placeholder: 'Enter Email', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control input-sm' }
+              %>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="control-label">Phone No<span class="req">*</span></label>
+              <%= f.input :phone_no, placeholder: 'Enter Phone No', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control input-sm' }
+              %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">How would you like to be contacted<span class="req">*</span></label>
+          <%= f.input :contact_mode, :as => :select, :collection => {"Telephone" => "telephone", "Email" => "email", "No Preferences" => "no preferences"},label: false, input_html: { class: 'form-control' } 
+          %>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="control-label">City<span class="req">*</span></label>
+              <%= f.input :city, placeholder: 'Enter City', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control input-sm' }
+              %>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="control-label">State/Country<span class="req">*</span></label>
+              <%= f.input :purpose, placeholder: 'Enter State/Country', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control input-sm' }
+              %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Website<span class="req">*</span></label>
+          <%= f.input :website, placeholder: 'http://', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control input-sm' }
+          %>
+        </div>
+        <div class="form-group">
+          <label class="control-label">How did you hear about us?<span class="req">*</span></label>
+          <%= f.input :heard_mode, :as => :select, :collection => {"Websearch" => "websearch", "Referral" => "referral", "Facebook" => "facebook", "Twitter" => "twitter"},label: false, input_html: { class: 'form-control' } 
+          %>          
+        </div>
+      </div>
+      <div class="col-xs-12">
+       <div class="form-group">
+          <label class="control-label">Message<span class="req">*</span></label>
+          <%= f.input :message, placeholder: 'Message', :required => true, :autofocus => true, label: false, :as => :text, :input_html => { :rows => 10 , :style => 'width: 100%'} 
+          %>
+        </div>
+        <br>
+        <%= f.submit "Send Message",class: "btn btn-info" %>
+      </div>
+      <% end %>
+    <!-- </form> -->
   </div>
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_no %><br>
-    <%= f.text_field :phone_no %>
-  </div>
-  <div class="field">
-    <%= f.label :contact_mode %><br>
-    <%= f.text_field :contact_mode %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state_country %><br>
-    <%= f.text_field :state_country %>
-  </div>
-  <div class="field">
-    <%= f.label :website %><br>
-    <%= f.text_field :website %>
-  </div>
-  <div class="field">
-    <%= f.label :heard_mode %><br>
-    <%= f.text_field :heard_mode %>
-  </div>
-  <div class="field">
-    <%= f.label :purpose %><br>
-    <%= f.text_field :purpose %>
-  </div>
-  <div class="field">
-    <%= f.label :message %><br>
-    <%= f.text_area :message %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
