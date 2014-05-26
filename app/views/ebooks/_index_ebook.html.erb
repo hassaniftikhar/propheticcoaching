@@ -6,8 +6,8 @@
 
 <%= form_tag search_ebooks_path, method: :get do %>
   <p>
-    <%= text_field_tag :query, params[:query] %>
-    <%= submit_tag "Search", name: nil %>
+    <%= text_field_tag :query, params[:query], id: 'ebook_query' %>
+    <%= submit_tag "Search", name: nil, id: 'ebook_search' %>
   </p>
 <% end %>
 

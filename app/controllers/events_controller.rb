@@ -22,6 +22,7 @@ class EventsController < ApplicationController
       event = EventSeries.new(event_params[:event])
     end
     if event.save
+      event.events.update_all profile_id: params[:mentee_id], profile_type: 'Mentee' if event.methods.include?(:events)
       render :nothing => true
     else
       render :text => event.errors.full_messages.to_sentence, :status => 422
@@ -35,6 +36,7 @@ class EventsController < ApplicationController
   #TODO fix get events
   def get_events
     conditions = "starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' AND endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"
+    p @profile.inspect
     if @profile
       @events = @profile.events.where conditions
     else

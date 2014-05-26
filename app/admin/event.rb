@@ -58,6 +58,7 @@ ActiveAdmin.register Event do
 
   end
   index do
+    selectable_column
     column :title
     column :description
     column :starttime
