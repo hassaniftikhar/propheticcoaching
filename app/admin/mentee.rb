@@ -113,7 +113,11 @@ ActiveAdmin.register Mentee do
     column :first_name
     column :last_name
     column :email
-    column :date_of_birth
+    column :date_of_birth do |mentee|
+        if(mentee.date_of_birth)
+          "#{mentee.date_of_birth.strftime("%m/%d/%Y")}"
+        end
+      end
     column :donor_id
     column :home_phone
     column :availability
@@ -135,7 +139,7 @@ ActiveAdmin.register Mentee do
       f.input :first_name
       f.input :last_name
       f.input :email
-      f.input :date_of_birth
+      f.input :date_of_birth, :start_year => Time.now.year - 100
       f.input :donor_id
       f.input :home_phone
       f.input :availability
@@ -164,7 +168,11 @@ ActiveAdmin.register Mentee do
       row :first_name
       row :last_name
       row :email
-      row :date_of_birth
+      row :date_of_birth do |mentee|
+        if(mentee.date_of_birth)
+          "#{mentee.date_of_birth.strftime("%m/%d/%Y")}"
+        end
+      end
       row :donor_id
       row :home_phone
       row :availability

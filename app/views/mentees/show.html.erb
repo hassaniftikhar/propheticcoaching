@@ -41,7 +41,7 @@
       <tr>
         <td>COACH</td>
         <td><% @mentee.coaches.collect {|coach| %>
-          <%= link_to("#{coach.first_name} #{coach.last_name}", admin_user_path(coach)) if coach %>
+          <%= link_to("#{coach.first_name} #{coach.last_name}", user_path(coach)) if coach %>
           <% } %> 
         </td>
       </tr>
