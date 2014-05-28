@@ -1,5 +1,7 @@
 Propheticcoaching::Application.routes.draw do
 
+  resources :contact_requests
+
   # resources :featured_products
 
   resources :featured_products , :only => [:index, :show] do
@@ -26,8 +28,7 @@ Propheticcoaching::Application.routes.draw do
   get "info/index"
   get "info/about"
   get "info/features"
-  get "info/contact"
-  post 'info/contact', to: 'info#send_message'
+  # post 'info/contact', to: 'info#send_message'
   # get "time_slots/new"
   # get "time_slots/create"
 

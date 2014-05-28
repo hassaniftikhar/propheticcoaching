@@ -1,4 +1,5 @@
 class TimeSlotsController < ApplicationController
+  before_action :authenticate_user!
   def new
   		@time_slot = TimeSlot.new
   end

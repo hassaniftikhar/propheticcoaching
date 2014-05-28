@@ -50,11 +50,11 @@ ActiveAdmin.register Event do
         set_coach_mentee_relation_id(user)
       end
 
-      super do |success, failure| 
+      super do |success, failure|
         block.call(success, failure) if block
         failure.html { render :edit }
       end
-    end    
+    end
 
   end
   index do

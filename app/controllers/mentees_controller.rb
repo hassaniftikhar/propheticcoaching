@@ -1,4 +1,5 @@
 class MenteesController < ApplicationController
+  before_action :authenticate_user!
   #load_and_authorize_resource
   # load_and_authorize_resource :user
   # load_and_authorize_resource :mentee, :through => :user

@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @contact_request.subject %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @contact_request.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @contact_request.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @contact_request.email %>
+</p>
+
+<p>
+  <strong>Phone no:</strong>
+  <%= @contact_request.phone_no %>
+</p>
+
+<p>
+  <strong>Contact mode:</strong>
+  <%= @contact_request.contact_mode %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @contact_request.city %>
+</p>
+
+<p>
+  <strong>State country:</strong>
+  <%= @contact_request.state_country %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @contact_request.website %>
+</p>
+
+<p>
+  <strong>Heard mode:</strong>
+  <%= @contact_request.heard_mode %>
+</p>
+
+<p>
+  <strong>Purpose:</strong>
+  <%= @contact_request.purpose %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @contact_request.message %>
+</p>
+
+<%= link_to 'Edit', edit_contact_request_path(@contact_request) %> |
+<%= link_to 'Back', contact_requests_path %>

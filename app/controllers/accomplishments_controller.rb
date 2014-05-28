@@ -1,4 +1,6 @@
 class AccomplishmentsController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_accomplishment, only: [:show, :edit, :update, :destroy]
 
   # GET /accomplishments

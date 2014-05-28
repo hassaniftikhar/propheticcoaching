@@ -35,20 +35,27 @@
 </div>
 <% end %>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-<% if current_user %>
+
 <div class="top-bar">
   <div class="container">
     <div class="row">
       <div class="col-xs-6">
-        <p class="text-left top-bar-text">Welcome to prophetic Coaching</p>
+        <% if current_user %>
+          <p class="text-left top-bar-text">Welcome to prophetic Coaching</p>
+        <% else %>
+          <p class="text-left top-bar-text"></p>
+        <% end %>
       </div>
       <div class="col-xs-6">
-        <p class="text-right top-bar-text">Logged in as : <a href="#"><%= current_user.first_name %> </a></p>
+        <% if current_user %>
+          <p class="text-right top-bar-text">Logged in as : <a href="#"><%= current_user.first_name %> </a></p>
+        <% else %>
+          <p class="text-right top-bar-text"><a href="#"></a></p>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
-<% end %>
   <div class="container">
 
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -61,27 +68,21 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navigation">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/info/index.html">HOME</a></li>
-        <li><a href="/info/about.html">ABOUT</a></li>
-        <li><a href="/info/features.html">FEATURES</a></li>
-        <% if current_user %>
-          <li class="dropdown">
-            <a href="/dashboard/index.html" class="dropdown-toggle" data-toggle="dropdown">COACHING SYSTEM</a>
-            <ul class="dropdown-menu">
-              <% if current_user.has_role?(:admin) %>
-                <li><%= link_to "Admin Panel", admin_users_path %></li>
-                <li class="divider"></li>
-              <% end %>
-              <li><%= link_to "Dashboard", dashboard_index_path %></li>
-              <li class="divider"></li>
-              <li><%= link_to "View Coaches Schedule", events_path %></li>
-              <li><%= link_to "My Mentees", mentees_path %></li>
-              <li><%= link_to "Search Resource", ebooks_path %></li>
-              <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-            </ul>
-          </li>
+        <% if current_user %>    
+          <% if current_user.has_role?(:admin) %>
+            <li><%= link_to "Admin Panel", admin_users_path %></li>
+          <% end %>
+          <li><%= link_to "Dashboard", dashboard_index_path %></li>
+          <li><%= link_to "View Coaches Schedule", events_path %></li>
+          <li><%= link_to "My Mentees", mentees_path %></li>
+          <li><%= link_to "Search Resource", ebooks_path %></li>
+          <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+        <% else %>
+          <li><a href="/info/index.html">HOME</a></li>
+          <li><a href="/info/about.html">ABOUT</a></li>
+          <li><a href="/info/features.html">FEATURES</a></li>
+          <li><a href="/contact_requests/new">CONTACT</a></li>
         <% end %>
-        <li><a href="contact.html">CONTACT</a></li>
       </ul>
     </div>
     <!-- /.navbar-collapse -->
@@ -149,8 +150,7 @@
 <% end %>
 
 
-
-<%= render partial: 'layouts/footer' %>
+  <%= render partial: 'layouts/footer' %>
 <% else %>
   <%= yield %>
 <% end %>
@@ -174,10 +174,10 @@
 
 <script>
   $(document).ready(
-      function () {
-        $("html").niceScroll({
-          cursorcolor: "#000", mousescrollstep: "40", scrollspeed: "400", cursoropacitymin: "0.4", cursoropacitymax: "0.4", cursorborderradius: "10px"});
-      }
+    function () {
+      $("html").niceScroll({
+        cursorcolor: "#000", mousescrollstep: "40", scrollspeed: "400", cursoropacitymin: "0.4", cursoropacitymax: "0.4", cursorborderradius: "10px"});
+    }
   );
 </script>
 </body>

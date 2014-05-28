@@ -1,4 +1,4 @@
-<h1>Listing featured_products</h1>
+<h1>Featured Products</h1>
 
 <table class="table table-striped">
   <thead>
@@ -6,8 +6,9 @@
       <th>Title</th>
       <th>Description</th>
       <th>Price</th>
-      <th>Profile</th>
-      <th>Profile type</th>
+      <th>Resource</th>
+      <th>Resource type</th>
+      <th>Image</th>
       <th></th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td><%= featured_product.price %></td>
         <td><%= featured_product.profile_id %></td>
         <td><%= featured_product.profile_type %></td>
+        <td><img src="<%= featured_product.image_url(:thumb) %>" alt="" /></td>
         <td><%= link_to 'Show', featured_product %></td>
       </tr>
     <% end %>

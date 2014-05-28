@@ -20,6 +20,8 @@ gem 'figaro'
 gem 'mysql2'
 gem 'rolify'
 gem 'simple_form'
+gem 'rmagick'
+gem 'mini_magick'
 #gem 'chosen-rails'
 #gem "chartkick"
 #gem 'groupdate'

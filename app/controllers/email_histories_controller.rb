@@ -1,4 +1,5 @@
 class EmailHistoriesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_email_history, only: [:show, :edit, :update, :destroy]
 
   # GET /email_histories

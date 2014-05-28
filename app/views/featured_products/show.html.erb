@@ -16,9 +16,10 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <a class="fancybox" data-fancybox-type="iframe" href="<%= @featured_product.profile.pdf %>"><img src="<%= @featured_product.image %>" style="width:150px; height:200px;" alt="" /></a>
-</p>
 
+  <a class="fancybox" data-fancybox-type="iframe" href="<%= @featured_product.profile.pdf %>"><img src="<%= @featured_product.image %>" style="width:150px; height:200px;" alt="" />
+  </a>
+</p>
 
 <p>
   <strong>Title:</strong>
@@ -36,12 +37,12 @@
 </p>
 
 <p>
-  <strong>Profile:</strong>
+  <strong>Resource:</strong>
   <%= @featured_product.profile.name %>
 </p>
 
 <p>
-  <strong>Profile type:</strong>
+  <strong>Resource type:</strong>
   <%= @featured_product.profile_type %>
 </p>
 

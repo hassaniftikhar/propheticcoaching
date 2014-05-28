@@ -1,0 +1,49 @@
+<h1>Listing contact_requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Phone no</th>
+      <th>Contact mode</th>
+      <th>City</th>
+      <th>State country</th>
+      <th>Website</th>
+      <th>Heard mode</th>
+      <th>Purpose</th>
+      <th>Message</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contact_requests.each do |contact_request| %>
+      <tr>
+        <td><%= contact_request.subject %></td>
+        <td><%= contact_request.first_name %></td>
+        <td><%= contact_request.last_name %></td>
+        <td><%= contact_request.email %></td>
+        <td><%= contact_request.phone_no %></td>
+        <td><%= contact_request.contact_mode %></td>
+        <td><%= contact_request.city %></td>
+        <td><%= contact_request.state_country %></td>
+        <td><%= contact_request.website %></td>
+        <td><%= contact_request.heard_mode %></td>
+        <td><%= contact_request.purpose %></td>
+        <td><%= contact_request.message %></td>
+        <td><%= link_to 'Show', contact_request %></td>
+        <td><%= link_to 'Edit', edit_contact_request_path(contact_request) %></td>
+        <td><%= link_to 'Destroy', contact_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contact request', new_contact_request_path %>

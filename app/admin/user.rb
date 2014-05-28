@@ -65,7 +65,11 @@ ActiveAdmin.register User do
     #  user.status? ? "Enabled" : "Disabled"
     #end
     column :best_time_to_call
-    column :date_of_birth
+    column :date_of_birth do |user|
+        if(user.date_of_birth)
+          "#{user.date_of_birth.strftime("%m/%d/%Y")}"
+        end
+      end
     #column :current_sign_in_at
     #column :last_sign_in_at
     #column :current_sign_in_ip
@@ -91,7 +95,7 @@ ActiveAdmin.register User do
       f.input :availablity_time, :as => :select, :collection => {"Morning" => "morning", "Afternoon" => "afternoon", "Evening" => "evening"}
       #f.input :status, :as => :select, :collection => {"Enable" => true, "Disable" => false}
       f.input :best_time_to_call
-      f.input :date_of_birth, :start_year => Time.now.year - 70
+      f.input :date_of_birth, :start_year => Time.now.year - 100
     end
     f.actions
   end
@@ -113,7 +117,11 @@ ActiveAdmin.register User do
       row :home_phone
       row :availablity_time
       row :best_time_to_call
-      row :date_of_birth
+      row :date_of_birth do |user|
+        if(user.date_of_birth)
+          "#{user.date_of_birth.strftime("%m/%d/%Y")}"
+        end
+      end
       row :mentees do |user|
         user.mentees.collect { |r| link_to(r.name, admin_mentee_path(r.id)) }.join(", ").html_safe
       end
