@@ -10,7 +10,7 @@ class TasksController < InheritedResources::Base
 
     @mentee = Mentee.find_by :id => task_params[:mentee_id]
     @task = @mentee.tasks.new(task_params[:task])
-
+    p "task create============================"
     respond_to do |format|
       if @task.save
         @task.deliver_email(current_user, "New Task Created") if params[:is_send_email]
@@ -23,17 +23,24 @@ class TasksController < InheritedResources::Base
     end
   end
 
-  # def update
-  #   respond_to do |format|
-  #     if @task.update(task_params)
-  #       format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-  #       format.json { head :no_content }
-  #     else
-  #       format.html { render action: 'edit' }
-  #       format.json { render json: @task.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+  def update
+        p "task update============================"
+        p params
+    respond_to do |format|
+      if @task.update(params)
+        format.html { redirect_to user_mentee_path(params[:user_id], @mentee), notice: 'Task was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  def edit
+        p "task edit============================"
+        p params
+
+  end
 
   # def destroy
   #   @task.destroy

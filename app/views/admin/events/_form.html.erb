@@ -2,12 +2,12 @@
 <p>
   <%=f.label :title %>
   <br/>
-  <%=f.text_field :title, {value: @event.title || current_user.name} %>
+  <%=f.text_field :title, {value: @event.title} %>
 </p>
 <p>
   <%=f.label :description %>
   <br/>
-  <%=f.text_area :description, {:rows => 4, :cols => 30, value: @event.description || current_user.name} %>
+  <%=f.text_area :description, {:rows => 4, :cols => 30, value: @event.description} %>
 </p>
 <p>
   <%=f.label :starttime, 'Start Time' %>

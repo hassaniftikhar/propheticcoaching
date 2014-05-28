@@ -4,5 +4,6 @@
     <td><%= task.starttime %></td>
     <td><%= task.endtime %></td>
     <td><%= task.status %></td>
+    <td><%= link_to 'Edit', edit_user_mentee_task_path(params[:user_id], params[:id], task) %></td>
   </tr>
 <% end %>
