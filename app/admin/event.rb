@@ -32,6 +32,7 @@ ActiveAdmin.register Event do
 
     def set_coach_mentee_relation_id(user)
       params[:event][:coach_mentee_relation_id] = user.coach_mentee_relations.find_by(mentee_id: params[:event][:mentee_id]).id
+      @coach_mentee_relation_id = user.coach_mentee_relations.find_by(mentee_id: params[:event][:mentee_id]).id
       params[:event].delete :coach_id
       params[:event].delete :mentee_id
     end
@@ -39,9 +40,19 @@ ActiveAdmin.register Event do
     def create
       if user = (User.find_by id: params[:event][:coach_id])
         set_coach_mentee_relation_id(user)
-        @event = Event.new(permitted_params[:event])
+        if params[:event][:period] == "Does not repeat"
+          @event = Event.new(permitted_params[:event])
+        else
+          params[:event].delete :coach_mentee_relation_id
+          @event = EventSeries.new(permitted_params[:event])
+          @event.profile = @profile || current_user
+          @event.coach_mentee_relation_id = @coach_mentee_relation_id || nil
+        end
       end
-      super
+      # super
+      super do |format|
+        redirect_to admin_event_path(@event.events.last) and return if resource.valid?
+      end
     end    
 
     def update(options={}, &block)
