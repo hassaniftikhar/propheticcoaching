@@ -14,7 +14,7 @@
 #
 
 class EventSeries < ActiveRecord::Base
-  attr_accessor :title, :description, :commit_button
+  attr_accessor :title, :description, :commit_button, :profile
   
   validates_presence_of :frequency, :period, :starttime, :endtime
   validates_presence_of :title, :description
@@ -44,6 +44,9 @@ class EventSeries < ActiveRecord::Base
         end
       end
     end
+
+    self.events.update_all profile_id: profile.id, profile_type: profile.class.name
+
   end
   
   def r_period(period)
