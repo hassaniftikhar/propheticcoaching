@@ -61,7 +61,7 @@
       },
 //      events: "https://www.google.com/calendar/feeds/imran.malik71%40gmail.com/public/basic",
       eventSources: <%= events_url %>,
-      timeFormat: 'h:mm t{ - h:mm t} ',
+      timeFormat: 'h:mm TT{ - h:mm TT} ',
       dragOpacity: "0.5",
       eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
         moveEvent(event, dayDelta, minuteDelta, allDay);
