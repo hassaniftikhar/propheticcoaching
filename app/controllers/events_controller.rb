@@ -88,7 +88,11 @@ class EventsController < ApplicationController
     else
       @event.update(event_params[:event])
     end
-    render :nothing => true
+    if @event.save
+      render :nothing => true
+    else
+      render :text => @event.errors.full_messages.to_sentence, :status => 422
+    end
   end
 
   def destroy
