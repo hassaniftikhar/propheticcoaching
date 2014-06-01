@@ -1,5 +1,6 @@
 <% @goals.order("id DESC").each do |goal| %>
   <tr>
     <td><%= goal.body %></td>
+    <td><%= goal.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
   </tr>
 <% end %>

@@ -1,5 +1,6 @@
 <% @accomplishments.order("id DESC").each do |accomplishment| %>
   <tr>
     <td><%= accomplishment.body %></td>
+    <td><%= accomplishment.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
   </tr>
 <% end %>
