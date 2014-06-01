@@ -22,7 +22,7 @@
 
 <body>
 
-<% if !(params[:controller] == 'devise/sessions' or params[:controller] == 'users/registrations') %>
+<% if !(params[:controller] == 'devise/sessions' or (params[:controller] == 'users/registrations' and params[:action] != 'edit')) %>
 
 <% flash.each do |name, msg| %>
 <div class="flash-box">
