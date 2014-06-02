@@ -139,7 +139,7 @@ ActiveAdmin.register Mentee do
       f.input :first_name
       f.input :last_name
       f.input :email
-      f.input :date_of_birth, :start_year => Time.now.year - 100
+      f.input :date_of_birth, :start_year => 1910
       f.input :donor_id
       f.input :home_phone
       f.input :availability
