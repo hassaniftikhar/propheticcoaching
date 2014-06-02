@@ -4,10 +4,10 @@ ActiveAdmin.register Event do
   # actions :all, :except => [:new]
 
   scope :GenericEvents, :default => true
-  scope :Meetings, :default => true
+  scope :Sessions, :default => true
   
   action_item :only => :index do
-    link_to 'New Meeting', new_admin_event_path(:meeting => true)
+    link_to 'New Session', new_admin_event_path(:meeting => true)
   end  
   controller do
     def permitted_params

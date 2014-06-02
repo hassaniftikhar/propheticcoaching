@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
   scope :GenericEvents, -> { where('coach_mentee_relation_id IS NULL') }
   # scope :GenericEvents, where('coach_mentee_relation_id IS NULL')
   # scope :Meetings, where('coach_mentee_relation_id IS NOT NULL') 
-  scope :Meetings, -> { where('coach_mentee_relation_id IS NOT NULL') }
+  scope :Sessions, -> { where('coach_mentee_relation_id IS NOT NULL') }
 
   delegate :coach_id, to: :coach_mentee_relation, :allow_nil => true
   delegate :mentee_id, to: :coach_mentee_relation, :allow_nil => true
