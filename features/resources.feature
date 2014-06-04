@@ -12,7 +12,7 @@ Feature:
     Given I have a book resource
     When I visit ebooks index page
     And I enter available as keyword for ebook
-    And I click search button
+    And I click ebook search button
     Then I should see key word in the matched text
     And keyword should be highlighted in yellow
 
@@ -20,11 +20,11 @@ Feature:
   @javascript
   Scenario: search questions
     Given I have a question resource
-    When I visit question index page
+    When I visit questions index page
     And I enter question as keyword for question
-    And I click search button
+    And I click question search button
     Then I should see key word in the matched text
-    And keyword should be highlighted in yellow
+#    And keyword should be highlighted in yellow
 
 #  @search_book
 #  @javascript

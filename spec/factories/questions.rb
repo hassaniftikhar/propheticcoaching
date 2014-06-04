@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :question do
-    body "MyText"
+    body "this is a question"
   end
 end

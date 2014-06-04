@@ -19,7 +19,7 @@ When(/^I visit (.+) index page$/) do |klass|
   case klass
     when /ebooks/
       visit ebooks_path
-    when /ebooks/
+    when /questions/
       visit ebooks_path
       click_link 'Question'
   end
@@ -35,8 +35,13 @@ When(/^I enter (.+) as keyword for (.+)$/) do |keyword, klass|
   end
 end
 
-When(/^I click search button$/) do
-  click_button 'ebook_search'
+When(/^I click (.+) search button$/) do |klass|
+  case klass
+    when /ebook/
+      click_button 'ebook_search'
+    when /question/
+      click_button 'question_search'
+  end
 end
 
 Then(/^I should see key word in the matched text$/) do
