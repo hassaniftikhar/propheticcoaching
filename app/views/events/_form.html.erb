@@ -2,23 +2,25 @@
 <p>
   <%=f.label :title %>
   <br/>
-  <%=f.text_field :title, {value: @event.title || current_user.name} %>
+  <%=f.text_field :title, {value: @event.title} %>
 </p>
 <p>
   <%=f.label :description %>
   <br/>
-  <%=f.text_area :description, {:rows => 4, :cols => 30, value: @event.description || current_user.name} %>
+  <%=f.text_area :description, {:rows => 4, :cols => 30, value: @event.description} %>
 </p>
 <p>
   <%=f.label :starttime, 'Start Time' %>
   <br/>
-  <%=f.datetime_select :starttime, ampm: true, order: [:month, :day, :year], :minute_step => 15, :start_hour => 9, :end_hour => 21 %>
+  <%=f.datetime_select :starttime, ampm: true, order: [:month, :day, :year], :minute_step => 15, :start_hour => 9, :end_hour => 21, :default => { :hour => 9, :minute => 00 } %>
 </p>
 <p>
   <%=f.label :endtime, 'End Time' %>
   <br/>
-  <%=f.datetime_select :endtime, ampm: true, order: [:month, :day, :year], :minute_step => 15, :start_hour => 9, :end_hour => 21 %>
+  <%=f.datetime_select :endtime, ampm: true, order: [:month, :day, :year], :minute_step => 15, :start_hour => 9, :end_hour => 21, :default => { :hour => 10, :minute => 00 } %>
+
 </p>
+
 <p>
   <%=f.label :all_day %>
   <%=f.check_box :all_day %>

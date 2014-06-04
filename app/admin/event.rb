@@ -4,10 +4,10 @@ ActiveAdmin.register Event do
   # actions :all, :except => [:new]
 
   scope :GenericEvents, :default => true
-  scope :Meetings, :default => true
+  scope :Sessions, :default => true
   
   action_item :only => :index do
-    link_to 'New Meeting', new_admin_event_path(:meeting => true)
+    link_to 'New Session', new_admin_event_path(:meeting => true)
   end  
   controller do
     def permitted_params
@@ -32,6 +32,7 @@ ActiveAdmin.register Event do
 
     def set_coach_mentee_relation_id(user)
       params[:event][:coach_mentee_relation_id] = user.coach_mentee_relations.find_by(mentee_id: params[:event][:mentee_id]).id
+      @coach_mentee_relation_id = user.coach_mentee_relations.find_by(mentee_id: params[:event][:mentee_id]).id
       params[:event].delete :coach_id
       params[:event].delete :mentee_id
     end
@@ -39,9 +40,23 @@ ActiveAdmin.register Event do
     def create
       if user = (User.find_by id: params[:event][:coach_id])
         set_coach_mentee_relation_id(user)
-        @event = Event.new(permitted_params[:event])
+        if params[:event][:period] == "Does not repeat"
+          @event = Event.new(permitted_params[:event])
+          super
+        else
+          params[:event].delete :coach_mentee_relation_id
+          @event = EventSeries.new(permitted_params[:event])
+          @event.profile = @profile || current_user
+          @event.coach_mentee_relation_id = @coach_mentee_relation_id || nil
+          super do |format|
+            redirect_to admin_event_path(@event.events.last) and return if resource.valid?
+          end
+        end
       end
-      super
+      # super
+      # super do |format|
+      #   redirect_to admin_event_path(@event.events.last) and return if resource.valid?
+      # end
     end    
 
     def update(options={}, &block)
@@ -72,7 +87,7 @@ ActiveAdmin.register Event do
   # index :as => :grid, :default => true do |event|
   #   link_to(event.title, admin_event_path(event))
   # end
-
+  @event = Event.new(:period => "Does not repeat")
   form :partial => "form"
 
   # form do |f|

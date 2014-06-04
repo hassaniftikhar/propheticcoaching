@@ -6,5 +6,4 @@ class BestFeature < ActiveRecord::Base
 	validates_presence_of :title
   validates_presence_of :image
   validates_uniqueness_of :title, :case_sensitive => false
-
 end

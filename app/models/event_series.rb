@@ -14,7 +14,7 @@
 #
 
 class EventSeries < ActiveRecord::Base
-  attr_accessor :title, :description, :commit_button, :profile
+  attr_accessor :title, :description, :commit_button, :profile, :coach_mentee_relation_id
   
   validates_presence_of :frequency, :period, :starttime, :endtime
   validates_presence_of :title, :description
@@ -45,7 +45,7 @@ class EventSeries < ActiveRecord::Base
       end
     end
 
-    self.events.update_all profile_id: profile.id, profile_type: profile.class.name
+    self.events.update_all profile_id: profile.id, profile_type: profile.class.name, coach_mentee_relation_id: coach_mentee_relation_id
 
   end
   

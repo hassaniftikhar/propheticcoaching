@@ -6,6 +6,7 @@
 //= require jquery_highlight
 //= require fullcalendar.min.js
 //= require gcal.js
+//= require shared
 //= require events
 //= require ebooks
 //= require meetings.js.coffee

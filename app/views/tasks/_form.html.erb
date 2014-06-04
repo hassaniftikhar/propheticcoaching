@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :starttime %><br>
-    <%= f.datetime_select :starttime %>
+    <%= f.datetime_select :starttime, ampm: true, order: [:month, :day, :year], :minute_step => 15, :start_hour => 9, :end_hour => 21 %>
   </div>
   <div class="field">
     <%= f.label :endtime %><br>
-    <%= f.datetime_select :endtime %>
+    <%= f.datetime_select :endtime, ampm: true, order: [:month, :day, :year], :minute_step => 15, :start_hour => 9, :end_hour => 21 %>
   </div>
   <div class="field">
     <%= f.label :status %><br>
