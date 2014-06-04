@@ -42,17 +42,21 @@ ActiveAdmin.register Event do
         set_coach_mentee_relation_id(user)
         if params[:event][:period] == "Does not repeat"
           @event = Event.new(permitted_params[:event])
+          super
         else
           params[:event].delete :coach_mentee_relation_id
           @event = EventSeries.new(permitted_params[:event])
           @event.profile = @profile || current_user
           @event.coach_mentee_relation_id = @coach_mentee_relation_id || nil
+          super do |format|
+            redirect_to admin_event_path(@event.events.last) and return if resource.valid?
+          end
         end
       end
       # super
-      super do |format|
-        redirect_to admin_event_path(@event.events.last) and return if resource.valid?
-      end
+      # super do |format|
+      #   redirect_to admin_event_path(@event.events.last) and return if resource.valid?
+      # end
     end    
 
     def update(options={}, &block)
@@ -83,7 +87,7 @@ ActiveAdmin.register Event do
   # index :as => :grid, :default => true do |event|
   #   link_to(event.title, admin_event_path(event))
   # end
-
+  @event = Event.new(:period => "Does not repeat")
   form :partial => "form"
 
   # form do |f|
