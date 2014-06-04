@@ -20,11 +20,13 @@ class BestFeaturesController < ApplicationController
   # GET /best_features/1/edit
   def edit
   end
+
   def image
     #TODO: this is a security issue as anyone can access the pdf, need to fix so that only jquery can access
     @best_feature = BestFeature.find_by(id: params[:id])
     send_file(open(@best_feature.image.url), :filename => @best_feature.image.path, :disposition => 'inline', :type => "image/jpeg")
   end
+
   # POST /best_features
   # POST /best_features.json
   def create

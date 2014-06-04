@@ -7,10 +7,41 @@ Feature:
     Given I am signed in
 
   @search_book
+  @javascript
   Scenario: search books
     Given I have a book resource
     When I visit ebooks index page
-    And I enter available as keyword
+    And I enter available as keyword for ebook
     And I click search button
     Then I should see key word in the matched text
+    And keyword should be highlighted in yellow
+
+  @search_question
+  @javascript
+  Scenario: search questions
+    Given I have a question resource
+    When I visit question index page
+    And I enter question as keyword for question
+    And I click search button
+    Then I should see key word in the matched text
+    And keyword should be highlighted in yellow
+
+#  @search_book
+#  @javascript
+#  Scenario: search books
+#    Given I have a book resource
+#    When I visit ebooks index page
+#    And I enter available as keyword
+#    And I click search button
+#    Then I should see key word in the matched text
+#    And keyword should be highlighted in yellow
+#
+#  @search_book
+#  @javascript
+#  Scenario: search books
+#    Given I have a book resource
+#    When I visit ebooks index page
+#    And I enter available as keyword
+#    And I click search button
+#    Then I should see key word in the matched text
 #    And keyword should be highlighted in yellow

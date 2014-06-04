@@ -21,6 +21,7 @@
 //= require jquery_highlight
 //= require mentees
 //= require ebooks
+//= require questions
 //= require events
 //= require dashboard
 //= require active_admin
