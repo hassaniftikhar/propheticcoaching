@@ -21,9 +21,11 @@
 //= require jquery_highlight
 //= require mentees
 //= require ebooks
+//= require questions
 //= require events
 //= require dashboard
 //= require active_admin
 //= require bootstrap
 //= require jquery.ui.chatbox
 //= require jquery.cookie
+//= require bootstrap-timepicker.js

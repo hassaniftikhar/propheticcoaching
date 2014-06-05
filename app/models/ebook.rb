@@ -67,7 +67,9 @@ class Ebook < ActiveRecord::Base
   end
 
   def create_pages
+    #unless self.featured_product
     Resque.enqueue(CreatePagesWorker, self.id)
+    #end
   end
 
 end
