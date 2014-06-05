@@ -28,3 +28,4 @@
 //= require bootstrap
 //= require jquery.ui.chatbox
 //= require jquery.cookie
+//= require bootstrap-timepicker.js
