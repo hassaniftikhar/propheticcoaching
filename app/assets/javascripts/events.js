@@ -33,6 +33,7 @@ function showEventDetails(event) {
     title: title,
     modal: true,
     width: 500,
+    draggable: false,
     close: function (event, ui) {
       $('#desc_dialog').dialog('destroy')
     }
@@ -142,6 +143,7 @@ var ready = function () {
           title: 'New Event',
           modal: true,
           width: 500,
+          draggable: false,
           close: function (event, ui) {
             $(dialog_div_id).dialog('destroy')
           }
