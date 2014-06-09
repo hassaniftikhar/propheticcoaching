@@ -25,12 +25,11 @@ class ContactRequestsController < ApplicationController
   # POST /contact_requests.json
   def create
     @contact_request = ContactRequest.new(contact_request_params)
-    @contact_request.state_country = "Pakistan"
     respond_to do |format|
       if @contact_request.save
         # format.html { render action: 'new', notice: 'Contact request was successfully created.' }
         # format.html { redirect_to @contact_request, notice: 'Contact request was successfully created.' }
-        format.html { redirect_to :root, notice: 'Contact request was successfully created.' }
+        format.html { redirect_to :root, notice: 'Contact Request was successfully sent.' }
         # format.json { render action: 'show', status: :created, location: @contact_request }
       else
         format.html { render action: 'new' }

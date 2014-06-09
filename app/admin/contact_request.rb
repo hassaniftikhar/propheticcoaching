@@ -13,5 +13,7 @@ ActiveAdmin.register ContactRequest do
   #  permitted << :other if resource.something?
   #  permitted
   # end
-  
+  config.clear_action_items!
+
+  permit_params :subject, :first_name, :last_name, :email, :phone_no, :contact_mode, :city, :state_country, :website, :heard_mode, :purpose, :message
 end

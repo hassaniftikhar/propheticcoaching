@@ -6,7 +6,7 @@
     </div>
     <div class="col-sm-6">
     <!--<form> -->
-      <%= simple_form_for(@contact_request) do |f| %>
+      <%= simple_form_for @contact_request do |f| %>
         <% if @contact_request.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@contact_request.errors.count, "error") %> prohibited this contact_request from being saved:</h2>
@@ -31,21 +31,14 @@
       <p><span class="req">*</span>Required</p>
       <br>
       <h4>Purpose of Contact</h4>
-      <div class="radio">
-        <label>
-          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-          Text for option goes here. </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-          Text for option two goes here. </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-          Text for option three goes here. </label>
-      </div>
+
+      <%= f.input :purpose, 
+      :collection => [["Text for option goes here."], ["Text for option two goes here."], ["Text for option three goes here."]], 
+      :checked => ["Text for option goes here."], 
+      :label_method => :last, 
+      :value_method => :first,
+      :as => :radio_buttons, label: false %>
+
       <p class="mini">Please indicate what the nature of your contact is</p>
       <br>
       </div>
@@ -102,7 +95,7 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label class="control-label">State/Country<span class="req">*</span></label>
-              <%= f.input :purpose, placeholder: 'Enter State/Country', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control input-sm' }
+              <%= f.input :state_country, placeholder: 'Enter State/Country', :required => true, :autofocus => true, label: false, input_html: { class: 'form-control input-sm' }
               %>
             </div>
           </div>

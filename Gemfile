@@ -44,6 +44,8 @@ gem 'rails_12factor'
 # gem 'resque'
 gem 'unf' 
 gem 'resque', :require => 'resque/server'
+gem 'country_select'
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

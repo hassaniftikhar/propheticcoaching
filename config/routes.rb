@@ -1,6 +1,6 @@
 Propheticcoaching::Application.routes.draw do
 
-  resources :contact_requests
+  resources :contact_requests, :only => [:new, :create]
 
   # resources :featured_products
 
