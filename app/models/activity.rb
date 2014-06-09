@@ -5,6 +5,9 @@ class Activity < ActiveRecord::Base
 
   validates_presence_of :body
   validates_uniqueness_of :body, :case_sensitive => false
+  has_many :comments, :as => :resource
+  has_and_belongs_to_many :categories
+
 
   # scope :All, -> { where('last_import IS false') }
   scope :All, -> { order('updated_at') }

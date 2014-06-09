@@ -12,6 +12,8 @@ class Ebook < ActiveRecord::Base
   process_in_background :pdf
 
   has_one :featured_product, :as => :profile
+  has_many :categories
+
 
 
   # after_save :update_sha
