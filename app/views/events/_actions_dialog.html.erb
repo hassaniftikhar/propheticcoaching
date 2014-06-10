@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<% if profile %>
+<% if profile and !(params[:controller] == 'dashboard') %>
   <%= link_to 'Create Event', [:new, profile, :event], :id => "new_event" %> <br/>
   <%= link_to 'Add Google Calendar', [:new, profile, :google_event], :id => "google_event" %> <br/>
   <%= link_to 'Edit Google Calendar', [profile, :google_events], :id => "google_event" %> <br/>
