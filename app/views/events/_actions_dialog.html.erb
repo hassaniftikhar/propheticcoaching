@@ -20,11 +20,12 @@
   </div>
 </div>
 
-<% if profile and !(params[:controller] == 'dashboard') %>
-  <%= link_to 'Create Event', [:new, profile, :event], :id => "new_event" %> <br/>
-  <%= link_to 'Add Google Calendar', [:new, profile, :google_event], :id => "google_event" %> <br/>
-  <%= link_to 'Edit Google Calendar', [profile, :google_events], :id => "google_event" %> <br/>
-
+<% if profile %>
+  <% unless(params[:controller] == 'dashboard') %>
+    <%= link_to 'Create Event', [:new, profile, :event], :id => "new_event" %> <br/>
+    <%= link_to 'Add Google Calendar', [:new, profile, :google_event], :id => "google_event" %> <br/>
+    <%= link_to 'Edit Google Calendar', [profile, :google_events], :id => "google_event" %> <br/>
+  <% end %>
   <% events_url = get_events_url_on(profile) %>
 <% else %>
   <% events_url = get_coaches_events_url %>
