@@ -7,6 +7,11 @@ class Activity < ActiveRecord::Base
   validates_uniqueness_of :body, :case_sensitive => false
   has_many :comments, :as => :resource
   has_and_belongs_to_many :categories
+  # has_and_belongs_to_many :categories,
+  #       :foreign_key => 'activity_id',
+  #       :association_foreign_key => 'category_id',
+  #       :class_name => 'Category',
+  #       :join_table => 'activities_categories'  
 
 
   # scope :All, -> { where('last_import IS false') }

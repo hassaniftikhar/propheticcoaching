@@ -1,8 +1,9 @@
 class Ebook < ActiveRecord::Base
 
+  attr_accessor :category_id
   has_many :pages, dependent: :destroy
-  validates_presence_of :name
-  validates_presence_of :pdf
+  # validates_presence_of :name
+  validates_presence_of :name, :pdf
   validates_uniqueness_of :name, :case_sensitive => false
   # validates_uniqueness_of :sha
   # validate :is_book_unique
@@ -12,7 +13,7 @@ class Ebook < ActiveRecord::Base
   process_in_background :pdf
 
   has_one :featured_product, :as => :profile
-  has_many :categories
+  has_and_belongs_to_many :categories
 
 
 

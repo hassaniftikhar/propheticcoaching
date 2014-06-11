@@ -92,7 +92,7 @@ class EbooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ebook_params
-      params.require(:ebook).permit(:name, :pdf)
+      params.require(:ebook).permit(:name, :pdf, :category_id)
     end
 
     def set_ebook_name
