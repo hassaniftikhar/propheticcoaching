@@ -1,0 +1,13 @@
+if activities
+    table_for activities do
+      column :body
+      column :category_name do |activity|
+          activity.categories.order("name asc").collect {|category| (link_to category.name, admin_category_path(category))}.join(", ").html_safe
+      end
+    end
+
+
+    "Assign Category"
+    render "assign_multi_categories"
+
+end

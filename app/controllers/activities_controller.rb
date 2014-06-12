@@ -29,6 +29,7 @@ class ActivitiesController < ApplicationController
 
     respond_to do |format|
       if @activity.save
+        # params[:activity][:category_id]
         format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
         format.json { render action: 'show', status: :created, location: @activity }
       else
@@ -70,6 +71,6 @@ class ActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      params.require(:activity).permit(:body, :last_import)
+      params.require(:activity).permit(:body, :last_import, :category_id)
     end
 end

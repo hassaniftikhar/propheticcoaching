@@ -2,16 +2,22 @@ class Activity < ActiveRecord::Base
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
-
+  attr_accessor :category_id
+  
   validates_presence_of :body
   validates_uniqueness_of :body, :case_sensitive => false
   has_many :comments, :as => :resource
-  has_and_belongs_to_many :categories
+  # has_and_belongs_to_many :categories
   # has_and_belongs_to_many :categories,
   #       :foreign_key => 'activity_id',
   #       :association_foreign_key => 'category_id',
   #       :class_name => 'Category',
   #       :join_table => 'activities_categories'  
+  has_many :activity_categorizations
+  has_many :categories, through: :activity_categorizations, :class_name => "Category",
+        :foreign_key => 'activity_id'
+
+  before_destroy {|activity| activity.categories.clear}
 
 
   # scope :All, -> { where('last_import IS false') }
