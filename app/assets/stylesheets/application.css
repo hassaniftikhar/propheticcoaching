@@ -21,6 +21,7 @@
  *= require bootstrap-theme.css
  *= require font-awesome.css
  *= require custom.css
+ *= require jquery.multiselect
  *= require owl.carousel.css
  *= require owl.theme.css
  *= require owl.transitions.css

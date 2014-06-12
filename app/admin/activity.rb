@@ -48,10 +48,10 @@ ActiveAdmin.register Activity do
     # p "==========================================="
     # p params[:activity_selection].split(",").map(&:to_i).first
     # p "==========================================="
-    # redirect_to assign_category_admin_activity_path(params[:activity_id])
+    redirect_to assign_category_admin_activity_path(params[:activity_id])
     # redirect_to admin_activities_path
 
-    window.opener.location.href = window.opener.location;
+    # window.opener.location.href = window.opener.location;
     # activities = Activity.find(29)
     # @selection = params[:activity_selection]
     # @existing_categories=nil

@@ -20,6 +20,8 @@ class ActivitiesController < ApplicationController
 
   # GET /activities/1/edit
   def edit
+    @activity = Activity.find(params[:id])
+    @existing_categories =  @activity.categories  
   end
 
   # POST /activities
@@ -42,6 +44,23 @@ class ActivitiesController < ApplicationController
   # PATCH/PUT /activities/1
   # PATCH/PUT /activities/1.json
   def update
+
+    existing_categories = (Activity.find_by id: params[:id]).categories
+    is_already_category = (Activity.find_by id: params[:id]).activity_categorizations.pluck(:category_id).include? params[:category_id].to_i
+
+    if(params[:checked] == "checked" )
+      if(!is_already_category)
+        existing_categories << (Category.find_by id: params[:category_id])
+      end
+    else
+      if(is_already_category)
+        existing_categories.delete(params[:category_id])
+      end
+    end
+    # redirect_to assign_category_admin_activity_path(params[:id])   
+
+
+
     respond_to do |format|
       if @activity.update(activity_params)
         format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }

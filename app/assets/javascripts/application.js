@@ -25,6 +25,7 @@
 //= require events
 //= require dashboard
 //= require active_admin
+//= require jquery.multiselect
 //= require bootstrap
 //= require jquery.ui.chatbox
 //= require jquery.cookie

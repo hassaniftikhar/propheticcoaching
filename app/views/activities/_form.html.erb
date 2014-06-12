@@ -15,13 +15,32 @@
     <%= f.label :body %><br>
     <%= f.text_area :body %>
   </div>
-  <div class="field">
-    <%= f.select :category_id, Category.all.collect {|category| [ category.name, category.id ] }, 
-    { :prompt => "Select Category"}, 
-    { :multiple => true, :size => 5 } %>
+ 
+  <div>
+    <select id="categories_list" name="categories_list" multiple="multiple">
+      <% Category.order("name ASC").each do |category| %>
+        <% if @existing_categories and (@activity.activity_categorizations.pluck(:category_id).include? category.id) %>
+                <option value= <%="#{category.id}" %> selected="selected" > <%= category.name %> </option>
+            <% else %>
+                <option value= <%="#{category.id}" %>  > <%= category.name %> </option>
+        <% end %>
 
+      <% end %>
+    </select>
   </div>
+  <div><p><br /> <br /><br /><br /><br /></p></div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+
+<script type="text/javascript">
+
+    var activity_selection;
+    <% if @selection %>
+      activity_selection  ="<%= @selection.join(',').html_safe %>";
+    <% else %>
+        activity_selection  = nil;
+    <% end %>
+ </script>
