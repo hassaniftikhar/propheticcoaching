@@ -59,8 +59,6 @@ class ActivitiesController < ApplicationController
     end
     # redirect_to assign_category_admin_activity_path(params[:id])   
 
-
-
     respond_to do |format|
       if @activity.update(activity_params)
         format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }

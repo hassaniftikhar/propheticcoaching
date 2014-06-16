@@ -1,6 +1,8 @@
 <% @activities.each do |activity| %>
   <tr>
     <td><%= activity.body %></td>
+    <td><%= activity.categories.order("name asc").collect {|category| link_to("#{category.name}", admin_category_path(category)) }.join(", ").html_safe %>
+    </td>
     <td><%= link_to 'Show', activity_path(activity), :class => 'btn btn-mini'%></td>
   </tr>
 <% end %>

@@ -21,18 +21,23 @@ class Activity < ActiveRecord::Base
 
 
   # scope :All, -> { where('last_import IS false') }
-  scope :All, -> { order('updated_at') }
+  # default_scope order('updated_at DESC')
+  scope :All, -> { order('updated_at DESC') }
   scope :LastImported, -> { where('last_import IS true') }
 
   def self.search(params)
+    # tire.search(load: true, page: params[:page], per_page: 100) do
     tire.search(load: true, page: params[:page], per_page: 100) do
       query { string params[:query], default_operator: "AND" } if params[:query].present?
+      # sort { by :updated_at, "desc" }
+      sort { by :id, "desc" }
     end
   end
 
   mapping do
     indexes :id, type: 'integer'
     indexes :body
+    # indexes :updated_at
   end
 
   def self.import_csv(file)
