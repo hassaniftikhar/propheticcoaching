@@ -7,6 +7,7 @@
 <%= form_tag activities_path, method: :get do %>
   <p>
     <%= text_field_tag :query, params[:query] %>
+    <%= text_field_tag :category, params[:category] %>
     <%= submit_tag "Search", body: nil %>
   </p>
 <% end %>

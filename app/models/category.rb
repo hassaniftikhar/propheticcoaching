@@ -12,6 +12,7 @@ class Category < ActiveRecord::Base
       :foreign_key => 'category_id'
  has_many :activities, through: :activity_categorizations, :class_name => "Activity",
        :foreign_key => 'activity_id'
+       # , touch: true
 	before_destroy {|category| category.activities.clear}
 
 	

@@ -1,11 +1,11 @@
-<%- model_class = Question -%>
+<%- model_class = Activity -%>
 <div class="page-header">
-  <h1><%= t '.title', :default => Question.name.pluralize.titleize %></h1>
+  <h1><%= t '.title', :default => Activity.name.pluralize.titleize %></h1>
 </div>
 
 <%= form_tag search_activities_path, :id => "search_activity", method: :get do %>
   <p>
-    <%= text_field_tag :query, params[:query] %>
+    <%= text_field_tag :category, params[:category] %>
     <%= submit_tag "Search", name: nil %>
   </p>
 <% end %>

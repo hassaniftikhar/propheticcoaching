@@ -1,7 +1,8 @@
 class Activity < ActiveRecord::Base
 
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  
+  
+
   attr_accessor :category_id
   
   validates_presence_of :body
@@ -17,6 +18,12 @@ class Activity < ActiveRecord::Base
   has_many :categories, through: :activity_categorizations, :class_name => "Category",
         :foreign_key => 'activity_id'
 
+  # after_touch() { tire.update_index }
+  self.include_root_in_json = false
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
+
   before_destroy {|activity| activity.categories.clear}
 
 
@@ -25,20 +32,51 @@ class Activity < ActiveRecord::Base
   scope :All, -> { order('updated_at DESC') }
   scope :LastImported, -> { where('last_import IS true') }
 
+  # before_filter :category_filter
+
+  # def category_filter
+  #   if(self.activity_categorizations.pluck(:category_id).include? params[:category].to_i)
+      
+  #   end
+  # end
   def self.search(params)
+    p "---------------------------"
+    p params
     # tire.search(load: true, page: params[:page], per_page: 100) do
     tire.search(load: true, page: params[:page], per_page: 100) do
-      query { string params[:query], default_operator: "AND" } if params[:query].present?
-      # sort { by :updated_at, "desc" }
-      sort { by :id, "desc" }
+      query { 
+        string params[:query], default_operator: "AND" 
+        match 'categories.name',  'Health'
+      } if params[:query].present?
+      sort { by :updated_at, "desc" }
+      # query { string params[:query], :default_field => 'name'}
+      # filter :term, :coach_role => true
+      # filter :term, :category_id => self.categories.last.name
+      # filter :term, 'categories.name' => ["Education"]
+      # filter :term, 'categories.name' => ["Education", "Love"]
+      # highlight 'body', 'categories.name'
+      # filter : {
+      #     :terms, : {
+      #         :categories => ["10", "11"]
+      #     }
+      # }
     end
   end
 
   mapping do
     indexes :id, type: 'integer'
-    indexes :body
-    # indexes :updated_at
+    indexes :body, type: 'string', boost: 10, analyzer: 'snowball'
+    # indexes :updated_at, type: 'date'
+     
+    indexes :categories do
+      indexes :name, type: 'string', analyzer: 'snowball'
+    end
   end
+
+  def to_indexed_json
+    to_json( include: { categories: { only: [:name] } } )
+  end
+
 
   def self.import_csv(file)
       require "csv"
