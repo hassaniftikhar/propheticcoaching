@@ -101,6 +101,7 @@ $(document).ready(function () {
   $("#categories_list").multiselect({
     selectedList: 4, 
     header: "Category Selection",
+    noneSelectedText: "Select Category",
      click: function(event, ui){
         // $callback.text(ui.value + ' ' + (ui.checked ? 'checked' : 'unchecked') );
         var url = window.location.href;
