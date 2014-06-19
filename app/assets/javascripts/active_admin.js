@@ -108,9 +108,7 @@ $(document).ready(function () {
         var parts = url.split("/");
         var activity_id = parts[parts.length - 2];
         console.log("event: " + event);
-
         var url = '/admin/activities'+( ( activity_id > 0 ) ? ('/'+activity_id+'/assign_multiple_categories'):'/batch_assign_multiple_categories');
-
         $.ajax({
           data: 'category_id=' + ui.value + '&activity_selection=' + activity_selection + '&checked=' + (ui.checked ? 'checked' : 'unchecked'),
           dataType: 'script',
@@ -118,10 +116,18 @@ $(document).ready(function () {
           url: url,
           success: function(){
             location.reload();
+            // $("#activity_list").html("success testing");
           }
           ,
           error: function(){
+            // window.location = window.location.href;
+            // window.location.href = window.location.protocol +url+ window.location.host + window.location.pathname;
+            // window.location.href = url
+            // window.location.replace(window.location.href);
+            // window.location.assign(document.URL);
             location.reload();
+            // $("#activity_list").html("fail testing");
+            // $("#activity_list").reload;
           }
         });
         // return false;

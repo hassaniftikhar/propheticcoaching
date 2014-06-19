@@ -30,9 +30,7 @@ ActiveAdmin.register Activity do
     render "assign_categories", :locals => {activities: activities, selection: selection}
   end
 
-  collection_action :batch_assign_multiple_categories, :method => :post do
-
-
+  collection_action :batch_assign_multiple_categories, :method => [:post] do
     params[:activity_selection].split(",").map(&:to_i).each do |activity_id|
       activity = (Activity.find_by id: activity_id)
       if(params[:checked] == "checked" )
@@ -44,12 +42,14 @@ ActiveAdmin.register Activity do
           activity.categories.delete(params[:category_id])
         end
       end
+      redirect_to admin_activities_url, flash: {message: "Successfully Assigned Category"}
     end
     # p "==========================================="
     # p params[:activity_selection].split(",").map(&:to_i).first
     # p "==========================================="
-    redirect_to assign_category_admin_activity_path(params[:activity_id])
-    # redirect_to admin_activities_path
+    # redirect_to assign_category_admin_activity_path(params[:activity_id])
+    # redirect_to assign_category_admin_activity_path(45) 
+    # p "==========================================="
 
     # window.opener.location.href = window.opener.location;
     # activities = Activity.find(29)
