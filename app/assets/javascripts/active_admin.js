@@ -115,17 +115,34 @@ $(document).ready(function () {
           type: 'post',
           url: url,
           success: function(){
-            location.reload();
+            if( activity_id > 0 ) {
+              location.reload();
+            }
+            else {
+              window.location.href = '/admin/activities?message=true';
+            }
+            // location.reload();
+            // window.location.href = '/admin/activities?message=true';
             // $("#activity_list").html("success testing");
           }
           ,
           error: function(){
+            if( activity_id > 0 ) {
+              location.reload();
+            }
+            else {
+              window.location.href = '/admin/activities?message=true';
+            }
+
+
+
+            // location.reload();
             // window.location = window.location.href;
             // window.location.href = window.location.protocol +url+ window.location.host + window.location.pathname;
             // window.location.href = url
             // window.location.replace(window.location.href);
             // window.location.assign(document.URL);
-            location.reload();
+            // window.location.href = '/admin/activities?message=true';
             // $("#activity_list").html("fail testing");
             // $("#activity_list").reload;
           }

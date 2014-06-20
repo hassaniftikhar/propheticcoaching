@@ -1,5 +1,7 @@
 class Activity < ActiveRecord::Base
 
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
   
   
 
@@ -19,12 +21,11 @@ class Activity < ActiveRecord::Base
         :foreign_key => 'activity_id'
 
   # after_touch() { tire.update_index }
-  self.include_root_in_json = false
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  # self.include_root_in_json = false
 
-
+  before_destroy :remove_es_index
   before_destroy {|activity| activity.categories.clear}
+  
 
 
   # scope :All, -> { where('last_import IS false') }
@@ -73,7 +74,9 @@ class Activity < ActiveRecord::Base
   def to_indexed_json
     to_json( include: { categories: { only: [:name] } } )
   end
-
+  def remove_es_index
+    self.index.remove self
+  end
 
   def self.import_csv(file)
       require "csv"

@@ -37,12 +37,17 @@ ActiveAdmin.register Activity do
         unless(activity.activity_categorizations.pluck(:category_id).include? params[:category_id].to_i)
           activity.categories << (Category.find_by id: params[:category_id])
         end
+        flash[:notice] = "Successfully Assigned Category"
       else
         if(activity.activity_categorizations.pluck(:category_id).include? params[:category_id].to_i)
           activity.categories.delete(params[:category_id])
         end
+        flash[:notice] = "Successfully Unassigned Category"
       end
-      redirect_to admin_activities_url, flash: {message: "Successfully Assigned Category"}
+      activity.save
+      head :no_content
+
+      # redirect_to admin_activities_url, flash: {message: "Successfully Assigned Category"}
     end
     # p "==========================================="
     # p params[:activity_selection].split(",").map(&:to_i).first
@@ -66,6 +71,7 @@ ActiveAdmin.register Activity do
 
   member_action :assign_multiple_categories, :method => :post do
 
+    activity = (Activity.find_by id: params[:id])
     existing_categories = (Activity.find_by id: params[:id]).categories
     is_already_category = (Activity.find_by id: params[:id]).activity_categorizations.pluck(:category_id).include? params[:category_id].to_i
 
@@ -80,6 +86,7 @@ ActiveAdmin.register Activity do
         existing_categories.delete(params[:category_id])
       end
     end
+    activity.save
     redirect_to assign_category_admin_activity_path(params[:id])   
   end
 
@@ -88,7 +95,7 @@ ActiveAdmin.register Activity do
     column :id
     column :body
     column :category do |activity|
-          activity.categories.collect {|category| (category.name)}.join(", ").html_safe
+          activity.categories.order("name asc").collect {|category| (category.name)}.join(", ").html_safe
     end
     default_actions
     actions :defaults => false do |activity|
