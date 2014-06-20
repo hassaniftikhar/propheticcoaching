@@ -2,7 +2,7 @@ div :id => "activity_category_list" do
 		table_for activity do
 		  column :body
 		  column :category_name do |activity|
-		  		activity.categories.order("name asc").collect {|category| (link_to category.name, admin_user_path(category))}.join(", ").html_safe
+		  		activity.categories.order("name asc").collect {|category| (link_to category.name, admin_category_path(category))}.join(", ").html_safe
 		  end
 		end
 
