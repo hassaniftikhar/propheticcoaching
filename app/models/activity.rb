@@ -63,7 +63,7 @@ class Activity < ActiveRecord::Base
   mapping do
     indexes :id, type: 'integer'
     indexes :body, type: 'string', boost: 10, analyzer: 'snowball'
-    # indexes :updated_at, type: 'date'
+    indexes :updated_at, type: 'date'
      
     indexes :categories do
       indexes :name, type: 'string', analyzer: 'snowball'
