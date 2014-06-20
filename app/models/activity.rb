@@ -40,9 +40,6 @@ class Activity < ActiveRecord::Base
   #   end
   # end
   def self.search(params)
-    p "---------------------------"
-    p params
-    # tire.search(load: true, page: params[:page], per_page: 100) do
     if params[:category].present?
       params_categories = params[:category]
       categories_ary = params_categories.to_s.split(',')

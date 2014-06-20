@@ -1,6 +1,9 @@
 class Ebook < ActiveRecord::Base
 
-  attr_accessor :category_id
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
+  # attr_accessor :category_id
   has_many :pages, dependent: :destroy
   # validates_presence_of :name
   validates_presence_of :name, :pdf
@@ -13,7 +16,7 @@ class Ebook < ActiveRecord::Base
   process_in_background :pdf
 
   has_one :featured_product, :as => :profile
-  has_and_belongs_to_many :categories
+  # has_and_belongs_to_many :categories
 
 
 
@@ -22,8 +25,6 @@ class Ebook < ActiveRecord::Base
   after_save :create_pages
   before_destroy :remove_es_index
 
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
 
   # def get_sha
   #   require 'open-uri'
