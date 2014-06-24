@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   before_action :set_calendar_properties
   before_action :set_profile, only: [:new, :create, :index, :get_events]
 
+  
   def set_calendar_properties
     gon.editable = current_user.is_admin? ? true : false
     @calendar_editable = gon.editable
@@ -14,6 +15,26 @@ class EventsController < ApplicationController
     # @event = Event.new(:endtime => 1.hour.from_now, :period => "Does not repeat")
     @event = Event.new(:period => "Does not repeat")
     render :json => {:form => render_to_string(:partial => 'form')}
+  end
+
+  def meeting_time_management
+    p "time==========================================="
+    if params[:reset_time_counter] == "true"
+      $coach_meeting_time_seconds  = 0
+      $coach_meeting_id = "0"
+      p "time reset to 0 ========================"
+    else
+      if params[:event_id].to_i > 0
+      $coach_meeting_id = params[:event_id]
+      $coach_meeting_time_seconds  = params[:time_seconds].to_i
+      $coach_meeting_out_time = Time.now
+      p "time set========================"
+      end
+    end
+    p $coach_meeting_id
+    p $coach_meeting_time_seconds
+    p params[:time_seconds].to_i
+    render :nothing => true
   end
 
   def create

@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   # before_filter :configure_permitted_parameters
   # before_filter :configure_permitted_parameters, if: :registration_controller?
+  $coach_meeting_id = "0"
+  $coach_meeting_time_seconds = 0
+  $coach_meeting_out_time = Time.now
 
   def after_sign_in_path_for(resource)
     dashboard_index_path

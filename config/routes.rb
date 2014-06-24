@@ -106,6 +106,7 @@ Propheticcoaching::Application.routes.draw do
     member do
       post :move
       post :resize
+      post :meeting_time_management
     end
     resources :time_slots
   end

@@ -9,5 +9,4 @@ class DashboardController < ApplicationController
     @user 						= @current_user
     @mentees 					= @user.mentees.page params[:page]
   end
-
 end

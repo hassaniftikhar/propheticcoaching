@@ -33,6 +33,12 @@ class MenteesController < ApplicationController
 
 
   end
+  
+  def set_meeting_time
+
+    $meeting_counter = $meeting_counter + params[:meeting_counter]
+    $meeting_out_time = params[:meeting_out_time]
+  end
 
   # GET /mentees/1
   # GET /mentees/1.json
@@ -58,7 +64,7 @@ class MenteesController < ApplicationController
     @coach_mentee_relation_id = (@user.coach_mentee_relations.find_by mentee_id: @mentee.id).id
     # @coach_meetings     = @current_user.events.where("endtime >= ? and coach_mentee_relation_id = ?", Time.now, @coach_mentee_relation_id).order("starttime asc")
 
-    @user.events.where("endtime >= ? and coach_mentee_relation_id = ?", Time.now, @coach_mentee_relation_id).order("starttime asc").each do |event|
+    @user.events.order("starttime").where("endtime >= ? and coach_mentee_relation_id = ?", Time.now, @coach_mentee_relation_id).order("starttime asc").each do |event|
       @coach_meetings << event if event.remaining_time > 0
     end
 
@@ -141,6 +147,7 @@ class MenteesController < ApplicationController
 
     "#{hours.to_s.rjust(2, '0')}:#{minutes.to_s.rjust(2, '0')}:#{seconds.to_s.rjust(2, '0')}"
   end
+
   helper_method :time_diff
   private
     # Use callbacks to share common setup or constraints between actions.

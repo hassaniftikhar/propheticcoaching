@@ -17,3 +17,160 @@
     </p>
   </tr>
 <% end %>
+
+<script type="text/javascript">
+
+
+// $(document).ready(function () {
+var counter = 0;
+// counter_stoped = false;
+// var counter =  <%= $coach_meeting_time_seconds %>;
+var timer = null;
+var display_time = ' ';
+var start_time = 0;
+var event_id = 0;
+var inputs;
+var press_start = 1;
+
+window.onbeforeunload = function() {
+  
+  url = "/events/" + event_id + "/meeting_time_management";
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].disabled = false;
+  }
+  
+  if(event_id > 0)
+  {
+    $.post(url,{event_id:event_id, time_seconds:counter});
+    alert(url);
+    // return "Are you sure you wish to leave the page?";
+  }
+  else
+  {
+    alert("no post time set");
+  }
+  return null;
+};
+$(document).ready(function () {
+// if(press_start == 1) 
+// {
+//   press_start = 0;
+  alert("start-<%=$coach_meeting_id %>");
+  document.getElementById("start-<%=$coach_meeting_id %>").click();
+  counter = <%= $coach_meeting_time_seconds + (Time.now - $coach_meeting_out_time) %>;
+// }
+});
+function tictac(){
+    counter++;
+    display_time = formatTime(start_time-counter);
+    if(start_time-counter >= 0)
+    {
+      // alert(display_time);
+      // <%= $coach_meeting_time_seconds %>  = counter;
+      $("#clock-"+event_id).html(display_time);
+    }
+    else
+    {
+      stopInterval(event_id);
+    }
+}
+function startInterval(id, start_counter)
+{
+  start_time = start_counter;
+  // start_time = <%= $coach_meeting_time_seconds %>;
+  counter = 0;
+  // counter_stoped = false;
+  event_id = id;
+  // alert(start_time);
+  timer= setInterval("tictac()", 1000);
+  inputs = document.getElementsByClassName('button');
+  for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].id === 'stop-'+id) {
+          inputs[i].disabled = false;
+      }
+      else
+      {
+          inputs[i].disabled = true;
+      }
+  }; 
+};
+
+
+
+
+function stopInterval(id)
+{
+
+    var url = window.location.href;
+    var parts = url.split("/");
+    var mentee_id = parts[parts.length - 1]
+    var coach_id = parts[parts.length - 3];
+
+    console.log("event_id: " + id);
+    // alert(counter);
+    if(event_id > 0)
+    {
+    url = "/events/" + id + "/time_slots";
+    $.ajax({
+      // data: 'event_id=' + id + '&time_seconds=' + counter.to_s,
+      data: 'event_id=' + id + '&time_seconds='+ counter + '&coach_id=' + coach_id + '&mentee_id=' + mentee_id,
+      dataType: 'script',  
+      type: 'post',
+      url: url,
+      success: function(){
+        // alert(data);
+        url = "/events/" + id + "/meeting_time_management";
+        $.post(url,{reset_time_counter:true});
+        // alert("reset timer to 0");
+        clearInterval(timer);
+        counter = 0;
+        start_time = 0;
+        for (var i = 0; i < inputs.length; i++) {
+          inputs[i].disabled = false;
+        }
+        location.reload();
+      }
+      ,
+      error: function(){
+        url = "/events/" + id + "/meeting_time_management";
+        $.post(url,{reset_time_counter:true});
+        clearInterval(timer);
+        counter = 0;
+        // counter_stoped = true;
+        start_time = 0;
+        for (var i = 0; i < inputs.length; i++) {
+          inputs[i].disabled = false;
+        }
+        location.reload();
+        // alert("stop out");
+
+      }
+    });
+    }
+    // clearInterval(timer);
+    // counter = 0;
+    // // counter_stoped = true;
+    // start_time = 0;
+    // for (var i = 0; i < inputs.length; i++) {
+    //   inputs[i].disabled = false;
+    // } 
+}
+
+function formatTime(seconds)
+{
+  var formated_time = [
+      Math.floor(seconds / 3600), // an hour has 3600 seconds
+      Math.floor((seconds % 3600) / 60), // a minute has 60 seconds
+      Math.floor(seconds % 60)
+  ];
+  // 0 padding and concatation
+  formated_time = formated_time.map(function(time) {
+      return time < 10 ? '0' + time : time;
+  }).join(':');
+  // alert(formated_time);
+  return formated_time;
+}
+// });
+</script>
+
+
