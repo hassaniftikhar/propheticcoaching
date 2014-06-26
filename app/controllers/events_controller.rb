@@ -27,13 +27,15 @@ class EventsController < ApplicationController
       if params[:event_id].to_i > 0
       $coach_meeting_id = params[:event_id]
       $coach_meeting_time_seconds  = params[:time_seconds].to_i
-      $coach_meeting_out_time = Time.now
+      $coach_meeting_out_time = params[:coach_meeting_out_time].to_datetime
       p "time set========================"
       end
     end
     p $coach_meeting_id
     p $coach_meeting_time_seconds
+    p $coach_meeting_out_time
     p params[:time_seconds].to_i
+
     render :nothing => true
   end
 

@@ -41,24 +41,27 @@ window.onbeforeunload = function() {
   
   if(event_id > 0)
   {
-    $.post(url,{event_id:event_id, time_seconds:counter});
-    alert(url);
+    $.post(url,{event_id:event_id, time_seconds:counter, coach_meeting_out_time:"<%= Time.now %>"});
+    alert(event_id);
     // return "Are you sure you wish to leave the page?";
   }
   else
   {
-    alert("no post time set");
+    // alert("no post time set");
   }
   return null;
 };
 $(document).ready(function () {
-// if(press_start == 1) 
-// {
-//   press_start = 0;
-  alert("start-<%=$coach_meeting_id %>");
-  document.getElementById("start-<%=$coach_meeting_id %>").click();
-  counter = <%= $coach_meeting_time_seconds + (Time.now - $coach_meeting_out_time) %>;
-// }
+  alert(<%=$coach_meeting_id %> != 0);
+  if(<%=$coach_meeting_id %> != 0) 
+  {
+    // alert(<%=$coach_meeting_id %>);
+    // alert("just starting doc ready");
+    document.getElementById("start-<%=$coach_meeting_id %>").click();
+    counter = <%= $coach_meeting_time_seconds + (Time.now - $coach_meeting_out_time) %>;
+    alert("inside ready");
+  }
+
 });
 function tictac(){
     counter++;
@@ -95,9 +98,6 @@ function startInterval(id, start_counter)
   }; 
 };
 
-
-
-
 function stopInterval(id)
 {
 
@@ -118,30 +118,45 @@ function stopInterval(id)
       type: 'post',
       url: url,
       success: function(){
-        // alert(data);
         url = "/events/" + id + "/meeting_time_management";
         $.post(url,{reset_time_counter:true});
-        // alert("reset timer to 0");
         clearInterval(timer);
-        counter = 0;
-        start_time = 0;
         for (var i = 0; i < inputs.length; i++) {
           inputs[i].disabled = false;
         }
-        location.reload();
+
+        // id = 0;
+        counter = 0;
+        // timer = null;
+        // display_time = ' ';
+        start_time = 0;
+        event_id = 0;
+        // inputs = null;
+        press_start = 0;
+
+
+        // location.reload();
       }
       ,
       error: function(){
         url = "/events/" + id + "/meeting_time_management";
         $.post(url,{reset_time_counter:true});
         clearInterval(timer);
-        counter = 0;
-        // counter_stoped = true;
-        start_time = 0;
         for (var i = 0; i < inputs.length; i++) {
           inputs[i].disabled = false;
         }
-        location.reload();
+
+        // id = 0;
+        counter = 0;
+        // timer = null;
+        // display_time = ' ';
+        start_time = 0;
+        event_id = 0;
+        // inputs = null;
+        press_start = 0;
+
+
+        // location.reload();
         // alert("stop out");
 
       }
@@ -154,6 +169,7 @@ function stopInterval(id)
     // for (var i = 0; i < inputs.length; i++) {
     //   inputs[i].disabled = false;
     // } 
+    // location.reload();
 }
 
 function formatTime(seconds)
