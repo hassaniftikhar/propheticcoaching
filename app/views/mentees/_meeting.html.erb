@@ -32,6 +32,8 @@ var event_id = 0;
 var inputs;
 var press_start = 1;
 
+// function alert(nope) { return; }
+
 window.onbeforeunload = function() {
   
   url = "/events/" + event_id + "/meeting_time_management";
@@ -42,24 +44,20 @@ window.onbeforeunload = function() {
   if(event_id > 0)
   {
     $.post(url,{event_id:event_id, time_seconds:counter, coach_meeting_out_time:"<%= Time.now %>"});
-    alert(event_id);
-    // return "Are you sure you wish to leave the page?";
-  }
-  else
-  {
-    // alert("no post time set");
+    alert("Session is in progress");
   }
   return null;
+  // return "Session is in progress";
 };
 $(document).ready(function () {
-  alert(<%=$coach_meeting_id %> != 0);
+  // alert(<%=$coach_meeting_id %> != 0);
   if(<%=$coach_meeting_id %> != 0) 
   {
     // alert(<%=$coach_meeting_id %>);
     // alert("just starting doc ready");
     document.getElementById("start-<%=$coach_meeting_id %>").click();
     counter = <%= $coach_meeting_time_seconds + (Time.now - $coach_meeting_out_time) %>;
-    alert("inside ready");
+    // alert("inside ready");
   }
 
 });
@@ -113,52 +111,42 @@ function stopInterval(id)
     url = "/events/" + id + "/time_slots";
     $.ajax({
       // data: 'event_id=' + id + '&time_seconds=' + counter.to_s,
-      data: 'event_id=' + id + '&time_seconds='+ counter + '&coach_id=' + coach_id + '&mentee_id=' + mentee_id,
+      data: 'event_id=' + id + '&time_seconds='+ counter + '&coach_id=' + coach_id + '&mentee_id=' + mentee_id + '&reset_time_counter=' + true,
       dataType: 'script',  
       type: 'post',
       url: url,
       success: function(){
-        url = "/events/" + id + "/meeting_time_management";
-        $.post(url,{reset_time_counter:true});
+        // url = "/events/" + id + "/meeting_time_management";
+        // $.post(url,{reset_time_counter:true});
         clearInterval(timer);
         for (var i = 0; i < inputs.length; i++) {
           inputs[i].disabled = false;
         }
 
-        // id = 0;
         counter = 0;
-        // timer = null;
-        // display_time = ' ';
         start_time = 0;
         event_id = 0;
-        // inputs = null;
         press_start = 0;
 
 
-        // location.reload();
+        location.reload();
       }
       ,
       error: function(){
-        url = "/events/" + id + "/meeting_time_management";
-        $.post(url,{reset_time_counter:true});
+        // url = "/events/" + id + "/meeting_time_management";
+        // $.post(url,{reset_time_counter:true});
+
         clearInterval(timer);
         for (var i = 0; i < inputs.length; i++) {
           inputs[i].disabled = false;
         }
-
-        // id = 0;
         counter = 0;
-        // timer = null;
-        // display_time = ' ';
         start_time = 0;
         event_id = 0;
-        // inputs = null;
         press_start = 0;
 
 
-        // location.reload();
-        // alert("stop out");
-
+        location.reload();
       }
     });
     }

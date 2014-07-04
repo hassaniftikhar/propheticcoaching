@@ -22,6 +22,7 @@ class EventsController < ApplicationController
     if params[:reset_time_counter] == "true"
       $coach_meeting_time_seconds  = 0
       $coach_meeting_id = "0"
+      $coach_meeting_out_time = Time.now
       p "time reset to 0 ========================"
     else
       if params[:event_id].to_i > 0

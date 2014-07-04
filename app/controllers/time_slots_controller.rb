@@ -7,6 +7,12 @@ class TimeSlotsController < ApplicationController
   def create
   	# @coach = User.find_by :id => params[:coach_id]
    #  @mentee = Mentee.find_by :id => params[:mentee_id]
+    if params[:reset_time_counter] == "true"
+      $coach_meeting_time_seconds  = 0
+      $coach_meeting_id = "0"
+      $coach_meeting_out_time = Time.now
+      p "in timeSlots: reset to 0 ========================"
+    end   
     @event = Event.find_by :id => params[:event_id]
     @time_slot = @event.time_slots.new(:time_seconds => params[:time_seconds])
     # @time_slot = @coach.mentees.find_by(:id => 94).coach_mentee_relations.first.time_slots.new(:time_seconds => 180)
