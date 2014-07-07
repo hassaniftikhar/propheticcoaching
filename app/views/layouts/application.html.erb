@@ -147,7 +147,6 @@
   <%= yield %>
 <% end %>
 
-
   <%= render partial: 'layouts/footer' %>
 <% else %>
   <%= yield %>
@@ -159,6 +158,62 @@
 
 <script type="text/javascript">
   authenticity_token = "<%= form_authenticity_token %>"
+
+function check_session_progress() {
+  g_session_event_id = localStorage.getItem("session_event_id");
+  var g_url = window.location.href;
+  // alert("checking");
+  if(localStorage.getItem("session_event_id") && g_url != localStorage.getItem("session_url"))
+  {
+    // alert("in layout JS2");
+    g_start_time = localStorage.getItem("session_initial_remaining_time");
+    g_session_start_time = new Date(localStorage.getItem("session_start_time"));
+    g_session_mentee_id = localStorage.getItem("session_mentee_id");
+    g_session_coach_id = localStorage.getItem("session_coach_id");
+
+    g_current_time = new Date();
+    g_counter = (g_current_time - g_session_start_time)/1000;
+    
+    if(g_start_time-g_counter <= 0)
+    {    
+      url = "/events/" + g_session_event_id + "/time_slots";
+      $.ajax({
+        data: 'event_id=' + g_session_event_id + '&time_seconds='+ g_start_time + '&coach_id=' + g_session_coach_id + '&mentee_id=' + g_session_mentee_id ,
+        dataType: 'script',  
+        type: 'post',
+        url: url,
+        success: function(){
+          localStorage.removeItem("session_event_id");
+          localStorage.removeItem("session_start_time");
+          localStorage.removeItem("session_initial_remaining_time")
+          localStorage.removeItem("session_mentee_id");
+          localStorage.removeItem("session_coach_id");
+          localStorage.removeItem("session_url");
+          alert("Current Session is timeout");
+        }
+        ,
+        error: function(){
+          localStorage.removeItem("session_event_id");
+          localStorage.removeItem("session_start_time");
+          localStorage.removeItem("session_initial_remaining_time")
+          localStorage.removeItem("session_mentee_id");
+          localStorage.removeItem("session_coach_id");
+          localStorage.removeItem("session_url");
+          alert("Current Session is timeout");
+        }
+      });
+    }
+  }
+} 
+
+  $(document).ready(
+    function () {
+      $("html").niceScroll({
+        cursorcolor: "#000", mousescrollstep: "40", scrollspeed: "400", cursoropacitymin: "0.4", cursoropacitymax: "0.4", cursorborderradius: "10px"});
+      window.setInterval(check_session_progress, 10000);
+
+    }
+  );
 </script>
 
 <!--<script src="/assets/jquery.js" type="text/javascript"></script> -->
@@ -170,13 +225,5 @@
 <script src="/assets/bootstrap-timepicker.js" type="text/javascript"></script>
 <script src="/assets/shared.js" type="text/javascript"></script>
 
-<script>
-  $(document).ready(
-    function () {
-      $("html").niceScroll({
-        cursorcolor: "#000", mousescrollstep: "40", scrollspeed: "400", cursoropacitymin: "0.4", cursoropacitymax: "0.4", cursorborderradius: "10px"});
-    }
-  );
-</script>
 </body>
 </html>

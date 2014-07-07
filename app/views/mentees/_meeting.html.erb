@@ -31,35 +31,33 @@ var start_time = 0;
 var event_id = 0;
 var inputs;
 var press_start = 1;
+var session_start_time = new Date();
 
 // function alert(nope) { return; }
 
-window.onbeforeunload = function() {
+// window.onbeforeunload = function() {
   
-  url = "/events/" + event_id + "/meeting_time_management";
-  for (var i = 0; i < inputs.length; i++) {
-    inputs[i].disabled = false;
-  }
+//   url = "/events/" + event_id + "/meeting_time_management";
+//   for (var i = 0; i < inputs.length; i++) {
+//     inputs[i].disabled = false;
+//   }
   
-  if(event_id > 0)
-  {
-    $.post(url,{event_id:event_id, time_seconds:counter, coach_meeting_out_time:"<%= Time.now %>"});
-    alert("Session is in progress");
-  }
-  return null;
-  // return "Session is in progress";
-};
+//   if(event_id > 0)
+//   {
+//     $.post(url,{event_id:event_id, time_seconds:counter, coach_meeting_out_time:"<%= Time.now %>"});
+//     alert("Session is in progress");
+//   }
+//   return null;
+//   // return "Session is in progress";
+// };
 $(document).ready(function () {
   // alert(<%=$coach_meeting_id %> != 0);
-  if(<%=$coach_meeting_id %> != 0) 
+ // localStorage.setItem("company_id", "1111");
+  // alert(localStorage.getItem("session_event_id"));
+  if(localStorage.getItem("session_event_id"))
   {
-    // alert(<%=$coach_meeting_id %>);
-    // alert("just starting doc ready");
-    document.getElementById("start-<%=$coach_meeting_id %>").click();
-    counter = <%= $coach_meeting_time_seconds + (Time.now - $coach_meeting_out_time) %>;
-    // alert("inside ready");
+    document.getElementById("start-"+localStorage.getItem("session_event_id")).click(localStorage.getItem("session_event_id"), localStorage.getItem("session_initial_remaining_time"));
   }
-
 });
 function tictac(){
     counter++;
@@ -77,11 +75,36 @@ function tictac(){
 }
 function startInterval(id, start_counter)
 {
-  start_time = start_counter;
+
+  session_start_time = new Date(localStorage.getItem("session_start_time"));
   // start_time = <%= $coach_meeting_time_seconds %>;
-  counter = 0;
-  // counter_stoped = false;
+
+  if(localStorage.getItem("session_event_id"))
+  {
+    current_time = new Date()
+    counter = (current_time - session_start_time)/1000;
+    // alert(session_start_time);
+    // alert(current_time);
+    // alert(counter);
+  }
+  else
+  {
+    var url = window.location.href;
+    var parts = url.split("/");
+    var mentee_id = parts[parts.length - 1]
+    var coach_id = parts[parts.length - 3];
+
+    localStorage.setItem("session_start_time", Date());
+    localStorage.setItem("session_event_id", id);
+    localStorage.setItem("session_initial_remaining_time", start_counter);
+    localStorage.setItem("session_mentee_id", mentee_id);
+    localStorage.setItem("session_coach_id", coach_id);
+    localStorage.setItem("session_url", url);
+    counter = 0;
+  }
   event_id = id;
+  start_time = start_counter;
+
   // alert(start_time);
   timer= setInterval("tictac()", 1000);
   inputs = document.getElementsByClassName('button');
@@ -127,6 +150,12 @@ function stopInterval(id)
         start_time = 0;
         event_id = 0;
         press_start = 0;
+        localStorage.removeItem("session_event_id");
+        localStorage.removeItem("session_start_time");
+        localStorage.removeItem("session_initial_remaining_time")
+        localStorage.removeItem("session_mentee_id");
+        localStorage.removeItem("session_coach_id");
+        localStorage.removeItem("session_url");
 
 
         location.reload();
@@ -144,6 +173,12 @@ function stopInterval(id)
         start_time = 0;
         event_id = 0;
         press_start = 0;
+        localStorage.removeItem("session_event_id");
+        localStorage.removeItem("session_start_time");
+        localStorage.removeItem("session_initial_remaining_time")
+        localStorage.removeItem("session_mentee_id");
+        localStorage.removeItem("session_coach_id");
+        localStorage.removeItem("session_url");
 
 
         location.reload();
