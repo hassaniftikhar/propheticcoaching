@@ -32,6 +32,7 @@ var event_id = 0;
 var inputs;
 var press_start = 1;
 var session_start_time = new Date();
+var is_updated_time = 0;
 
 // function alert(nope) { return; }
 
@@ -70,7 +71,12 @@ function tictac(){
     }
     else
     {
-      stopInterval(event_id);
+      if(is_updated_time == 0)
+      {
+        is_updated_time = 1;
+        counter = start_time;
+        stopInterval(event_id);
+      }
     }
 }
 function startInterval(id, start_counter)
