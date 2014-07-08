@@ -17,28 +17,28 @@ class EventsController < ApplicationController
     render :json => {:form => render_to_string(:partial => 'form')}
   end
 
-  def meeting_time_management
-    p "time==========================================="
-    if params[:reset_time_counter] == "true"
-      $coach_meeting_time_seconds  = 0
-      $coach_meeting_id = "0"
-      $coach_meeting_out_time = Time.now
-      p "time reset to 0 ========================"
-    else
-      if params[:event_id].to_i > 0
-      $coach_meeting_id = params[:event_id]
-      $coach_meeting_time_seconds  = params[:time_seconds].to_i
-      $coach_meeting_out_time = params[:coach_meeting_out_time].to_datetime
-      p "time set========================"
-      end
-    end
-    p $coach_meeting_id
-    p $coach_meeting_time_seconds
-    p $coach_meeting_out_time
-    p params[:time_seconds].to_i
+  # def meeting_time_management
+  #   p "time==========================================="
+  #   if params[:reset_time_counter] == "true"
+  #     $coach_meeting_time_seconds  = 0
+  #     $coach_meeting_id = "0"
+  #     $coach_meeting_out_time = Time.now
+  #     p "time reset to 0 ========================"
+  #   else
+  #     if params[:event_id].to_i > 0
+  #     $coach_meeting_id = params[:event_id]
+  #     $coach_meeting_time_seconds  = params[:time_seconds].to_i
+  #     $coach_meeting_out_time = params[:coach_meeting_out_time].to_datetime
+  #     p "time set========================"
+  #     end
+  #   end
+  #   p $coach_meeting_id
+  #   p $coach_meeting_time_seconds
+  #   p $coach_meeting_out_time
+  #   p params[:time_seconds].to_i
 
-    render :nothing => true
-  end
+  #   render :nothing => true
+  # end
 
   def create
     if params[:event][:period] == "Does not repeat"
