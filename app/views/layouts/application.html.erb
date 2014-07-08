@@ -160,16 +160,16 @@
   authenticity_token = "<%= form_authenticity_token %>"
 
 function check_session_progress() {
-  g_session_event_id = localStorage.getItem("session_event_id");
+  g_session_event_id = sessionStorage.getItem("session_event_id");
   var g_url = window.location.href;
   // alert("checking");
-  if(localStorage.getItem("session_event_id") && g_url != localStorage.getItem("session_url"))
+  if(sessionStorage.getItem("session_event_id") && g_url != sessionStorage.getItem("session_url"))
   {
     // alert("in layout JS2");
-    g_start_time = localStorage.getItem("session_initial_remaining_time");
-    g_session_start_time = new Date(localStorage.getItem("session_start_time"));
-    g_session_mentee_id = localStorage.getItem("session_mentee_id");
-    g_session_coach_id = localStorage.getItem("session_coach_id");
+    g_start_time = sessionStorage.getItem("session_initial_remaining_time");
+    g_session_start_time = new Date(sessionStorage.getItem("session_start_time"));
+    g_session_mentee_id = sessionStorage.getItem("session_mentee_id");
+    g_session_coach_id = sessionStorage.getItem("session_coach_id");
 
     g_current_time = new Date();
     g_counter = (g_current_time - g_session_start_time)/1000;
@@ -183,23 +183,23 @@ function check_session_progress() {
         type: 'post',
         url: url,
         success: function(){
-          localStorage.removeItem("session_event_id");
-          localStorage.removeItem("session_start_time");
-          localStorage.removeItem("session_initial_remaining_time")
-          localStorage.removeItem("session_mentee_id");
-          localStorage.removeItem("session_coach_id");
-          localStorage.removeItem("session_url");
-          alert("Current Session is timeout");
+          sessionStorage.removeItem("session_event_id");
+          sessionStorage.removeItem("session_start_time");
+          sessionStorage.removeItem("session_initial_remaining_time")
+          sessionStorage.removeItem("session_mentee_id");
+          sessionStorage.removeItem("session_coach_id");
+          sessionStorage.removeItem("session_url");
+          alert("Current Session is Timeout");
         }
         ,
         error: function(){
-          localStorage.removeItem("session_event_id");
-          localStorage.removeItem("session_start_time");
-          localStorage.removeItem("session_initial_remaining_time")
-          localStorage.removeItem("session_mentee_id");
-          localStorage.removeItem("session_coach_id");
-          localStorage.removeItem("session_url");
-          alert("Current Session is timeout");
+          sessionStorage.removeItem("session_event_id");
+          sessionStorage.removeItem("session_start_time");
+          sessionStorage.removeItem("session_initial_remaining_time")
+          sessionStorage.removeItem("session_mentee_id");
+          sessionStorage.removeItem("session_coach_id");
+          sessionStorage.removeItem("session_url");
+          alert("Current Session is Timeout");
         }
       });
     }
@@ -210,7 +210,9 @@ function check_session_progress() {
     function () {
       $("html").niceScroll({
         cursorcolor: "#000", mousescrollstep: "40", scrollspeed: "400", cursoropacitymin: "0.4", cursoropacitymax: "0.4", cursorborderradius: "10px"});
-      window.setInterval(check_session_progress, 10000);
+      <% if current_user %>
+        window.setInterval(check_session_progress, 10000);
+      <% end %>
 
     }
   );

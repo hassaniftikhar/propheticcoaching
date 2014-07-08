@@ -52,11 +52,11 @@ var session_start_time = new Date();
 // };
 $(document).ready(function () {
   // alert(<%=$coach_meeting_id %> != 0);
- // localStorage.setItem("company_id", "1111");
-  // alert(localStorage.getItem("session_event_id"));
-  if(localStorage.getItem("session_event_id"))
+ // sessionStorage.setItem("company_id", "1111");
+  // alert(sessionStorage.getItem("session_event_id"));
+  if(sessionStorage.getItem("session_event_id"))
   {
-    document.getElementById("start-"+localStorage.getItem("session_event_id")).click(localStorage.getItem("session_event_id"), localStorage.getItem("session_initial_remaining_time"));
+    document.getElementById("start-"+sessionStorage.getItem("session_event_id")).click(sessionStorage.getItem("session_event_id"), sessionStorage.getItem("session_initial_remaining_time"));
   }
 });
 function tictac(){
@@ -76,10 +76,10 @@ function tictac(){
 function startInterval(id, start_counter)
 {
 
-  session_start_time = new Date(localStorage.getItem("session_start_time"));
+  session_start_time = new Date(sessionStorage.getItem("session_start_time"));
   // start_time = <%= $coach_meeting_time_seconds %>;
 
-  if(localStorage.getItem("session_event_id"))
+  if(sessionStorage.getItem("session_event_id"))
   {
     current_time = new Date()
     counter = (current_time - session_start_time)/1000;
@@ -94,12 +94,12 @@ function startInterval(id, start_counter)
     var mentee_id = parts[parts.length - 1]
     var coach_id = parts[parts.length - 3];
 
-    localStorage.setItem("session_start_time", Date());
-    localStorage.setItem("session_event_id", id);
-    localStorage.setItem("session_initial_remaining_time", start_counter);
-    localStorage.setItem("session_mentee_id", mentee_id);
-    localStorage.setItem("session_coach_id", coach_id);
-    localStorage.setItem("session_url", url);
+    sessionStorage.setItem("session_start_time", Date());
+    sessionStorage.setItem("session_event_id", id);
+    sessionStorage.setItem("session_initial_remaining_time", start_counter);
+    sessionStorage.setItem("session_mentee_id", mentee_id);
+    sessionStorage.setItem("session_coach_id", coach_id);
+    sessionStorage.setItem("session_url", url);
     counter = 0;
   }
   event_id = id;
@@ -150,12 +150,12 @@ function stopInterval(id)
         start_time = 0;
         event_id = 0;
         press_start = 0;
-        localStorage.removeItem("session_event_id");
-        localStorage.removeItem("session_start_time");
-        localStorage.removeItem("session_initial_remaining_time")
-        localStorage.removeItem("session_mentee_id");
-        localStorage.removeItem("session_coach_id");
-        localStorage.removeItem("session_url");
+        sessionStorage.removeItem("session_event_id");
+        sessionStorage.removeItem("session_start_time");
+        sessionStorage.removeItem("session_initial_remaining_time")
+        sessionStorage.removeItem("session_mentee_id");
+        sessionStorage.removeItem("session_coach_id");
+        sessionStorage.removeItem("session_url");
 
 
         location.reload();
@@ -173,12 +173,12 @@ function stopInterval(id)
         start_time = 0;
         event_id = 0;
         press_start = 0;
-        localStorage.removeItem("session_event_id");
-        localStorage.removeItem("session_start_time");
-        localStorage.removeItem("session_initial_remaining_time")
-        localStorage.removeItem("session_mentee_id");
-        localStorage.removeItem("session_coach_id");
-        localStorage.removeItem("session_url");
+        sessionStorage.removeItem("session_event_id");
+        sessionStorage.removeItem("session_start_time");
+        sessionStorage.removeItem("session_initial_remaining_time")
+        sessionStorage.removeItem("session_mentee_id");
+        sessionStorage.removeItem("session_coach_id");
+        sessionStorage.removeItem("session_url");
 
 
         location.reload();

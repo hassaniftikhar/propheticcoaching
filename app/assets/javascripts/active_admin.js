@@ -12,8 +12,54 @@
 //= require meetings.js.coffee
 //= require jquery.multiselect
 
+function check_session_progress() {
+  g_session_event_id = sessionStorage.getItem("session_event_id");
+  var g_url = window.location.href;
+  // alert("checking");
+  if(sessionStorage.getItem("session_event_id") && g_url != sessionStorage.getItem("session_url"))
+  {
+    // alert("in layout JS2");
+    g_start_time = sessionStorage.getItem("session_initial_remaining_time");
+    g_session_start_time = new Date(sessionStorage.getItem("session_start_time"));
+    g_session_mentee_id = sessionStorage.getItem("session_mentee_id");
+    g_session_coach_id = sessionStorage.getItem("session_coach_id");
 
+    g_current_time = new Date();
+    g_counter = (g_current_time - g_session_start_time)/1000;
+    
+    if(g_start_time-g_counter <= 0)
+    {    
+      url = "/events/" + g_session_event_id + "/time_slots";
+      $.ajax({
+        data: 'event_id=' + g_session_event_id + '&time_seconds='+ g_start_time + '&coach_id=' + g_session_coach_id + '&mentee_id=' + g_session_mentee_id ,
+        dataType: 'script',  
+        type: 'post',
+        url: url,
+        success: function(){
+          sessionStorage.removeItem("session_event_id");
+          sessionStorage.removeItem("session_start_time");
+          sessionStorage.removeItem("session_initial_remaining_time")
+          sessionStorage.removeItem("session_mentee_id");
+          sessionStorage.removeItem("session_coach_id");
+          sessionStorage.removeItem("session_url");
+          alert("Current Session is Timeout");
+        }
+        ,
+        error: function(){
+          sessionStorage.removeItem("session_event_id");
+          sessionStorage.removeItem("session_start_time");
+          sessionStorage.removeItem("session_initial_remaining_time")
+          sessionStorage.removeItem("session_mentee_id");
+          sessionStorage.removeItem("session_coach_id");
+          sessionStorage.removeItem("session_url");
+          alert("Current Session is Timeout");
+        }
+      });
+    }
+  }
+}
 $(document).ready(function () {
+  window.setInterval(check_session_progress, 10000);
   $("#search_ebook").on("ajax:success",function (e, data, status, xhr) {
 
     console.log("search ebook success");
