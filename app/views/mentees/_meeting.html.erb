@@ -134,7 +134,7 @@ function stopInterval(id)
     url = "/events/" + id + "/time_slots";
     $.ajax({
       // data: 'event_id=' + id + '&time_seconds=' + counter.to_s,
-      data: 'event_id=' + id + '&time_seconds='+ counter + '&coach_id=' + coach_id + '&mentee_id=' + mentee_id + '&reset_time_counter=' + true,
+      data: 'event_id=' + id + '&time_seconds='+ counter + '&coach_id=' + coach_id + '&mentee_id=' + mentee_id,
       dataType: 'script',  
       type: 'post',
       url: url,
