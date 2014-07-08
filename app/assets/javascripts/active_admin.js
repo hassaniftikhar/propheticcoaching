@@ -12,6 +12,8 @@
 //= require meetings.js.coffee
 //= require jquery.multiselect
 
+var g_is_updated_time = 0;
+
 function check_session_progress() {
   g_session_event_id = sessionStorage.getItem("session_event_id");
   var g_url = window.location.href;
@@ -27,8 +29,9 @@ function check_session_progress() {
     g_current_time = new Date();
     g_counter = (g_current_time - g_session_start_time)/1000;
     
-    if(g_start_time-g_counter <= 0)
-    {    
+    if((g_start_time-g_counter <= 0) && g_is_updated_time == 0)
+    {   
+      g_is_updated_time = 1; 
       url = "/events/" + g_session_event_id + "/time_slots";
       $.ajax({
         data: 'event_id=' + g_session_event_id + '&time_seconds='+ g_start_time + '&coach_id=' + g_session_coach_id + '&mentee_id=' + g_session_mentee_id ,
@@ -57,7 +60,8 @@ function check_session_progress() {
       });
     }
   }
-}
+} 
+
 $(document).ready(function () {
   window.setInterval(check_session_progress, 10000);
   $("#search_ebook").on("ajax:success",function (e, data, status, xhr) {
