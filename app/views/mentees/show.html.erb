@@ -1,4 +1,3 @@
-
 <h2 class="tablehead"> Client Details </h2>
 <table class="table table-striped" >
   <tbody>
@@ -56,6 +55,7 @@
         <li><a href="#tabs-4">Email History</a></li>
         <li><a href="#tabs-5">Tasks</a></li>
         <li><a href="#tabs-6">Sessions</a></li>
+        <li><a href="#tabs-7">Calendar</a></li>
     </ul>
     <div id="tabs-1">
         <%= render :partial => "goals/show" %>
@@ -84,6 +84,20 @@
     </div>
     <div id="tabs-6">
         <%= render :partial => "mentees/meeting_index" %>
-    </div></div>
+    </div>
+    <div id="tabs-7">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div>
+            <div id='calendar'>
+            </div>
+            </div>
+            <%= render :partial => "events/actions_dialog", :locals => {:profile => @mentee} %>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
 <%= link_to 'Back', user_path(@mentee.coaches.first.id) %>
 
