@@ -10,7 +10,7 @@ ActiveAdmin.register FeaturedProduct do
      link_to "New Featured Product", new_admin_featured_product_path()
    end
 
-  permit_params :title,:description, :price, :image, :profile_type, :profile_id
+  permit_params :title,:description, :price, :url, :image, :profile_type, :profile_id
 
   controller do
     def edit
@@ -22,6 +22,7 @@ ActiveAdmin.register FeaturedProduct do
     column :title
     column :description
     column :price
+    column :url
     column :profile
     default_actions
   end
@@ -32,6 +33,7 @@ ActiveAdmin.register FeaturedProduct do
       f.input :title
       f.input :description
       f.input :price
+      f.input :url
       f.input :profile_id, :label => 'Resource', :as => :select, :collection => Ebook.all.order(:name).map{|resource| ["#{resource.name}", resource.id]}, :include_blank => true
       f.input :profile_type, :as => :hidden, :value => "Ebook"
       f.input :image, :as => :file
@@ -55,6 +57,7 @@ ActiveAdmin.register FeaturedProduct do
         row :title
         row :description
         row :price
+        row :url
         row :profile
         # row :image do
         #   image_tag(featured_product.image.url)
