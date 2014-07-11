@@ -156,11 +156,13 @@ $(document).ready(function () {
         // $callback.text(ui.value + ' ' + (ui.checked ? 'checked' : 'unchecked') );
         var url = window.location.href;
         var parts = url.split("/");
-        var activity_id = parts[parts.length - 2];
+        var resource_id = parts[parts.length - 2];
         console.log("event: " + event);
-        var url = '/admin/activities'+( ( activity_id > 0 ) ? ('/'+activity_id+'/assign_multiple_categories'):'/batch_assign_multiple_categories');
+        // var url = '/admin/activities'+( ( activity_id > 0 ) ? ('/'+activity_id+'/assign_multiple_categories'):'/batch_assign_multiple_categories');
+        var url = '/admin/'+( ( resource_id > 0 ) ? (parts[parts.length - 3]+'/'+resource_id+'/assign_multiple_categories'):parts[parts.length - 2]+'/batch_assign_multiple_categories');
+
         $.ajax({
-          data: 'category_id=' + ui.value + '&activity_selection=' + activity_selection + '&checked=' + (ui.checked ? 'checked' : 'unchecked'),
+          data: 'category_id=' + ui.value + '&resource_selection=' + resource_selection + '&checked=' + (ui.checked ? 'checked' : 'unchecked'),
           dataType: 'script',
           type: 'post',
           url: url,
@@ -225,54 +227,6 @@ $(document).ready(function () {
         $callback.html("Checkboxes " + (ui.checked ? "checked" : "unchecked") + ": " + values);
      }
   });
-
-// ----------------------------------------------------------------
-  // var $callback = $("#callback");
-  // $("#coach_list").multiselect({
-  //   multiple: false,
-  //   header: "Coach Selection",
-  //   noneSelectedText: "Select a Coach",
-  //   selectedList: 1,
-  //    click: function(event, ui){
-  //       // $callback.text(ui.value + ' ' + (ui.checked ? 'checked' : 'unchecked') );
-
-  //       console.log("event: " + event);
-
-  //       var url = '/admin/events'+( ( event_id > 0 ) ? ('/'+event_id+'/assign_multiple_coaches'):'/batch_assign_multiple_coaches');
-
-  //       // return false;
-  //    },
-  //    beforeopen: function(){
-  //       $callback.text("Select about to be opened...");
-  //    },
-  //    open: function(){
-  //       $callback.text("Select opened!");
-  //    },
-  //    beforeclose: function(){
-  //       $callback.text("Select about to be closed...");
-  //       var values = $("#coach_list").val();
-  //       alert(values);
-  //    },
-  //    close: function(){
-  //       $callback.text("Select closed!");
-  //    },
-  //    checkAll: function(){
-  //       $callback.text("Check all clicked!");
-  //    },
-  //    uncheckAll: function(){
-  //       $callback.text("Uncheck all clicked!");
-  //    },
-  //    optgrouptoggle: function(event, ui){
-  //       var values = $.map(ui.inputs, function(checkbox){
-  //          return checkbox.value;
-  //       }).join(", ");
-        
-  //       $callback.html("Checkboxes " + (ui.checked ? "checked" : "unchecked") + ": " + values);
-  //    }
-  // });
-  // var value = $("#coaches_list").val();
-  // alert(value);
-
 
   function editEvent(event_id) {
     console.log("event_id: " + event_id);

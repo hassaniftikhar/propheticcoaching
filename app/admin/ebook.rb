@@ -32,12 +32,64 @@ ActiveAdmin.register Ebook do
     end
   end  
 
+
+  batch_action "Assign Category" do |selection|
+    ebooks = Ebook.find(selection)
+    @selection = selection
+    @existing_categories=nil
+    render "assign_categories", :locals => {ebooks: ebooks, selection: selection}
+  end
+
+  collection_action :batch_assign_multiple_categories, :method => :post do
+
+
+    params[:ebook_selection].split(",").map(&:to_i).each do |ebook_id|
+      ebook = (Ebook.find_by id: ebook_id)
+      if(params[:checked] == "checked" )
+        unless(ebook.ebook_categorizations.pluck(:category_id).include? params[:category_id].to_i)
+          ebook.categories << (Category.find_by id: params[:category_id])
+        end
+      else
+        if(ebook.ebook_categorizations.pluck(:category_id).include? params[:category_id].to_i)
+          ebook.categories.delete(params[:category_id])
+        end
+      end
+    end
+    redirect_to assign_category_admin_ebook_path(params[:ebook_id])
+  end
+
+  member_action :assign_category, :method => :get do
+    @ebook = Ebook.find(params[:id])
+    @existing_categories =  @ebook.categories
+  end
+
+  member_action :assign_multiple_categories, :method => :post do
+
+    existing_categories = (Ebook.find_by id: params[:id]).categories
+    is_already_category = (Ebook.find_by id: params[:id]).ebook_categorizations.pluck(:category_id).include? params[:category_id].to_i
+
+    if(params[:checked] == "checked" )
+      if(!is_already_category)
+        existing_categories << (Category.find_by id: params[:category_id])
+      end
+    else
+      if(is_already_category)
+        existing_categories.delete(params[:category_id])
+      end
+    end
+    redirect_to assign_category_admin_ebook_path(params[:id])   
+  end
+
   index :title => 'Resources' do
     column :name
     column :created_at
-    #column :pdf_file_name
-    #column :pdf_content_type
+    column :category do |ebook|
+          ebook.categories.collect {|category| (category.name)}.join(", ").html_safe
+    end
     default_actions
+    actions :defaults => false do |ebook|
+      link_to "Change Category", assign_category_admin_ebook_path(ebook.id)
+    end
   end
 
   form do |f|

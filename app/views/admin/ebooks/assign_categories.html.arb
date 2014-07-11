@@ -1,0 +1,13 @@
+if ebooks
+    table_for ebooks do
+    column :name
+      column :category_name do |ebook|
+          ebook.categories.order("name asc").collect {|category| (link_to category.name, admin_category_path(category))}.join(", ").html_safe
+      end
+    end
+
+
+    "Assign Category"
+    render "assign_multi_categories"
+
+end

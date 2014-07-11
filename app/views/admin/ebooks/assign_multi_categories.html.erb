@@ -1,6 +1,6 @@
 <select id="categories_list" name="categories_list" multiple="multiple">
   <% Category.order("name ASC").each do |category| %>
-    <% if @existing_categories and (@activity.activity_categorizations.pluck(:category_id).include? category.id) %>
+    <% if @existing_categories and (@ebook.ebook_categorizations.pluck(:category_id).include? category.id) %>
 						<option value= <%="#{category.id}" %> selected="selected" > <%= category.name %> </option>
 				<% else %>
 						<option value= <%="#{category.id}" %>  > <%= category.name %> </option>
@@ -10,10 +10,10 @@
 </select>
 <script type="text/javascript">
 
-		var resource_selection;
+		var ebook_selection;
 		<% if @selection %>
-		  resource_selection  ="<%= @selection.join(',').html_safe %>";
+		  ebook_selection  ="<%= @selection.join(',').html_safe %>";
 		<% else %>
-				resource_selection  = nil;
+				ebook_selection  = nil;
 		<% end %>
  </script>
