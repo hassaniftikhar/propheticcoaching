@@ -42,9 +42,9 @@ ActiveAdmin.register Ebook do
 
   collection_action :batch_assign_multiple_categories, :method => :post do
 
-    p "======================================="
-    p params[:resource_selection]
-    p "======================================="
+    # p "======================================="
+    # p params[:resource_selection]
+    # p "======================================="
     
     params[:resource_selection].split(",").map(&:to_i).each do |ebook_id|
       ebook = (Ebook.find_by id: ebook_id)
@@ -52,15 +52,18 @@ ActiveAdmin.register Ebook do
         unless(ebook.ebook_categorizations.pluck(:category_id).include? params[:category_id].to_i)
           ebook.categories << (Category.find_by id: params[:category_id])
         end
+        flash[:notice] = "Successfully Assigned Category"
       else
         if(ebook.ebook_categorizations.pluck(:category_id).include? params[:category_id].to_i)
           ebook.categories.delete(params[:category_id])
         end
+        flash[:notice] = "Successfully Unassigned Category"
       end
     end
-    p params
-    p "red ==================================================="
-    redirect_to assign_category_admin_ebook_path(params[:ebook_id])
+    head :no_content
+    # p params
+    # p "red ==================================================="
+    # redirect_to assign_category_admin_ebook_path(params[:ebook_id])
   end
 
   member_action :assign_category, :method => :get do

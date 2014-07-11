@@ -165,16 +165,22 @@ $(document).ready(function () {
         switch(resource_id > 0 ? parts[parts.length - 3]:parts[parts.length - 2]) {
             case 'ebooks':
                 var selection = ebook_selection;
+                var redirection_path = '/admin/ebooks';
                 break;
             case 'activities':
                 var selection = activity_selection;
+                // redirection_path = '/admin/activities?message=true';
+                var redirection_path = '/admin/activities';
                 break;
             case 'questions':
                 var selection = question_selection;
+                var redirection_path = '/admin/questions';
             case 'exercises':
                 var selection = exercise_selection;
+                var redirection_path = '/admin/exercises';
             default:
                 var selection = ebook_selection;
+                var redirection_path = '/admin/ebooks';
         }
 
         $.ajax({
@@ -183,11 +189,11 @@ $(document).ready(function () {
           type: 'post',
           url: url,
           success: function(){
-            if( activity_id > 0 ) {
+            if( resource_id > 0 ) {
               location.reload();
             }
             else {
-              window.location.href = '/admin/activities?message=true';
+              window.location.href = redirection_path;
             }
             // location.reload();
             // window.location.href = '/admin/activities?message=true';
@@ -195,11 +201,11 @@ $(document).ready(function () {
           }
           ,
           error: function(){
-            if( activity_id > 0 ) {
+            if( resource_id > 0 ) {
               location.reload();
             }
             else {
-              window.location.href = '/admin/activities?message=true';
+              window.location.href = redirection_path;
             }
 
 
