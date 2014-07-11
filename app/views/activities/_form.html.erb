@@ -37,10 +37,10 @@
 
 
 <script type="text/javascript">
-    var resource_selection;
+    var activity_selection;
     <% if @selection %>
-      resource_selection  ="<%= @selection.join(',').html_safe %>";
+      activity_selection  ="<%= @selection.join(',').html_safe %>";
     <% else %>
-        resource_selection  = nil;
+        activity_selection  = nil;
     <% end %>
  </script>

@@ -90,6 +90,7 @@ ActiveAdmin.register Ebook do
 
   index :title => 'Resources' do
     selectable_column
+    column :id
     column :name
     column :created_at
     column :category do |ebook|

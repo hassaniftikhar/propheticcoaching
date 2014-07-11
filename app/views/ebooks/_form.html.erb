@@ -24,3 +24,12 @@
                 ebooks_path, :class => 'btn' %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+    var ebook_selection;
+    <% if @selection %>
+      ebook_selection  ="<%= @selection.join(',').html_safe %>";
+    <% else %>
+        ebook_selection  = nil;
+    <% end %>
+ </script>
