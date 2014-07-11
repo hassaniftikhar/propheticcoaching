@@ -16,8 +16,9 @@ class Ebook < ActiveRecord::Base
   process_in_background :pdf
 
   has_one :featured_product, :as => :profile
-  # has_and_belongs_to_many :categories
-
+  has_many :ebook_categorizations
+  has_many :categories, through: :ebook_categorizations, :class_name => "Category",
+        :foreign_key => 'ebook_id'
 
 
   # after_save :update_sha
@@ -25,6 +26,8 @@ class Ebook < ActiveRecord::Base
   after_save :create_pages
   before_destroy :remove_es_index
 
+
+  before_destroy {|ebook| ebook.categories.clear}
 
   # def get_sha
   #   require 'open-uri'

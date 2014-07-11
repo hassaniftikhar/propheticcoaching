@@ -38,6 +38,8 @@ class EbooksController < ApplicationController
 
   # GET /ebooks/1/edit
   def edit
+    @ebook = Ebook.find(params[:id])
+    @existing_categories =  @ebook.categories  
   end
 
   # GET /ebooks/search
@@ -63,6 +65,19 @@ class EbooksController < ApplicationController
   # PATCH/PUT /ebooks/1
   # PATCH/PUT /ebooks/1.json
   def update
+    existing_categories = (Ebook.find_by id: params[:id]).categories
+    is_already_category = (Ebook.find_by id: params[:id]).ebook_categorizations.pluck(:category_id).include? params[:category_id].to_i
+
+    if(params[:checked] == "checked" )
+      if(!is_already_category)
+        existing_categories << (Category.find_by id: params[:category_id])
+      end
+    else
+      if(is_already_category)
+        existing_categories.delete(params[:category_id])
+      end
+    end
+
     respond_to do |format|
       if @ebook.update(ebook_params)
         format.html { redirect_to @ebook, notice: "#{@ebook_name} was successfully updated." }

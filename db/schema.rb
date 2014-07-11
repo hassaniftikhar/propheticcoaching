@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611150352) do
+ActiveRecord::Schema.define(version: 20140710070439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,13 @@ ActiveRecord::Schema.define(version: 20140611150352) do
     t.datetime "updated_at"
   end
 
+  create_table "ebook_categorizations", force: true do |t|
+    t.integer  "ebook_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "ebooks", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -147,6 +154,13 @@ ActiveRecord::Schema.define(version: 20140611150352) do
     t.integer  "coach_mentee_relation_id"
   end
 
+  create_table "exercise_categorizations", force: true do |t|
+    t.integer  "exercise_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "exercises", force: true do |t|
     t.text     "body"
     t.boolean  "last_import"
@@ -163,6 +177,7 @@ ActiveRecord::Schema.define(version: 20140611150352) do
     t.string   "profile_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
   end
 
   create_table "goals", force: true do |t|
@@ -199,6 +214,13 @@ ActiveRecord::Schema.define(version: 20140611150352) do
     t.integer  "ebook_id"
     t.string   "page_number"
     t.text     "tags"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "question_categorizations", force: true do |t|
+    t.integer  "question_id"
+    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -42,8 +42,11 @@ ActiveAdmin.register Ebook do
 
   collection_action :batch_assign_multiple_categories, :method => :post do
 
-
-    params[:ebook_selection].split(",").map(&:to_i).each do |ebook_id|
+    p "======================================="
+    p params[:resource_selection]
+    p "======================================="
+    
+    params[:resource_selection].split(",").map(&:to_i).each do |ebook_id|
       ebook = (Ebook.find_by id: ebook_id)
       if(params[:checked] == "checked" )
         unless(ebook.ebook_categorizations.pluck(:category_id).include? params[:category_id].to_i)
@@ -55,6 +58,8 @@ ActiveAdmin.register Ebook do
         end
       end
     end
+    p params
+    p "red ==================================================="
     redirect_to assign_category_admin_ebook_path(params[:ebook_id])
   end
 
@@ -81,6 +86,7 @@ ActiveAdmin.register Ebook do
   end
 
   index :title => 'Resources' do
+    selectable_column
     column :name
     column :created_at
     column :category do |ebook|

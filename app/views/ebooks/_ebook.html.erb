@@ -3,6 +3,8 @@
     <td><%= link_to ebook.id, pdf_ebook_path(ebook) %></td>
     <td><%= ebook.name %></td>
     <td><%= l ebook.created_at.to_time %></td>
+    <td><%= ebook.categories.order("name asc").collect {|category| link_to("#{category.name}", category_path(category)) }.join(", ").html_safe %>
+    </td>
     <td>
       <% if can? :edit, @ebook %>
         <%= link_to t('.edit', :default => t("helpers.links.edit")),

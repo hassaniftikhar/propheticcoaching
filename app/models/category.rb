@@ -16,6 +16,12 @@ class Category < ActiveRecord::Base
 	before_destroy {|category| category.activities.clear}
 
 	
+	has_many :ebook_categorizations, :class_name => "EbookCategorization",
+      :foreign_key => 'category_id'
+ has_many :ebooks, through: :ebook_categorizations, :class_name => "Ebook",
+       :foreign_key => 'ebook_id'
+       # , touch: true
+	before_destroy {|category| category.ebooks.clear}
 	# has_and_belongs_to_many :questions
 	# has_and_belongs_to_many :ebooks
 	# has_and_belongs_to_many :exercises

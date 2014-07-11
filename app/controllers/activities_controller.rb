@@ -31,7 +31,6 @@ class ActivitiesController < ApplicationController
 
     respond_to do |format|
       if @activity.save
-        # params[:activity][:category_id]
         format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
         format.json { render action: 'show', status: :created, location: @activity }
       else

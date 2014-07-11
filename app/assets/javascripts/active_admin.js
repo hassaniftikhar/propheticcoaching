@@ -160,9 +160,25 @@ $(document).ready(function () {
         console.log("event: " + event);
         // var url = '/admin/activities'+( ( activity_id > 0 ) ? ('/'+activity_id+'/assign_multiple_categories'):'/batch_assign_multiple_categories');
         var url = '/admin/'+( ( resource_id > 0 ) ? (parts[parts.length - 3]+'/'+resource_id+'/assign_multiple_categories'):parts[parts.length - 2]+'/batch_assign_multiple_categories');
+        
+
+        switch(resource_id > 0 ? parts[parts.length - 3]:parts[parts.length - 2]) {
+            case 'ebooks':
+                var selection = ebook_selection;
+                break;
+            case 'activities':
+                var selection = activity_selection;
+                break;
+            case 'questions':
+                var selection = question_selection;
+            case 'exercises':
+                var selection = exercise_selection;
+            default:
+                var selection = ebook_selection;
+        }
 
         $.ajax({
-          data: 'category_id=' + ui.value + '&resource_selection=' + resource_selection + '&checked=' + (ui.checked ? 'checked' : 'unchecked'),
+          data: 'category_id=' + ui.value + '&resource_selection=' + selection + '&checked=' + (ui.checked ? 'checked' : 'unchecked'),
           dataType: 'script',
           type: 'post',
           url: url,

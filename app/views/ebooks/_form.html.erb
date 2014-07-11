@@ -1,6 +1,22 @@
 <%= simple_form_for @ebook ||= Ebook.new, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
   <%= f.input :name %>
   <%= f.file_field :pdf %>
+  <% unless(@ebook.new_record?) %>
+    <div>
+      <select id="categories_list" name="categories_list" multiple="multiple">
+        <% Category.order("name ASC").each do |category| %>
+          <% if @existing_categories and (@ebook.ebook_categorizations.pluck(:category_id).include? category.id) %>
+                  <option value= <%="#{category.id}" %> selected="selected" > <%= category.name %> </option>
+              <% else %>
+                  <option value= <%="#{category.id}" %>  > <%= category.name %> </option>
+          <% end %>
+
+        <% end %>
+      </select>
+    </div>
+    <div><p><br /> <br /><br /></p></div>
+  <% end %>
+
 
   <div class="form-actions">
     <%= f.button :submit, (@ebook.new_record? ? "Create " : "Update ") +@ebook_name, :class => 'btn-primary' %>
