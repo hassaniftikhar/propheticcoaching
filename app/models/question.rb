@@ -4,11 +4,20 @@ class Question < ActiveRecord::Base
   include Tire::Model::Callbacks
 
   # index_name BONSAI_INDEX_NAME
+  attr_accessor :category_id
 
   validates_presence_of :body
   validates_uniqueness_of :body, :case_sensitive => false
   # has_and_belongs_to_many :categories
+  has_many :question_categorizations
+  has_many :categories, through: :question_categorizations, :class_name => "Category",
+        :foreign_key => 'question_id'
 
+  # after_touch() { tire.update_index }
+  # self.include_root_in_json = false
+
+  before_destroy :remove_es_index
+  before_destroy {|question| question.categories.clear}
   # scope :All, -> { where('last_import IS false') }
   # scope :All
   scope :All, -> { order('updated_at') }
@@ -16,10 +25,25 @@ class Question < ActiveRecord::Base
   scope :LastImported, -> { where('last_import IS true') }
 
   def self.search(params)
-    tire.search(load: true, page: params[:page], per_page: 100) do
-      query { string params[:query], default_operator: "AND" } if params[:query].present?
-      # filter :term, :coach_role => true
-      # sort { by :updated_at, "desc" }
+    if params[:category].present?
+      params_categories = params[:category]
+      categories_ary = params_categories.to_s.split(',')
+      tire.search(load: true, page: params[:page], per_page: 100) do
+        query { 
+          string params[:query], default_operator: "AND"  if params[:query].present?
+          categories_ary.each do |category|  
+            match 'categories.name',  category
+          end
+        }
+        sort { by :updated_at, "desc" }
+      end
+    else
+      tire.search(load: true, page: params[:page], per_page: 100) do
+        query { string params[:query], default_operator: "AND" } if params[:query].present?
+        sort { by :updated_at, "desc" }
+        # filter :term, :coach_role => true
+        # sort { by :updated_at, "desc" }
+      end
     end
   end
 
@@ -31,7 +55,19 @@ class Question < ActiveRecord::Base
 
   mapping do
     indexes :id, type: 'integer'
-    indexes :body
+    indexes :body, type: 'string', boost: 10, analyzer: 'snowball'
+    indexes :updated_at, type: 'date'
+     
+    indexes :categories do
+      indexes :name, type: 'string', analyzer: 'snowball'
+    end
+  end
+
+  def to_indexed_json
+    to_json( include: { categories: { only: [:name] } } )
+  end
+  def remove_es_index
+    self.index.remove self
   end
 
   # def to_indexed_json

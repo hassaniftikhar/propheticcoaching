@@ -7,6 +7,11 @@
 <%= form_tag questions_path, method: :get do %>
   <p>
     <%= text_field_tag :query, params[:query], id: 'question_query' %>
+    <%= select_tag 'category', options_for_select(Category.all.collect {|category| [ category.name, category.name ] }, :selected), 
+     {:include_blank => false, :prompt => "Select Category", :multiple => false, :size => 0}
+    %>
+
+
     <%= submit_tag "Search", body: nil, id: 'question_search'  %>
   </p>
 <% end %>
@@ -14,7 +19,8 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Question List</th>
+      <th>Question</th>
+      <th>Catergory</th>
       <th></th>
 
     </tr>

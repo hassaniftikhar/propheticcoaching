@@ -15,7 +15,31 @@
     <%= f.label :body %><br>
     <%= f.text_area :body %>
   </div>
+  <div><p><br /></p></div>
+  <% unless(@question.new_record?) %>
+    <div>
+      <select id="categories_list" name="categories_list" multiple="multiple">
+        <% Category.order("name ASC").each do |category| %>
+          <% if @existing_categories and (@question.question_categorizations.pluck(:category_id).include? category.id) %>
+                  <option value= <%="#{category.id}" %> selected="selected" > <%= category.name %> </option>
+              <% else %>
+                  <option value= <%="#{category.id}" %>  > <%= category.name %> </option>
+          <% end %>
+        <% end %>
+      </select>
+    </div>
+    <div><p><br /> <br /><br /></p></div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+<script type="text/javascript">
+    var question_selection;
+    <% if @selection %>
+      question_selection  ="<%= @selection.join(',').html_safe %>";
+    <% else %>
+        question_selection  = nil;
+    <% end %>
+ </script>

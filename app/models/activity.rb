@@ -20,9 +20,6 @@ class Activity < ActiveRecord::Base
   has_many :categories, through: :activity_categorizations, :class_name => "Category",
         :foreign_key => 'activity_id'
 
-  # after_touch() { tire.update_index }
-  # self.include_root_in_json = false
-
   before_destroy :remove_es_index
   before_destroy {|activity| activity.categories.clear}
   

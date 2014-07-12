@@ -175,9 +175,11 @@ $(document).ready(function () {
             case 'questions':
                 var selection = question_selection;
                 var redirection_path = '/admin/questions';
+                break;
             case 'exercises':
                 var selection = exercise_selection;
                 var redirection_path = '/admin/exercises';
+                break;
             default:
                 var selection = ebook_selection;
                 var redirection_path = '/admin/ebooks';
