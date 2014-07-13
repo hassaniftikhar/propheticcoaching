@@ -21,6 +21,8 @@ class ExercisesController < ApplicationController
 
   # GET /exercises/1/edit
   def edit
+    @exercise = Exercise.find(params[:id])
+    @existing_categories =  @exercise.categories
   end
 
   # POST /exercises
@@ -42,6 +44,20 @@ class ExercisesController < ApplicationController
   # PATCH/PUT /exercises/1
   # PATCH/PUT /exercises/1.json
   def update
+
+    existing_categories = (Exercise.find_by id: params[:id]).categories
+    is_already_category = (Exercise.find_by id: params[:id]).exercise_categorizations.pluck(:category_id).include? params[:category_id].to_i
+
+    if(params[:checked] == "checked" )
+      if(!is_already_category)
+        existing_categories << (Category.find_by id: params[:category_id])
+      end
+    else
+      if(is_already_category)
+        existing_categories.delete(params[:category_id])
+      end
+    end
+
     respond_to do |format|
       if @exercise.update(exercise_params)
         format.html { redirect_to @exercise, notice: 'Exercise was successfully updated.' }
@@ -71,6 +87,6 @@ class ExercisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exercise_params
-      params.require(:exercise).permit(:body, :last_import)
+      params.require(:exercise).permit(:body, :last_import, :category_id)
     end
 end

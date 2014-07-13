@@ -1,4 +1,3 @@
-<%= link_to 'Back', ebooks_path %>
 <%- model_class = Exercise -%>
 <div class="page-header">
   <h1><%= t '.title', :default => Exercise.name.pluralize.titleize %></h1>
@@ -7,6 +6,9 @@
 <%= form_tag exercises_path, method: :get do %>
   <p>
     <%= text_field_tag :query, params[:query] %>
+    <%= select_tag 'category', options_for_select(Category.all.collect {|category| [ category.name, category.name ] }, :selected), 
+     {:include_blank => false, :prompt => "Select Category", :multiple => false, :size => 0}
+    %>
     <%= submit_tag "Search", body: nil %>
   </p>
 <% end %>
@@ -14,7 +16,8 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Exercise List</th>
+      <th>Exercise</th>
+      <th>Catergory</th>
       <th></th>
 
     </tr>

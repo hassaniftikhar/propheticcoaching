@@ -1,4 +1,3 @@
-<%= link_to 'Back', ebooks_path %>
 <%- model_class = Activity -%>
 <div class="page-header">
   <h1><%= t '.title', :default => Activity.name.pluralize.titleize %></h1>
@@ -40,13 +39,3 @@
             new_activity_path,
             :class => 'btn btn-primary' %>
 <% end %>
-
-<script type="text/javascript">
-
-    var resource_selection;
-    <% if @selection %>
-      resource_selection  ="<%= @selection.join(',').html_safe %>";
-    <% else %>
-        resource_selection  = nil;
-    <% end %>
- </script>

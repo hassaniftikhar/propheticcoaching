@@ -4,6 +4,7 @@ class Exercise < ActiveRecord::Base
   include Tire::Model::Callbacks
 
   # index_name BONSAI_INDEX_NAME
+  attr_accessor :category_id
 
   validates_presence_of :body
   validates_uniqueness_of :body, :case_sensitive => false

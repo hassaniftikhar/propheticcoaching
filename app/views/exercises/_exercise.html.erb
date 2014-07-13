@@ -1,6 +1,18 @@
 <% @exercises.each do |exercise| %>
   <tr>
     <td><%= exercise.body %></td>
-    <td><%= link_to 'Show', exercise_path(exercise), :class => 'btn btn-mini'%></td>
+    <td><%= exercise.categories.order("name asc").collect {|category| link_to("#{category.name}", category_path(category)) }.join(", ").html_safe %>
+    </td>
+    <td>
+      <% if can? :edit, @exercise %>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                    edit_exercise_path(exercise), :class => 'btn btn-mini' %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                    exercise_path(exercise),
+                    :method => :delete,
+                    :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                    :class => 'btn btn-mini btn-danger' %>
+      <% end %>
+    </td>
   </tr>
 <% end %>

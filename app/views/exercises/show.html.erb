@@ -3,6 +3,12 @@
 <p>
   <strong>Body:</strong>
   <%= @exercise.body %>
+  <div>
+	  <strong>
+	  	Category:
+	  </strong>
+	  <%= @exercise.categories.order("name asc").collect {|category| link_to("#{category.name}", category_path(category)) }.join(", ").html_safe %>
+		</div>
 </p>
 
 
