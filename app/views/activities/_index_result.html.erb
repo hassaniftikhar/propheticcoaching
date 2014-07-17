@@ -6,7 +6,7 @@
 <%= form_tag activities_path, method: :get do %>
   <p>
     <%= text_field_tag :query, params[:query] %>
-    <%= select_tag 'category', options_for_select(Category.all.collect {|category| [ category.name, category.name ] }, :selected), 
+    <%= select_tag 'category', options_for_select(Category.order("name ASC").collect {|category| [ category.name, category.name ] }, :selected), 
      {:include_blank => false, :prompt => "Select Category", :multiple => false, :size => 0}
     %>
 

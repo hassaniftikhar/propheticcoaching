@@ -3,7 +3,7 @@ class Ebook < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  # attr_accessor :category_id
+  attr_accessor :category_id
   has_many :pages, dependent: :destroy
   # validates_presence_of :name
   validates_presence_of :name, :pdf
@@ -59,14 +59,38 @@ class Ebook < ActiveRecord::Base
   # end
 
   def self.search(params)
-    tire.search do
-      query { string params[:query], default_operator: "AND" } if params[:query].present?
+    if params[:category].present?
+      params_categories = params[:category]
+      categories_ary = params_categories.to_s.split(',')
+      tire.search(load: true, page: params[:page], per_page: 100) do
+        query { 
+          string params[:query], default_operator: "AND"  if params[:query].present?
+          categories_ary.each do |category|  
+            match 'categories.name',  category
+          end
+        }
+        sort { by :updated_at, "desc" }
+      end
+    else
+      tire.search do
+        query { string params[:query], default_operator: "AND" } if params[:query].present?
+        sort { by :updated_at, "desc" }
+      end
     end
   end
 
   mapping do
     indexes :id, type: 'integer'
-    indexes :name
+    indexes :name, type: 'string', boost: 10, analyzer: 'snowball'
+    indexes :updated_at, type: 'date'
+     
+    indexes :categories do
+      indexes :name, type: 'string', analyzer: 'snowball'
+    end
+  end
+
+  def to_indexed_json
+    to_json( include: { categories: { only: [:name] } } )
   end
 
   def remove_es_index

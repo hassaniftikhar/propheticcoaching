@@ -1,5 +1,3 @@
-<%= link_to 'Back', ebooks_path %>
-
 <div id="pdfContainer" class = "pdf-content" style="display: none">
 </div>
 
@@ -11,7 +9,11 @@
 <%= form_tag search_ebooks_path, :id => "search_ebook", method: :get do %>
   <p>
     <%= text_field_tag :query, params[:query] %>
-    <%= text_field_tag :category, params[:category] %>
+    <%= select_tag 'category', options_for_select(Category.order("name ASC").collect {|category| [ category.name, category.name ] }, :selected), 
+     {:include_blank => false, :prompt => "Select Category", :multiple => false, :size => 0}
+    %>
+
+
     <%= submit_tag "Search", name: nil %>
   </p>
 <% end %>

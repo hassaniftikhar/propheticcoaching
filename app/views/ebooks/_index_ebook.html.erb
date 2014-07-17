@@ -7,7 +7,7 @@
 <%= form_tag search_ebooks_path, method: :get do %>
   <p>
     <%= text_field_tag :query, params[:query], id: 'ebook_query' %>
-    <%= select_tag 'category', options_for_select(Category.all.collect {|category| [ category.name, category.name ] }, :selected), 
+    <%= select_tag 'category', options_for_select(Category.order("name ASC").collect {|category| [ category.name, category.name ] }, :selected), 
      {:include_blank => false, :prompt => "Select Category", :multiple => false, :size => 0}
     %>
 
@@ -21,6 +21,7 @@
     <th><%= model_class.human_attribute_name(:id) %></th>
     <th><%= model_class.human_attribute_name(:name) %></th>
     <th><%= model_class.human_attribute_name(:created_at) %></th>
+    <th><%= model_class.human_attribute_name(:category) %></th>
     <th><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
