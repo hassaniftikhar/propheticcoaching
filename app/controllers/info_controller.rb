@@ -3,6 +3,8 @@ class InfoController < ApplicationController
     @benefits = Benefit.order("updated_at desc").limit(10)
     @featured_products = FeaturedProduct.order("updated_at desc").limit(20)
     @best_features = BestFeature.order("updated_at desc").limit(4)
+    # @video_path = '<iframe src="//player.vimeo.com/video/100508776" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'.html_safe
+    @video_path = Video.order("updated_at desc").first.path.html_safe
   end
 
   def about

@@ -1,5 +1,6 @@
 Propheticcoaching::Application.routes.draw do
 
+  # resources :videos , :only => [:index, :show]
   resources :contact_requests, :only => [:new, :create]
   resources :categories, :only => [:show]
 
