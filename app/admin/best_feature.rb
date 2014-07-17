@@ -18,6 +18,7 @@ config.clear_action_items!
   index :title => 'Best Features' do
     column :title
     column :description
+    column :updated_at
     default_actions
   end
 
