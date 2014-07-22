@@ -15,7 +15,7 @@
       </tr>
       <tr>
         <td>Date of Birth</td>
-        <td><%= @mentee.date_of_birth %></td>
+        <td><%= @mentee.date_of_birth.strftime("%m/%d/%Y") if @mentee.date_of_birth %></td>
       </tr>
       <tr>
         <td>DONER</td>

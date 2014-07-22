@@ -39,7 +39,7 @@
       </tr>
       <tr>
         <td>DATE OF BIRTH</td>
-        <td><%= @user.date_of_birth %></td>
+        <td><%= @user.date_of_birth.strftime("%m/%d/%Y") if @user.date_of_birth %></td>
       </tr>
 
   </tbody>
