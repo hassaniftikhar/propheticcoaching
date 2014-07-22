@@ -89,16 +89,20 @@ def self.import_csv(file)
     rows.each do |row|
 
       index_map = { :first_name => 0, :last_name => 1, :email => 2, :address => 3,
-                    :home_phone => 4, :password => 5 }
+                    :home_phone => 4, :password => 5, :availablity_time => 6, :best_time_to_call => 7,
+                    :date_of_birth => 8 }
 
       user = User.new
 
-      user.first_name   = row[index_map[:first_name]]
-      user.last_name    = row[index_map[:last_name]]
-      user.email        = row[index_map[:email]]
-      user.address      = row[index_map[:address]]
-      user.home_phone   = row[index_map[:home_phone]]
-      user.password     = row[index_map[:password]]
+      user.first_name             = row[index_map[:first_name]]
+      user.last_name              = row[index_map[:last_name]]
+      user.email                  = row[index_map[:email]]
+      user.address                = row[index_map[:address]]
+      user.home_phone             = row[index_map[:home_phone]]
+      user.password               = row[index_map[:password]]
+      user.availablity_time       = row[index_map[:availablity_time]]
+      user.best_time_to_call      = row[index_map[:best_time_to_call]]
+      user.date_of_birth          = row[index_map[:date_of_birth]]
 
       p "++++ user import method"
       p user.inspect

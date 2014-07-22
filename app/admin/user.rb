@@ -56,9 +56,6 @@ ActiveAdmin.register User do
     column :last_name
     column :email
     column :address
-    column :roles do |user|
-      "#{user.roles_name.join(', ')}"
-    end
     column :home_phone
     column :availablity_time
     #column :status do |user|
@@ -69,11 +66,15 @@ ActiveAdmin.register User do
         if(user.date_of_birth)
           "#{user.date_of_birth.strftime("%m/%d/%Y")}"
         end
-      end
+    end
+
     #column :current_sign_in_at
     #column :last_sign_in_at
     #column :current_sign_in_ip
     #column :last_sign_in_ip
+    column :roles do |user|
+      "#{user.roles_name.join(', ')}"
+    end
     default_actions
   end
 
