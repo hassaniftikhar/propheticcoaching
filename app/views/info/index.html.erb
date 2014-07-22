@@ -72,9 +72,9 @@
     <% @best_features.each do |best_feature| %>
       <div class="col-md-3 col-sm-6">
         <div class="feature-box">
-          <h3 class="feature-box-title text-center"><%= best_feature.title %></h3>
-          <img class=" img-responsive" src="<%= best_feature.image %>" height="762" width="1144" />
-          <p class="feature-box-text text-center"><%= best_feature.description %> </p>
+          <h3 class="feature-box-title text-center"><%= best_feature.title[0..80] %></h3>
+          <img class=" img-responsive" src="<%= best_feature.image_url(:show) %>" height="762" width="1144" />
+          <p class="feature-box-text text-center"><%= best_feature.description[0..175] %> </p>
           <p class="feature-box-more text-center"><a href= "<%= best_feature_path(best_feature) %>" >More info</a></p>
         </div>
       </div>
