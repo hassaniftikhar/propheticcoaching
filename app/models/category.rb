@@ -26,14 +26,14 @@ class Category < ActiveRecord::Base
 
  has_many :question_categorizations, :class_name => "QuestionCategorization",
       :foreign_key => 'category_id'
- has_many :activities, through: :question_categorizations, :class_name => "Question",
+ has_many :questions, through: :question_categorizations, :class_name => "Question",
        :foreign_key => 'question_id'
        # , touch: true
 	before_destroy {|category| category.activities.clear}
 
  has_many :exercise_categorizations, :class_name => "ExerciseCategorization",
       :foreign_key => 'category_id'
- has_many :activities, through: :exercise_categorizations, :class_name => "Exercise",
+ has_many :exercises, through: :exercise_categorizations, :class_name => "Exercise",
        :foreign_key => 'exercise_id'
        # , touch: true
 	before_destroy {|category| category.activities.clear}

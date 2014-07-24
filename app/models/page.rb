@@ -26,9 +26,9 @@ class Page < ActiveRecord::Base
   # end  
 
   def category_name
+    # category_list = self.ebook.categories.map(&:name)
+    # category_list.empty? ? ["Ebook"] : category_list
     self.ebook.categories.map(&:name)
-    # Page.last.ebook.categories.map(&:name)
-    # p self.ebook.categories.name
   end
 
   def self.search(params)
