@@ -1,8 +1,8 @@
 //= require shared
 
-$(document).ready(function () {
-		$( "#tabs" ).tabs();
-});				
+// $(document).ready(function () {
+// 		$( "#tabs" ).tabs();
+// });				
 
 
 
