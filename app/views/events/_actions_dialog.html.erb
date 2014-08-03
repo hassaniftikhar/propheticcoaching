@@ -35,7 +35,6 @@
 <script type="text/javascript">
     authenticity_token = "<%= form_authenticity_token %>";
     calendar_editable = "<%= @calendar_editable %>";
-    alert("Calendar Events loaded");
     <% dashboard ||= false%>
     <%if dashboard %>
       calendar_scope_type = "<%= profile ? "#calendar" : "#coaches_calendar" %>";
@@ -43,6 +42,7 @@
       calendar_scope_type = "#calendar"
     <%end%>
     if ($(calendar_scope_type).length > 0) {
+      alert(calendar_scope_type);
       var editable = to_boolean(calendar_editable);
       console.log("==editable: " + editable);
       $(calendar_scope_type).fullCalendar({
