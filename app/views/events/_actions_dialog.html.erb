@@ -31,52 +31,55 @@
   <% events_url = get_coaches_events_url %>
 <% end %>
 
+
 <script type="text/javascript">
-  authenticity_token = "<%= form_authenticity_token %>";
-  calendar_editable = "<%= @calendar_editable %>";
-  // calendar_scope_type = "<%= profile ? "#calendar" : "#coaches_calendar" %>";
-  <% dashboard ||= false%>
-  <%if dashboard %>
-    calendar_scope_type = "<%= profile ? "#calendar" : "#coaches_calendar" %>";
-  <% else %>
-    calendar_scope_type = "#calendar"
-  <%end%>
-  if ($(calendar_scope_type).length > 0) {
-    var editable = to_boolean(calendar_editable);
-    console.log("==editable: " + editable);
-    $(calendar_scope_type).fullCalendar({
-      editable: editable,
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      },
-      defaultView: 'agendaWeek',
-      height: 500,
-      slotMinutes: 15,
-      loading: function (bool) {
-        if (bool)
-          $('#loading').show();
-        else
-          $('#loading').hide();
-      },
-//      events: "https://www.google.com/calendar/feeds/imran.malik71%40gmail.com/public/basic",
-      eventSources: <%= events_url %>,
-      timeFormat: 'h:mm TT{ - h:mm TT} ',
-      dragOpacity: "0.5",
-      eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
-        moveEvent(event, dayDelta, minuteDelta, allDay);
-      },
+  $(document).ready(function () {
+    authenticity_token = "<%= form_authenticity_token %>";
+    calendar_editable = "<%= @calendar_editable %>";
+    // calendar_scope_type = "<%= profile ? "#calendar" : "#coaches_calendar" %>";
+    <% dashboard ||= false%>
+    <%if dashboard %>
+      calendar_scope_type = "<%= profile ? "#calendar" : "#coaches_calendar" %>";
+    <% else %>
+      calendar_scope_type = "#calendar"
+    <%end%>
+    if ($(calendar_scope_type).length > 0) {
+      var editable = to_boolean(calendar_editable);
+      console.log("==editable: " + editable);
+      $(calendar_scope_type).fullCalendar({
+        editable: editable,
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        defaultView: 'agendaWeek',
+        height: 500,
+        slotMinutes: 15,
+        loading: function (bool) {
+          if (bool)
+            $('#loading').show();
+          else
+            $('#loading').hide();
+        },
+        //      events: "https://www.google.com/calendar/feeds/imran.malik71%40gmail.com/public/basic",
+        eventSources: <%= events_url %>,
+        timeFormat: 'h:mm TT{ - h:mm TT} ',
+        dragOpacity: "0.5",
+        eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+          moveEvent(event, dayDelta, minuteDelta, allDay);
+        },
 
-      eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
-        resizeEvent(event, dayDelta, minuteDelta);
-      },
+        eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+          resizeEvent(event, dayDelta, minuteDelta);
+        },
 
-      eventClick: function (event, jsEvent, view) {
-        if (editable) {
-          showEventDetails(event);
+        eventClick: function (event, jsEvent, view) {
+          if (editable) {
+            showEventDetails(event);
+          }
         }
-      }
-    });
-  }
+      });
+    }
+  });
 </script>
