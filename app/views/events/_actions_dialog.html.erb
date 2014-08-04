@@ -60,18 +60,15 @@
           else
             $('#loading').hide();
         },
-        //      events: "https://www.google.com/calendar/feeds/imran.malik71%40gmail.com/public/basic",
         eventSources: <%= events_url %>,
         timeFormat: 'h:mm TT{ - h:mm TT} ',
-        dragOpacity: "0.5",
+        dragOpacity: '0.5',
         eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
           moveEvent(event, dayDelta, minuteDelta, allDay);
         },
-
         eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
           resizeEvent(event, dayDelta, minuteDelta);
         },
-
         eventClick: function (event, jsEvent, view) {
           if (editable) {
             showEventDetails(event);
