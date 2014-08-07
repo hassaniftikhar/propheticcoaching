@@ -15,7 +15,7 @@ class Ebook < ActiveRecord::Base
   mount_uploader :pdf, PdfUploader
   process_in_background :pdf
 
-  has_one :featured_product, :as => :profile
+  # has_one :featured_product, :as => :profile
   has_many :ebook_categorizations
   has_many :categories, through: :ebook_categorizations, :class_name => "Category",
         :foreign_key => 'ebook_id'
