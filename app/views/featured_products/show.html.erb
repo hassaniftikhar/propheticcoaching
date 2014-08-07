@@ -17,7 +17,7 @@
 
 <p>
 
-  <a class="fancybox" data-fancybox-type="iframe" href="<%= @featured_product.profile.pdf %>"><img src="<%= @featured_product.image %>" style="width:150px; height:200px;" alt="" />
+  <a class="fancybox" href="<%= @featured_product.url %>"><img src="<%= @featured_product.image %>" style="width:150px; height:200px;" alt="" />
   </a>
 </p>
 
@@ -34,16 +34,6 @@
 <p>
   <strong>Price:</strong>
   <%= @featured_product.price %>
-</p>
-
-<p>
-  <strong>Resource:</strong>
-  <%= @featured_product.profile.name %>
-</p>
-
-<p>
-  <strong>Resource type:</strong>
-  <%= @featured_product.profile_type %>
 </p>
 
 <%= link_to 'Back', featured_products_path %>

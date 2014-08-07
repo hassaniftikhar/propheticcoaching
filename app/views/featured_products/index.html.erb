@@ -3,12 +3,11 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Image</th>
       <th>Title</th>
       <th>Description</th>
       <th>Price</th>
-      <th>Resource</th>
-      <th>Resource type</th>
-      <th>Image</th>
+      <th>Magento Link(URL)</th>
       <th></th>
     </tr>
   </thead>
@@ -16,12 +15,11 @@
   <tbody>
     <% @featured_products.each do |featured_product| %>
       <tr>
+        <td><img src="<%= featured_product.image_url(:thumb) %>" alt="" /></td>
         <td><%= featured_product.title %></td>
         <td><%= featured_product.description %></td>
         <td><%= featured_product.price %></td>
-        <td><%= featured_product.profile_id %></td>
-        <td><%= featured_product.profile_type %></td>
-        <td><img src="<%= featured_product.image_url(:thumb) %>" alt="" /></td>
+        <td><%= link_to featured_product.url, featured_product.url %></td>
         <td><%= link_to 'Show', featured_product %></td>
       </tr>
     <% end %>

@@ -111,7 +111,7 @@
         <div id="owl-demo" class="owl-carousel">
           <% @featured_products.each do |featured_product| %>
             <div class="item">
-              <h1><%= link_to image_tag(featured_product.image_url(:show), size: "150x200"), featured_product.url ? featured_product.url : featured_product_path(featured_product) %> </h1>
+              <h1><%= link_to image_tag(featured_product.image_url(:show), size: "150x200"), featured_product.url %> </h1>
               
             </div>
           <% end %>

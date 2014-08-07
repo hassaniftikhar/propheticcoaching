@@ -22,8 +22,8 @@ ActiveAdmin.register FeaturedProduct do
     column :title
     column :description
     column :price
-    column :url
-    column :profile
+    column "Magento Link(URL)", :url
+    # column :profile
     default_actions
   end
 
@@ -33,9 +33,9 @@ ActiveAdmin.register FeaturedProduct do
       f.input :title
       f.input :description
       f.input :price
-      f.input :url
-      f.input :profile_id, :label => 'Resource', :as => :select, :collection => Ebook.all.order(:name).map{|resource| ["#{resource.name}", resource.id]}, :include_blank => true
-      f.input :profile_type, :as => :hidden, :value => "Ebook"
+      f.input :url, :label => 'Magento Link (URL)'
+      # f.input :profile_id, :label => 'Resource', :as => :select, :collection => Ebook.all.order(:name).map{|resource| ["#{resource.name}", resource.id]}, :include_blank => true
+      # f.input :profile_type, :as => :hidden, :value => "Ebook"
       f.input :image, :as => :file
     end
     f.actions
@@ -57,14 +57,16 @@ ActiveAdmin.register FeaturedProduct do
         row :title
         row :description
         row :price
-        row :url
-        row :profile
+        # row :profile
         # row :image do
         #   image_tag(featured_product.image.url)
         # end
         row :image do |file|
           link_to "View Image", image_featured_product_path(file)
         end
+        row :magento_link do
+          link_to featured_product.url, featured_product.url
+        end 
       end
     end
     active_admin_comments

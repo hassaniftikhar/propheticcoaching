@@ -4,6 +4,7 @@ class FeaturedProduct < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :image
   validates_presence_of :price
+  validates_presence_of :url
   validates_uniqueness_of :title, :case_sensitive => false
   # validates_uniqueness_of :sha
   # validate :is_book_unique
@@ -12,5 +13,5 @@ class FeaturedProduct < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   process_in_background :image
 
-  belongs_to :profile, :polymorphic => true
+  # belongs_to :profile, :polymorphic => true
 end
