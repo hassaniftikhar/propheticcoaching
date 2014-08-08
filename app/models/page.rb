@@ -36,19 +36,29 @@ class Page < ActiveRecord::Base
       # Page.tire.update_index
       params_categories = params[:category]
       categories_ary = params_categories.to_s.split(',')
-      tire.search(load: true) do
+      tire.search(load: true, page: params[:page], per_page: 10) do
         query { 
         string params[:query], default_operator: "AND" if params[:query].present? 
           categories_ary.each do |category|  
             match 'category_name',  category
           end
         }
-        sort { by :page_number, 'asc' }
+        # sort { by :ebook_id, 'asc' }
+        sort do
+          by :ebook_id, 'asc'
+          by :page_number, 'asc'
+        end        
+        # size 3000
       end
     else
-      tire.search(load: true) do
+      tire.search(load: true, page: params[:page], per_page: 10) do
         query { string params[:query], default_operator: "AND" } if params[:query].present?
-        sort { by :page_number, 'asc' }
+        sort do
+          by :ebook_id, 'asc'
+          by :page_number, 'asc'
+        end        
+        # sort { by :ebook_id, 'asc' }
+        # size 3000
       end
     end
     # tire.search(load: true) do

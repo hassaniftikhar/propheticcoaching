@@ -44,6 +44,8 @@ class EbooksController < ApplicationController
 
   # GET /ebooks/search
   def search
+    # @pages = Page.search(params)
+    # @pages = Kaminari.paginate_array(@pages).page(params[:page]).per(10)
     @pages = Page.search params
   end
 

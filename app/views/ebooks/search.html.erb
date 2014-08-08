@@ -43,7 +43,8 @@
   <% end %>
   </tbody>
 </table>
-
+<%= paginate @pages %>
+<br>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_ebook_path,
             :class => 'btn btn-primary' %>
