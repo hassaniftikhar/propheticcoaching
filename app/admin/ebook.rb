@@ -14,12 +14,28 @@ ActiveAdmin.register Ebook do
 
   collection_action :search, :method => :get do
     if params.has_key? "query"
-      @pages = Page.search params
+      # @pages = Page.search params
+      @pages = Page.search(params)
+      # @pages = Kaminari.paginate_array(@pages).page(params[:ebook_search_page]).per(10)
+      p "admin ser====================================="
+      # p @pages
       render :partial => "admin/ebooks/result_table", :locals => {:pages => @pages}
     else
-      render "admin/ebooks/search"
-    end
+      p "else admin ser====================================="
+      @pages = Page.search(params)
+      # @pages = Kaminari.paginate_array(@pages).page(params[:ebook_search_page]).per(10)
+      paginated_collection(Kaminari.paginate_array(@pages).page(params[:ebook_search_page]).per(10), param_name: 'ebook_search_page') do
+       table_for(collection) do |cr|
+        column(I18n.t("cr.ebook_id")) { |cr| I18n.l cr.ebook_id, format: :raw }
+          #other columns...
+       end
+      end
 
+      # @pages = Kaminari.paginate_array(@pages).page(params[:ebook_search_page]).per(10)
+      # render "admin/ebooks/search"
+      # render :partial => "admin/ebooks/result_table", :locals => {:pages => @pages}
+      # p @pages
+    end
   end
 
   action_item :only => :index do

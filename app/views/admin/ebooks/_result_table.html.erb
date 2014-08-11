@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "/assets/active_admin.css" %>
+
 <%- model_class = Ebook -%>
 <table class="table-striped">
   <thead>
@@ -8,20 +10,17 @@
     <th> Matched Text</th>
   </tr>
   </thead>
-  <tbody style="font-size: 14px">
+  <tbody id="ebook_search" style="font-size: 14px">
   <% pages ||= [] %>
-  <% pages.each do |page| %>
-    <tr>
-      <td><%= link_to page.ebook_id, admin_ebook_path(page.ebook_id) %></td>
-      <td><%= page.ebook_name %></td>
-      <td>
-        <div id="pdf-view">
-          <%= page.page_number %>
-        </div>
-      </td>
-      <td id="tags"> <%= page.tags %> </td>
-    </tr>
-
-  <% end %>
+  <%= render :partial => "admin/ebooks/display_search_result", :locals => {:pages => @pages} %>
   </tbody>
 </table>
+
+<div id="ebook_search_paginator">
+     <%= paginate @pages, :remote => true, :param_name => "ebook_search_page" %>
+</div>
+
+<script type="text/javascript">
+  $('tbody#ebook_search').html('<%= escape_javascript render :partial => "admin/ebooks/display_search_result", :locals => {:pages => @pages} %>');
+  $('#ebook_search_paginator').html('<%= escape_javascript(paginate(@pages, :remote => true, :param_name => 'ebook_search_page').to_s) %>');
+</script >
