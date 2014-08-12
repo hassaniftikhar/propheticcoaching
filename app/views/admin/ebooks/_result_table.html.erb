@@ -12,15 +12,10 @@
   </thead>
   <tbody id="ebook_search" style="font-size: 14px">
   <% pages ||= [] %>
-  <%= render :partial => "admin/ebooks/display_search_result", :locals => {:pages => @pages} %>
+  <%= render :partial => "/admin/ebooks/display_search_result", :locals => {:pages => @pages} %>
   </tbody>
 </table>
 
 <div id="ebook_search_paginator">
-     <%= paginate @pages, :remote => true, :param_name => "ebook_search_page" %>
+     <%= paginate @pages, :remote => true, :param_name => "page" %>
 </div>
-
-<script type="text/javascript">
-  $('tbody#ebook_search').html('<%= escape_javascript render :partial => "admin/ebooks/display_search_result", :locals => {:pages => @pages} %>');
-  $('#ebook_search_paginator').html('<%= escape_javascript(paginate(@pages, :remote => true, :param_name => 'ebook_search_page').to_s) %>');
-</script >
