@@ -65,9 +65,9 @@ function check_session_progress() {
 $(document).ready(function () {
   window.setInterval(check_session_progress, 10000);
   $("#search_ebook").on("ajax:success",function (e, data, status, xhr) {
-
     console.log("search ebook success");
-    $("#result_table").html(xhr.responseText);
+    // disable following line. Now date is refresh through _search_result.js in views/admin/ebooks
+    // $("#result_table").html(xhr.responseText);
     $("td#tags").highlight($("input#query").val());
 
   }).bind("ajax:error", function (e, xhr, status, error) {

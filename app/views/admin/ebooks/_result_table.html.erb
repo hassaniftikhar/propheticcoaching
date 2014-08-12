@@ -1,5 +1,3 @@
-<%= stylesheet_link_tag "/assets/active_admin.css" %>
-
 <%- model_class = Ebook -%>
 <table class="table-striped">
   <thead>
@@ -10,8 +8,9 @@
     <th> Matched Text</th>
   </tr>
   </thead>
-  <tbody id="ebook_search" style="font-size: 14px">
   <% pages ||= [] %>
+  <tbody id="ebook_search_result" style="font-size: 14px">
+
   <%= render :partial => "/admin/ebooks/display_search_result", :locals => {:pages => @pages} %>
   </tbody>
 </table>

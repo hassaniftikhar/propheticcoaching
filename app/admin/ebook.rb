@@ -14,12 +14,11 @@ ActiveAdmin.register Ebook do
 
   collection_action :search, :method => :get do
     if params.has_key? "query"
-      # @pages = Page.search params
       @pages = Page.search(params)
       render :partial => "admin/ebooks/result_table", :locals => {:pages => @pages}
     else
       @pages = Page.search(params)
-      # render "admin/ebooks/search"
+      render "admin/ebooks/search"
     end
   end
 
