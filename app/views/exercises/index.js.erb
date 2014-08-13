@@ -1,2 +1,5 @@
-$('tbody#exercises').html('<%= escape_javascript render :partial => "/exercises/exercise", :locals => {:exercises => @exercises} %>');
-$('#exercise_paginator').html('<%= escape_javascript(paginate(@exercises, :remote => true, :param_name => 'exercise_page').to_s) %>');
+$(document).ready(function () {
+		$('tbody#exercises').html('<%= escape_javascript render :partial => "/exercises/exercise", :locals => {:exercises => @exercises} %>');
+		$('#exercise_paginator').html('<%= escape_javascript(paginate(@exercises, :remote => true, :param_name => 'exercise_page').to_s) %>');
+		$("td#exercise_body").highlight($("input#query").val());
+});

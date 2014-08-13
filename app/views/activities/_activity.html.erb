@@ -1,6 +1,6 @@
 <% @activities.each do |activity| %>
   <tr>
-    <td><%= activity.body %></td>
+    <td id="activity_body"><%= activity.body %></td>
     <td><%= activity.categories.order("name asc").collect {|category| link_to("#{category.name}", category_path(category)) }.join(", ").html_safe %>
     </td>
     <td>

@@ -29,5 +29,7 @@ $(document).ready(function () {
   });
 
   $("td#tags").highlight($("input#query").val());
-
+  $("td#question_body").highlight($("input#question_query").val());
+  $("td#activity_body").highlight($("input#query").val());
+  $("td#exercise_body").highlight($("input#query").val());
 });

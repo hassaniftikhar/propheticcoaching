@@ -1,6 +1,6 @@
 <% @questions.each do |question| %>
   <tr>
-    <td><%= question.body %></td>
+    <td id="question_body"><%= question.body %></td>
     <td><%= question.categories.order("name asc").collect {|category| link_to("#{category.name}", category_path(category)) }.join(", ").html_safe %>
     </td>
     <td>
