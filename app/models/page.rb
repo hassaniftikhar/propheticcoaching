@@ -3,6 +3,15 @@ class Page < ActiveRecord::Base
   belongs_to :ebook
   before_destroy :remove_es_index
   before_destroy {|page| page.ebook.categories.clear}
+  
+  after_save do
+    tire.index.refresh
+  end
+
+  after_destroy do
+    tire.index.refresh
+  end
+
 
   include Tire::Model::Search
   include Tire::Model::Callbacks

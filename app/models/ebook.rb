@@ -29,6 +29,16 @@ class Ebook < ActiveRecord::Base
 
   before_destroy {|ebook| ebook.categories.clear}
 
+  
+  after_save do
+    tire.index.refresh
+  end
+
+  after_destroy do
+    tire.index.refresh
+  end
+
+
   # def get_sha
   #   require 'open-uri'
   #   sha = ''

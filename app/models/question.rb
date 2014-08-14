@@ -18,6 +18,15 @@ class Question < ActiveRecord::Base
 
   before_destroy :remove_es_index
   before_destroy {|question| question.categories.clear}
+  
+  after_save do
+    tire.index.refresh
+  end
+
+  after_destroy do
+    tire.index.refresh
+  end
+
   # scope :All, -> { where('last_import IS false') }
   # scope :All
   scope :All, -> { order('updated_at') }
