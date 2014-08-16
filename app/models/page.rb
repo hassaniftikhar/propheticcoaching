@@ -55,7 +55,7 @@ class Page < ActiveRecord::Base
         # sort { by :ebook_id, 'asc' }
         sort do
           by :ebook_id, 'desc'
-          by :page_number, 'asc'
+          # by :page_number, 'asc'
         end        
         # size 3000
       end
@@ -64,7 +64,7 @@ class Page < ActiveRecord::Base
         query { string params[:query], default_operator: "AND" } if params[:query].present?
         sort do
           by :ebook_id, 'desc'
-          by :page_number, 'asc'
+          # by :page_number, 'asc'
         end        
         # sort { by :ebook_id, 'asc' }
         # size 3000
