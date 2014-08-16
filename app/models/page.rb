@@ -1,5 +1,8 @@
 class Page < ActiveRecord::Base
 
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
   belongs_to :ebook
   before_destroy :remove_es_index
   before_destroy {|page| page.ebook.categories.clear}
@@ -12,9 +15,6 @@ class Page < ActiveRecord::Base
     tire.index.refresh
   end
 
-
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
 
   mapping do
     indexes :id, type: 'integer'
@@ -54,7 +54,7 @@ class Page < ActiveRecord::Base
         }
         # sort { by :ebook_id, 'asc' }
         sort do
-          by :ebook_id, 'asc'
+          by :ebook_id, 'desc'
           by :page_number, 'asc'
         end        
         # size 3000
@@ -63,7 +63,7 @@ class Page < ActiveRecord::Base
       tire.search(load: true, page: params[:page], per_page: 10) do
         query { string params[:query], default_operator: "AND" } if params[:query].present?
         sort do
-          by :ebook_id, 'asc'
+          by :ebook_id, 'desc'
           by :page_number, 'asc'
         end        
         # sort { by :ebook_id, 'asc' }
