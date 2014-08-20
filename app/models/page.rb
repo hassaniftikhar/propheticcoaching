@@ -53,10 +53,10 @@ class Page < ActiveRecord::Base
           end
         }
         # sort { by :ebook_id, 'asc' }
-        sort do
-          by :ebook_id, 'desc'
-          by :page_number, 'asc'
-        end        
+        # sort do
+        #   by :ebook_id, 'desc'
+        #   by :page_number, 'asc'
+        # end        
         # size 3000
       end
     else
@@ -69,10 +69,10 @@ class Page < ActiveRecord::Base
             boolean &tags_query
           end
         end      
-          sort do
-            by :ebook_id, 'desc'
-            by :page_number, 'asc'
-          end  
+          # sort do
+          #   by :ebook_id, 'desc'
+          #   by :page_number, 'asc'
+          # end  
         # query { string ('tags: '+params[:query]), default_operator: "AND" } if params[:query].present?
         # sort do
         #   # by :ebook_id, 'desc'
