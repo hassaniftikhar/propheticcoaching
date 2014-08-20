@@ -47,19 +47,19 @@ class Activity < ActiveRecord::Base
     if params[:category].present?
       params_categories = params[:category]
       categories_ary = params_categories.to_s.split(',')
-      tire.search(load: true, page: params[:page], per_page: 100) do
+      tire.search(load: true, page: params[:activity_page], per_page: 10) do
         query { 
           string params[:query], default_operator: "AND"  if params[:query].present?
           categories_ary.each do |category|  
             match 'categories.name',  category
           end
         }
-        sort { by :updated_at, "desc" }
+        # sort { by :updated_at, "desc" }
       end
     else
-      tire.search(load: true, page: params[:page], per_page: 100) do
+      tire.search(load: true, page: params[:activity_page], per_page: 10) do
         query { string params[:query], default_operator: "AND" } if params[:query].present?
-        sort { by :updated_at, "desc" }
+        # sort { by :updated_at, "desc" }
       end
     end
   end

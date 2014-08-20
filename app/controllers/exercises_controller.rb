@@ -6,7 +6,7 @@ class ExercisesController < ApplicationController
   # GET /exercises.json
   def index
     @exercises = Exercise.search(params)
-    @exercises = Kaminari.paginate_array(@exercises).page(params[:exercise_page]).per(PER_PAGE_RECORDS)
+    # @exercises = Kaminari.paginate_array(@exercises).page(params[:exercise_page]).per(PER_PAGE_RECORDS)
   end
 
   # GET /exercises/1

@@ -5,7 +5,7 @@ class ActivitiesController < ApplicationController
   # GET /activities.json
   def index
     @activities = Activity.search(params)
-    @activities = Kaminari.paginate_array(@activities).page(params[:activity_page]).per(PER_PAGE_RECORDS)
+    # @activities = Kaminari.paginate_array(@activities).page(params[:activity_page]).per(PER_PAGE_RECORDS)
   end
 
   # GET /activities/1

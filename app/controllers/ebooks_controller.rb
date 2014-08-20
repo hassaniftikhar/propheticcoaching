@@ -6,16 +6,17 @@ class EbooksController < ApplicationController
   # GET /ebooks
   # GET /ebooks.json
   def index
-    @ebooks = Ebook.all.order("updated_at desc").page(params[:ebook_page]).per(PER_PAGE_RECORDS)
+    # @ebooks = Ebook.all.order("updated_at desc").page(params[:ebook_page]).per(PER_PAGE_RECORDS)
+    @ebooks = Ebook.search(params)
 
     @questions = Question.search(params)
     # @questions = Kaminari.paginate_array(@questions).page(params[:question_page]).per(PER_PAGE_RECORDS)
 
     @activities = Activity.search(params)
-    @activities = Kaminari.paginate_array(@activities).page(params[:activity_page]).per(PER_PAGE_RECORDS)
+    # @activities = Kaminari.paginate_array(@activities).page(params[:activity_page]).per(PER_PAGE_RECORDS)
 
     @exercises = Exercise.search(params)
-    @exercises = Kaminari.paginate_array(@exercises).page(params[:exercise_page]).per(PER_PAGE_RECORDS)
+    # @exercises = Kaminari.paginate_array(@exercises).page(params[:exercise_page]).per(PER_PAGE_RECORDS)
 
   end
 
