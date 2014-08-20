@@ -55,17 +55,29 @@ class Page < ActiveRecord::Base
         # sort { by :ebook_id, 'asc' }
         sort do
           by :ebook_id, 'desc'
-          # by :page_number, 'asc'
+          by :page_number, 'asc'
         end        
         # size 3000
       end
     else
       tire.search(load: true, page: params[:page], per_page: 10) do
-        query { string params[:query], default_operator: "AND" } if params[:query].present?
-        sort do
-          by :ebook_id, 'desc'
-          # by :page_number, 'asc'
-        end        
+          tags_query = lambda do |boolean|
+            boolean.should { string 'tags:'+params[:query], default_operator: "AND"  }
+          end
+        if params[:query].present?        
+          query do
+            boolean &tags_query
+          end
+        end      
+          sort do
+            by :ebook_id, 'desc'
+            by :page_number, 'asc'
+          end  
+        # query { string ('tags: '+params[:query]), default_operator: "AND" } if params[:query].present?
+        # sort do
+        #   # by :ebook_id, 'desc'
+        #   by :page_number, 'asc'
+        # end        
         # sort { by :ebook_id, 'asc' }
         # size 3000
       end
@@ -105,10 +117,20 @@ class Page < ActiveRecord::Base
   #   }.to_json
   # end
 
-
-
   def ebook_name
     ebook.name if ebook
+  end
+
+  def self.duplicate_page
+    # find all models and group them on keys which should be common
+    grouped = all.group_by{|page| [page.ebook_id,page.page_number] }
+    grouped.values.each do |duplicates|
+      # the first one we want to keep right?
+      first_one = duplicates.shift # or pop for last one
+      # if there are any more left, they are duplicates
+      # so delete all of them
+      duplicates.each{|double| double.destroy} # duplicates can now be destroyed
+    end
   end
 
 end

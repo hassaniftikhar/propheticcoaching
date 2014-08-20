@@ -47,9 +47,9 @@ class Question < ActiveRecord::Base
         sort { by :updated_at, "desc" }
       end
     else
-      tire.search(load: true, page: params[:page], per_page: 100) do
+      tire.search(load: true, page: params[:question_page], per_page: 10) do
         query { string params[:query], default_operator: "AND" } if params[:query].present?
-        sort { by :updated_at, "desc" }
+        # sort { by :updated_at, "desc" }
         # filter :term, :coach_role => true
         # sort { by :updated_at, "desc" }
       end

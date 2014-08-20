@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
   def index
     # @questions = Question.all.page params[:page]
     @questions = Question.search(params)
-    @questions = Kaminari.paginate_array(@questions).page(params[:question_page]).per(PER_PAGE_RECORDS)
+    # @questions = Kaminari.paginate_array(@questions).page(params[:question_page]).per(PER_PAGE_RECORDS)
   end
 
   # def search
