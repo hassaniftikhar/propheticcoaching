@@ -5,11 +5,11 @@ ruby '1.9.3'
 gem 'rails', '4.0.2'
 
 #group :assets do
-  gem 'sass-rails', '~> 4.0.0'
-  gem 'coffee-rails', '~> 4.0.0'
-  gem 'uglifier', '>= 1.0.3'
-  gem 'less-rails'
-  gem 'therubyracer', :platform=>:ruby
+gem 'sass-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier', '>= 1.0.3'
+gem 'less-rails'
+gem 'therubyracer', :platform=>:ruby
 #end
 
 gem 'twitter-bootstrap-rails'

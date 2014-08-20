@@ -31,7 +31,10 @@
   <% @pages ||= [] %>
   <% @pages.each do |page| %>
     <tr>
-      <td><%= link_to page.ebook_id, ebook_path(page.ebook_id) %></td>
+      <td>
+        <div id="pdf-fullview">
+      <%=  page.ebook_id %></td>
+      </div>
       <td><%= page.ebook_name %></td>
       <td>
         <div id="pdf-view">
