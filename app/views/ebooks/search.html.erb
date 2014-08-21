@@ -33,13 +33,15 @@
     <tr>
       <td>
         <div id="pdf-fullview">
-      <%=  page.ebook_id %></td>
-      </div>
+          <%=  link_to page.ebook_id, '#' %>
+        </div>
+      </td>
       <td><%= page.ebook_name %></td>
       <td>
         <div id="pdf-view">
-        <%= page.page_number %></td>
-      </div>
+          <%= page.page_number %>
+        </div>
+      </td>
       <td id="tags"> <%= page.tags %> </td>
     </tr>
 

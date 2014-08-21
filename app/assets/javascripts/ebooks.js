@@ -42,7 +42,8 @@ $(document).ready(function () {
     }
 
     var document_id = $(this).closest('td').text();
-    var url =  document_id + "/pdf.pdf";
+    // var url =  document_id + "/pdf.pdf";
+    var url = "/ebooks/" + document_id + "/pdf.pdf";
     var currentPage = 1 ;
     var documentViewer = $('#pdfContainer').documentViewer(
         {
