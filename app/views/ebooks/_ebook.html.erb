@@ -1,5 +1,6 @@
 <% @ebooks.each do |ebook| %>
   <tr>
+  
     <td><%= link_to ebook.id, pdf_ebook_path(ebook) %></td>
     <td><%= ebook.name %></td>
     <td><%= l ebook.created_at.to_time %></td>

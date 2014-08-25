@@ -10,11 +10,11 @@ $(document).ready(function () {
     var url = "/ebooks/" + document_id + "/pdf.pdf";
     var currentPage = parseInt($(this).text());
     var documentViewer = $('#pdfContainer').documentViewer(
-        {
-          path: "/assets/documentViewer/",
-          width: 800,
-          debug: true
-        }
+    {
+      path: "/assets/documentViewer/",
+      width: 800,
+      debug: true
+    }
     );
 
     documentViewer.load(url, {currentPage: currentPage});
@@ -46,11 +46,11 @@ $(document).ready(function () {
     var url = "/ebooks/" + document_id + "/pdf.pdf";
     var currentPage = 1 ;
     var documentViewer = $('#pdfContainer').documentViewer(
-        {
-          path: "/assets/documentViewer/",
-          width: 800,
-          debug: true
-        }
+    {
+      path: "/assets/documentViewer/",
+      width: 800,
+      debug: true
+    }
     );
 
     documentViewer.load(url, {currentPage: currentPage});
@@ -63,6 +63,11 @@ $(document).ready(function () {
     });
 
   });
+
+
+  
+
+
 
 
 });
