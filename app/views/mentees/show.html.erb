@@ -86,18 +86,9 @@
         <%= render :partial => "mentees/meeting_index" %>
     </div>
     <div id="tabs-7">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div>
-            <div id='calendar'>
-            </div>
-            </div>
-            <%= render :partial => "events/actions_dialog", :locals => {:profile => @mentee} %>
-          </div>
-        </div>
-      </div>  
-    </div>
+      <div id='calendar'>
+        <%= render :partial => "events/actions_dialog", :locals => {:profile => @mentee} %>
+      </div>
   </div>
 <%= link_to 'Back', user_path(@mentee.coaches.first.id) %>
 
