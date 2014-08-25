@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
 
   belongs_to :mentee
+ 
 
   def deliver_email(current_user, subject)
     email = self.mentee.email_histories.new

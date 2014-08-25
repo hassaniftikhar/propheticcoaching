@@ -33,3 +33,8 @@
 //= require jquery.ui.chatbox
 //= require jquery.cookie
 //= require bootstrap-timepicker.js
+
+
+
+//= require jquery.purr
+//= require best_in_place

@@ -79,7 +79,7 @@
 
 
     <div id="tabs-5">
-        <%= render :partial => "tasks/show" %>
+        <%= render :partial => "tasks/show", :locals => {:coach => @mentee.coaches.find_by(id: params[:user_id]), :mentee => @mentee} %>
         <%= render :partial => "tasks/form", :locals => {:coach => @mentee.coaches.find_by(id: params[:user_id]), :mentee => @mentee} %>
     </div>
     <div id="tabs-6">

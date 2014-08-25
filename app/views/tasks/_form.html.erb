@@ -25,8 +25,8 @@
   </div>
   <div class="field">
     <%= f.label :status %><br>
-    <%= f.text_field :status %>
-  </div>
+    <%= f.select :status, [['Pending','pending'],['Inprocess','inprocess'],['Completed','completed']] %>
+      </div>
   <div class="actions">
         <%= label_tag "Send Email" %>
         <%= check_box_tag("is_send_email","1", true,  {}) %>

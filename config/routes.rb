@@ -184,4 +184,7 @@ Propheticcoaching::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  
+
+  #put 'taskupdate' => "tasks#update"
 end

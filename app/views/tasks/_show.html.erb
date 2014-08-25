@@ -10,7 +10,7 @@
   </thead>
 
   <tbody id="tasks">
-    <%= render :partial => "/tasks/task_list", :locals => {:tasks => @tasks} %>
+    <%= render :partial => "/tasks/task_list", :locals => {:tasks => @tasks, :coach => coach, :mentee => mentee} %>
   </tbody>
 
 </table>

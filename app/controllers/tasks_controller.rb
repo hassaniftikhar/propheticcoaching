@@ -24,23 +24,31 @@ class TasksController < InheritedResources::Base
   end
 
   def update
-        p "task update============================"
-        p params
+    p "task update============================"
+    p params
+    @task=Task.find(params[:id])
     respond_to do |format|
-      if @task.update(params)
+     if @task.update_attributes(params[:task])
+      #if @task.update(params)
         format.html { redirect_to user_mentee_path(params[:user_id], @mentee), notice: 'Task was successfully updated.' }
         format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-  def edit
-        p "task edit============================"
-        p params
+        #format.json { respond_with_bip(params[:user_id], @mentee) }
+else
+  format.html { render action: 'edit' }
+  format.json { render json: @task.errors, status: :unprocessable_entity }
+end
+end
+end
 
-  end
+def edit
+  p "task edit============================"
+  p params
+
+end
+
+
+
+
 
   # def destroy
   #   @task.destroy
@@ -52,7 +60,7 @@ class TasksController < InheritedResources::Base
 
   private
 
-    def task_params
+  def task_params
       #params.require(:task).permit(:description, :starttime, :endtime, :status)
       params.permit(:user_id, :mentee_id, :task => [:description, :starttime, :endtime, :status, :id])
     end
@@ -60,4 +68,4 @@ class TasksController < InheritedResources::Base
     def set_task
       @task = Task.find(params[:id])
     end
-end
+  end

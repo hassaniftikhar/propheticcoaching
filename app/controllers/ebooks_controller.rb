@@ -32,7 +32,7 @@ class EbooksController < ApplicationController
     send_file(open(@ebook.pdf.url), :filename => @ebook.pdf.path, :disposition => 'inline', :type => "application/pdf")
   end
 
-  # GET /ebooks/new
+  # GET /ebooks/newpdf_ebook_path(ebook)
   def new
     @ebook = Ebook.new
   end
