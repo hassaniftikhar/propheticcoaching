@@ -11,7 +11,13 @@ module EventsHelper
   end
 
   def get_coaches_events_url
-    ["/events/get_events?profile_type=User"].to_json.html_safe
+    # ["/events/get_events?profile_type=User"].to_json.html_safe
+    events = []
+    events << "/events/get_events?profile_type=User"
+    GoogleEvent.where(profile_type: "User").each do |event|
+      events << event.url
+    end
+    events.to_json.html_safe
   end
 
 end
