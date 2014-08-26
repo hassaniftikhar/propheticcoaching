@@ -73,6 +73,12 @@ class EventsController < ApplicationController
     @events.each do |event|
       events << {:id => event.id, :title => event.title, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.event_series_id) ? true : false}
     end
+    if @profile
+      @profile.google_events.each do |event|
+        events << event.url
+      end
+    end
+    # set_profile
     render :text => events.to_json
   end
 

@@ -14,7 +14,8 @@
   <%= render :partial => "/admin/ebooks/display_search_result", :locals => {:pages => @pages} %>
   </tbody>
 </table>
-
-<div id="ebook_search_paginator">
-     <%= paginate @pages, :remote => true, :param_name => "page" %>
-</div>
+<% unless (params[:controller] == 'admin/mentees' and params[:action] == 'show') %>
+  <div id="ebook_search_paginator">
+       <%= paginate @pages, :remote => true, :param_name => "page" %>
+  </div>
+<% end %>

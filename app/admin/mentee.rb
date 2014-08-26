@@ -9,6 +9,13 @@ ActiveAdmin.register Mentee do
                                                   :availability, :prophecy, :bc])
     end
 
+    def show
+      # @pages = Ebook.last.pages
+      # @pages = Page.search params
+      @pages = Page.search(params)
+      @mentee = Mentee.find_by(id: params[:mentee_id])
+    end
+
     def set_mentee_id
       params[:mentee_id] = params[:id]
     end
@@ -155,6 +162,7 @@ ActiveAdmin.register Mentee do
       link_to "Back to Mentees List", admin_mentees_path
     end
     br
+
     button "Search Resources", :id => "btn_ebook_search"
     div :id => "ebook_search", :style => "display:none" do
       render :partial => "admin/ebooks/search"
