@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/zpaulovics/datetimepicker-rails.git
+  revision: b0c93d9e5cac3d3bb6d6f1d7ac57adbba3d025c1
+  branch: tarruda
+  specs:
+    datetimepicker-rails (3.0.1)
+
+GIT
   remote: git://github.com/aaronchi/best_in_place.git
   revision: 1152e2256afd485e66602833fd99d09d60994841
   specs:
@@ -373,6 +380,7 @@ DEPENDENCIES
   country_select
   cucumber-rails
   database_cleaner
+  datetimepicker-rails (>= 3.0.0)!
   devise
   email_spec
   factory_girl_rails

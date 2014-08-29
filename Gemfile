@@ -49,6 +49,13 @@ gem 'country_select'
 # gem 'best_in_place'
 #gem "best_in_place", :git => "git://github.com/bernat/best_in_place", :ref => "ee95961e639022e6aa528704b8cb4789596ea61b"
 gem 'best_in_place', github: 'aaronchi/best_in_place'
+#gem 'jquery-timepicker-addon-rails'
+
+gem 'datetimepicker-rails', '>= 3.0.0', :git => 'git://github.com/zpaulovics/datetimepicker-rails.git', :branch => 'tarruda'
+
+
+
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

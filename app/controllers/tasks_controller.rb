@@ -28,7 +28,7 @@ class TasksController < InheritedResources::Base
     p params
     @task=Task.find(params[:id])
     respond_to do |format|
-     if @task.update_attributes(params[:task])
+     if @task.update_attributes(task_params[:task])
       #if @task.update(params)
         format.html { redirect_to user_mentee_path(params[:user_id], @mentee), notice: 'Task was successfully updated.' }
         format.json { head :no_content }
