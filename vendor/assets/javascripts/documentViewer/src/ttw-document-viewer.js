@@ -7,7 +7,7 @@
 
         //paths to each dependency
         dependencies = {
-            pdfjs: ['libs/pdfjs/compatibility.js'],
+            pdfjs: ['libs/pdfjs/compatibility.js', 'libs/pdfjs/pdf.js'],
             prettify: ['libs/google-code-prettify/prettify.js', 'libs/google-code-prettify/prettify.css'],
             flowplayer: ['libs/flowplayer/flowplayer-3.2.6.min.js'],
             jplayer: ['libs/jPlayer/jquery.jplayer.min.js']
@@ -33,7 +33,6 @@
 
         function loadDependency(userOptions) {
             var options = $.extend({}, loaderOptions, userOptions);
-
 
             load = [];
 
@@ -109,8 +108,7 @@
                 unsupportedBrowserText:'<div class="document-viewer-empty-text">This document can not be opened in this browser. Please upgrade.</div>',
                 errorText:'An error occurred while loading the ',
                 serverResponseText:'Unexpected server response of ',
-                path:'documentViewer/',
-                currentPage: 1
+                path:'documentViewer/'
             },
             cssSelector = {
                 scrollable:'.scrollable',
@@ -128,8 +126,7 @@
             $loadingIndicator = $('<div class="dv-loading"></div>');
 
         function init() {
-
-          var $markup = '<div class="document-viewer-wrapper dv-markup clearfix">' +
+            var $markup = '<div class="document-viewer-wrapper dv-markup clearfix">' +
                 '<div class="document-viewer-outer dv-markup clearfix">' +
                 '<div class="document-viewer dv-markup clearfix"></div>' +
                 '</div>' +
@@ -391,9 +388,8 @@
         }
 
         var PDFLoader = function(filename, options) {
-          debugger;
             var pdf,
-                currentPage = options.currentPage,
+                currentPage = 1,
                 $menu = $('<div class="pdf-menu"><div class="prev-page" >Prev Page</div><div class="next-page">Next Page</div><div class="go-to-page">Go to page <input></div></div>');
 
             //bind event handlers for the pdf menu
@@ -425,6 +421,7 @@
             function load(filename) {
 
                 $inner.append($menu);
+
                 PDFJS.workerSrc = options.path + 'libs/pdfjs/pdf.js';
                 PDFJS.getPdf({
                     url:filename,

@@ -41,7 +41,7 @@ function showEventDetails(event) {
 }
 
 function editEvent(event_id) {
-  console.log("event_id: " + event_id);
+  // console.log("event_id: " + event_id);
   jQuery.ajax({
     url: "/events/" + event_id + "/edit",
     success: function (data) {

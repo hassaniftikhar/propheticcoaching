@@ -1,7 +1,6 @@
 <?php
 
 //I'm intentionally suppressing errors. If there is an error, we assume it is because the file can not be found
-echo $_POST['file']
 $file = @file_get_contents($_POST['file']);
 
 

@@ -650,7 +650,6 @@ var PDFDoc = (function PDFDocClosure() {
         } else {
           // Some versions of FF can't create a worker on localhost, see:
           // https://bugzilla.mozilla.org/show_bug.cgi?id=683280
-
           worker = new Worker(workerSrc);
         }
 

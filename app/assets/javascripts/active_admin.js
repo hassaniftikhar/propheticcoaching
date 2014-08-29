@@ -65,13 +65,13 @@ function check_session_progress() {
 $(document).ready(function () {
   window.setInterval(check_session_progress, 10000);
   $("#search_ebook").on("ajax:success",function (e, data, status, xhr) {
-    console.log("search ebook success");
+    // console.log("search ebook success");
     // disable following line. Now date is refresh through _search_result.js in views/admin/ebooks
     // $("#result_table").html(xhr.responseText);
     $("td#tags").highlight($("input#query").val());
 
   }).bind("ajax:error", function (e, xhr, status, error) {
-        console.log("search ebook error");
+        // console.log("search ebook error");
         return $("#search_ebook").append("<p>ERROR</p>");
   });
 
@@ -101,7 +101,7 @@ $(document).ready(function () {
         var parts = url.split("/");
         var mentee_id = parts[parts.length - 2];
 
-        console.log("event: " + event);
+        // console.log("event: " + event);
 
         var url = '/admin/mentees'+( ( mentee_id > 0 ) ? ('/'+mentee_id+'/assign_multiple_coaches'):'/batch_assign_multiple_coaches');
 
@@ -157,7 +157,7 @@ $(document).ready(function () {
         var url = window.location.href;
         var parts = url.split("/");
         var resource_id = parts[parts.length - 2];
-        console.log("event: " + event);
+        // console.log("event: " + event);
         // var url = '/admin/activities'+( ( activity_id > 0 ) ? ('/'+activity_id+'/assign_multiple_categories'):'/batch_assign_multiple_categories');
         var url = '/admin/'+( ( resource_id > 0 ) ? (parts[parts.length - 3]+'/'+resource_id+'/assign_multiple_categories'):parts[parts.length - 2]+'/batch_assign_multiple_categories');
         
@@ -253,7 +253,7 @@ $(document).ready(function () {
   });
 
   function editEvent(event_id) {
-    console.log("event_id: " + event_id);
+    // console.log("event_id: " + event_id);
     alert(event_id);
     jQuery.ajax({
       url: "/events/" + event_id + "/edit",
