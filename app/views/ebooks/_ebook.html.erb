@@ -1,20 +1,26 @@
+<div id="pdfContainer" class = "pdf-content" style="display: none">
+</div>
+
 <% @ebooks.each do |ebook| %>
-  <tr>
-    <td><%= link_to ebook.id, pdf_ebook_path(ebook) %></td>
+<tr>
+  <td>
+    <div id="pdf-fullview">
+      <%= link_to ebook.id, '#' %></td>
+    </div>
     <td><%= ebook.name %></td>
     <td><%= l ebook.created_at.to_time %></td>
     <td><%= ebook.categories.order("name asc").collect {|category| link_to("#{category.name}", category_path(category)) }.join(", ").html_safe %>
     </td>
     <td>
       <% if can? :edit, @ebook %>
-        <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                    edit_ebook_path(ebook), :class => 'btn btn-mini' %>
-        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                    ebook_path(ebook),
-                    :method => :delete,
-                    :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                    :class => 'btn btn-mini btn-danger' %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+      edit_ebook_path(ebook), :class => 'btn btn-mini' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+      ebook_path(ebook),
+      :method => :delete,
+      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+      :class => 'btn btn-mini btn-danger' %>
       <% end %>
     </td>
   </tr>
-<% end %>
+  <% end %>
