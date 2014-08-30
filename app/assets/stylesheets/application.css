@@ -13,6 +13,7 @@
  *= require jquery-ui-1.10.3.custom.min.css
  *= require style.css
  *= require fullcalendar
+ *= require fullcalendar.print.css
  *= require ebooks
  *= require jquery-ui
  *= require jquery.ui.chatbox
