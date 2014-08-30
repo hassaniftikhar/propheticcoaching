@@ -21,9 +21,7 @@
 //= require "documentViewer/libs/pdfjs/compatibility.js"
 //= require "documentViewer/ttw-document-viewer.min.js"
 //= require jquery_highlight
-//= require "fullcalendar/fullcalendar.min.js"
-//= require "fullcalendar/lib/moment.min.js"
-//= require "fullcalendar/gcal.js"
+//= require fullcalendar.min
 //= require mentees
 //= require ebooks
 //= require questions
