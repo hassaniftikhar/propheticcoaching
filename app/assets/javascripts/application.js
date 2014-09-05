@@ -37,6 +37,7 @@
 //= require jquery.ui.datepicker
 //= require bootstrap-datetimepicker
 //= require jquery-ui-timepicker-addon
+//= require tasks
 
 
 

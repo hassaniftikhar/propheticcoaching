@@ -1,27 +1,47 @@
-<% var1 = []; i = 0 %>
-
+<%= button_tag "Send Email", :id => "emailbtn", :type => "button" %>
 <% @tasks.each do |task| %>
 <tr>
 
-	<td><%= check_box_tag "is_send_email[]", task.id %></td>
+	<td><%= check_box_tag "tasks_ids[]", task.id ,class: 'mycheckbox'%></td>
 	<td><%= best_in_place task, :description, :type => :input, :path => user_mentee_task_path(coach, mentee, task) %></td>
 	<div id="datetime1">
-	<td><%= best_in_place task, :starttime, :type => :date, :path => user_mentee_task_path(coach, mentee, task) %></td>
+		<td><%= best_in_place task, :starttime, :type => :date, :path => user_mentee_task_path(coach, mentee, task) %></td>
 	</div>
 	<td><%= best_in_place task, :endtime, :type => :date, :path => user_mentee_task_path(coach, mentee, task) %></td>
 	
 	<td>
 
-		<%= best_in_place task, :status, type: :select, collection: [["Pending", "pending"], ["Inprocess", "inprocess"], ["Completed", "completed"]], :path => user_mentee_task_path(coach, mentee, task)  %>
+		<%= best_in_place task, :status, type: :select, collection: [["Pending", "Pending"], ["Inprocess", "Inprocess"], ["Completed", "Completed"]], :path => user_mentee_task_path(coach, mentee, task)  %>
 	</td>
 
 
 </tr>
 <% end %>
+<script type="text/javascript">
 
-<%= submit_tag "Send Email" %>
+	var val = [];
+	var userid = <%= @user.id %>
+	var menteeid = <%= @mentee.id %>
 
-<%= text_field_tag 'datetime' %>
+	$('#emailbtn').click(function () {
+
+		//$(':checkbox:checked').each(function(i){
+			$('input[name="tasks_ids[]"]:checked').each(function(i){
+
+			val[i] = $(this).val();
+		});
+
+		alert(val);
+		jQuery.ajax({
+			data: 'tasks_ids[]=' + val,
+			dataType: 'json',
+			type: 'post',
+			url: "/users/" + userid + "/mentees/"+ menteeid + "/tasks/email_multiple"
+		});
+
+	});
+</script>
+
 
 
 

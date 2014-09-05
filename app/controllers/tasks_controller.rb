@@ -30,22 +30,33 @@ class TasksController < InheritedResources::Base
     respond_to do |format|
      if @task.update_attributes(task_params[:task])
       #if @task.update(params)
-        format.html { redirect_to user_mentee_path(params[:user_id], @mentee), notice: 'Task was successfully updated.' }
-        format.json { head :no_content }
+      format.html { redirect_to user_mentee_path(params[:user_id], @mentee), notice: 'Task was successfully updated.' }
+      format.json { head :no_content }
         #format.json { respond_with_bip(params[:user_id], @mentee) }
-else
-  format.html { render action: 'edit' }
-  format.json { render json: @task.errors, status: :unprocessable_entity }
-end
-end
-end
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-def edit
-  p "task edit============================"
-  p params
+  def edit
+    p "task edit============================"
+    p params
 
-end
+  end
 
+  def email_multiple
+
+    @tasks = Task.find(params[:tasks_ids])
+    p @tasks
+    @tasks.each do |task|
+      task.deliver_email(current_user, "New Task Created")
+      respond_to do |format|
+        format.json { render :json => @tasks}
+     end
+   end
+ end
 
 
 
@@ -69,3 +80,4 @@ end
       @task = Task.find(params[:id])
     end
   end
+
