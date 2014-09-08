@@ -96,6 +96,7 @@ collection_action :batch_assign_multiple_categories, :method => :post do
       div :class => 'pdf-fullview' do
         link_to ebook.id ,'#' ,:class => "booklink"  #admin_ebook_path(ebook.id)
       end
+
     end
     column :name
     column :created_at

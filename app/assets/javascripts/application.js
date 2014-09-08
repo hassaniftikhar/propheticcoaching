@@ -37,8 +37,3 @@
 //= require jquery.ui.datepicker
 //= require bootstrap-datetimepicker
 //= require jquery.datetimepicker
-
-
-
-
-

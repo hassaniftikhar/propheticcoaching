@@ -1,4 +1,5 @@
 GIT
+<<<<<<< HEAD
   remote: git://github.com/zpaulovics/datetimepicker-rails.git
   revision: b0c93d9e5cac3d3bb6d6f1d7ac57adbba3d025c1
   branch: tarruda
@@ -6,6 +7,8 @@ GIT
     datetimepicker-rails (3.0.1)
 
 GIT
+=======
+>>>>>>> e1876a0e07542959c56352a3ad96f7db1fe59118
   remote: git://github.com/aaronchi/best_in_place.git
   revision: 1152e2256afd485e66602833fd99d09d60994841
   specs:

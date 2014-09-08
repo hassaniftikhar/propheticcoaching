@@ -43,7 +43,6 @@ class TasksController < InheritedResources::Base
   def edit
     p "task edit============================"
     p params
-
   end
 
   def email_multiple
@@ -80,4 +79,3 @@ class TasksController < InheritedResources::Base
       @task = Task.find(params[:id])
     end
   end
-
