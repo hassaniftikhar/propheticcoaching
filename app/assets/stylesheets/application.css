@@ -25,9 +25,9 @@
  *= require owl.carousel.css
  *= require owl.theme.css
  *= require owl.transitions.css
- *= require jquery-ui-timepicker-addon
  *= require datepicker.css
  *= require bootstrap-datetimepicker
+ *= require jquery.datetimepicker.css
  
 
  // require scaffolds
