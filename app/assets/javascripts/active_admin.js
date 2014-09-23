@@ -11,8 +11,7 @@
 //= require ebooks
 //= require meetings.js.coffee
 //= require jquery.multiselect
-//= require jquery.purr
-//= require best_in_place
+
 
 var g_is_updated_time = 0;
 

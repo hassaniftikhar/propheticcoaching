@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui-1.10.3.custom.min.js
-// require jquery-1.11.1.min.js
 //= require twitter/bootstrap
 //= require "documentViewer/libs/yepnope.1.5.3-min.js"
 //= require "documentViewer/libs/pdfjs/pdf.js"
@@ -31,9 +30,10 @@
 //= require bootstrap
 //= require jquery.ui.chatbox
 //= require jquery.cookie
-//= require bootstrap-timepicker.js
-//= require jquery.purr
-//= require best_in_place
-//= require jquery.ui.datepicker
-//= require bootstrap-datetimepicker
-//= require jquery.datetimepicker
+
+
+
+
+
+
+

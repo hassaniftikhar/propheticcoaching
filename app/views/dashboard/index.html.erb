@@ -29,7 +29,7 @@
   <% end %>
   </tbody>
 </table>
-<%= paginate @coach_meetings %>
+<%= paginate @coach_meetings, :param_name => 'meet' %>
 <br>
 
 
@@ -51,6 +51,7 @@
   <%= render :partial => "/mentees/mentee", :locals => {:mentees => @mentees} %>
   </tbody>
 </table>
+<%= paginate @mentees , :param_name => 'ment'%>
 <br>
 <br>
 

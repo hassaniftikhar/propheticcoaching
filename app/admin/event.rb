@@ -81,7 +81,7 @@ ActiveAdmin.register Event do
     column :profile
 
 
-    default_actions
+    actions
   end
 
   # index :as => :grid, :default => true do |event|

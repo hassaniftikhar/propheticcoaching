@@ -75,7 +75,8 @@ ActiveAdmin.register User do
     column :roles do |user|
       "#{user.roles_name.join(', ')}"
     end
-    default_actions
+    #default_actions
+    actions
   end
 
   form do |f|

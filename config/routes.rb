@@ -87,6 +87,7 @@ Propheticcoaching::Application.routes.draw do
         collection do
           post :email_multiple
         end 
+       patch :save
       end
       resources :accomplishments
       resources :email_histories

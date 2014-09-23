@@ -135,7 +135,8 @@ ActiveAdmin.register Mentee do
     column :coach do |mentee|
           mentee.coaches.collect {|coach| (coach.name)}.join(", ").html_safe
     end
-    default_actions
+    #default_actions
+    actions
     actions :defaults => false do |mentee|
       link_to "Change Coach", assign_coach_admin_mentee_path(mentee.id)
     end

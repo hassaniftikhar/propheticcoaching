@@ -25,12 +25,13 @@ class TasksController < InheritedResources::Base
 
   def update
     p "task update============================"
-    p params
+    
     @task=Task.find(params[:id])
     respond_to do |format|
      if @task.update_attributes(task_params[:task])
+      p "=============== ho gaya update"
       #if @task.update(params)
-      format.html { redirect_to user_mentee_path(params[:user_id], @mentee), notice: 'Task was successfully updated.' }
+      format.html { redirect_to  user_mentee_task_path(params[:user_id], @mentee,@task), notice: 'Task was successfully updated.' }
       format.json { head :no_content }
         #format.json { respond_with_bip(params[:user_id], @mentee) }
       else
@@ -41,9 +42,32 @@ class TasksController < InheritedResources::Base
   end
 
   def edit
-    p "task edit============================"
-    p params
+    # p "task edit============================"
+    # p parms
+    #@task=Task.find(params[:id])
+     p @task
+    
   end
+  def save
+
+    p @task
+   @task=Task.find(params[:task_id])
+
+
+    respond_to do |format|
+     if @task.update_attributes(task_params[:task])
+      format.html { redirect_to  user_mentee_path(params[:user_id], @task.mentee), notice: 'Task was successfully updated.' }
+      format.json { head :no_content }
+        #format.json { respond_with_bip(params[:user_id], @mentee) }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+
+
+  end
+
 
   def email_multiple
 
@@ -53,9 +77,9 @@ class TasksController < InheritedResources::Base
       task.deliver_email(current_user, "New Task Created")
       respond_to do |format|
         format.json { render :json => @tasks}
-     end
-   end
- end
+      end
+    end
+  end
 
 
 
@@ -77,5 +101,6 @@ class TasksController < InheritedResources::Base
 
     def set_task
       @task = Task.find(params[:id])
+
     end
   end

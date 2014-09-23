@@ -16,7 +16,7 @@
  *= require ebooks
  *= require jquery-ui
  *= require jquery.ui.chatbox
-	* require bootstrap_and_overrides
+	* require bootstrap_and_overrides	
  *= require bootstrap.css
  *= require bootstrap-theme.css
  *= require font-awesome.css
@@ -25,8 +25,6 @@
  *= require owl.carousel.css
  *= require owl.theme.css
  *= require owl.transitions.css
- *= require datepicker.css
- *= require bootstrap-datetimepicker
  *= require jquery.datetimepicker.css
  
 
