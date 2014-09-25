@@ -17,8 +17,7 @@ jQuery ->
       $('#event_mentee_id').empty()
       $('#event_mentee_id').parent().hide()
 
-jQuery ->
-  $('.best_in_place').best_in_place()
+
 
  
 

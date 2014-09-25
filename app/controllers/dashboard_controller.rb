@@ -8,7 +8,12 @@ class DashboardController < ApplicationController
     @coach_meetings 	= @current_user.events.where("endtime >= ? and coach_mentee_relation_id is not null", Time.now).order("starttime asc").page(params[:meet]).per(5)
     @user 						= @current_user
     @mentees 					= @user.mentees.page(params[:ment]).per(5)
+
+    p @coach_meetings
+
   end
 end
+
+
 
 

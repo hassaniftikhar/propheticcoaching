@@ -2,17 +2,6 @@
 
 <div id="dtBox"></div>
 <% @tasks.each do |task| %>
-<!-- <tr>
-
-	<td><%= check_box_tag "tasks_ids[]", task.id ,class: 'mycheckbox'%></td>
-	<td><%= best_in_place task, :description, :type => :input, :path => user_mentee_task_path(coach, mentee, task) %></td> 
-	<td><%= best_in_place task, :starttime, :classes => 'mydatetime',  :type => :datetime, :path => user_mentee_task_path(coach, mentee, task) %></td>  
-	<td><%= best_in_place task, :endtime,  :classes => 'mydatetime', :type => :datetime, :path => user_mentee_task_path(coach, mentee, task) %></td>
-	<td><%= best_in_place task, :status, type: :select, collection: [["Pending", "Pending"], ["Inprocess", "Inprocess"], ["Completed", "Completed"]], :path => user_mentee_task_path(coach, mentee, task)  %></td>
-
-</tr> -->
-
-
 <tr>
 <td><%= check_box_tag "tasks_ids[]", task.id ,class: 'mycheckbox'%></td>
 	<td><%= task.description %></td>
