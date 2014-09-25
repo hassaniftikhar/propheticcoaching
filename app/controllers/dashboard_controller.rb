@@ -9,8 +9,6 @@ class DashboardController < ApplicationController
     @user 						= @current_user
     @mentees 					= @user.mentees.page(params[:ment]).per(5)
 
-    p @coach_meetings
-
   end
 end
 
