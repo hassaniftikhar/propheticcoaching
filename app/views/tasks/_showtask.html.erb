@@ -1,0 +1,25 @@
+
+<%= form_for(@task, url: "update")  do |f| %>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :starttime %><br>
+    <%= f.datetime_select :starttime, :default => @task.starttime,ampm: true, order: [:month, :day, :year], :minute_step => 15, :start_hour => 9, :end_hour => 21 %>
+  </div>
+  <div class="field">
+    <%= f.label :endtime %><br>
+    <%= f.datetime_select :endtime, ampm: true, order: [:month, :day, :year], :minute_step => 15, :start_hour => 9, :end_hour => 21 %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.select :status, [['Pending','Pending'],['Inprocess','Inprocess'],['Completed','Completed']] %>
+
+      </div>
+      <div>
+   <%= f.submit "save" %>
+     </div>
+ <% end %>
+
+
