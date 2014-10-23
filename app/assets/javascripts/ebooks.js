@@ -64,11 +64,4 @@ $(document).ready(function () {
 
   });
 
-  
-
-  
-
-
-
-
 });

@@ -31,6 +31,9 @@
 //= require jquery.ui.chatbox
 //= require jquery.cookie
 //= require pagination
+//= require firebase
+
+
 
 
 

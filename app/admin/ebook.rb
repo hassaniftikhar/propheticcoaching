@@ -103,7 +103,7 @@ collection_action :batch_assign_multiple_categories, :method => :post do
     column :category do |ebook|
       ebook.categories.collect {|category| (category.name)}.join(", ").html_safe
     end
-    default_actions
+    actions
     actions :defaults => false do |ebook|
       link_to "Change Category", assign_category_admin_ebook_path(ebook.id)
     end
@@ -129,10 +129,14 @@ end
 
 
 show do
+  
+  api_key=ApiKey.create
+
   panel "Resource Details" do
     attributes_table_for ebook  do
       row :name
       row :pdf do |file|
+          response.headers['Authorization'] = "Token token=#{api_key.access_token}"
           link_to "View PDF", pdf_ebook_path(file)
       end
     end

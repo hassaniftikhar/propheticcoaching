@@ -46,6 +46,8 @@ gem 'unf'
 gem 'resque', :require => 'resque/server'
 gem 'country_select'
 
+#gem 'hipchat-api'
+
 # gem 'best_in_place'
 #gem "best_in_place", :git => "git://github.com/bernat/best_in_place", :ref => "ee95961e639022e6aa528704b8cb4789596ea61b"
 #gem 'best_in_place', github: 'aaronchi/best_in_place'
