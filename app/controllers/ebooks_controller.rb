@@ -3,8 +3,8 @@ class EbooksController < ApplicationController
   before_action :set_ebook_name
   before_action :set_ebook, only: [:show, :edit, :update, :destroy, :pdf]
 
-  before_filter :restrict_access, only: [:pdf]
-  respond_to :json
+  # before_filter :restrict_access, only: [:pdf]
+  # respond_to :json
 
   # GET /ebooks
   # GET /ebooks.json
@@ -132,24 +132,33 @@ class EbooksController < ApplicationController
     def set_ebook_name
       @ebook_name = "Resource"
     end
-  end
 
-  
 
-  private
-  def restrict_access
+
+
+     # private
+  # def restrict_access
    
-   p "===========restrict_access" 
-   p request.env
-   authenticate_or_request_with_http_token do |token, options|
+  #  p "===========restrict_access" 
+  #  p request.env
+  #  authenticate_or_request_with_http_token do |token, options|
 
-    p "======token: #{token} --- options: #{options} "
+  #   p "======token: #{token} --- options: #{options} "
 
 
-    ApiKey.exists?(access_token: token)
+  #   ApiKey.exists?(access_token: token)
+
+  # end
+
+
+
+
+
 
   end
+
   
-end
+
+ 
 
 
