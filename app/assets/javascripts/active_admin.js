@@ -12,6 +12,7 @@
 //= require meetings.js.coffee
 //= require jquery.multiselect
 
+
 var g_is_updated_time = 0;
 
 function check_session_progress() {
@@ -58,8 +59,8 @@ function check_session_progress() {
           alert("Current Session is Timeout");
         }
       });
-    }
-  }
+}
+}
 } 
 
 $(document).ready(function () {
@@ -71,8 +72,8 @@ $(document).ready(function () {
     $("td#tags").highlight($("input#query").val());
 
   }).bind("ajax:error", function (e, xhr, status, error) {
-        // console.log("search ebook error");
-        return $("#search_ebook").append("<p>ERROR</p>");
+    console.log("search ebook error");
+    return $("#search_ebook").append("<p>ERROR</p>");
   });
 
   $("#main_content").on("click", "#show_calendar", function(){
@@ -95,7 +96,7 @@ $(document).ready(function () {
   $("#coaches_list").multiselect({
     selectedList: 4, 
     header: "Coach Selection",
-     click: function(event, ui){
+    click: function(event, ui){
         // $callback.text(ui.value + ' ' + (ui.checked ? 'checked' : 'unchecked') );
         var url = window.location.href;
         var parts = url.split("/");
@@ -119,40 +120,40 @@ $(document).ready(function () {
           }
         });
         // return false;
-     },
-     beforeopen: function(){
+      },
+      beforeopen: function(){
         $callback.text("Select about to be opened...");
-     },
-     open: function(){
+      },
+      open: function(){
         $callback.text("Select opened!");
-     },
-     beforeclose: function(){
+      },
+      beforeclose: function(){
         $callback.text("Select about to be closed...");
-     },
-     close: function(){
+      },
+      close: function(){
         $callback.text("Select closed!");
-     },
-     checkAll: function(){
+      },
+      checkAll: function(){
         $callback.text("Check all clicked!");
-     },
-     uncheckAll: function(){
+      },
+      uncheckAll: function(){
         $callback.text("Uncheck all clicked!");
-     },
-     optgrouptoggle: function(event, ui){
+      },
+      optgrouptoggle: function(event, ui){
         var values = $.map(ui.inputs, function(checkbox){
-           return checkbox.value;
-        }).join(", ");
+         return checkbox.value;
+       }).join(", ");
         
         $callback.html("Checkboxes " + (ui.checked ? "checked" : "unchecked") + ": " + values);
-     }
-  });
+      }
+    });
 
 
-  $("#categories_list").multiselect({
-    selectedList: 4, 
-    header: "Category Selection",
-    noneSelectedText: "Select Category",
-     click: function(event, ui){
+$("#categories_list").multiselect({
+  selectedList: 4, 
+  header: "Category Selection",
+  noneSelectedText: "Select Category",
+  click: function(event, ui){
         // $callback.text(ui.value + ' ' + (ui.checked ? 'checked' : 'unchecked') );
         var url = window.location.href;
         var parts = url.split("/");
@@ -163,40 +164,40 @@ $(document).ready(function () {
         
 
         switch(resource_id > 0 ? parts[parts.length - 3]:parts[parts.length - 2]) {
-            case 'ebooks':
-                var selection = ebook_selection;
-                var redirection_path = '/admin/ebooks';
-                break;
-            case 'activities':
-                var selection = activity_selection;
+          case 'ebooks':
+          var selection = ebook_selection;
+          var redirection_path = '/admin/ebooks';
+          break;
+          case 'activities':
+          var selection = activity_selection;
                 // redirection_path = '/admin/activities?message=true';
                 var redirection_path = '/admin/activities';
                 break;
-            case 'questions':
+                case 'questions':
                 var selection = question_selection;
                 var redirection_path = '/admin/questions';
                 break;
-            case 'exercises':
+                case 'exercises':
                 var selection = exercise_selection;
                 var redirection_path = '/admin/exercises';
                 break;
-            default:
+                default:
                 var selection = ebook_selection;
                 var redirection_path = '/admin/ebooks';
-        }
+              }
 
-        $.ajax({
-          data: 'category_id=' + ui.value + '&resource_selection=' + selection + '&checked=' + (ui.checked ? 'checked' : 'unchecked'),
-          dataType: 'script',
-          type: 'post',
-          url: url,
-          success: function(){
-            if( resource_id > 0 ) {
-              location.reload();
-            }
-            else {
-              window.location.href = redirection_path;
-            }
+              $.ajax({
+                data: 'category_id=' + ui.value + '&resource_selection=' + selection + '&checked=' + (ui.checked ? 'checked' : 'unchecked'),
+                dataType: 'script',
+                type: 'post',
+                url: url,
+                success: function(){
+                  if( resource_id > 0 ) {
+                    location.reload();
+                  }
+                  else {
+                    window.location.href = redirection_path;
+                  }
             // location.reload();
             // window.location.href = '/admin/activities?message=true';
             // $("#activity_list").html("success testing");
@@ -224,43 +225,68 @@ $(document).ready(function () {
           }
         });
         // return false;
-     },
-     beforeopen: function(){
+      },
+      beforeopen: function(){
         $callback.text("Select about to be opened...");
-     },
-     open: function(){
+      },
+      open: function(){
         $callback.text("Select opened!");
-     },
-     beforeclose: function(){
+      },
+      beforeclose: function(){
         $callback.text("Select about to be closed...");
-     },
-     close: function(){
+      },
+      close: function(){
         $callback.text("Select closed!");
-     },
-     checkAll: function(){
+      },
+      checkAll: function(){
         $callback.text("Check all clicked!");
-     },
-     uncheckAll: function(){
+      },
+      uncheckAll: function(){
         $callback.text("Uncheck all clicked!");
-     },
-     optgrouptoggle: function(event, ui){
+      },
+      optgrouptoggle: function(event, ui){
         var values = $.map(ui.inputs, function(checkbox){
-           return checkbox.value;
-        }).join(", ");
+         return checkbox.value;
+       }).join(", ");
         
         $callback.html("Checkboxes " + (ui.checked ? "checked" : "unchecked") + ": " + values);
-     }
-  });
-
-  function editEvent(event_id) {
-    // console.log("event_id: " + event_id);
-    alert(event_id);
-    jQuery.ajax({
-      url: "/events/" + event_id + "/edit",
-      success: function (data) {
-        $('#event_desc').html(data['form']);
       }
     });
-  }
+
+
+function editEvent(event_id) {
+  console.log("event_id: " + event_id);
+  alert(event_id);
+  jQuery.ajax({
+    url: "/events/" + event_id + "/edit",
+    success: function (data) {
+      $('#event_desc').html(data['form']);
+    }
+  });
+}
+
+$(".booklink").click(function () {
+  var document_id = $(this).text();
+    // var url =  document_id + "/pdf.pdf";
+    var url = "/ebooks/" + document_id + "/pdf.pdf";
+    var currentPage = 1 ;
+    var documentViewer = $('#pdfContainer').documentViewer(
+    {
+      path: "/assets/documentViewer/",
+      width: 800,
+      debug: true
+    }
+    );
+    documentViewer.load(url, {currentPage: currentPage});
+    $("#pdfContainer").dialog({
+      close: function (event, ui) {
+        $(this).empty().dialog('destroy');
+      },
+      width: 900
+    });
+  
+  });
+
+
 
 });

@@ -18,14 +18,13 @@ class Ebook < ActiveRecord::Base
   # has_one :featured_product, :as => :profile
   has_many :ebook_categorizations
   has_many :categories, through: :ebook_categorizations, :class_name => "Category",
-        :foreign_key => 'ebook_id'
+  :foreign_key => 'ebook_id'
 
 
   # after_save :update_sha
   # after_save :calculate_sha
   after_save :create_pages
   before_destroy :remove_es_index
-
 
   before_destroy {|ebook| ebook.categories.clear}
 
@@ -94,7 +93,7 @@ class Ebook < ActiveRecord::Base
     indexes :id, type: 'integer'
     indexes :name, type: 'string', boost: 10, analyzer: 'snowball'
     indexes :updated_at, type: 'date'
-     
+
     indexes :categories do
       indexes :name, type: 'string', analyzer: 'snowball'
     end

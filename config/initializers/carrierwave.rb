@@ -1,3 +1,16 @@
+
+############### akmal 
+  # has_attached_file :pdf,
+  # :path           => "/ebooks/:id/pdf",
+  # :storage        => :s3,
+  # :s3_permissions => :private,
+  # :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
+
+
+  ######################
+
+
+
 if Rails.env.test? || Rails.env.cucumber?
   CarrierWave.configure do |config|
     config.storage = :file
@@ -7,6 +20,8 @@ if Rails.env.test? || Rails.env.cucumber?
   # make sure our uploader is auto-loaded
   # PdfUploader
   ImageUploader
+
+
 
   # use different dirs when testing
   CarrierWave::Uploader::Base.descendants.each do |klass|

@@ -3,6 +3,9 @@ class EbooksController < ApplicationController
   before_action :set_ebook_name
   before_action :set_ebook, only: [:show, :edit, :update, :destroy, :pdf]
 
+  # before_filter :restrict_access, only: [:pdf]
+  # respond_to :json
+
   # GET /ebooks
   # GET /ebooks.json
   def index
@@ -23,6 +26,8 @@ class EbooksController < ApplicationController
   # GET /ebooks/1
   # GET /ebooks/1.json
   def show
+
+
   end
 
   # GET /ebooks/1/pdf
@@ -32,7 +37,16 @@ class EbooksController < ApplicationController
     send_file(open(@ebook.pdf.url), :filename => @ebook.pdf.path, :disposition => 'inline', :type => "application/pdf")
   end
 
-  # GET /ebooks/new
+  #########akmal #############
+
+  # def pdf
+  #   redirect_to(@ebook.pdf.url(Time.now + 10.seconds))
+  # end
+
+  ##########################
+
+  
+  # GET /ebooks/newpdf_ebook_path(ebook)
   def new
     @ebook = Ebook.new
   end
@@ -118,4 +132,33 @@ class EbooksController < ApplicationController
     def set_ebook_name
       @ebook_name = "Resource"
     end
-end
+
+
+
+
+     # private
+  # def restrict_access
+   
+  #  p "===========restrict_access" 
+  #  p request.env
+  #  authenticate_or_request_with_http_token do |token, options|
+
+  #   p "======token: #{token} --- options: #{options} "
+
+
+  #   ApiKey.exists?(access_token: token)
+
+  # end
+
+
+
+
+
+
+  end
+
+  
+
+ 
+
+

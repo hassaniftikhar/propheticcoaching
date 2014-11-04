@@ -83,7 +83,12 @@ Propheticcoaching::Application.routes.draw do
     resources :mentees do
       resources :goals
       resources :comments
-      resources :tasks
+      resources :tasks do
+        collection do
+          post :email_multiple
+        end 
+       patch :save
+      end
       resources :accomplishments
       resources :email_histories
 
@@ -122,6 +127,8 @@ Propheticcoaching::Application.routes.draw do
     mount Resque::Server, :at => "/admin/resque"
   end
 
+
+  #resources :tasks, :collection => { :SendEmail_multipletasks => :post }
   # mount Resque::Server, :at => "/resque"
   # authenticate do
   #   mount Resque::Server.new, at: '/resque'
@@ -184,4 +191,7 @@ Propheticcoaching::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  
+
+  #put 'taskupdate' => "tasks#update"
 end

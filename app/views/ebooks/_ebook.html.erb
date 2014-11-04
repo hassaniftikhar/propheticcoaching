@@ -1,6 +1,16 @@
+<div id="pdfContainer" class = "pdf-content" style="display: none">
+</div>
+
 <% @ebooks.each do |ebook| %>
   <tr>
-    <td><%= link_to ebook.id, pdf_ebook_path(ebook) %></td>
+  
+    <td>
+
+    <div id="pdf-fullview">
+    <%= link_to ebook.id, '#' %>
+    </div>
+    </td>
+
     <td><%= ebook.name %></td>
     <td><%= l ebook.created_at.to_time %></td>
     <td><%= ebook.categories.order("name asc").collect {|category| link_to("#{category.name}", category_path(category)) }.join(", ").html_safe %>

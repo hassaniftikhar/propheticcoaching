@@ -1,38 +1,50 @@
-<%= render partial: 'appointments' %>
+<h2 class="tablehead">Appointments</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Created at</th>
+
+    </tr>
+  </thead>
+
+  <tbody id="appointments">
+    <%= render partial: 'appointments' %>
+  </tbody>
+</tbody>
+</table>
+<div id="appointmentpaginator">
+  <%= paginate @coach_events, :remote => true, :param_name => 'evnt' %>
+</div>
 <br>
 
 <h2 class="tablehead">Sessions</h2>
 
 <table class="table table-striped">
   <thead>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Start Time</th>
-    <th>End Time</th>
-    <th>Created at</th>
-    <th>Session With</th>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Created at</th>
+      <th>Session With</th>
 
-  </tr>
+    </tr>
   </thead>
 
-  <tbody>
-  <% @coach_meetings.each do |coach_meeting| %>
-    <tr>
-      <td><%= coach_meeting.title %></td>
-      <td><%= coach_meeting.description %></td>
-      <td><%= coach_meeting.starttime.strftime("%b %d, %Y %I:%M %p") %></td>
-      <td><%= coach_meeting.endtime.strftime("%b %d, %Y %I:%M %p") %></td>
-      <td><%= coach_meeting.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
-      <td><%= link_to coach_meeting.coach_mentee_relation.mentee.name, user_mentee_path(@user, coach_meeting.coach_mentee_relation.mentee) %></td>
-    </tr>
-  <% end %>
-  </tbody>
+  <tbody id="coachmeetings">
+   <%= render  'coachmeetings' %>
+ </tbody>
 </table>
-<%= paginate @coach_meetings %>
+<div id="meetingspaginator">
+  <%= paginate @coach_meetings , :remote => true, :param_name => 'meet' %>
+</div>
 <br>
-
-
 <h2 class="tablehead">Mentees</h2>
 
 <table class="table table-striped">
@@ -47,10 +59,18 @@
     </tr>
   </thead>
 
-  <tbody>
-  <%= render :partial => "/mentees/mentee", :locals => {:mentees => @mentees} %>
-  </tbody>
+  <tbody id="mentees">
+
+   <%= render  'mentees' %>
+
+   
+
+ </tbody>
 </table>
+<div id="paginator">
+  <%= paginate @mentees, :remote => true, :param_name => 'ment' %>
+</div>
+
 <br>
 <br>
 

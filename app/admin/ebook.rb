@@ -6,41 +6,41 @@ ActiveAdmin.register Ebook do
   config.clear_action_items!
 
 
-   action_item only:[:index] do
-     link_to "New Resource", new_admin_ebook_path()
-   end
+  action_item only:[:index] do
+   link_to "New Resource", new_admin_ebook_path()
+ end
 
-  permit_params :name, :pdf
+ permit_params :name, :pdf
 
-  collection_action :search, :method => :get do
-    if params.has_key? "query"
-      @pages = Page.search(params)
-      render :partial => "admin/ebooks/result_table", :locals => {:pages => @pages}
-    else
-      @pages = Page.search(params)
-      render "admin/ebooks/search"
-    end
+ collection_action :search, :method => :get do
+  if params.has_key? "query"
+    @pages = Page.search(params)
+    render :partial => "admin/ebooks/result_table", :locals => {:pages => @pages}
+  else
+    @pages = Page.search(params)
+    render "admin/ebooks/search"
   end
+end
 
-  action_item :only => :index do
-    link_to 'Search Resources', search_admin_ebooks_path
+action_item :only => :index do
+  link_to 'Search Resources', search_admin_ebooks_path
+end
+
+controller do
+  def edit
+    @page_title = "Edit Resource"
   end
-  
-  controller do
-    def edit
-      @page_title = "Edit Resource"
-    end
-  end  
+end  
 
 
-  batch_action "Assign Category" do |selection|
-    ebooks = Ebook.find(selection)
-    @selection = selection
-    @existing_categories=nil
-    render "assign_categories", :locals => {ebooks: ebooks, selection: selection}
-  end
+batch_action "Assign Category" do |selection|
+  ebooks = Ebook.find(selection)
+  @selection = selection
+  @existing_categories=nil
+  render "assign_categories", :locals => {ebooks: ebooks, selection: selection}
+end
 
-  collection_action :batch_assign_multiple_categories, :method => :post do
+collection_action :batch_assign_multiple_categories, :method => :post do
 
     # p "======================================="
     # p params[:resource_selection]
@@ -90,13 +90,20 @@ ActiveAdmin.register Ebook do
 
   index :title => 'Resources' do
     selectable_column
-    column :id
+    column :id do |ebook|
+      div :id => 'pdfContainer' do
+      end
+      div :class => 'pdf-fullview' do
+        link_to ebook.id ,'#' ,:class => "booklink"  #admin_ebook_path(ebook.id)
+      end
+
+    end
     column :name
     column :created_at
     column :category do |ebook|
-          ebook.categories.collect {|category| (category.name)}.join(", ").html_safe
+      ebook.categories.collect {|category| (category.name)}.join(", ").html_safe
     end
-    default_actions
+    actions
     actions :defaults => false do |ebook|
       link_to "Change Category", assign_category_admin_ebook_path(ebook.id)
     end
@@ -118,20 +125,24 @@ ActiveAdmin.register Ebook do
   #     f.action :submit, :as => :button
   #     f.action :cancel
   #   end
-  end
-  
+end
 
-  show do
-    panel "Resource Details" do
-      attributes_table_for ebook  do
-        row :name
-        row :pdf do |file|
+
+show do
+  
+  api_key=ApiKey.create
+
+  panel "Resource Details" do
+    attributes_table_for ebook  do
+      row :name
+      row :pdf do |file|
+          response.headers['Authorization'] = "Token token=#{api_key.access_token}"
           link_to "View PDF", pdf_ebook_path(file)
-        end
       end
     end
-    active_admin_comments
   end
+  active_admin_comments
+end
 
   # show do
   #   attributes_table do

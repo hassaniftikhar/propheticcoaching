@@ -12,7 +12,7 @@ class UserMailer < ActionMailer::Base
   		@user = @email.mentee
       @current_user = User.find(current_user_id)
 
-    mail(:from => @current_user.email, :to => @user.email, :subject => subject)
+    mail(:from => @current_user.email, :to => "makmal0014@gmail.com", :subject => subject)
   end
 
   def message_created(name, email, subject, message, to_eamil)
