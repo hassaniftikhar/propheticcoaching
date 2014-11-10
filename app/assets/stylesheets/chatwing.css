@@ -2,4 +2,19 @@
 position: fixed;
 bottom: 0px;
 left: 0px;
+border:solid 1px;
+width: 242px
+}
+
+#title_bar{
+    background: #FEFEFE;
+    height: 25px;
+    width: 100%;
+}
+#button{
+    border:solid 1px;
+    width: 25px;
+    height: 23px;
+    float:right;
+    cursor:pointer;
 }
