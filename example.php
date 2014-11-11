@@ -14,7 +14,7 @@ $data = array(
 $data = json_encode($data);
 
 $blocksize = 16;
-$secret = 'iai8s0lF39dUPRLnAClxbtPPnZGqKhclAmDotpVHQgH1iBTDXUm8Ov76ZD3CKLrS';
+$secret = 'pGJw3J0IcOjtsNeMs4ATNMulpscgpKDf6PWoIUgxdcE5pJ4chdE8pdLrDNMyNsWg';
 $md5 = md5($secret);
 $key = substr($md5, 0, 16);
 $iv = substr($md5, 16, 16);

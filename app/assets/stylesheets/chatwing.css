@@ -8,13 +8,13 @@ width: 242px
 
 #title_bar{
     background: #FEFEFE;
-    height: 25px;
+    height: 15px;
     width: 100%;
 }
 #button{
     border:solid 1px;
-    width: 25px;
-    height: 23px;
+    width: 20px;
+    height: 15px;
     float:right;
     cursor:pointer;
 }
