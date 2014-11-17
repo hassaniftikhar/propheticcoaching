@@ -129,14 +129,10 @@ end
 
 
 show do
-  
-  api_key=ApiKey.create
-
   panel "Resource Details" do
     attributes_table_for ebook  do
       row :name
       row :pdf do |file|
-          response.headers['Authorization'] = "Token token=#{api_key.access_token}"
           link_to "View PDF", pdf_ebook_path(file)
       end
     end
