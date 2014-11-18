@@ -133,7 +133,7 @@ show do
     attributes_table_for ebook  do
       row :name
       row :pdf do |file|
-          link_to "View PDF", pdf_ebook_path(file)
+        link_to "View PDF", pdf_ebook_path(file)
       end
     end
   end

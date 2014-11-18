@@ -68,17 +68,18 @@ class TasksController < InheritedResources::Base
 
 
   def email_multiple
-
-    @tasks = Task.find(params[:tasks_ids])
+    p "==============="
+    p params[:tasks_ids]
+    paramsids = params[:tasks_ids].join(",")
+    @tasks = Task.where id:(paramsids.split(",").map { |s| s.to_i })
     p @tasks
     @tasks.each do |task|
-      task.deliver_email(current_user, "New Task Created")
-      respond_to do |format|
+      task.deliver_email(current_user, "Task Reminder")
+    end
+    respond_to do |format|
         format.json { render :json => @tasks}
       end
-    end
   end
-
 
 
 
