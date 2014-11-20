@@ -3,39 +3,41 @@
 <div id="dtBox"></div>
 <% @tasks.each do |task| %>
 <tr>
-<td><%= check_box_tag "tasks_ids[]", task.id ,class: 'mycheckbox'%></td>
+	<td><%= check_box_tag "tasks_ids[]", task.id ,class: 'mycheckbox'%></td>
 	<td><%= task.description %></td>
 	<td><%= task.starttime %></td>
 	<td><%= task.endtime %></td>
 	<td><%= task.status %></td>
-	 <td> <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                     edit_user_mentee_task_path(coach,mentee,task), :class => 'btn btn-mini' %></td>
-</tr>
-<% end %>
+	<td> <%= link_to t('.edit', :default => t("helpers.links.edit")),
+		edit_user_mentee_task_path(coach,mentee,task), :class => 'btn btn-mini' %></td>
+	</tr>
+	<% end %>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
-	var val = [];
-	var userid = <%= @user.id %>
-	var menteeid = <%= @mentee.id %>
 
-	$('#emailbtn').click(function () {
+		var userid = <%= @user.id %>
+		var menteeid = <%= @mentee.id %>
 
-		$('input[name="tasks_ids[]"]:checked').each(function(i){
+		$('#emailbtn').click(function () {
+			var val = [];
+			$('input[name="tasks_ids[]"]:checked').each(function(i){
 
-			val[i] = $(this).val();
+				val[i] = $(this).val();
+			});
+
+			jQuery.ajax({
+				data: 'tasks_ids[]=' + val,
+				dataType: 'json',
+				type: 'post',
+				url: "/users/" + userid + "/mentees/"+ menteeid + "/tasks/email_multiple"
+			});
+
+			alert("Email has been sent");
+
 		});
 
-		alert(val);
-		jQuery.ajax({
-			data: 'tasks_ids[]=' + val,
-			dataType: 'json',
-			type: 'post',
-			url: "/users/" + userid + "/mentees/"+ menteeid + "/tasks/email_multiple"
-		});
 
-	});
+			
 
-	
-
-</script>
+	</script>

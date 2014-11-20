@@ -3,11 +3,6 @@ class EbooksController < ApplicationController
   before_action :set_ebook_name
   before_action :set_ebook, only: [:show, :edit, :update, :destroy, :pdf]
 
-  # before_filter :restrict_access, only: [:pdf]
-  # respond_to :json
-
-  # GET /ebooks
-  # GET /ebooks.json
   def index
     # @ebooks = Ebook.all.order("updated_at desc").page(params[:ebook_page]).per(PER_PAGE_RECORDS)
     @ebooks = Ebook.search(params)
@@ -36,14 +31,6 @@ class EbooksController < ApplicationController
     #TODO: this is a security issue as anyone can access the pdf, need to fix so that only jquery can access
     send_file(open(@ebook.pdf.url), :filename => @ebook.pdf.path, :disposition => 'inline', :type => "application/pdf")
   end
-
-  #########akmal #############
-
-  # def pdf
-  #   redirect_to(@ebook.pdf.url(Time.now + 10.seconds))
-  # end
-
-  ##########################
 
   
   # GET /ebooks/newpdf_ebook_path(ebook)
@@ -132,25 +119,6 @@ class EbooksController < ApplicationController
     def set_ebook_name
       @ebook_name = "Resource"
     end
-
-
-
-
-     # private
-  # def restrict_access
-   
-  #  p "===========restrict_access" 
-  #  p request.env
-  #  authenticate_or_request_with_http_token do |token, options|
-
-  #   p "======token: #{token} --- options: #{options} "
-
-
-  #   ApiKey.exists?(access_token: token)
-
-  # end
-
-
 
 
 

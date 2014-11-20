@@ -24,12 +24,10 @@ class TasksController < InheritedResources::Base
   end
 
   def update
-    p "task update============================"
     
     @task=Task.find(params[:id])
     respond_to do |format|
      if @task.update_attributes(task_params[:task])
-      p "=============== ho gaya update"
       #if @task.update(params)
       format.html { redirect_to  user_mentee_task_path(params[:user_id], @mentee,@task), notice: 'Task was successfully updated.' }
       format.json { head :no_content }
@@ -45,13 +43,13 @@ class TasksController < InheritedResources::Base
     # p "task edit============================"
     # p parms
     #@task=Task.find(params[:id])
-     p @task
+    p @task
     
   end
   def save
 
     p @task
-   @task=Task.find(params[:task_id])
+    @task=Task.find(params[:task_id])
 
 
     respond_to do |format|
@@ -70,17 +68,18 @@ class TasksController < InheritedResources::Base
 
 
   def email_multiple
-
-    @tasks = Task.find(params[:tasks_ids])
+    p "==============="
+    p params[:tasks_ids]
+    paramsids = params[:tasks_ids].join(",")
+    @tasks = Task.where id:(paramsids.split(",").map { |s| s.to_i })
     p @tasks
     @tasks.each do |task|
-      task.deliver_email(current_user, "New Task Created")
-      respond_to do |format|
+      task.deliver_email(current_user, "Task Reminder")
+    end
+    respond_to do |format|
         format.json { render :json => @tasks}
       end
-    end
   end
-
 
 
 
