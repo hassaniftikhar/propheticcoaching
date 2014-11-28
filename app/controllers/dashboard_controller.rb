@@ -9,11 +9,11 @@ class DashboardController < ApplicationController
     @user 						= @current_user
     @mentees 					= @user.mentees.page(params[:ment]).per(5)
 
-      php_output = `php example.php #{@current_user.id} #{@current_user.name}`
+      # php_output = `php example.php #{@current_user.id} #{@current_user.name}`
 
-      code = php_output.gsub("\n",'')
+      # code = php_output.gsub("\n",'')
 
-      @encryptedsession = code
+      # @encryptedsession = code
 
     end
 
