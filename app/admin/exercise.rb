@@ -80,7 +80,7 @@ ActiveAdmin.register Exercise do
     column :category do |exercise|
           exercise.categories.order("name asc").collect {|category| (category.name)}.join(", ").html_safe
     end
-    default_actions
+    actions
     actions :defaults => false do |exercise|
       link_to "Change Category", assign_category_admin_exercise_path(exercise.id)
     end

@@ -24,7 +24,7 @@ ActiveAdmin.register FeaturedProduct do
     column :price
     column "Magento Link(URL)", :url
     # column :profile
-    default_actions
+    actions
   end
 
   form do |f|

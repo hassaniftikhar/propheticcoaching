@@ -19,7 +19,7 @@ config.clear_action_items!
     column :title
     column :description
     column :updated_at
-    default_actions
+    actions
   end
 
   form do |f|

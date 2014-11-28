@@ -81,7 +81,7 @@ ActiveAdmin.register Question do
     column :category do |question|
           question.categories.order("name asc").collect {|category| (category.name)}.join(", ").html_safe
     end
-    default_actions
+    actions
     actions :defaults => false do |question|
       link_to "Change Category", assign_category_admin_question_path(question.id)
     end

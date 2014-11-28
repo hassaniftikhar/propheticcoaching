@@ -97,7 +97,7 @@ ActiveAdmin.register Activity do
     column :category do |activity|
           activity.categories.order("name asc").collect {|category| (category.name)}.join(", ").html_safe
     end
-    default_actions
+    actions
     actions :defaults => false do |activity|
       link_to "Change Category", assign_category_admin_activity_path(activity.id)
     end
