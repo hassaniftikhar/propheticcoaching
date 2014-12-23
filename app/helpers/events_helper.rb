@@ -3,10 +3,13 @@ module EventsHelper
     events = []
     profile_type = profile.class.name.camelize(:lower)+"s"
     events << "/#{profile_type}/#{profile.id}/events/get_events"
-    profile.google_events.each do |event|
-      events << event.url
-    end
-    p events
+    # IJM Tmp change. due to other events not shown
+    # profile.google_events.each do |event|
+    #   events << event.url
+    # end
+    # p '===================================================='
+    # p events
+    # p '===================================================='
     events.to_json.html_safe
   end
 
@@ -14,9 +17,10 @@ module EventsHelper
     # ["/events/get_events?profile_type=User"].to_json.html_safe
     events = []
     events << "/events/get_events?profile_type=User"
-    GoogleEvent.where(profile_type: "User").each do |event|
-      events << event.url
-    end
+    # IJM Tmp change. due to other events not shown
+    # GoogleEvent.where(profile_type: "User").each do |event|
+    #   events << event.url
+    # end
     events.to_json.html_safe
   end
 
