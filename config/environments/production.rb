@@ -88,11 +88,11 @@ Propheticcoaching::Application.configure do
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-      address: 'mail.propheticcoaching.com',
+      address: 'smtp.sendgrid.net',
       port: 25,
-      domain: 'propheticcoaching.com',
-      user_name: 'alerts@propheticcoaching.com',
-      password: 'asdfasdf1234!@#$',
+      domain: 'www.propheticcoaching.com',
+      user_name: 'app24156801@heroku.com',
+      password: 'fgovmamg',
       authentication: 'plain',
       enable_starttls_auto: true,
       openssl_verify_mode: 'none'}

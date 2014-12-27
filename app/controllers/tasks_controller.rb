@@ -27,8 +27,9 @@ class TasksController < InheritedResources::Base
         p "task update============================"
         p params
     respond_to do |format|
-      if @task.update(params)
-        format.html { redirect_to user_mentee_path(params[:user_id], @mentee), notice: 'Task was successfully updated.' }
+      if @task.update_attributes(task_params[:task])
+      #if @task.update(params)
+        format.html { redirect_to  user_mentee_task_path(params[:user_id], @mentee,@task), notice: 'Task was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -36,11 +37,48 @@ class TasksController < InheritedResources::Base
       end
     end
   end
+
   def edit
         p "task edit============================"
         p params
 
   end
+  def save
+
+    p @task
+    @task=Task.find(params[:task_id])
+
+
+    respond_to do |format|
+     if @task.update_attributes(task_params[:task])
+      format.html { redirect_to  user_mentee_path(params[:user_id], @task.mentee), notice: 'Task was successfully updated.' }
+      format.json { head :no_content }
+        #format.json { respond_with_bip(params[:user_id], @mentee) }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+
+
+  end
+
+
+  def email_multiple
+    p "==============="
+    p params[:tasks_ids]
+    paramsids = params[:tasks_ids].join(",")
+    @tasks = Task.where id:(paramsids.split(",").map { |s| s.to_i })
+    p @tasks
+    @tasks.each do |task|
+      task.deliver_email(current_user, "Task Reminder")
+    end
+    respond_to do |format|
+        format.json { render :json => @tasks}
+      end
+  end
+
+
 
   # def destroy
   #   @task.destroy

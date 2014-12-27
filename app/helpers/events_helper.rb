@@ -7,9 +7,6 @@ module EventsHelper
     # profile.google_events.each do |event|
     #   events << event.url
     # end
-    # p '===================================================='
-    # p events
-    # p '===================================================='
     events.to_json.html_safe
   end
 

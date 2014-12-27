@@ -25,7 +25,8 @@
  *= require owl.carousel.css
  *= require owl.theme.css
  *= require owl.transitions.css
- *= require datepicker.css
+ *= require jquery.datetimepicker.css
+ *= require chatwing.css
 
  // require scaffolds
 

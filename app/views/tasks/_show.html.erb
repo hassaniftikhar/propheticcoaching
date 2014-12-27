@@ -1,16 +1,18 @@
 <h2 class="tablehead">Task Reminder</h2>
 <table class="table table-striped table-bordered" >
   <thead>
-  <tr>
-     <th>DESCRIPTION</th>
-     <th>START TIME</th>
-     <th>END TIME</th>
-     <th>STATUS</th>
-  </tr>
+    <tr>
+      <th>     </th>
+      <th>DESCRIPTION</th>
+      <th>START TIME</th>
+      <th>END TIME</th>
+      <th>STATUS</th>
+      <th>     </th>
+    </tr>
   </thead>
 
   <tbody id="tasks">
-    <%= render :partial => "/tasks/task_list", :locals => {:tasks => @tasks} %>
+    <%= render :partial => "/tasks/task_list", :locals => {:tasks => @tasks, :coach => coach, :mentee => mentee} %>
   </tbody>
 
 </table>

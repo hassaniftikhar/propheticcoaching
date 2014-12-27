@@ -1,0 +1,13 @@
+$("#mentees").html("<%= escape_javascript(render("mentees")) %>");
+$('#paginator').html("<%= escape_javascript(paginate(@mentees, :remote => true, :param_name => 'ment')) %>");
+
+
+
+
+$("#coachmeetings").html("<%= escape_javascript(render("coachmeetings")) %>");
+$('#meetingspaginator').html("<%= escape_javascript(paginate(@coach_meetings, :remote => true, :param_name => 'meet')) %>");
+
+
+
+$("#appointments").html("<%= escape_javascript(render("appointments")) %>");
+$('#appointmentpaginator').html("<%= escape_javascript(paginate(@coach_events, :remote => true, :param_name => 'evnt')) %>");

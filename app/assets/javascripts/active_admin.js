@@ -263,4 +263,28 @@ $(document).ready(function () {
     });
   }
 
+$(".booklink").click(function () {
+  var document_id = $(this).text();
+    // var url =  document_id + "/pdf.pdf";
+    var url = "/ebooks/" + document_id + "/pdf.pdf";
+    var currentPage = 1 ;
+    var documentViewer = $('#pdfContainer').documentViewer(
+    {
+      path: "/assets/documentViewer/",
+      width: 800,
+      debug: true
+    }
+    );
+    documentViewer.load(url, {currentPage: currentPage});
+    $("#pdfContainer").dialog({
+      close: function (event, ui) {
+        $(this).empty().dialog('destroy');
+      },
+      width: 900
+    });
+
+  });
+
+
+
 });

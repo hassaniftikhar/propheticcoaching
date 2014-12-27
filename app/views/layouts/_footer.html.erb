@@ -25,3 +25,30 @@
     </div>
   </div>
 </div>
+<% if current_user %>
+<div id="chatfloat">
+  <div id="title_bar">
+    <div id="button">-</div>
+  </div>
+  <div id="chathead">
+   <div id="chatwing-embedded-81662644-4f1d-41d4-8fb1-6606b94ed846"></div>
+  </div>
+</div>
+<script type="text/javascript">
+
+  window.chatwingSession = '<%= @encryptedsession %>';
+
+  $("#button").click(function(){
+    if($(this).html() == "-"){
+        $(this).html("+");
+    }
+    else{
+        $(this).html("-");
+    }
+    $("#chathead").slideToggle();
+});
+
+</script>
+
+<% end %>
+

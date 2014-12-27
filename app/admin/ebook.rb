@@ -90,7 +90,14 @@ ActiveAdmin.register Ebook do
 
   index :title => 'Resources' do
     selectable_column
-    column :id
+    column :id do |ebook|
+      div :id => 'pdfContainer' do
+      end
+      div :class => 'pdf-fullview' do
+        link_to ebook.id ,'#' ,:class => "booklink"  #admin_ebook_path(ebook.id)
+      end
+
+    end
     column :name
     column :created_at
     column :category do |ebook|
