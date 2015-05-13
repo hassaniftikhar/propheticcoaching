@@ -4,7 +4,7 @@ class InfoController < ApplicationController
     @featured_products = FeaturedProduct.order("updated_at desc").limit(20)
     @best_features = BestFeature.order("updated_at desc").limit(4)
     # @video_path = '<iframe src="//player.vimeo.com/video/100508776" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'.html_safe
-    @video_info = Video.order("updated_at desc").first
+    @video_info = Video.order("updated_at desc").first.path
     if @video_info
       path_start = @video_info.index("<iframe")
       path_end = @video_info.index("</iframe>")+9
