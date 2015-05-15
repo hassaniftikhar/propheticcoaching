@@ -11,8 +11,9 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    P "app con====================================="
-    redirect_to user_path(current_user), :alert => exception.message
+    # P "app con====================================="
+    # redirect_to user_path(current_user), :alert => exception.message
+    redirect_to user_path(current_user), :notice => exception.message
   end
 
   def authenticate_admin_user!

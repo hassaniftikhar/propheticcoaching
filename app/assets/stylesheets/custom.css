@@ -426,6 +426,55 @@ color:#999;
 	font-weight: normal;
 	margin-bottom: 15px;
 }
+
+
+.admin-signup-form {
+	border-radius: 2px;
+	width: 475px;
+	height: auto;
+	min-height: 50px;
+	border: 0px solid #CCC;
+	box-shadow: 0px 0px 40px rgba(0,0,0,.4);
+	margin: 0 auto;
+	margin-top: 0px;
+	padding: 20px 20px 0px 20px;
+	background-color: #fff;
+}
+.admin-signup-form .heading{
+	margin-left: 40%;
+}
+.admin-signup-form input {
+	border-radius: 2px;
+	height: 30px;
+	margin-bottom: 20px;
+	background-color: #DAF0FF;
+}
+.admin-signup-form input::-webkit-input-placeholder {
+ color: #10A9DC;
+ font-weight: bold;
+ font-size:12px;
+ text-transform:uppercase;
+}
+ .admin-signup-form::-moz-placeholder {
+color:#00f;
+}
+.admin-signup-form::-moz-placeholder {
+color:#090;
+background:lightgreen;
+text-transform:uppercase;
+}
+.admin-signup-form::-moz-placeholder {
+font-style:italic;
+text-decoration:overline;
+letter-spacing:3px;
+color:#999;
+}
+.admin-signup-form .btn {
+	padding: 0px;
+	border-radius: 2px;
+}
+
+
 .border-left {
 	border-left: 1px solid #CCC;
 }
@@ -519,9 +568,10 @@ p.top-bar-text{
 }
 .flash-box{
 	/*background-color: rgba(21, 98, 112, 0.7);*/
-	/*background-color: white;*/
-	padding: 20px;
+	background-color: #C9DECB;
+	padding: 0px;
 	position: fixed;
+	width: 250px;
 	top:20px;
 	right:20px;
 	z-index:9999;
