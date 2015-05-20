@@ -583,6 +583,23 @@ p.top-bar-text{
 	margin:0px;
 	
 }
+.flash-box-email{
+	background-color: #dff0d8;
+	/*padding: 20px;*/
+	padding: 0px;
+	position: fixed;
+	/*width: 250px;*/
+	height: 75px;
+	top:20px;
+	right:20px;
+	z-index:9999;
+	border-radius: 5px;
+	/*color:#fff;*/
+}
+.flash-box-email p{
+	margin:0px;
+	
+}
 .close-fl{
 	position: fixed;
 padding: 2px 7px;

@@ -40,7 +40,7 @@ config.action_mailer.default_url_options = { :host => ENV['DOMAIN'] }
     :port           => '587',
     :authentication => :plain,
     :user_name      => 'app24156801@heroku.com',
-    :password       => 'fgovmamg',
+    :password       => 'xnffwojn3517',
     :domain         => 'www.propheticcoaching.com',
     :enable_starttls_auto => true
   }

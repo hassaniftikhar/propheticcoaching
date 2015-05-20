@@ -91,8 +91,8 @@ Propheticcoaching::Application.configure do
       address: 'smtp.sendgrid.net',
       port: 25,
       domain: 'www.propheticcoaching.com',
-      user_name: 'app24156801@heroku.com',
-      password: 'fgovmamg',
+      user_name: ENV['SENDGRID_USERNAME'],
+      password:  ENV['SENDGRID_PASSWORD'],
       authentication: 'plain',
       enable_starttls_auto: true,
       openssl_verify_mode: 'none'}

@@ -1,7 +1,7 @@
 <%= button_tag "Send Email", :id => "emailbtn", :type => "button" %>
 
 <div id="dtBox"></div>
-<div class="flash-box">
+<div class="flash-box-email">
         <div class="alert text-center alert-"success"">
           <a class="close" data-dismiss="alert">&#215;</a>
           <%= content_tag :div, ''.html_safe, :id => "flash_success" %>
@@ -21,11 +21,10 @@
 
 	<script type="text/javascript">
 
-
 		var userid = <%= @user.id %>
 		var menteeid = <%= @mentee.id %>
 
-		$('.flash-box').hide()
+		$('.flash-box-email').hide()
 		$('#emailbtn').click(function () {
 			var val = [];
 			$('input[name="tasks_ids[]"]:checked').each(function(i){
@@ -40,6 +39,6 @@
 				url: "/users/" + userid + "/mentees/"+ menteeid + "/tasks/email_multiple"
 			});
 			$('#flash_success').html('Sending email(s) in process');
-			$('.flash-box').show();
+			$('.flash-box-email').show();
 		});
 	</script>
