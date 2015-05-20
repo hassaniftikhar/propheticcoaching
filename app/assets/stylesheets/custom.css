@@ -567,11 +567,12 @@ p.top-bar-text{
 	text-decoration: none;
 }
 .flash-box{
-	/*background-color: rgba(21, 98, 112, 0.7);*/
-	background-color: #C9DECB;
+	background-color: #dff0d8;
+	/*padding: 20px;*/
 	padding: 0px;
 	position: fixed;
-	width: 250px;
+	/*width: 250px;*/
+	height: 75px;
 	top:20px;
 	right:20px;
 	z-index:9999;

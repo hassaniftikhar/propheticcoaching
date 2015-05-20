@@ -65,17 +65,21 @@ class TasksController < InheritedResources::Base
 
 
   def email_multiple
-    p "==============="
-    p params[:tasks_ids]
+    # p "==============="
+    # p params[:tasks_ids]
     paramsids = params[:tasks_ids].join(",")
-    @tasks = Task.where id:(paramsids.split(",").map { |s| s.to_i })
-    p @tasks
+    @tasks = Task.where id:(paramsids.split(",").map { |s| s.to_i }) rescue nil
+    # p @tasks
+    is_send_all_emails = true
     @tasks.each do |task|
-      task.deliver_email(current_user, "Task Reminder")
+      if task.deliver_email(current_user, "Task Reminder") == false
+        is_send_all_emails = false
+      end
     end
     respond_to do |format|
         format.json { render :json => @tasks}
-      end
+    end
+    # flash[:notice] = "Sending email(s) in process"
   end
 
 

@@ -1,2 +1,2 @@
-$('tbody#mentees').html('<%= escape_javascript render(@mentees) %>');
-$('#paginator').html('<%= escape_javascript(paginate(@mentees, :remote => true).to_s) %>');
+$('tbody#mentees').html('<%= escape_javascript render :partial => "/mentees/mentee", :locals => {:mentees => @mentees} %>');
+$('#mentee_paginator').html('<%= escape_javascript(paginate(@mentees, :remote => true, :param_name => "mentee_page").to_s) %>');

@@ -1,6 +1,12 @@
 <%= button_tag "Send Email", :id => "emailbtn", :type => "button" %>
 
 <div id="dtBox"></div>
+<div class="flash-box">
+        <div class="alert text-center alert-"success"">
+          <a class="close" data-dismiss="alert">&#215;</a>
+          <%= content_tag :div, ''.html_safe, :id => "flash_success" %>
+        </div>
+</div>
 <% @tasks.each do |task| %>
 <tr>
 	<td><%= check_box_tag "tasks_ids[]", task.id ,class: 'mycheckbox'%></td>
@@ -19,6 +25,7 @@
 		var userid = <%= @user.id %>
 		var menteeid = <%= @mentee.id %>
 
+		$('.flash-box').hide()
 		$('#emailbtn').click(function () {
 			var val = [];
 			$('input[name="tasks_ids[]"]:checked').each(function(i){
@@ -32,12 +39,7 @@
 				type: 'post',
 				url: "/users/" + userid + "/mentees/"+ menteeid + "/tasks/email_multiple"
 			});
-
-			alert("Email has been sent");
-
+			$('#flash_success').html('Sending email(s) in process');
+			$('.flash-box').show();
 		});
-
-
-
-
 	</script>

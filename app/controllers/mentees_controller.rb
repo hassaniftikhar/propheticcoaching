@@ -19,8 +19,8 @@ class MenteesController < ApplicationController
     #   @mentees = @user.mentees.page params[:page]
     # end
     # @mentees = @user.mentees.page(params[:page])
-    @mentees = @user.mentees.page(params[:page])
-
+    @mentees = @user.mentees.page(params[:mentee_page])
+    
     authorize! :read, *(@mentees.any? ? @mentees : @user.mentees.new)
     respond_to do |format|
       format.html

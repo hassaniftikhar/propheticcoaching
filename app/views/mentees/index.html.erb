@@ -12,14 +12,14 @@
             </tr>
             </thead>
 
-            <tbody>
+            <tbody id="mentees">
               <%= render :partial => "/mentees/mentee", :locals => {:mentees => @mentees} %>
             </tbody>
               
           </table>
 
-          <div id="paginator">
-            <%= paginate @mentees, :remote => true %>
+          <div id="mentee_paginator">
+            <%= paginate @mentees, :remote => true, :param_name => "mentee_page" %>
           </div>
           <br>
         </div>
