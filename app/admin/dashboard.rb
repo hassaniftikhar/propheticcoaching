@@ -32,14 +32,14 @@ ActiveAdmin.register_page "Dashboard" do
            strong { link_to "View All Resources", admin_ebooks_path }
          end
 
-         panel "Recent Mentee" do
+         panel "Recent Partner" do
            ul do
              Mentee.order("created_at desc").limit(5).map do |mentee|
                #User.recent(5).map do |user|
                li link_to(mentee.name, admin_mentee_path(mentee))
              end
            end
-           strong { link_to "View All Mentees", admin_mentees_path }
+           strong { link_to "View All Partners", admin_mentees_path }
          end
 
        end

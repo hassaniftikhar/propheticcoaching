@@ -1,5 +1,6 @@
 ActiveAdmin.register Mentee do
 
+  menu :label => "Partners"
   controller do
     before_action :set_calendar_properties
     before_action :set_mentee_id
@@ -115,7 +116,7 @@ ActiveAdmin.register Mentee do
     link_to('Assign/Change Coach', assign_coach_admin_mentee_path(params[:id]))
   end
 
-  index do
+  index :title => 'Partners' do
     selectable_column
     column :first_name
     column :last_name

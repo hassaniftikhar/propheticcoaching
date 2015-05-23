@@ -124,7 +124,7 @@ ActiveAdmin.register User do
           "#{user.date_of_birth.strftime("%m/%d/%Y")}"
         end
       end
-      row :mentees do |user|
+      row "Partners", :mentees do |user|
         user.mentees.collect { |r| link_to(r.name, admin_mentee_path(r.id)) }.join(", ").html_safe
       end
     end
