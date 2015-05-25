@@ -102,7 +102,7 @@ class MenteesController < ApplicationController
 
     respond_to do |format|
       if @mentee.save
-        format.html { redirect_to @mentee, notice: 'Mentee was successfully created.' }
+        format.html { redirect_to @mentee, notice: 'Partner was successfully created.' }
         format.json { render action: 'show', status: :created, location: @mentee }
       else
         format.html { render action: 'new' }
@@ -116,7 +116,7 @@ class MenteesController < ApplicationController
   def update
     respond_to do |format|
       if @mentee.update(mentee_params)
-        format.html { redirect_to @mentee, notice: 'Mentee was successfully updated.' }
+        format.html { redirect_to @mentee, notice: 'Partner was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

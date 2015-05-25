@@ -1,6 +1,13 @@
 ActiveAdmin.register Mentee do
 
   menu :label => "Partners"
+  # menu false
+  # This Clear the default "New mentee" link
+  config.clear_action_items!
+
+  action_item only:[:index] do
+    link_to "New Partner", new_admin_mentee_path()
+  end
   controller do
     before_action :set_calendar_properties
     before_action :set_mentee_id
@@ -11,10 +18,33 @@ ActiveAdmin.register Mentee do
     end
 
     def show
-      # @pages = Ebook.last.pages
-      # @pages = Page.search params
       @pages = Page.search(params)
       @mentee = Mentee.find_by(id: params[:mentee_id])
+    end
+
+    def new
+      @page_title="New Partner"
+      super
+    end
+
+    def edit
+      @page_title = "Edit Partner"
+      super
+    end
+
+    def update
+      flash[:notice] = "Partner Successfully Updated"
+      super
+    end
+
+    def create
+      flash[:notice] = "Partner Successfully Created"
+      super
+    end
+
+    def destroy
+      flash[:notice] = "Partner was successfully destroyed."
+      super
     end
 
     def set_mentee_id
@@ -109,7 +139,7 @@ ActiveAdmin.register Mentee do
 
 
   action_item :only => :index do
-    link_to('Import Mentee CSV', import_csv_admin_mentees_path)
+    link_to('Import Partner CSV', import_csv_admin_mentees_path)
   end
 
   action_item :only => :show do
@@ -142,8 +172,9 @@ ActiveAdmin.register Mentee do
     end
   end
 
+  
   form do |f|
-    f.inputs "details" do
+    f.inputs "Details" do
       f.input :first_name
       f.input :last_name
       f.input :email
@@ -154,13 +185,21 @@ ActiveAdmin.register Mentee do
       f.input :prophecy
       f.input :bc
     end
-    f.actions
+    # f.actions
+    f.actions do
+      if params["controller"] == "admin/mentees" and params["action"] == "edit"
+        f.action :submit, label: 'Edit Partner'
+      else
+        f.action :submit, label: 'Create Partner'
+      end
+      f.action :cancel, :label => "Cancel", :wrapper_html => { :class => "cancel" }
+    end
   end
 
   show do
 
     span do
-      link_to "Back to Mentees List", admin_mentees_path
+      link_to "Back to Partners List", admin_mentees_path
     end
     br
 
@@ -173,28 +212,31 @@ ActiveAdmin.register Mentee do
       render :partial => "/events/actions_dialog", :locals => {:profile => mentee}
     end
 
-    attributes_table do
-      row :first_name
-      row :last_name
-      row :email
-      row :date_of_birth do |mentee|
-        if(mentee.date_of_birth)
-          "#{mentee.date_of_birth.strftime("%m/%d/%Y")}"
+
+    panel "Partner Details" do
+      attributes_table_for mentee do
+        row :first_name
+        row :last_name
+        row :email
+        row :date_of_birth do |mentee|
+          if(mentee.date_of_birth)
+            "#{mentee.date_of_birth.strftime("%m/%d/%Y")}"
+          end
         end
-      end
-      row :donor_id
-      row :home_phone
-      row :availability
-      row :prophecy
-      row :bc
-      row :coach do |mentee|
-          mentee.coaches.collect {|coach| (link_to coach.name, admin_user_path(coach))}.join(", ").html_safe
-      end
-      if mentee.coaches
-        row "Recent Coaches" do |mentee|
-          mentee.versions.collect { |version|
-            version.reify.coaches.collect { |coach| (link_to coach.name, admin_user_path(coach))} if version.reify && version.reify.coaches
-          }.join(", ").html_safe
+        row :donor_id
+        row :home_phone
+        row :availability
+        row :prophecy
+        row :bc
+        row :coach do |mentee|
+            mentee.coaches.collect {|coach| (link_to coach.name, admin_user_path(coach))}.join(", ").html_safe
+        end
+        if mentee.coaches
+          row "Recent Coaches" do |mentee|
+            mentee.versions.collect { |version|
+              version.reify.coaches.collect { |coach| (link_to coach.name, admin_user_path(coach))} if version.reify && version.reify.coaches
+            }.join(", ").html_safe
+          end
         end
       end
     end
