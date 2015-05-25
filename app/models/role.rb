@@ -10,7 +10,8 @@ class Role < ActiveRecord::Base
   def self.global_roles
     where("resource_id is null").find_or_create_by :name => "admin"
     where("resource_id is null").find_or_create_by :name => "coach"
-    where("resource_id is null").find_or_create_by :name => "mentee"
+    # where("resource_id is null").find_or_create_by :name => "mentee"
+    where("resource_id is null").find_or_create_by :name => "partner"
     global
   end
 

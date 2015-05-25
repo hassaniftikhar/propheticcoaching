@@ -38,7 +38,7 @@
   <div class="field">
     <%= f.label :coach_id %>
     <%= f.collection_select :coach_id, User.coach.includes(:coach_mentee_relations).where('coaches_mentees_joins.mentee_id IS NOT NULL').references(:coach_mentee_relations).order(:first_name), :id, :first_name, include_blank: false %>
-    <%= f.label :mentee_id %>
+    <%= f.label "Partner" %>
     <%= f.grouped_collection_select :mentee_id, User.coach.includes(:coach_mentee_relations).where('coaches_mentees_joins.mentee_id IS NOT NULL').references(:coach_mentee_relations).order(:first_name), :mentees, :first_name, :id, :first_name, include_blank: false %>
     <%=f.hidden_field :coach_mentee_relation_id %>
   </div>
