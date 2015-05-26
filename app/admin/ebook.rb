@@ -126,14 +126,20 @@ ActiveAdmin.register Ebook do
   #     f.action :cancel
   #   end
   end
-  
 
   show do
     panel "Resource Details" do
       attributes_table_for ebook  do
         row :name
-        row :pdf do |file|
-          link_to "View PDF", pdf_ebook_path(file)
+        div :id => 'pdfContainer' do
+          span :id => 'ebook_id' do 
+            ebook.id.to_s
+          end
+        end
+        row :pdf do |ebook|
+          div :class => 'pdf-fullview' do
+            link_to "View PDF" ,'#' ,:class => "booklink"
+          end
         end
       end
     end

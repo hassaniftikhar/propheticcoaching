@@ -63,6 +63,8 @@ function check_session_progress() {
 } 
 
 $(document).ready(function () {
+  $('#ebook_id').hide();
+
   window.setInterval(check_session_progress, 10000);
   $("#search_ebook").on("ajax:success",function (e, data, status, xhr) {
     // console.log("search ebook success");
@@ -264,8 +266,13 @@ $(document).ready(function () {
   }
 
 $(".booklink").click(function () {
-  var document_id = $(this).text();
-    // var url =  document_id + "/pdf.pdf";
+    var document_id = ""
+    if($('#ebook_id').text() == "") {
+      document_id = $(this).text();
+    }
+    else {
+      document_id = $('#ebook_id').text();
+    }
     var url = "/ebooks/" + document_id + "/pdf.pdf";
     var currentPage = 1 ;
     var documentViewer = $('#pdfContainer').documentViewer(
