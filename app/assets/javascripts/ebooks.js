@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $(".container .row").on("click", "td #pdf-view", function () {
+  $(".container .row").on("click", "td #tmp-pdf-view", function () {
 
     if ($("#pdfContainer").hasClass('ui-dialog-content')) {
       $('#pdfContainer').empty().dialog('destroy');

@@ -25,9 +25,6 @@
 <% end %>
 
 <script type="text/javascript">
-// $(document).ready(function () {
-
-    // var document_url = sessionStorage.getItem("session_ebook_pdf");
     var document_url = "";
     var viewerParams = {
         document: document_url,  
@@ -51,7 +48,6 @@
             viewerParams["document"] = "<%=ebook.pdf%>".replace(/amp;/g, '');
         }
     <% end %>
-    // alert(viewerParams["document"]);
     var oHead = document.getElementById('accusoft_viewer');
     var oScript= document.createElement("script");
     oScript.type = "text/javascript";
@@ -67,7 +63,5 @@
 
     oHead.appendChild( oScript, viewerParams);
   });
-
-// });
 </script>
 <!-- <script src="//api.accusoft.com/v1/viewer/js?container=accusoft_viewer&key=K5102014151403"></script> -->
