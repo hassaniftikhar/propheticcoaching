@@ -14,10 +14,6 @@
 //= require jquery_ujs
 //= require jquery-ui-1.10.3.custom.min.js
 //= require twitter/bootstrap
-//= require "documentViewer/libs/yepnope.1.5.3-min.js"
-//= require "documentViewer/libs/pdfjs/pdf.js"
-//= require "documentViewer/libs/pdfjs/compatibility.js"
-//= require "documentViewer/ttw-document-viewer.min.js"
 //= require jquery_highlight
 //= require fullcalendar.min
 //= require mentees

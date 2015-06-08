@@ -1,13 +1,8 @@
-<div id="pdfContainer" class = "pdf-content" style="display: none">
-</div>
-
 <% @ebooks.each do |ebook| %>
   <tr>
-
     <td>
-
     <div id="pdf-fullview">
-    <%= link_to ebook.id, '#' %>
+        <%= link_to ebook.id, '#' %>
     </div>
     </td>
 
@@ -28,3 +23,51 @@
     </td>
   </tr>
 <% end %>
+
+<script type="text/javascript">
+// $(document).ready(function () {
+
+    // var document_url = sessionStorage.getItem("session_ebook_pdf");
+    var document_url = "";
+    var viewerParams = {
+        document: document_url,  
+        key: "K5102014151403",
+        viewertype: "html5",
+        viewerheight: "600",
+        viewerwidth: "100%",
+        upperToolbarColor: "7a7975",
+        lowerToolbarColor: "000000",
+        bottomToolbarColor: "000000",
+        backgroundColor: "757a7a",
+        fontColor: "ffffff",
+        buttonColor: "white",
+        hidden: "selectText,panTool,fullScreen,print,download,pageInfo,redact,esign"
+    }
+
+  $(".container .row").on("click", "td #pdf-fullview", function () {
+    var document_id = $(this).closest('td').text();
+    <% @ebooks.each do |ebook| %>
+        if(<%= ebook.id.to_s %> == document_id) {
+            viewerParams["document"] = "<%=ebook.pdf%>".replace(/amp;/g, '');
+        }
+    <% end %>
+    // alert(viewerParams["document"]);
+    var oHead = document.getElementById('accusoft_viewer');
+    var oScript= document.createElement("script");
+    oScript.type = "text/javascript";
+    oScript.src="//api.accusoft.com/v1/viewer/js?container=accusoft_viewer&key=K5102014151403";
+    $("#accusoft_viewer").dialog({
+      close: function (event, ui) {
+        $(this).empty().dialog('destroy');
+      },
+      width: 900
+    });
+    ui_dialog = document.getElementsByClassName("ui-dialog")
+    ui_dialog[0].style.top = "120px";
+
+    oHead.appendChild( oScript, viewerParams);
+  });
+
+// });
+</script>
+<!-- <script src="//api.accusoft.com/v1/viewer/js?container=accusoft_viewer&key=K5102014151403"></script> -->
