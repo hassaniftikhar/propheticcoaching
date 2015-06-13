@@ -91,10 +91,10 @@ ActiveAdmin.register Ebook do
   index :title => 'Resources' do
     selectable_column
     column :id do |ebook|
-      div :id => 'pdfContainer' do
+        div :id => 'pdfContainer' do
       end
       div :class => 'pdf-fullview' do
-        link_to ebook.id ,'#' ,:class => "booklink"  #admin_ebook_path(ebook.id)
+        link_to ebook.id, admin_ebook_path(ebook.id), :class => "booklink"  #admin_ebook_path(ebook.id)
       end
 
     end
@@ -128,33 +128,17 @@ ActiveAdmin.register Ebook do
   end
 
   show do
-    panel "Resource Details" do
-      attributes_table_for ebook  do
-        row :name
-        div :id => 'pdfContainer' do
-          span :id => 'ebook_id' do 
-            ebook.id.to_s
-          end
-        end
-        row :pdf do |ebook|
-          div :class => 'pdf-fullview' do
-            link_to "View PDF" ,'#' ,:class => "booklink"
-          end
-        end
-      end
-    end
-    active_admin_comments
-  end
 
-  # show do
-  #   attributes_table do
-  #     row :name
-  #     row :pdf do |file|
-  #       link_to "View PDF", pdf_ebook_path(file)
-  #     end
-  #   end
-  #   active_admin_comments
-  # end
+    render :partial => "admin/ebooks/show", :locals => {:ebook => @ebook}
+
+    # attributes_table do
+    #   row :name
+    #   row :pdf do |file|
+    #     link_to "View PDF", pdf_ebook_path(file)
+    #   end
+    # end
+    # active_admin_comments
+  end
 
 
   # See permitted parameters documentation:
@@ -171,3 +155,4 @@ ActiveAdmin.register Ebook do
   # end
 
 end
+

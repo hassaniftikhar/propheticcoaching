@@ -1,5 +1,82 @@
 $(document).ready(function () {
-		$('#ebook_search_result').html('<%= escape_javascript render :partial => "/admin/ebooks/display_search_result", :locals => {:pages => @pages} %>');
-		$('#ebook_search_paginator').html('<%= escape_javascript(paginate(@pages, :remote => true, :param_name => 'page').to_s) %>');
-		$("td#tags").highlight($("input#query").val());
+	$('#ebook_search_result').html('<%= escape_javascript render :partial => "/admin/ebooks/display_search_result", :locals => {:pages => @pages} %>');
+	$('#ebook_search_paginator').html('<%= escape_javascript(paginate(@pages, :remote => true, :param_name => 'page').to_s) %>');
+	$("td#tags").highlight($("input#query").val());
+  document.body.style.lineHeight = '200%';
+
+  ebook_name_padding_left = document.getElementsByClassName("ebook_name")
+  ebook_name_padding_left[1].style.paddingLeft = "30px";   
+  for(i=0; i<10; i++) {
+    ebook_name_padding_left[i].style.paddingLeft = "10px";
+  }  
+
+});
+
+var document_url = "";
+var viewerParams = {
+    document: document_url,  
+    key: "K5102014151403",
+    viewertype: "html5",
+    viewerheight: "600",
+    viewerwidth: "100%",
+    upperToolbarColor: "7a7975",
+    lowerToolbarColor: "000000",
+    bottomToolbarColor: "000000",
+    backgroundColor: "757a7a",
+    fontColor: "ffffff",
+    buttonColor: "white",
+    hidden: "selectText,panTool,fullScreen,print,download,pageInfo,redact,esign"
+}
+$(".container .row").on("click", "td #pdf-view", function () {
+  var document_id = $(this).closest('td').prev('td').prev('td').text();
+  // var document_id = $(this).closest('td').text();
+  <% @pages.each do |page| %>
+      if(<%= page.ebook_id.to_s %> == document_id) {
+          viewerParams["document"] = "<%=page.ebook.pdf%>".replace(/amp;/g, '');
+      }
+  <% end %>
+  var oHead = document.getElementById('accusoft_viewer');
+  var oScript= document.createElement("script");
+  oScript.type = "text/javascript";
+  oScript.src="//api.accusoft.com/v1/viewer/js?container=accusoft_viewer&key=K5102014151403";
+  $("#accusoft_viewer").dialog({
+    close: function (event, ui) {
+      $(this).empty().dialog('destroy');
+    },
+    width: 900
+  });
+  // ui_dialog = document.getElementsByClassName("ui-dialog")
+  // ui_dialog[0].style.top = "120px";
+
+  oHead.appendChild( oScript, viewerParams);
+});
+
+$(".container .row").on("click", "td #pdf-fullview", function () {
+  var document_id = $(this).closest('td').text();
+  <% @pages.each do |page| %>
+      if(<%= page.ebook_id.to_s %> == document_id) {
+          viewerParams["document"] = "<%=page.ebook.pdf%>".replace(/amp;/g, '');
+      }
+  <% end %>
+  var oHead = document.getElementById('accusoft_viewer');
+  var oScript= document.createElement("script");
+  oScript.type = "text/javascript";
+  oScript.src="//api.accusoft.com/v1/viewer/js?container=accusoft_viewer&key=K5102014151403";
+  $("#accusoft_viewer").dialog({
+    close: function (event, ui) {
+      $(this).empty().dialog('destroy');
+    },
+    width: 900
+  });
+  ui_dialog = document.getElementsByClassName("ui-dialog")
+  ui_dialog[0].style.top = "120px";
+
+  oHead.appendChild( oScript, viewerParams);
+  document.body.style.lineHeight = '200%';
+
+  ebook_name_padding_left = document.getElementsByClassName("ebook_name")
+  ebook_name_padding_left[1].style.paddingLeft = "30px";   
+  for(i=0; i<10; i++) {
+    ebook_name_padding_left[i].style.paddingLeft = "10px";
+  }  
 });

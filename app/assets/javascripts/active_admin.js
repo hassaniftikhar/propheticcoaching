@@ -265,7 +265,7 @@ $(document).ready(function () {
     });
   }
 
-$(".booklink").click(function () {
+$(".viewr_changed_booklink").click(function () {
     var document_id = ""
     if($('#ebook_id').text() == "") {
       document_id = $(this).text();
@@ -291,7 +291,4 @@ $(".booklink").click(function () {
     });
 
   });
-
-
-
 });

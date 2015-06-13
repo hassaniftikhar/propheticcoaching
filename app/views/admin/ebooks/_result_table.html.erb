@@ -1,3 +1,4 @@
+<div id='accusoft_viewer'> </div>
 <%- model_class = Ebook -%>
 <table class="table-striped">
   <thead>
@@ -9,8 +10,8 @@
   </tr>
   </thead>
   <% pages ||= [] %>
-  <tbody id="ebook_search_result" style="font-size: 14px">
 
+  <tbody id="ebook_search_result" style="font-size: 14px">
   <%= render :partial => "/admin/ebooks/display_search_result", :locals => {:pages => @pages} %>
   </tbody>
 </table>

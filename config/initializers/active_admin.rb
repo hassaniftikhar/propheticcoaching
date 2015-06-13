@@ -5,6 +5,15 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
+  class MyFooter < ActiveAdmin::Component
+    def build
+      super(id: "footer")
+      para "Copyright (C) #{Date.today.year} Prophetic Coaching"
+    end
+  end
+  config.view_factory.footer = MyFooter
+
+
   config.site_title = "Propheticcoaching"
   # config.site_title_link = :root
   config.site_title_link = "/dashboard/index"

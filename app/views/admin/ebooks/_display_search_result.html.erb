@@ -1,7 +1,12 @@
+<% if params.has_key? "query" %>
+
 <% @pages.each do |page| %>
   <tr>
-    <td><%= link_to page.ebook_id, admin_ebook_path(page.ebook_id) %></td>
-    <td><%= page.ebook_name %></td>
+    <td>
+      <div id="pdf-fullview">
+        <%= link_to page.ebook_id, '#' %></td>
+      </div>
+    <td class="ebook_name"><%= page.ebook_name %></td>
     <td>
       <div id="pdf-view">
         <%= page.page_number %>
@@ -10,4 +15,4 @@
     <td id="tags"> <%= page.tags %> </td>
   </tr>
 <% end %>
-  
+<% end %>
