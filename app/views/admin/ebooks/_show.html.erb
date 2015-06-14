@@ -1,0 +1,62 @@
+<div id='accusoft_viewer'> </div>
+<div class="panel">
+  <h3>Resource Details</h3>
+  <div class="panel_contents">
+    <div class="attributes_table ebook" id="attributes_table_ebook">
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr class="row row-name">
+          <th>Name</th>
+          <td><%= @ebook.name %></td>
+        </tr>
+        <tr class="row row-pdf">
+          <th>Pdf</th>
+        <td>
+          <div id="pdf-fullview">
+            <%= link_to 'View PDF', '#' %>
+          </div>
+        </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var document_url = "";
+var viewerParams = {
+    document: document_url,  
+    key: "K5102014151403",
+    viewertype: "html5",
+    viewerheight: "600",
+    viewerwidth: "100%",
+    upperToolbarColor: "7a7975",
+    lowerToolbarColor: "000000",
+    bottomToolbarColor: "000000",
+    backgroundColor: "757a7a",
+    fontColor: "ffffff",
+    buttonColor: "white",
+    hidden: "selectText,panTool,fullScreen,print,download,pageInfo,redact,esign"
+}
+
+$("body").on("click", "td #pdf-fullview", function () {
+  viewerParams["document"] = "<%=@ebook.pdf%>".replace(/amp;/g, '');
+  var oHead = document.getElementById('accusoft_viewer');
+  var oScript= document.createElement("script");
+  oScript.type = "text/javascript";
+  oScript.src="//api.accusoft.com/v1/viewer/js?container=accusoft_viewer&key=K5102014151403";
+  $("#accusoft_viewer").dialog({
+    close: function (event, ui) {
+      $(this).empty().dialog('destroy');
+    },
+    width: 900
+  });
+  oHead.appendChild( oScript, viewerParams);
+  document.body.style.lineHeight = '200%';
+
+  ebook_name_padding_left = document.getElementsByClassName("ebook_name")
+  ebook_name_padding_left[1].style.paddingLeft = "30px";   
+  for(i=0; i<10; i++) {
+    ebook_name_padding_left[i].style.paddingLeft = "10px";
+  }  
+});  
+</script>
