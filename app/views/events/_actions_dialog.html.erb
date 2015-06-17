@@ -1,3 +1,4 @@
+
 <div id="desc_dialog" class="dialog" style="display:none;">
   <div id="event_desc">
   </div>
@@ -45,8 +46,12 @@
       var editable = to_boolean(calendar_editable);
       // console.log("==editable: " + editable);
         console.log("IJM:testing===============================");
+
+      
       $(calendar_scope_type).fullCalendar({
         editable: editable,
+        googleCalendarApiKey: 'AIzaSyDi3ezQEoadT4TcyD4Gvc6yQnCQLwwLtgs',
+        googleCalendarId: 'ijmalik@gmail.com',
         header: {
           left: 'prev,next today',
           center: 'title',
