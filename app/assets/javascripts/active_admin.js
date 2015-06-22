@@ -4,8 +4,6 @@
 //= require "documentViewer/libs/pdfjs/compatibility.js"
 //= require "documentViewer/ttw-document-viewer.min.js"
 //= require jquery_highlight
-//= require fullcalendar/fullcalendar.min
-//= require fullcalendar/gcal.js
 //= require shared
 //= require events
 //= require ebooks

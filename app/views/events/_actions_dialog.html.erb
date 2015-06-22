@@ -1,3 +1,7 @@
+<link rel='stylesheet' href='/assets/fullcalendar/fullcalendar.css' />
+<script src='/assets/fullcalendar/lib/moment.min.js'></script>
+<script src='/assets/fullcalendar/fullcalendar.js'></script>
+<script type='text/javascript' src='/assets/fullcalendar/gcal.js'></script>
 
 <div id="desc_dialog" class="dialog" style="display:none;">
   <div id="event_desc">
@@ -45,13 +49,9 @@
     if ($(calendar_scope_type).length > 0) {
       var editable = to_boolean(calendar_editable);
       // console.log("==editable: " + editable);
-        console.log("IJM:testing===============================");
-
-      
+      // console.log("fullcalendar loading ==========================");   
       $(calendar_scope_type).fullCalendar({
         editable: editable,
-        googleCalendarApiKey: 'AIzaSyDi3ezQEoadT4TcyD4Gvc6yQnCQLwwLtgs',
-        googleCalendarId: 'ijmalik@gmail.com',
         header: {
           left: 'prev,next today',
           center: 'title',
@@ -67,6 +67,7 @@
             $('#loading').hide();
         },
         eventSources: <%= events_url %>,
+        googleCalendarApiKey: "AIzaSyDi3ezQEoadT4TcyD4Gvc6yQnCQLwwLtgs",
         timeFormat: 'h:mm TT{ - h:mm TT} ',
         dragOpacity: '0.5',
         eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {

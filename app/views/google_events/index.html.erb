@@ -1,11 +1,19 @@
-<h3> Google Event Listing </h3>
-
+<h2 class="tablehead"> Google Calendars </h2>
 <table class="table table-striped">
-
+  <thead>
+  <tr>
+    <th>Google Calendar Address</th>
+<!--     <th>Google Calendar API Key</th>
+    <th>Google Calendar ID</th> -->
+    <th></th>
+  </tr>
+  </thead>
   <tbody>
   <% @google_events.each do |google_event| %>
     <tr>
       <td><%= google_event.url %></td>
+<!--       <td><%= google_event.google_calendar_api_key %></td>
+      <td><%= google_event.google_calendar_id %></td> -->
       <td>
         <% if can? :edit, @google_events %>
 

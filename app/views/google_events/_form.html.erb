@@ -1,9 +1,18 @@
 <%= form_for [@profile, @google_event], :html => {:id => 'google_event'} do |f| %>
   <p>
-    <%= f.label :url %>
+    <%= f.label 'Google calendar Address' %>
     <br/>
-    <%= f.text_field :url %>
+    <%= f.text_field :url, :size => 50 %>
+    <br/>
+<!--     <%= f.label :google_calendar_api_key %>
+    <br/>
+    <%= f.text_field :google_calendar_api_key %>
+    <br/>
+    <%= f.label 'Google calendar id' %>
+    <br/>
+    <%= f.text_field :google_calendar_id %> -->
   </p>
+  <p> Please click <a href="/info/google_calendar_info.html"><b>here</b></a> to see how to fill these filed. </p>
 
   <p>
     <%= f.submit (@google_event.new_record? ? 'Add' : 'Edit'), :id => "google_event_btn" %>

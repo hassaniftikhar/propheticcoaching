@@ -17,6 +17,9 @@ class InfoController < ApplicationController
   def about
   end
 
+  def google_calendar_info
+  end
+
   def features
   end
 

@@ -60,7 +60,7 @@ class GoogleEventsController < ApplicationController
   private
 
   def google_event_params
-    params.require(:google_event).permit(:url)
+    params.require(:google_event).permit(:url, :google_calendar_api_key, :google_calendar_id)
   end
 
   def set_google_event
