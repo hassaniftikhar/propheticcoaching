@@ -2,18 +2,10 @@
   <p>
     <%= f.label 'Google calendar Address' %>
     <br/>
-    <%= f.text_field :url, :size => 50 %>
+      <%= f.text_field :url %>
     <br/>
-<!--     <%= f.label :google_calendar_api_key %>
-    <br/>
-    <%= f.text_field :google_calendar_api_key %>
-    <br/>
-    <%= f.label 'Google calendar id' %>
-    <br/>
-    <%= f.text_field :google_calendar_id %> -->
   </p>
-  <p> Please click <a href="/info/google_calendar_info.html"><b>here</b></a> to see how to fill these filed. </p>
-
+  <p> Please click <a href="/info/google_calendar_info.html"><b>here</b></a> to see how to fill this field.</p>
   <p>
     <%= f.submit (@google_event.new_record? ? 'Add' : 'Edit'), :id => "google_event_btn" %>
     <span id="creating_events" class="spinner" style="display:none;">Creating, Please wait...</span>
