@@ -15,9 +15,6 @@
 //= require jquery-ui-1.10.3.custom.min.js
 //= require twitter/bootstrap
 //= require jquery_highlight
-//= require fullcalendar/fullcalendar.js
-//= require fullcalendar/gcal.js
-//= require fullcalendar/lib/moment.min.js
 //= require mentees
 //= require ebooks
 //= require questions
