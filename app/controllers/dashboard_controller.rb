@@ -13,7 +13,7 @@ class DashboardController < ApplicationController
 
     @data = {'id' => @current_user.id,
              'name' => @current_user.name,
-             'avatar' => 'http://mydomain.com/avatar/1.png/',
+             'avatar' => 'https://s3-us-west-2.amazonaws.com/propheticcoaching-test/uploads/featured_product/image/40/show_context_to_content.png',
              'expiration' => (Time.now.to_f*1000 + 60*60*1000).round} #milli second
 
     require 'json'

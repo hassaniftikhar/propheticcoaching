@@ -1,0 +1,42 @@
+#chatfloat{
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	border:solid 1px;
+	width: 350px
+}
+
+#title_bar{
+	background: #05b0ff;
+	/*background: #444444; // website blue color #6188f5;*/
+	height: 15px;
+	width: 100%;
+}
+#button{
+	border:solid 1px;
+	width: 20px;
+	height: 15px;
+	float:right;
+	cursor:pointer;
+}
+#button_sign {
+	/*margin-top: -10px;
+	margin-left: 1px;*/
+	margin-top: -11px;
+	margin-left: 4px;
+	font: 2em Arial;
+}
+#hide_element {
+	border:solid 1px;
+	width: 20px;
+	height: 15px;
+	float:right;
+	background: #6188f5;
+}
+.social-bar{
+	display: none;
+}
+
+.logout-button {
+	display: none;
+}
