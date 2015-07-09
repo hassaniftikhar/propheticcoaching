@@ -30,5 +30,6 @@ else
     }
     config.fog_directory = ENV['S3_BUCKET'] # required
     config.fog_public = false
+    config.fog_authenticated_url_expiration = 5.hours
   end
 end
