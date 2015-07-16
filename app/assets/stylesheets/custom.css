@@ -589,7 +589,7 @@ p.top-bar-text{
 	padding: 0px;
 	position: fixed;
 	/*width: 250px;*/
-	height: 75px;
+	height: 55px;
 	top:20px;
 	right:20px;
 	z-index:9999;

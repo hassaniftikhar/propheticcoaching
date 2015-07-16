@@ -10,7 +10,14 @@
       <th>     </th>
     </tr>
   </thead>
+  <%= button_tag "Send Email", :id => "emailbtn", :type => "button" %>
 
+  <div id="dtBox"></div>
+  <div class="flash-box-email">
+          <div class="alert text-center alert-"success"">
+            <%= content_tag :div, ''.html_safe, :id => "flash_success" %>
+          </div>
+  </div>
   <tbody id="tasks">
     <%= render :partial => "/tasks/task_list", :locals => {:tasks => @tasks, :coach => coach, :mentee => mentee} %>
   </tbody>
@@ -19,3 +26,29 @@
 <div id="task_paginator">
   <%= paginate @tasks, :remote => true, :param_name => "task_page" %>
 </div>
+
+<script type="text/javascript">
+
+    var userid = <%= @user.id %>
+    var menteeid = <%= @mentee.id %>
+
+    $('.flash-box-email').hide()
+    $('#emailbtn').click(function () {
+      var val = [];
+      $('input[name="tasks_ids[]"]:checked').each(function(i){
+
+        val[i] = $(this).val();
+      });
+      jQuery.ajax({
+        data: 'tasks_ids[]=' + val,
+        dataType: 'json',
+        type: 'post',
+        url: "/users/" + userid + "/mentees/"+ menteeid + "/tasks/email_multiple"
+      });
+      $('#flash_success').html('Sending email(s) in process');
+      $('.flash-box-email').show();
+      setTimeout(function() {
+          $('.flash-box-email').fadeOut(5);
+      }, 5000);     
+    });
+  </script>
