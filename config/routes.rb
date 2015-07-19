@@ -5,20 +5,20 @@ Propheticcoaching::Application.routes.draw do
   resources :categories, :only => [:show]
 
   # resources :featured_products
-
-  resources :featured_products , :only => [:index, :show] do
-    member do
-      get 'image'
-    end
-  end
+  # resources :featured_products , :only => [:index, :show] do
+  #   member do
+  #     get 'image'
+  #   end
+  # end
 
   # resources :best_features
-  resources :best_features , :only => [:index, :show] do
+  # resources :best_features , :only => [:index, :show] do
+  resources :best_features , :only => [:show] do
     member do
       get 'image'
     end
   end
-  resources :benefits , :only => [:index, :show]
+  # resources :benefits , :only => [:index, :show]
 
   resources :exercises
   resources :activities
