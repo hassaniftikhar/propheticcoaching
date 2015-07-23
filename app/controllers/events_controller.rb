@@ -120,6 +120,12 @@ class EventsController < ApplicationController
     params.each do |name, value|
       if name =~ /(.+)_id$/
         @profile = $1.classify.constantize.find_by id: value
+        if ($1 == "mentee")
+          mentee = current_user.mentees.find_by id: value
+          if(mentee.nil? and !current_user.has_role?(:admin))
+            redirect_to user_path(current_user)
+          end
+        end
       end
     end
     nil

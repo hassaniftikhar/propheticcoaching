@@ -2,13 +2,15 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-
+    p 'in Ability ----------------------------------'
     if user.has_role? :admin
       can :manage, :all
     elsif user.has_role? :coach
         can :read, Mentee do |*mentees_list|
         mentees_list.all? {|mentee| mentee.coach_mentee_relations.pluck(:coach_id).include? user.id}
       end
+    elsif user.has_role? :partner
+        # cannot :read, Mentee.find(1306)
     end
     #   can :read, Mentee
     #   cannot :read, User

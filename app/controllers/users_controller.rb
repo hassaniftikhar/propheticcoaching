@@ -16,7 +16,16 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    # @user = current_user
     # UserMailer.registration_confirmation(@user).deliver
+    # authorize! :read, @user
+    if(!current_user.has_role?(:admin) and current_user.id != @user.id)
+      redirect_to user_path(current_user)
+    end
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    # end
   end
 
   # GET /coaches/new

@@ -1,10 +1,4 @@
-<p>
-  <% if can? :read, @users %>
-  <%= link_to "Back", users_path %>
-    <% end %>
-</p>
-
-<h3> Details </h3>
+<h2 class="tablehead"> Coach Details </h2>
 <table class="table table-striped" >
   <tbody>
       <tr>
@@ -42,6 +36,5 @@
 
   </tbody>
 </table>
-
-<%= link_to 'Show Partners', user_mentees_path(@user) %>
-<%= link_to 'Back', users_path %>
+<%= link_to 'Show Partners', user_mentees_path(@user) if current_user.has_any_role?(:admin, :coach)%>
+<%= link_to 'Back', users_path if current_user.has_any_role?(:admin)%>
