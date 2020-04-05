@@ -7,7 +7,7 @@ gem 'rails', '4.0.2'
 #group :assets do
 gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
-gem 'uglifier', '>= 1.0.3'
+gem 'uglifier', '>= 2.3.2'
 gem 'less-rails'
 gem 'therubyracer', :platform=>:ruby
 #end
@@ -34,12 +34,12 @@ gem 'fog'
 gem "paperclip", "~> 3.5.1"
 gem "pdf-reader"
 gem "tire"
-gem "gon"
+gem "gon", ">= 4.1.1"
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'paper_trail', '~> 3.0.0'
 gem 'redis'
-gem 'carrierwave'
-gem 'carrierwave_backgrounder'
+gem 'carrierwave', '>= 0.9.0'
+gem 'carrierwave_backgrounder', '>= 0.3.0'
 gem 'rails_12factor'
 # gem 'resque'
 gem 'unf' 
@@ -49,7 +49,7 @@ gem 'country_select'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+  gem 'sdoc', '>= 0.4.0', require: false
 end
 group :development do
   gem 'better_errors'
