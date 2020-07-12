@@ -13,7 +13,7 @@ gem 'therubyracer', :platform=>:ruby
 #end
 
 gem 'twitter-bootstrap-rails'
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 3.1.3'
 gem 'cancan'
 gem 'devise'
 gem 'figaro'
