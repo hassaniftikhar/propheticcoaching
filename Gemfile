@@ -71,7 +71,7 @@ group :production do
 end
 group :test do
   gem 'capybara'
-  gem 'cucumber-rails', :require=>false
+  gem 'cucumber-rails', '>= 1.4.0', :require=>false
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'launchy'
