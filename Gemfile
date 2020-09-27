@@ -34,7 +34,7 @@ gem 'fog'
 gem "paperclip", "~> 3.5.1"
 gem "pdf-reader"
 gem "tire"
-gem "gon"
+gem "gon", ">= 6.4.0"
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'paper_trail', '~> 3.0.0'
 gem 'redis'
