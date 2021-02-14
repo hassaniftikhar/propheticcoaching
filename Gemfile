@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '1.9.3'
 
-gem 'rails', '4.0.2'
+gem 'rails', '6.0.3.5'
 
 #group :assets do
 gem 'sass-rails', '~> 4.0.0'
@@ -12,11 +12,11 @@ gem 'less-rails'
 gem 'therubyracer', :platform=>:ruby
 #end
 
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', '>= 2.2.8'
 gem 'jquery-rails'
 gem 'cancan'
 gem 'devise'
-gem 'figaro'
+gem 'figaro', '>= 1.0.0'
 gem 'mysql2'
 gem 'rolify'
 gem 'simple_form'
@@ -38,7 +38,7 @@ gem "gon"
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'paper_trail', '~> 3.0.0'
 gem 'redis'
-gem 'carrierwave'
+gem 'carrierwave', '>= 1.3.2'
 gem 'carrierwave_backgrounder'
 gem 'rails_12factor'
 # gem 'resque'
@@ -71,7 +71,7 @@ group :production do
 end
 group :test do
   gem 'capybara'
-  gem 'cucumber-rails', :require=>false
+  gem 'cucumber-rails', '>= 1.4.0', :require=>false
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'launchy'
