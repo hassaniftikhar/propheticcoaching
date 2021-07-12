@@ -49,7 +49,7 @@ gem 'country_select'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
+  gem 'sdoc', '>= 1.0.0', require: false
 end
 group :development do
   gem 'better_errors'
@@ -73,7 +73,7 @@ group :test do
   gem 'capybara'
   gem 'cucumber-rails', :require=>false
   gem 'database_cleaner'
-  gem 'email_spec'
-  gem 'launchy'
+  gem 'email_spec', '>= 1.5.0'
+  gem 'launchy', '>= 2.4.2'
   gem 'poltergeist'
 end
