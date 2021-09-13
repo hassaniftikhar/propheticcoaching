@@ -30,7 +30,7 @@ gem 'mini_magick'
 #gem 'coffee-rails', '~> 4.0.0'
 #gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
-gem 'fog'
+gem 'fog', '>= 1.18.0'
 gem "paperclip", "~> 3.5.1"
 gem "pdf-reader"
 gem "tire"
@@ -52,7 +52,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 group :development do
-  gem 'better_errors'
+  gem 'better_errors', '>= 2.8.0'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
   gem 'quiet_assets'
   #gem 'sqlite3'
@@ -70,10 +70,10 @@ group :production do
   gem 'pg'
 end
 group :test do
-  gem 'capybara'
-  gem 'cucumber-rails', :require=>false
+  gem 'capybara', '>= 2.2.0'
+  gem 'cucumber-rails', '>= 1.4.0', :require=>false
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'launchy'
-  gem 'poltergeist'
+  gem 'poltergeist', '>= 1.5.1'
 end
