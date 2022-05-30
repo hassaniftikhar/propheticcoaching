@@ -2,24 +2,24 @@ source 'https://rubygems.org'
 
 ruby '1.9.3'
 
-gem 'rails', '4.0.2'
+gem 'rails', '5.0.0'
 
 #group :assets do
-gem 'sass-rails', '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 5.0.5'
+gem 'coffee-rails', '~> 4.1.1'
 gem 'uglifier', '>= 1.0.3'
 gem 'less-rails'
 gem 'therubyracer', :platform=>:ruby
 #end
 
 gem 'twitter-bootstrap-rails'
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 4.0.1'
 gem 'cancan'
-gem 'devise'
-gem 'figaro'
+gem 'devise', '>= 4.0.0'
+gem 'figaro', '>= 1.0.0'
 gem 'mysql2'
 gem 'rolify'
-gem 'simple_form'
+gem 'simple_form', '>= 3.2.1'
 gem 'rmagick'
 gem 'mini_magick'
 #gem 'chosen-rails'
