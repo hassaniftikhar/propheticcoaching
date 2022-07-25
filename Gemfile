@@ -5,8 +5,8 @@ ruby '1.9.3'
 gem 'rails', '4.0.2'
 
 #group :assets do
-gem 'sass-rails', '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 4.0.1'
+gem 'coffee-rails', '~> 4.0.1'
 gem 'uglifier', '>= 1.0.3'
 gem 'less-rails'
 gem 'therubyracer', :platform=>:ruby
@@ -29,9 +29,9 @@ gem 'mini_magick'
 #gem 'uglifier', '>= 1.3.0'
 #gem 'coffee-rails', '~> 4.0.0'
 #gem 'turbolinks'
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 1.5', '>= 1.5.3'
 gem 'fog'
-gem "paperclip", "~> 3.5.1"
+gem "paperclip", "~> 3.5.2"
 gem "pdf-reader"
 gem "tire"
 gem "gon"
