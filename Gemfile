@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '1.9.3'
 
-gem 'rails', '4.0.2'
+gem 'rails', '5.2.8.1'
 
 #group :assets do
 gem 'sass-rails', '~> 4.0.0'
@@ -16,7 +16,7 @@ gem 'twitter-bootstrap-rails'
 gem 'jquery-rails'
 gem 'cancan'
 gem 'devise'
-gem 'figaro'
+gem 'figaro', '>= 1.0.0'
 gem 'mysql2'
 gem 'rolify'
 gem 'simple_form'
@@ -36,7 +36,7 @@ gem "pdf-reader"
 gem "tire"
 gem "gon"
 gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'paper_trail', '~> 3.0.0'
+gem 'paper_trail', '~> 4.0.0'
 gem 'redis'
 gem 'carrierwave'
 gem 'carrierwave_backgrounder'
