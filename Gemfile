@@ -2,24 +2,24 @@ source 'https://rubygems.org'
 
 ruby '1.9.3'
 
-gem 'rails', '4.0.2'
+gem 'rails', '6.1.7.3'
 
 #group :assets do
-gem 'sass-rails', '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 5.0.8'
+gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '>= 1.0.3'
 gem 'less-rails'
 gem 'therubyracer', :platform=>:ruby
 #end
 
 gem 'twitter-bootstrap-rails'
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 4.0.1'
 gem 'cancan'
-gem 'devise'
-gem 'figaro'
+gem 'devise', '>= 4.7.0'
+gem 'figaro', '>= 1.0.0'
 gem 'mysql2'
 gem 'rolify'
-gem 'simple_form'
+gem 'simple_form', '>= 4.0.0'
 gem 'rmagick'
 gem 'mini_magick'
 #gem 'chosen-rails'
@@ -29,14 +29,14 @@ gem 'mini_magick'
 #gem 'uglifier', '>= 1.3.0'
 #gem 'coffee-rails', '~> 4.0.0'
 #gem 'turbolinks'
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 1.5', '>= 1.5.3'
 gem 'fog'
-gem "paperclip", "~> 3.5.1"
+gem "paperclip", "~> 3.5.2"
 gem "pdf-reader"
 gem "tire"
 gem "gon"
 gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'paper_trail', '~> 3.0.0'
+gem 'paper_trail', '~> 10.3.1'
 gem 'redis'
 gem 'carrierwave'
 gem 'carrierwave_backgrounder'
