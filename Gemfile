@@ -2,24 +2,24 @@ source 'https://rubygems.org'
 
 ruby '1.9.3'
 
-gem 'rails', '4.0.2'
+gem 'rails', '7.1.0'
 
 #group :assets do
-gem 'sass-rails', '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 5.0.8'
+gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '>= 1.0.3'
-gem 'less-rails'
+gem 'less-rails', '>= 2.5.0'
 gem 'therubyracer', :platform=>:ruby
 #end
 
-gem 'twitter-bootstrap-rails'
-gem 'jquery-rails'
+gem 'twitter-bootstrap-rails', '>= 3.2.2'
+gem 'jquery-rails', '>= 4.0.1'
 gem 'cancan'
-gem 'devise'
-gem 'figaro'
+gem 'devise', '>= 4.7.0'
+gem 'figaro', '>= 1.0.0'
 gem 'mysql2'
 gem 'rolify'
-gem 'simple_form'
+gem 'simple_form', '>= 4.0.0'
 gem 'rmagick'
 gem 'mini_magick'
 #gem 'chosen-rails'
@@ -34,7 +34,7 @@ gem 'fog'
 gem "paperclip", "~> 3.5.1"
 gem "pdf-reader"
 gem "tire"
-gem "gon"
+gem "gon", ">= 5.0.0"
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'paper_trail', '~> 3.0.0'
 gem 'redis'
@@ -52,16 +52,16 @@ group :doc do
   gem 'sdoc', require: false
 end
 group :development do
-  gem 'better_errors'
+  gem 'better_errors', '>= 2.3.0'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
-  gem 'quiet_assets'
+  gem 'quiet_assets', '>= 1.0.3'
   #gem 'sqlite3'
   # gem 'pg'
   gem 'active_record_query_trace'
 end
 group :development, :test do
-  gem 'factory_girl_rails'
-  gem 'rspec-rails'
+  gem 'factory_girl_rails', '>= 4.4.0'
+  gem 'rspec-rails', '>= 2.14.1'
   gem 'thin'
 end
 group :production do
@@ -71,7 +71,7 @@ group :production do
 end
 group :test do
   gem 'capybara'
-  gem 'cucumber-rails', :require=>false
+  gem 'cucumber-rails', '>= 1.4.3', :require=>false
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'launchy'
