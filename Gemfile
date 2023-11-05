@@ -20,7 +20,7 @@ gem 'figaro'
 gem 'mysql2'
 gem 'rolify'
 gem 'simple_form'
-gem 'rmagick'
+gem 'rmagick', '>= 5.3.0'
 gem 'mini_magick'
 #gem 'chosen-rails'
 #gem "chartkick"
