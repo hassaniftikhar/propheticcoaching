@@ -43,7 +43,7 @@ gem 'carrierwave_backgrounder'
 gem 'rails_12factor'
 # gem 'resque'
 gem 'unf' 
-gem 'resque', :require => 'resque/server'
+gem 'resque', '>= 2.6.0', :require => 'resque/server'
 gem 'country_select'
 
 
