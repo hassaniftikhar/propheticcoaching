@@ -2,21 +2,21 @@ source 'https://rubygems.org'
 
 ruby '1.9.3'
 
-gem 'rails', '4.0.2'
+gem 'rails', '7.0.0'
 
 #group :assets do
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 6.0.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.0.3'
 gem 'less-rails'
 gem 'therubyracer', :platform=>:ruby
 #end
 
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', '>= 3.2.2'
 gem 'jquery-rails'
 gem 'cancan'
 gem 'devise'
-gem 'figaro'
+gem 'figaro', '>= 1.0.0'
 gem 'mysql2'
 gem 'rolify'
 gem 'simple_form'
@@ -71,7 +71,7 @@ group :production do
 end
 group :test do
   gem 'capybara'
-  gem 'cucumber-rails', :require=>false
+  gem 'cucumber-rails', '>= 1.4.3', :require=>false
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'launchy'
