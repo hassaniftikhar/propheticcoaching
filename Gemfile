@@ -30,7 +30,7 @@ gem 'mini_magick'
 #gem 'coffee-rails', '~> 4.0.0'
 #gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
-gem 'fog'
+gem 'fog', '>= 1.37.0'
 gem "paperclip", "~> 3.5.1"
 gem "pdf-reader"
 gem "tire"
@@ -71,7 +71,7 @@ group :production do
 end
 group :test do
   gem 'capybara'
-  gem 'cucumber-rails', :require=>false
+  gem 'cucumber-rails', '>= 3.0.0', :require=>false
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'launchy'
